@@ -14,3 +14,6 @@ hello()
 ## Rembo
 
 Rembo was created by Stallone
+
+## Terminator. Genesis
+`I will be back`
