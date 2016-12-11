@@ -7,7 +7,7 @@
 run()
 
 ## Hello my darling
-## Black doesn't surrender!
+## White starts and wins
 
 ``` java
 hello()
