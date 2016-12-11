@@ -1,19 +1,20 @@
 package io.khasang.genelove.config;
 
-import io.khasang.genelove.io.khasang.genelove.model.Message;
+import io.khasang.genelove.model.Message;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by Руслан on 11.12.2016.
  */
 
-@Configuration
+//@Configuration
 public class AppConfig {
 
-    @Bean
+ /*   @Bean
     public Message message() {
         return new Message("Hello my");
     }
-
+*/
 }

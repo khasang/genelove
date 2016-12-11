@@ -1,4 +1,4 @@
-package io.khasang.genelove.io.khasang.genelove.model;
+package io.khasang.genelove.model;
 
 import org.springframework.stereotype.Component;
 
@@ -7,13 +7,12 @@ import org.springframework.stereotype.Component;
  */
 
 
-//@Component
+@Component
 public class Message{
 
-    private String message;
+    private String message = "my bean";
 
-    public Message(String message) {
-        this.message = message;
+    public Message() {
     }
 
     public String getMessage() {
