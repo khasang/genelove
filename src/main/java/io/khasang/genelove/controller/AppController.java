@@ -1,6 +1,7 @@
 package io.khasang.genelove.controller;
 
 import io.khasang.genelove.model.Contacts;
+import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,15 +16,24 @@ public class AppController {
     @Autowired
     Contacts contacts;
 
+    @Autowired
+    CreateTable createTable;
+
     @RequestMapping("/")
     public String hello(Model model){
         model.addAttribute("hello", message.getMessageOut());
         return "hello";
     }
 
-    @RequestMapping("/**")
+    /*@RequestMapping("/**")
     public String helloContacts(Model model){
         model.addAttribute("hello", contacts.getContactsOut());
         return "hello";
+    }*/
+
+    @RequestMapping("/create")
+    public String createTable(Model model) {
+        model.addAttribute("create", createTable.createTableStatus());
+        return "create";
     }
 }
