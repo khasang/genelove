@@ -9,7 +9,7 @@ public class AppController {
 
     @RequestMapping("/")
     public String hello(Model model){
-        model.addAttribute("hello", "Hello World");
-        return "hello";
+        model.addAttribute("goodbay", "Goodbay World");
+        return "goodbay";
     }
 }
