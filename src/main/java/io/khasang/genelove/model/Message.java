@@ -12,7 +12,7 @@ public class Message{
 
     private String message = "my bean";
 
-    public Message(String s) {
+    public Message() {
     }
 
     public String getMessage() {
