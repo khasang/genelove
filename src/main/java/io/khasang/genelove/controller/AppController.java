@@ -1,6 +1,7 @@
 package io.khasang.genelove.controller;
 
 import io.khasang.genelove.model.CreateTable;
+import io.khasang.genelove.model.DataBaseQueries;
 import io.khasang.genelove.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
@@ -14,6 +15,8 @@ public class AppController {
     Message message;
     @Autowired
     CreateTable createTable;
+    @Autowired
+    DataBaseQueries dataBaseQueries;
 
     @RequestMapping("/")
     public String hello(Model model){
@@ -25,5 +28,11 @@ public class AppController {
     public String createTable(Model model){
         model.addAttribute("create", createTable.createTableStatus());
         return "create";
+    }
+
+    @RequestMapping("/select")
+    public String selectData(Model model) {
+        model.addAttribute("select", dataBaseQueries.selectData());
+        return "select";
     }
 }
