@@ -1,6 +1,7 @@
 package io.khasang.genelove.controller;
 
 import io.khasang.genelove.model.CreateTable;
+import io.khasang.genelove.model.DatabaseTraining;
 import io.khasang.genelove.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,8 @@ public class AppController {
     Message message;
     @Autowired
     CreateTable createTable;
+    @Autowired
+    DatabaseTraining databaseTraining;
 
     @RequestMapping("/")
     public String hello(Model model){
@@ -24,5 +27,11 @@ public class AppController {
     public String createTable(Model model){
         model.addAttribute("create", createTable.createTableStatus());
         return "create";
+    }
+
+    @RequestMapping("/databaseTraining")
+    public String createExampleTables(Model model) {
+        model.addAttribute("databaseTraining", databaseTraining.trainingStatus());
+        return "databaseTraining";
     }
 }
