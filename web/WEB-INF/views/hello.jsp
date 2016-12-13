@@ -5,6 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-${hello}
+<p>${hello}</p>
+
+<h2>${message}</h2>
 </body>
 </html>
