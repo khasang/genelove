@@ -2,4 +2,8 @@
 /target/
 /out/
 *.iml
+<<<<<<< HEAD
 /classes/
+=======
+*.class
+>>>>>>> origin/development
