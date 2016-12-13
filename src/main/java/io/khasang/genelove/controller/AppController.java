@@ -13,7 +13,7 @@ public class AppController {
     @Autowired
     Message message;
 
-//    @Autowired
+    @Autowired
     NewClass message2;
 
     @Autowired
