@@ -19,16 +19,26 @@ public class CreateTable {
         try{
             jdbcTemplate.execute("DROP TABLE IF EXISTS films");
             jdbcTemplate.execute("CREATE TABLE films (\n" +
-                    "                    code        char(5) CONSTRAINT firstkey PRIMARY KEY,\n" +
-                    "                    title       varchar(40) NOT NULL,\n" +
-                    "                    did         integer NOT NULL,\n" +
+                    "                    id          integer CONSTRAINT firstkey PRIMARY KEY,\n" +
+                    "                    title       varchar(100) NOT NULL,\n" +
                     "                    date_prod   date,\n" +
-                    "                    kind        varchar(10),\n" +
-                    "                    len         interval hour to minute\n" +
+                    "                    kind        varchar(50),\n" +
+                    "                    regalia_id  integer NOT NULL,\n" +
+                    "                    place       integer\n" +
                     "                    )");
-            return  "Table created";
+
+            jdbcTemplate.execute("DROP TABLE IF EXISTS regalia");
+            jdbcTemplate.execute("CREATE TABLE regalia (\n" +
+                    "                    id          integer CONSTRAINT firstkey2 PRIMARY KEY,\n" +
+                    "                    name        varchar(100) NOT NULL,\n" +
+                    "                    country     varchar(50) NOT NULL,\n" +
+                    "                    type        varchar(20),\n" +
+                    "                    year        integer\n" +
+                    "                    )");
+
+            return  "Tables created";
         } catch (Exception e) {
-            return "Table creation failed: " + e;
+            return "Tables creation failed: " + e;
         }
     }
 
