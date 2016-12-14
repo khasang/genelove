@@ -23,7 +23,7 @@ public class CreateTable {
                     "                    title       varchar(100) NOT NULL,\n" +
                     "                    date_prod   date,\n" +
                     "                    kind        varchar(50),\n" +
-                    "                    regalia_id  integer NOT NULL,\n" +
+                    "                    regalia_id  integer,\n" +
                     "                    place       integer\n" +
                     "                    )");
 

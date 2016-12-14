@@ -53,7 +53,7 @@ public class SqlExample {
                     "VALUES( 1," +
                     "'Семнадцать мгновений весны'," +
                     "'1973-08-11'," +
-                    "'политический детектив - военная драма'," +
+                    "'политический детектив / военная драма'," +
                     "1," +
                     "1" +
                     ")");
@@ -87,6 +87,17 @@ public class SqlExample {
                             "2," +
                             "2" +
                             ")");
+            jdbcTemplate.execute(
+                    "INSERT INTO films (id," +
+                            "title," +
+                            "date_prod," +
+                            "kind" +
+                             ")" +
+                            "VALUES( 4," +
+                            "'Не выходи из комнаты'," +
+                            "'2016-02-01'," +
+                            "'приключения / драма'" +
+                            ")");
 
             return "Insert SQL operation executed succesfully";
         } catch (Exception e) {
@@ -94,53 +105,47 @@ public class SqlExample {
         }
     }
 
-    private String sqlJoin() {
+    public String sqlJoin() {
         try {
-            jdbcTemplate.execute("CREATE TABLE films (\n" +
-                    "                    code        char(5) CONSTRAINT firstkey PRIMARY KEY,\n" +
-                    "                    title       varchar(40) NOT NULL,\n" +
-                    "                    did         integer NOT NULL,\n" +
-                    "                    date_prod   date,\n" +
-                    "                    kind        varchar(10),\n" +
-                    "                    len         interval hour to minute\n" +
-                    "                    )");
+            jdbcTemplate.execute(
+                    "SELECT f.title, r.name, r.year FROM films f INNER JOIN regalia r ON f.regalia_id = r.id WHERE f.place = 1"
+            );
             return "Join SQL query executed succesfully";
         } catch (Exception e) {
             return "Join SQL operation failed: " + e;
         }
     }
 
-    private String sqlAttached() {
+    public String sqlJoin2() {
         try {
-            jdbcTemplate.execute("CREATE TABLE films (\n" +
-                    "                    code        char(5) CONSTRAINT firstkey PRIMARY KEY,\n" +
-                    "                    title       varchar(40) NOT NULL,\n" +
-                    "                    did         integer NOT NULL,\n" +
-                    "                    date_prod   date,\n" +
-                    "                    kind        varchar(10),\n" +
-                    "                    len         interval hour to minute\n" +
-                    "                    )");
+            jdbcTemplate.execute(
+                    "SELECT f.title, r.name, r.year FROM films f RIGHT OUTER JOIN regalia r ON f.regalia_id = r.id"
+            );
+            return "Join2 SQL query executed succesfully";
+        } catch (Exception e) {
+            return "Join SQL operation failed: " + e;
+        }
+    }
+
+    public String sqlAttached() {
+        try {
+            jdbcTemplate.execute(
+                    "SELECT title FROM films WHERE regalia_id IN (SELECT id FROM regalia WHERE country like '%СССР%')"
+                    );
             return "Attached SQL query executed succesfully";
         } catch (Exception e) {
             return "Attached SQL query failed: " + e;
         }
     }
 
-    private String sqlCase() {
+    public String sqlCase() {
         try {
-            jdbcTemplate.execute("CREATE TABLE films (\n" +
-                    "                    code        char(5) CONSTRAINT firstkey PRIMARY KEY,\n" +
-                    "                    title       varchar(40) NOT NULL,\n" +
-                    "                    did         integer NOT NULL,\n" +
-                    "                    date_prod   date,\n" +
-                    "                    kind        varchar(10),\n" +
-                    "                    len         interval hour to minute\n" +
-                    "                    )");
+            jdbcTemplate.execute(
+                    "SELECT title AS наименование, CASE WHEN place IS NOT NULL THEN 'имеет награды' ELSE 'наградами не отмечен' END AS статус FROM films"
+                    );
             return "Case SQL query executed succesfully";
         } catch (Exception e) {
             return "Case SQL query failed: " + e;
         }
     }
-
-
 }

@@ -41,4 +41,28 @@ public class AppController {
         model.addAttribute("insert", sqlExample.sqlInsert());
         return "insert";
     }
+
+    @RequestMapping("/sql-join")
+    public String sqlJoinExecute(Model model){
+        model.addAttribute("sqlJoin", sqlExample.sqlJoin());
+        return "sqljoin";
+    }
+
+    @RequestMapping("/sql-join2")
+    public String sqlJoin2Execute(Model model) {
+        model.addAttribute("sqlJoin2", sqlExample.sqlJoin2());
+        return "sqljoin2";
+    }
+
+    @RequestMapping("/sql-attached")
+    public String sqlAttachedExecute(Model model) {
+        model.addAttribute("sqlAttached", sqlExample.sqlAttached());
+        return "sqlattached";
+    }
+
+    @RequestMapping("/sql-case")
+    public String sqlCaseExecute(Model model) {
+        model.addAttribute("sqlCase", sqlExample.sqlCase());
+        return "sqlcase";
+    }
 }
