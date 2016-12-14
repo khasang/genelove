@@ -2,6 +2,7 @@ package io.khasang.genelove.controller;
 
 import io.khasang.genelove.model.Message;
 import io.khasang.genelove.model.MyMessage;
+import io.khasang.genelove.model.SQLExamples;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +16,19 @@ public class AppController {
     @Autowired
     MyMessage myMessage;
 
+    @Autowired
+    SQLExamples sqlExamples;
+
     @RequestMapping("/")
     public String hello(Model model){
         model.addAttribute("hello", message.getMessageOut());
         model.addAttribute("message", myMessage.getMessage());
         return "hello";
+    }
+
+    @RequestMapping("/sql/create")
+    public String createTable(Model model) {
+        model.addAttribute("create", sqlExamples.createTableStatus());
+        return "create";
     }
 }
