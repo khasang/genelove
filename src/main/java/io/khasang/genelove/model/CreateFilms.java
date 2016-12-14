@@ -19,7 +19,7 @@ public class CreateFilms {
             jdbcTemplate.execute("CREATE TABLE films (\n" +
                     "    code        char(5) CONSTRAINT firstkey PRIMARY KEY,\n" +
                     "    title       varchar(40) NOT NULL,\n" +
-                    "    did         integer NOT NULL,\n" +
+                    "    did         varchar(40) NOT NULL,\n" +
                     "    date_prod   date,\n" +
                     "    kind        varchar(10),\n" +
                     "    len         interval hour to minute\n" +

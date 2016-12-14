@@ -15,8 +15,8 @@ public class InsertInto {
 
     private String insert() {
         try {
-            jdbcTemplate.execute("INSERT INTO films (code,)");
-            jdbcTemplate.execute("");
+            jdbcTemplate.execute("INSERT INTO films (code, title, did, date_prod, kind, len) values ('1'," +
+                    " 'Изгой-один: Звёздные войны', 'Гарет Эдвардс', '2016.01.01', 'фантастика','02:13')");
             return "Table created";
         } catch (Exception e) {
             return "Table creation failed: " + e;
