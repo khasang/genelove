@@ -1,8 +1,6 @@
 package io.khasang.genelove.config;
 
-import io.khasang.genelove.model.Contacts;
-import io.khasang.genelove.model.CreateTable;
-import io.khasang.genelove.model.Message;
+import io.khasang.genelove.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,7 +43,19 @@ public class AppConfig {
     }
 
     @Bean
-    public CreateTable createTable() {
-        return new CreateTable(jdbcTemplate());
+    public CreateFilms createTable() {
+        return new CreateFilms(jdbcTemplate());
     }
+
+    @Bean
+    public InsertInto insertInto() {
+        return new InsertInto(jdbcTemplate());
+    }
+
+    @Bean
+    public CreateRoles createTableAuthors() {
+        return new CreateRoles(jdbcTemplate());
+    }
+
 }
+

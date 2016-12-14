@@ -1,8 +1,6 @@
 package io.khasang.genelove.controller;
 
-import io.khasang.genelove.model.Contacts;
-import io.khasang.genelove.model.CreateTable;
-import io.khasang.genelove.model.Message;
+import io.khasang.genelove.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +15,13 @@ public class AppController {
     Contacts contacts;
 
     @Autowired
-    CreateTable createTable;
+    CreateFilms createFilms;
+
+    @Autowired
+    CreateRoles createRoles;
+
+    @Autowired
+    InsertInto insertInto;
 
     @RequestMapping("/")
     public String hello(Model model){
@@ -31,9 +35,21 @@ public class AppController {
         return "hello";
     }*/
 
-    @RequestMapping("/create")
-    public String createTable(Model model) {
-        model.addAttribute("create", createTable.createTableStatus());
-        return "create";
+    @RequestMapping("/createfilms")
+    public String createFilms(Model model) {
+        model.addAttribute("createfilms", createFilms.createFilmsStatus());
+        return "createfilms";
+    }
+
+    @RequestMapping("/createroles")
+    public String createRoles(Model model) {
+        model.addAttribute("createroles", createRoles.createRolesStatus());
+        return "createroles";    }
+
+
+    @RequestMapping("/insert")
+    public String insertInto(Model model) {
+        model.addAttribute("insert", insertInto.insertIntoStatus());
+        return "insert";
     }
 }

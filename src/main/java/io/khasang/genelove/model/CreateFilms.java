@@ -2,15 +2,14 @@ package io.khasang.genelove.model;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class CreateTable {
+public class CreateFilms {
     private JdbcTemplate jdbcTemplate;
 
-    public  CreateTable(JdbcTemplate jdbcTemplate) {
+    public CreateFilms(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-
     }
 
-    public CreateTable() {
+    public CreateFilms() {
 
     }
 
@@ -25,14 +24,13 @@ public class CreateTable {
                     "    kind        varchar(10),\n" +
                     "    len         interval hour to minute\n" +
                     ");");
-            return "Table created";
+            return "Table for Films created";
         } catch (Exception e) {
             return "Table creation failed: " + e;
         }
-
     }
 
-    public String createTableStatus () {
+    public String createFilmsStatus () {
         return create();
     }
 

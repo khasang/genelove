@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<p>Table creation status</p>
-<p>${create}</p>
+<p>/Insert into table status</p>
+<p>${insert}</p>
 </body>
 </html>
