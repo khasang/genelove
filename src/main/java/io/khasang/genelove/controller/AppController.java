@@ -18,6 +18,8 @@ public class AppController {
     CaseQuery caseQuery;
     @Autowired
     InserData insertData;
+    @Autowired
+    JoinQuery joinQuery;
 
     @RequestMapping("/")
     public String hello(Model model){
@@ -33,7 +35,6 @@ public class AppController {
 
     @RequestMapping("/select")
     public String selectData(Model model) {
-        model.addAttribute("create", createTable.createTableStatus());
         model.addAttribute("select", selectQuery.selectData());
         return "select";
     }
@@ -48,5 +49,11 @@ public class AppController {
     public String insertData(Model model) {
         model.addAttribute("insert", insertData.inserData());
         return "insert";
+    }
+
+    @RequestMapping("/join")
+    public String joinData(Model model) {
+        model.addAttribute("join", joinQuery.join());
+        return "join";
     }
 }

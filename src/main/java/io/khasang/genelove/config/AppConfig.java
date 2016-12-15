@@ -1,9 +1,6 @@
 package io.khasang.genelove.config;
 
-import io.khasang.genelove.model.CaseQuery;
-import io.khasang.genelove.model.CreateTable;
-import io.khasang.genelove.model.InserData;
-import io.khasang.genelove.model.SelectQuery;
+import io.khasang.genelove.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,5 +50,10 @@ public class AppConfig {
     @Bean
     public InserData inserData() {
         return new InserData(jdbcTemplate());
+    }
+
+    @Bean
+    public JoinQuery joinQuery() {
+        return new JoinQuery(jdbcTemplate());
     }
 }
