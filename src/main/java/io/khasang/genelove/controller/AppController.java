@@ -1,10 +1,7 @@
 package io.khasang.genelove.controller;
 
-import io.khasang.genelove.model.CreateTable;
-import io.khasang.genelove.model.DataBaseQueries;
-import io.khasang.genelove.model.Message;
+import io.khasang.genelove.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +13,11 @@ public class AppController {
     @Autowired
     CreateTable createTable;
     @Autowired
-    DataBaseQueries dataBaseQueries;
+    SelectQuery selectQuery;
+    @Autowired
+    CaseQuery caseQuery;
+    @Autowired
+    InserData insertData;
 
     @RequestMapping("/")
     public String hello(Model model){
@@ -32,7 +33,20 @@ public class AppController {
 
     @RequestMapping("/select")
     public String selectData(Model model) {
-        model.addAttribute("select", dataBaseQueries.selectData());
+        model.addAttribute("create", createTable.createTableStatus());
+        model.addAttribute("select", selectQuery.selectData());
         return "select";
+    }
+
+    @RequestMapping("/selectCase")
+    public String selectWithCase(Model model) {
+        model.addAttribute("selectCase", caseQuery.caseQuery());
+        return "selectCase";
+    }
+
+    @RequestMapping("/insert")
+    public String insertData(Model model) {
+        model.addAttribute("insert", insertData.inserData());
+        return "insert";
     }
 }

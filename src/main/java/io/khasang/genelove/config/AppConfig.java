@@ -1,8 +1,9 @@
 package io.khasang.genelove.config;
 
+import io.khasang.genelove.model.CaseQuery;
 import io.khasang.genelove.model.CreateTable;
-import io.khasang.genelove.model.DataBaseQueries;
-import io.khasang.genelove.model.Message;
+import io.khasang.genelove.model.InserData;
+import io.khasang.genelove.model.SelectQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +11,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.stereotype.Component;
 
 @Configuration
 @PropertySource(value = {"classpath:util.properties"})
@@ -18,11 +18,6 @@ public class AppConfig {
     @Autowired
     Environment environment;
 
- /*   @Bean
-    public Message message() {
-        return new Message("Hello my bean");
-    }
-*/
     @Bean
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -46,7 +41,17 @@ public class AppConfig {
     }
 
     @Bean
-    public DataBaseQueries dataBaseQueries() {
-        return  new DataBaseQueries(jdbcTemplate());
+    public SelectQuery dataBaseQueries() {
+        return  new SelectQuery(jdbcTemplate());
+    }
+
+    @Bean
+    public CaseQuery caseQuery() {
+        return new CaseQuery(jdbcTemplate());
+    }
+
+    @Bean
+    public InserData inserData() {
+        return new InserData(jdbcTemplate());
     }
 }
