@@ -26,9 +26,11 @@ public class AppController {
         return "hello";
     }
 
-    @RequestMapping("/sql/create")
-    public String createTable(Model model) {
-        model.addAttribute("create", sqlExamples.createTableStatus());
-        return "create";
+    @RequestMapping("/sql")
+    public String create(Model model) {
+        model.addAttribute("create", sqlExamples.tableCreate());
+        model.addAttribute("insert", sqlExamples.tableInsert());
+        model.addAttribute("select", sqlExamples.tableSelect());
+        return "sql";
     }
 }

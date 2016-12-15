@@ -1,10 +1,8 @@
 package io.khasang.genelove.model;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-/**
- * Created by Elena on 14.12.2016.
- */
 public class SQLExamples {
 
     private JdbcTemplate jdbcTemplate;
@@ -13,7 +11,7 @@ public class SQLExamples {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private String create() {
+    public String tableCreate() {
         try {
             jdbcTemplate.execute("DROP TABLE IF EXISTS films");
             jdbcTemplate.execute("CREATE TABLE films (\n" +
@@ -25,16 +23,28 @@ public class SQLExamples {
                     "    len         interval hour to minute\n" +
                     ");");
             return "Table created";
-        } catch (Exception e) {
+        } catch (DataAccessException e) {
             return "Table creation failed: " + e;
         }
     }
 
-    private String join() {
-        return "Join";
+    public String tableInsert() {
+        try {
+            jdbcTemplate.execute("INSERT INTO films (code, title, did, date_prod, kind) VALUES\n" +
+                    "    ('B6717', 'Tampopo', 110, '1985-02-10', 'Comedy'),\n" +
+                    "    ('HG120', 'The Dinner Game', 140, DEFAULT, 'Comedy');");
+            return "Records inserted";
+        } catch (DataAccessException e) {
+            return "Insert failed: " + e;
+        }
     }
 
-    public String createTableStatus() {
-        return create();
+    public String tableSelect() {
+        try {
+            jdbcTemplate.execute("SELECT * FROM films");
+            return "Records selected";
+        } catch (DataAccessException e) {
+            return "Select failed: " + e;
+        }
     }
 }

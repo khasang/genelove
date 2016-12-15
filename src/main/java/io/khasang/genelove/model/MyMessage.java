@@ -1,8 +1,5 @@
 package io.khasang.genelove.model;
 
-/**
- * Created by Elena on 11.12.2016.
- */
 public class MyMessage {
     private String message;
 
@@ -17,5 +14,4 @@ public class MyMessage {
     public String getMessage() {
         return this.message;
     }
-
 }
