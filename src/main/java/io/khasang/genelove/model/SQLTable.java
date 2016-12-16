@@ -4,9 +4,6 @@ package io.khasang.genelove.model;
 import io.khasang.genelove.constants.SqlConstns;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SQLTable {
 
     private JdbcTemplate jdbcTemplate;
@@ -48,7 +45,7 @@ public class SQLTable {
             jdbcTemplate.execute("SELECT u.id, u.name, f.title AS film_watch " +
                     "FROM users u " +
                     "INNER JOIN films f ON u.id_film = f.id");
-            
+
             return "SUCCESS";
         }catch (Exception e){
             return "FAILED (reason : " + e +" )";

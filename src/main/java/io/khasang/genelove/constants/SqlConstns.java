@@ -1,8 +1,5 @@
 package io.khasang.genelove.constants;
 
-/**
- * Created by User on 16.12.2016.
- */
 public class SqlConstns {
 
     public SqlConstns() {
