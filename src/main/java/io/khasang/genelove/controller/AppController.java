@@ -27,31 +27,31 @@ public class AppController {
         return "hello";
     }
 
-    @RequestMapping("/create")
+    @RequestMapping("/db/create")
     public String createTable(Model model){
         model.addAttribute("create", createTable.createTableStatus());
         return "create";
     }
 
-    @RequestMapping("/select")
+    @RequestMapping("/db/select")
     public String selectData(Model model) {
         model.addAttribute("select", selectQuery.selectData());
         return "select";
     }
 
-    @RequestMapping("/selectCase")
+    @RequestMapping("/db/selectCase")
     public String selectWithCase(Model model) {
         model.addAttribute("selectCase", caseQuery.caseQuery());
         return "selectCase";
     }
 
-    @RequestMapping("/insert")
+    @RequestMapping("/db/insert")
     public String insertData(Model model) {
         model.addAttribute("insert", insertData.inserData());
         return "insert";
     }
 
-    @RequestMapping("/join")
+    @RequestMapping("/db/join")
     public String joinData(Model model) {
         model.addAttribute("join", joinQuery.join());
         return "join";
