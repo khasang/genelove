@@ -4,6 +4,7 @@ package io.khasang.genelove.model;
 import io.khasang.genelove.constants.SqlConstns;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+
 public class SQLTable {
 
     private JdbcTemplate jdbcTemplate;

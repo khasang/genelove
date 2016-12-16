@@ -11,12 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by lembergIP on 09.12.2016.
  */
 @Controller
+@RequestMapping(value = "/mng-lemberg")
 public class LembergController {
 
 @Autowired
 private LembergMessage lembergMessage;
 
-    @RequestMapping("/lemberg")
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView sum2numbers(){
         ModelAndView modelAndView=new ModelAndView("lemberg");
         modelAndView.addObject("lembergMessage",lembergMessage.sumTwoNumbers(11,23));
