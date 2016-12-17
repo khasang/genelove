@@ -2,6 +2,7 @@ package io.khasang.genelove.config;
 
 import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.InsertTable;
+import io.khasang.genelove.model.SimpleSelect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import io.khasang.genelove.model.Message;
@@ -43,8 +44,14 @@ public class AppConfig {
     public CreateTable createTable() {
         return new CreateTable(jdbcTemplate());
     }
+
     @Bean
     public InsertTable insertTable() {
         return new InsertTable(jdbcTemplate());
+    }
+
+    @Bean
+    public SimpleSelect simpleSelect() {
+        return new SimpleSelect(jdbcTemplate());
     }
 }
