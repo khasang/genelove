@@ -21,7 +21,7 @@ public class InsertTable {
                     "('UN026', 'Sherloc Holmes', 10, '2008-12-10', 'Detective'),\n" +
                     "('HG120', 'The Dinner Game', 140, DEFAULT, 'Comedy');");
 
-            return "Data inserted into table films";
+            return "Data were inserted into table films";
         }
         catch (Exception e) {
             return "Data insert into films failed: " + e;
