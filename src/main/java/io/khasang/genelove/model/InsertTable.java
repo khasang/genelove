@@ -2,37 +2,34 @@ package io.khasang.genelove.model;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class CreateTable {
+public class InsertTable {
     private JdbcTemplate jdbcTemplate;
 
-    public CreateTable (JdbcTemplate jdbcTemplate) {
+    public InsertTable(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public CreateTable() {
+    public InsertTable() {
     }
 
-    private String create () {
+    private String insert () {
         try {
-            jdbcTemplate.execute ("drop table if exists films");
-            jdbcTemplate.execute ("CREATE TABLE films (\n" +
-                    "    code        char(5),\n" +
-                    "    title       varchar(40),\n" +
-                    "    did         integer,\n" +
-                    "    date_prod   date,\n" +
-                    "    kind        varchar(10),\n" +
-                    "    len         interval hour to minute,\n" +
-                    "    CONSTRAINT code_title PRIMARY KEY(code,title)\n" +
-                    ");");
-            return "Table created";
+            jdbcTemplate.execute ("INSERT INTO films " +
+                    "(code, title, did, date_prod, kind) VALUES\n" +
+                    "('B6717', 'Tampopo', 110, '1985-02-10', 'Comedy'),\n" +
+                    "('SA239', 'Sacramento', 190, '19959-09-10', 'Comedy'),\n" +
+                    "('UN026', 'Sherloc Holmes', 10, '2008-12-10', 'Detective'),\n" +
+                    "('HG120', 'The Dinner Game', 140, DEFAULT, 'Comedy');");
+
+            return "Data inserted into table films";
         }
         catch (Exception e) {
-            return "Table creation failed: " + e;
+            return "Data insert into films failed: " + e;
         }
 
     }
 
-    public String createTableStatus () {
-        return create();
+    public String insertTableStatus () {
+        return insert();
     }
 }
