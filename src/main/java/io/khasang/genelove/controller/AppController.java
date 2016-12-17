@@ -11,6 +11,6 @@ public class AppController {
     public String hello(Model model){
         model.addAttribute("hello", "Hello World");
         return "hello";
-        //////
+        // There is my first inline comment
     }
 }
