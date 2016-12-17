@@ -1,8 +1,6 @@
 package io.khasang.genelove.controller;
 
-import io.khasang.genelove.model.CreateTable;
-import io.khasang.genelove.model.InsertTable;
-import io.khasang.genelove.model.Message;
+import io.khasang.genelove.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +17,19 @@ public class AppController {
     @Autowired
     InsertTable insertTable;
 
+    @Autowired
+    SimpleSelect simpleSelect;
+
     @RequestMapping("/")
+    public String index(Model model){
+        model.addAttribute("index", "Hello World!!!");
+        return "index";
+        // There is my first inline comment
+    }
+    @RequestMapping("/hello")
     public String hello(Model model){
         model.addAttribute("hello", "Hello World!!!");
         return "hello";
-        // There is my first inline comment
     }
 
     @RequestMapping("/create")
@@ -31,9 +37,16 @@ public class AppController {
         model.addAttribute("create", createTable.createTableStatus());
         return "create";
     }
+
     @RequestMapping("/insert")
     public String insertTable (Model model) {
         model.addAttribute("insert", insertTable.insertTableStatus());
         return "insert";
+    }
+
+    @RequestMapping("/simpleSelect")
+    public String simpleSelect (Model model) {
+        model.addAttribute("simpleSelect", simpleSelect.simpleSelectTableStatus());
+        return "simpleSelect";
     }
 }
