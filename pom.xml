@@ -51,6 +51,12 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring.security.version}</version>
         </dependency>
+        <!--apache.DB connection pool-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.1.1</version>
+        </dependency>
         <!--PostgreSql driver-->
         <dependency>
             <groupId>org.postgresql</groupId>

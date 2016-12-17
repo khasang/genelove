@@ -4,9 +4,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.SQLException;
 
-/**
- * Created by Руслан on 14.12.2016.
- */
 public class SelectQuery {
     private JdbcTemplate jdbcTemplate;
 
