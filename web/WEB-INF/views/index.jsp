@@ -17,5 +17,9 @@
     </ul>
 </p><h2>${index}</h2>
 </div>
+<p>If you want  get the access to security zone, please use 'db' as login & password:<br>
+    <strong>Login: </strong><cite>db</cite><br>
+    <strong>Password: </strong><cite>db</cite>
+</p>
 </body>
 </html>
