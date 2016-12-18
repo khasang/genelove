@@ -5,6 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-${hello}
+${goodbay}
 </body>
 </html>
