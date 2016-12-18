@@ -17,8 +17,9 @@ public class InsertTable {
             jdbcTemplate.execute ("INSERT INTO films " +
                     "(code, title, did, date_prod, kind) VALUES\n" +
                     "('B6717', 'Tampopo', 110, '1985-02-10', 'Comedy'),\n" +
-                    "('SA239', 'Sacramento', 190, '19959-09-10', 'Comedy'),\n" +
+                    "('SA239', 'Sacramento', 190, '1959-09-10', 'Comedy'),\n" +
                     "('UN026', 'Sherloc Holmes', 10, '2008-12-10', 'Detective'),\n" +
+                    "('SU221', 'Matrix', 140, '2001-02-15', 'Fiction'),\n" +
                     "('HG120', 'The Dinner Game', 140, DEFAULT, 'Comedy');");
 
             return "Data were inserted into table films";

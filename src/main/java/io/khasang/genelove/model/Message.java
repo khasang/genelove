@@ -1,6 +1,5 @@
 package io.khasang.genelove.model;
 
-
 public class Message {
     private String messageOut;
 

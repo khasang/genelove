@@ -1,11 +1,8 @@
 package io.khasang.genelove.config;
 
-import io.khasang.genelove.model.CreateTable;
-import io.khasang.genelove.model.InsertTable;
-import io.khasang.genelove.model.SimpleSelect;
+import io.khasang.genelove.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import io.khasang.genelove.model.Message;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -15,6 +12,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @Configuration
 @PropertySource(value = {"classpath:util.properties"})
 public class AppConfig {
+
     @Autowired
     Environment environment;
 
@@ -53,5 +51,10 @@ public class AppConfig {
     @Bean
     public SimpleSelect simpleSelect() {
         return new SimpleSelect(jdbcTemplate());
+    }
+
+    @Bean
+    public MultipleSelect multipleSelect() {
+        return new MultipleSelect(jdbcTemplate());
     }
 }

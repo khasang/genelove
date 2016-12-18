@@ -2,9 +2,6 @@ package io.khasang.genelove.model;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-/**
- * Created by alex on 18.12.16.
- */
 public class SimpleSelect {
     private JdbcTemplate jdbcTemplate;
 
@@ -22,9 +19,8 @@ public class SimpleSelect {
             return "result: " + result.toString();
         }
         catch (Exception e) {
-            return "Data simple select into films failed: " + e;
+            return "Data simple select from films failed: " + e;
         }
-
     }
 
     public String simpleSelectTableStatus () {

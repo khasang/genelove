@@ -29,7 +29,6 @@ public class CreateTable {
         catch (Exception e) {
             return "Table creation failed: " + e;
         }
-
     }
 
     public String createTableStatus () {
