@@ -2,6 +2,9 @@ package io.khasang.genelove.model;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseTraining {
     // jdbc шаблон
     private JdbcTemplate jdbcTemplate;
@@ -14,16 +17,16 @@ public class DatabaseTraining {
     }
 
     // методы
-    public String trainingStatus() {
-        String result = "";
-        result += createExampleTables() + "<br>";
-        result += fillExampleTables() + "<br>";
-        result += leftOuterJoin() + "<br>";
-        result += fullOuterJoin() + "<br>";
-        result += rightOuterJoin() + "<br>";
-        result += innerJoin() + "<br>";
-        result += subSelect() + "<br>";
-        result += caseWhenThen();
+    public List<String> trainingStatus() {
+        List<String> result = new ArrayList<>();
+        result.add(createExampleTables());
+        result.add(fillExampleTables());
+        result.add(leftOuterJoin());
+        result.add(fullOuterJoin());
+        result.add(rightOuterJoin());
+        result.add(innerJoin());
+        result.add(subSelect());
+        result.add(caseWhenThen());
         return result;
     }
 
@@ -83,7 +86,7 @@ public class DatabaseTraining {
     public String fullOuterJoin() {
         try {
             jdbcTemplate.execute("SELECT * FROM example1 t1 FULL JOIN example2 t2 ON (t1.ex2_id = t2.row_id);");
-            return "Right outer join is executed!";
+            return "Full outer join is executed!";
         } catch (Exception e) {
             return "Error: " + e;
         }
