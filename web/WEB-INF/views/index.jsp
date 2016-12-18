@@ -2,11 +2,10 @@
 <html>
 <head>
     <title>Title</title>
-    <link href="./style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
-<div style="margin: 0 auto;">
-<p>
+<div>
     <ul id="navMenu">
         <li><a href="">Main page</a></li>
         <li><a href="hello">Hello page</a></li>
@@ -15,11 +14,10 @@
         <li><a href="simpleSelect">Simple select from table <strong>films</strong></a></li>
         <li><a href="multipleSelect">Multiple select from table <strong>films</strong></a></li>
     </ul>
-</p><h2>${index}</h2>
-</div>
-<p>If you want  get the access to security zone, please use 'db' as login & password:<br>
+<hr><h2>${index}</h2>
+    If you want  get the access to security zone, please use 'db' as login & password:<br>
     <strong>Login: </strong><cite>db</cite><br>
     <strong>Password: </strong><cite>db</cite>
-</p>
+</div>
 </body>
 </html>

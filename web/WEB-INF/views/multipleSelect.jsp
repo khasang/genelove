@@ -3,9 +3,9 @@
 <html>
 <head>
     <title>Multiple Select Example</title>
-    <link href="http://localhost:8080/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 </head>
-<p>
+<div>
 <ul id="navMenu">
     <li><a href="">Main page</a></li>
     <li><a href="hello">Hello page</a></li>
@@ -14,13 +14,14 @@
     <li><a href="simpleSelect">Simple select from table <strong>films</strong></a></li>
     <li><a href="multipleSelect">Multiple select from table <strong>films</strong></a></li>
 </ul>
-</p>
+</div>
+
+<div>
 <h2>Multiple Select Example</h2>
-<p>
     <strong>Here is raw-list:</strong>  ${multipleSelect}
-</p>
+</div>
 <hr>
-<p>
+<div>
     <table border="1">
     <tr>
         <th>Code</th>
@@ -35,9 +36,9 @@
         </tr>
     </c:forEach>
 </table>
-</p>
-<p>
+</div>
+<div>
     <a href="http://localhost:8080/logout">Do you wish logOut this session ?</a>
-</p>
+</div>
 </body>
 </html>

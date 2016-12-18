@@ -1,9 +1,30 @@
-body {
-    background: gray;
+* {
+
 }
 
-p {
-    margin: 0 auto;
-    padding: 5px;
-    border: 1px solid green;
+html {
+    background: #999999;
+}
+
+body {
+    height: auto;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 50px 50px 50px 50px;
+    margin: 0px 50px 0px 50px;
+    background: #CCCCCC;
+    box-shadow: 0px 0px 15px 15px rgba(0,0,0,.5);
+}
+
+hr {
+    width: 99%;
+    padding: 0px;
+    margin: 0px auto;
+}
+
+div {
+    background: #FFFFFF;
+    border: 1px solid black;
+    padding: 25px;
+    margin: 50px auto;
 }
