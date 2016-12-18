@@ -3,6 +3,7 @@ package io.khasang.genelove.model;
 import org.springframework.stereotype.Component;
 
 // Created by DGatilov on 17.12.2016.
+// Add comment
 @Component
 public class Message {
     private String messageOut;
