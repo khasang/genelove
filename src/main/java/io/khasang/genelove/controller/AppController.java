@@ -26,10 +26,26 @@ public class AppController {
         return "hello";
     }
 
-    @RequestMapping("/sql")
+    @RequestMapping("/sql/delete")
+    public String delete(Model model) {
+        model.addAttribute("delete", sqlExamples.tableDelete());
+        return "sql";
+    }
+
+    @RequestMapping("/sql/create")
     public String create(Model model) {
         model.addAttribute("create", sqlExamples.tableCreate());
+        return "sql";
+    }
+
+    @RequestMapping("/sql/insert")
+    public String insert(Model model) {
         model.addAttribute("insert", sqlExamples.tableInsert());
+        return "sql";
+    }
+
+    @RequestMapping("/sql/select")
+    public String select(Model model) {
         model.addAttribute("select", sqlExamples.tableSelect());
         return "sql";
     }

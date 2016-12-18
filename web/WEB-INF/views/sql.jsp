@@ -12,6 +12,7 @@
 </head>
 <body>
 <h2>Status:</h2>
+<p>${delete}</p>
 <p>${create}</p>
 <p>${insert}</p>
 <p>${select}</p>
