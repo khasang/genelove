@@ -1,6 +1,5 @@
 package io.khasang.genelove.config;
 
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +14,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
+                .antMatchers("/databaseTraining/**").access("hasAnyRole('ADMIN','USER')")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
     }
 
