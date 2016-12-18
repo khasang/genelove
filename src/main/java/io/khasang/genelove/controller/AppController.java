@@ -30,39 +30,39 @@ public class AppController {
         return "hello";
     }
 
-    @RequestMapping("/create")
+    @RequestMapping("/admin/create")
     public String createTable(Model model){
         model.addAttribute("create", createTable.createTableStatus());
         return "create";
     }
 
-    @RequestMapping("/insert")
+    @RequestMapping("/db/insert")
     public String sqlInsertExecute(Model model){
-        model.addAttribute("insert", sqlExample.sqlInsert());
-        return "insert";
+        model.addAttribute("sql", sqlExample.sqlInsert());
+        return "sqlexample";
     }
 
-    @RequestMapping("/sql-join")
+    @RequestMapping("/sql/join")
     public String sqlJoinExecute(Model model){
-        model.addAttribute("sqlJoin", sqlExample.sqlJoin());
-        return "sqljoin";
+        model.addAttribute("sql", sqlExample.sqlJoin());
+        return "sqlexample";
     }
 
-    @RequestMapping("/sql-join2")
+    @RequestMapping("/sql/join2")
     public String sqlJoin2Execute(Model model) {
-        model.addAttribute("sqlJoin2", sqlExample.sqlJoin2());
-        return "sqljoin2";
+        model.addAttribute("sql", sqlExample.sqlJoin2());
+        return "sqlexample";
     }
 
-    @RequestMapping("/sql-attached")
+    @RequestMapping("/sql/attached")
     public String sqlAttachedExecute(Model model) {
-        model.addAttribute("sqlAttached", sqlExample.sqlAttached());
-        return "sqlattached";
+        model.addAttribute("sql", sqlExample.sqlAttached());
+        return "sqlexample";
     }
 
-    @RequestMapping("/sql-case")
+    @RequestMapping("/sql/case")
     public String sqlCaseExecute(Model model) {
-        model.addAttribute("sqlCase", sqlExample.sqlCase());
-        return "sqlcase";
+        model.addAttribute("sql", sqlExample.sqlCase());
+        return "sqlexample";
     }
 }

@@ -4,8 +4,7 @@
     <title>Title</title>
 </head>
 <body>
-<p>Table creation status</p>
-<p>${sqlJoin}</p>
+<p>SQL status</p>
+<p>${sql}</p>
 </body>
 </html>
-

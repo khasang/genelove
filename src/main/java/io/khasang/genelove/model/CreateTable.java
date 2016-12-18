@@ -2,9 +2,6 @@ package io.khasang.genelove.model;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-/**
- * Created by Denis on 13.12.2016.
- */
 public class CreateTable {
     private JdbcTemplate jdbcTemplate;
 
