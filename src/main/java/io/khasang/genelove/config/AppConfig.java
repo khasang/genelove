@@ -43,18 +43,18 @@ public class AppConfig {
     }
 
     @Bean
-    public CreateFilms createTable() {
-        return new CreateFilms(jdbcTemplate());
+    public CreateFilm createFilm() {
+        return new CreateFilm(jdbcTemplate());
     }
 
     @Bean
-    public InsertInto insertInto() {
-        return new InsertInto(jdbcTemplate());
+    public CreateRole createRole() {
+        return new CreateRole(jdbcTemplate());
     }
 
     @Bean
-    public CreateRoles createTableAuthors() {
-        return new CreateRoles(jdbcTemplate());
+    public TestTable testTable() {
+        return new TestTable(jdbcTemplate());
     }
 
 }

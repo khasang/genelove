@@ -4,7 +4,7 @@
     <title>Title</title>
 </head>
 <body>
-<p>Table creation status</p>
-<p>${createroles}</p>
+<p>Full outer table status</p>
+<p>${joinFullOuter}</p>
 </body>
 </html>

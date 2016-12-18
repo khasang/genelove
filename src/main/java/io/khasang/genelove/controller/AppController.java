@@ -15,13 +15,13 @@ public class AppController {
     Contacts contacts;
 
     @Autowired
-    CreateFilms createFilms;
+    CreateFilm createFilm;
 
     @Autowired
-    CreateRoles createRoles;
+    CreateRole createRole;
 
     @Autowired
-    InsertInto insertInto;
+    TestTable testTable;
 
     @RequestMapping("/")
     public String hello(Model model){
@@ -29,27 +29,51 @@ public class AppController {
         return "hello";
     }
 
-    /*@RequestMapping("/**")
-    public String helloContacts(Model model){
-        model.addAttribute("hello", contacts.getContactsOut());
-        return "hello";
-    }*/
-
-    @RequestMapping("/createfilms")
+    @RequestMapping("/createFilm")
     public String createFilms(Model model) {
-        model.addAttribute("createfilms", createFilms.createFilmsStatus());
-        return "createfilms";
+        model.addAttribute("createFilm", createFilm.createFilmStatus());
+        return "createFilm";
     }
 
-    @RequestMapping("/createroles")
+    @RequestMapping("/createRole")
     public String createRoles(Model model) {
-        model.addAttribute("createroles", createRoles.createRolesStatus());
-        return "createroles";    }
+        model.addAttribute("createRole", createRole.createRoleStatus());
+        return "createRole";    }
 
 
     @RequestMapping("/insert")
     public String insertInto(Model model) {
-        model.addAttribute("insert", insertInto.insertIntoStatus());
+        model.addAttribute("insert", testTable.insertTableStatus());
         return "insert";
+    }
+
+    @RequestMapping("/joinInner")
+    public String joinInner(Model model) {
+        model.addAttribute("joinInner", testTable.joinInnerStatus());
+        return "joinInner";
+    }
+
+    @RequestMapping("/joinFullOuter")
+    public String joinFullOuter(Model model) {
+        model.addAttribute("joinFullOuter", testTable.joinFullOuterStatus());
+        return "joinFullOuter";
+    }
+
+    @RequestMapping("/joinRightOuter")
+    public String joinRightOuter(Model model) {
+        model.addAttribute("joinRightOuter", testTable.joinRightOuterStatus());
+        return "joinRightOuter";
+    }
+
+    /*@RequestMapping("/case")
+    public String caseTable(Model model) {
+        model.addAttribute("caseTable", testTable.caseTableStatus());
+        return "case";
+    }*/
+
+    @RequestMapping("/select")
+    public String select(Model model) {
+        model.addAttribute("select", testTable.selectTableStatus());
+        return "select";
     }
 }

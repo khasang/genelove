@@ -2,14 +2,14 @@ package io.khasang.genelove.model;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class CreateRoles {
+public class CreateRole {
     private JdbcTemplate jdbcTemplate;
 
-    public CreateRoles(JdbcTemplate jdbcTemplate) {
+    public CreateRole(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public CreateRoles() {
+    public CreateRole() {
 
     }
 
@@ -19,7 +19,7 @@ public class CreateRoles {
             jdbcTemplate.execute("CREATE TABLE roles (\n" +
                     "    role       varchar(40) NOT NULL,\n" +
                     "    person       varchar(40) NOT NULL,\n" +
-                    "    filmcode       char(5) PRIMARY KEY\n" +
+                    "    filmcode       char(5)\n" +
                     ");");
             return "Table for Roles created";
         } catch (Exception e) {
@@ -27,7 +27,7 @@ public class CreateRoles {
         }
     }
 
-    public String createRolesStatus () {
+    public String createRoleStatus () {
         return create();
     }
 

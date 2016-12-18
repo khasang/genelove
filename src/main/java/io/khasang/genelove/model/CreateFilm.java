@@ -2,14 +2,14 @@ package io.khasang.genelove.model;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class CreateFilms {
+public class CreateFilm {
     private JdbcTemplate jdbcTemplate;
 
-    public CreateFilms(JdbcTemplate jdbcTemplate) {
+    public CreateFilm(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public CreateFilms() {
+    public CreateFilm() {
 
     }
 
@@ -17,9 +17,8 @@ public class CreateFilms {
         try {
             jdbcTemplate.execute("DROP TABLE IF EXISTS films");
             jdbcTemplate.execute("CREATE TABLE films (\n" +
-                    "    code        char(5) CONSTRAINT firstkey PRIMARY KEY,\n" +
+                    "    filmcode        char(5) CONSTRAINT firstkey PRIMARY KEY,\n" +
                     "    title       varchar(40) NOT NULL,\n" +
-                    "    did         varchar(40) NOT NULL,\n" +
                     "    date_prod   date,\n" +
                     "    kind        varchar(10),\n" +
                     "    len         interval hour to minute\n" +
@@ -30,7 +29,7 @@ public class CreateFilms {
         }
     }
 
-    public String createFilmsStatus () {
+    public String createFilmStatus () {
         return create();
     }
 

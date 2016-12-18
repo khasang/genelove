@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -6,6 +5,6 @@
 </head>
 <body>
 <p>Table creation status</p>
-<p>${createfilms}</p>
+<p>${createRole}</p>
 </body>
 </html>
