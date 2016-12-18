@@ -37,7 +37,7 @@ public class AppController {
         return "hello";
     }
 
-    @RequestMapping("/create")
+    @RequestMapping("/admin/create")
     public String createTable (Model model) {
         model.addAttribute("create", createTable.createTableStatus());
         return "create";
