@@ -9,7 +9,7 @@
 <ul id="navMenu">
     <li><a href="">Main page</a></li>
     <li><a href="hello">Hello page</a></li>
-    <li><a href="admin/create">Create table <strong>films</strong></a></li>
+    <li><a href="create">Create table <strong>films</strong></a></li>
     <li><a href="insert">Insert data into table <strong>films</strong></a></li>
     <li><a href="simpleSelect">Simple select from table <strong>films</strong></a></li>
     <li><a href="multipleSelect">Multiple select from table <strong>films</strong></a></li>
@@ -35,6 +35,9 @@
         </tr>
     </c:forEach>
 </table>
+</p>
+<p>
+    <a href="http://localhost:8080/logout">Do you wish logOut this session ?</a>
 </p>
 </body>
 </html>

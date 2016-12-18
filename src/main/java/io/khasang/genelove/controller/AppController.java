@@ -37,25 +37,25 @@ public class AppController {
         return "hello";
     }
 
-    @RequestMapping("/admin/create")
+    @RequestMapping("db/create")
     public String createTable (Model model) {
         model.addAttribute("create", createTable.createTableStatus());
         return "create";
     }
 
-    @RequestMapping("/insert")
+    @RequestMapping("db/insert")
     public String insertTable (Model model) {
         model.addAttribute("insert", insertTable.insertTableStatus());
         return "insert";
     }
 
-    @RequestMapping("/simpleSelect")
+    @RequestMapping("db/simpleSelect")
     public String simpleSelect (Model model) {
         model.addAttribute("simpleSelect", simpleSelect.simpleSelectTableStatus());
         return "simpleSelect";
     }
 
-    @RequestMapping("/multipleSelect")
+    @RequestMapping("db/multipleSelect")
     public String multipleSelect (Model model) {
         model.addAttribute("multipleSelect", multipleSelect.multipleSelectTableStatus());
         return "multipleSelect";

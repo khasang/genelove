@@ -14,11 +14,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
+                .antMatchers("/db/**").access("hasRole('DB')")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication().withUser("db").password("db").roles("DB");
         auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
         auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
         auth.inMemoryAuthentication().withUser("adm").password("adm").roles("ADMIN");

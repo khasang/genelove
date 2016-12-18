@@ -10,7 +10,7 @@
     <ul id="navMenu">
         <li><a href="">Main page</a></li>
         <li><a href="hello">Hello page</a></li>
-        <li><a href="admin/create">Create table <strong>films</strong></a></li>
+        <li><a href="db/create">Create table <strong>films</strong></a></li>
         <li><a href="insert">Insert data into table <strong>films</strong></a></li>
         <li><a href="simpleSelect">Simple select from table <strong>films</strong></a></li>
         <li><a href="multipleSelect">Multiple select from table <strong>films</strong></a></li>
