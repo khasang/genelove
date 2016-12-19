@@ -65,11 +65,11 @@ public class AppController {
         return "joinRightOuter";
     }
 
-    /*@RequestMapping("/case")
+    @RequestMapping("/case")
     public String caseTable(Model model) {
         model.addAttribute("caseTable", testTable.caseTableStatus());
         return "case";
-    }*/
+    }
 
     @RequestMapping("/select")
     public String select(Model model) {

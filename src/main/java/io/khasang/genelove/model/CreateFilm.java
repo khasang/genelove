@@ -20,7 +20,7 @@ public class CreateFilm {
                     "    filmcode        char(5) CONSTRAINT firstkey PRIMARY KEY,\n" +
                     "    title       varchar(40) NOT NULL,\n" +
                     "    date_prod   date,\n" +
-                    "    kind        varchar(10),\n" +
+                    "    genre        varchar(10),\n" +
                     "    len         interval hour to minute\n" +
                     ");");
             return "Table for Films created";

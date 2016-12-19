@@ -15,10 +15,11 @@ public class TestTable {
 
     private String insert() {
         try {
-            jdbcTemplate.execute("INSERT INTO films (filmcode, title, date_prod, kind, len) " +
+            jdbcTemplate.execute("INSERT INTO films (filmcode, title, date_prod, genre, len) " +
                     "values" +
                     "('1', 'Изгой-один: Звёздные войны', '10.12.16', 'фантастика','02:13')," +
                     "('2', 'Союзники', '13.11.16', 'боевик', '02:01')," +
+                    "('4', 'Хоббит: Нежданное путешествие', '28.11.2012', 'фэнтези', '02:49')," +
                     "('3', 'Однажды в Америке', '17.02.84', 'драма', '03:49')");
             jdbcTemplate.execute("INSERT INTO roles (filmcode, person, role) " +
                     "values" +
@@ -79,21 +80,27 @@ public class TestTable {
 
     private String select() {
         try {
-            jdbcTemplate.execute("SELECT * FROM roles WHERE filmcode IN (SELECT filmcode FROM films);");
+            jdbcTemplate.execute("SELECT * FROM films WHERE filmcode IN (SELECT filmcode FROM roles);");
             return "Select done";
         } catch (Exception e) {
             return "Error: " + e;
         }
     }
 
-   /*private String caseTable() {
+   private String caseTable() {
         try {
-            jdbcTemplate.execute("SELECT (CASE WHEN ... LIKE ... THEN ... END) as ... FROM ...;");
+            jdbcTemplate.execute("SELECT title as Name,\n" +
+                    "(CASE genre\n" +
+                    "WHEN 'фантастика' THEN 'Фантастический'\n" +
+                    "WHEN 'фэнтези' THEN 'Фэнтезийный'\n" +
+                    "ELSE 'Прочее'\n" +
+                    "END) as Genre\n" +
+                    "FROM films;");
             return "Case done";
         } catch (Exception e) {
             return "Error: " + e;
         }
-    }*/
+    }
 
     public String insertTableStatus () {
         return insert();
@@ -112,9 +119,9 @@ public class TestTable {
     }
 
 
-    /*public String caseTableStatus () {
+    public String caseTableStatus () {
         return caseTable();
-    }*/
+    }
 
     public String selectTableStatus () {
         return select();
