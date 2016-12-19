@@ -11,9 +11,12 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 
 @Configuration
 @PropertySource(value = {"classpath:util.properties"})
+@PropertySource(value = {"classpath:auth.properties"})
 public class AppConfig {
     @Autowired
     Environment environment;
@@ -53,5 +56,14 @@ public class AppConfig {
     @Bean
     public SqlExample sqlExample(){
         return new SqlExample(jdbcTemplate());
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        JdbcDaoImpl jdbcImpl = new JdbcDaoImpl();
+        jdbcImpl.setDataSource(dataSource());
+        jdbcImpl.setUsersByUsernameQuery(environment.getRequiredProperty("usersByQuery"));
+        jdbcImpl.setAuthoritiesByUsernameQuery(environment.getRequiredProperty("rolesByQuery"));
+        return jdbcImpl;
     }
 }
