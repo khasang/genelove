@@ -29,19 +29,19 @@ public class AppController {
         return "hello";
     }
 
-    @RequestMapping("/createFilm")
+    @RequestMapping("/manx/createFilm")
     public String createFilms(Model model) {
         model.addAttribute("createFilm", createFilm.createFilmStatus());
         return "createFilm";
     }
 
-    @RequestMapping("/createRole")
+    @RequestMapping("/manx/createRole")
     public String createRoles(Model model) {
         model.addAttribute("createRole", createRole.createRoleStatus());
         return "createRole";    }
 
 
-    @RequestMapping("/insert")
+    @RequestMapping("/manx/insert")
     public String insertInto(Model model) {
         model.addAttribute("insert", testTable.insertTableStatus());
         return "insert";
