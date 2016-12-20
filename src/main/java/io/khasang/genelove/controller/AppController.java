@@ -2,9 +2,13 @@ package io.khasang.genelove.controller;
 
 import io.khasang.genelove.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AppController {
@@ -23,25 +27,25 @@ public class AppController {
     @Autowired
     TestTable testTable;
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(Model model){
         model.addAttribute("hello", message.getMessageOut());
         return "hello";
     }
 
-    @RequestMapping("/manx/createFilm")
+    @RequestMapping(value = "/manx/createFilm", method = RequestMethod.GET)
     public String createFilms(Model model) {
         model.addAttribute("createFilm", createFilm.createFilmStatus());
         return "createFilm";
     }
 
-    @RequestMapping("/manx/createRole")
+    @RequestMapping(value = "/manx/createRole", method = RequestMethod.GET)
     public String createRoles(Model model) {
         model.addAttribute("createRole", createRole.createRoleStatus());
         return "createRole";    }
 
 
-    @RequestMapping("/manx/insert")
+    @RequestMapping(value = "/manx/insert", method = RequestMethod.GET)
     public String insertInto(Model model) {
         model.addAttribute("insert", testTable.insertTableStatus());
         return "insert";
@@ -75,5 +79,13 @@ public class AppController {
     public String select(Model model) {
         model.addAttribute("select", testTable.selectTableStatus());
         return "select";
+    }
+
+    @RequestMapping(value = {"hello/{name}"}, method = RequestMethod.GET)
+    public ModelAndView hello(@PathVariable("name") String name) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("encode");
+        modelAndView.addObject("crypt", new BCryptPasswordEncoder().encode(name));
+        return modelAndView;
     }
 }

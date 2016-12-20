@@ -21,7 +21,7 @@ public class TestTable {
                     "('2', 'Союзники', '13.11.16', 'боевик', '02:01')," +
                     "('4', 'Хоббит: Нежданное путешествие', '28.11.2012', 'фэнтези', '02:49')," +
                     "('3', 'Однажды в Америке', '17.02.84', 'драма', '03:49')");
-            jdbcTemplate.execute("INSERT INTO roles (filmcode, person, role) " +
+            jdbcTemplate.execute("INSERT INTO cast (filmcode, person, role) " +
                     "values" +
                     "('1', 'Фелисити Джонс', 'Джин Эрсо')," +
                     "('1', 'Диего Луна', 'Кассиан Андор')," +
@@ -70,7 +70,7 @@ public class TestTable {
 
     private String joinRightOuter() {
         try {
-            jdbcTemplate.execute("SELECT * FROM films t1 RIGHT JOIN roles t2 ON (t1.filmcode = t2.filmcode);");
+            jdbcTemplate.execute("SELECT * FROM films t1 RIGHT JOIN cast t2 ON (t1.filmcode = t2.filmcode);");
             return "Right outer join done";
         } catch (Exception e) {
             return "Error: " + e;
@@ -80,7 +80,7 @@ public class TestTable {
 
     private String select() {
         try {
-            jdbcTemplate.execute("SELECT * FROM films WHERE filmcode IN (SELECT filmcode FROM roles);");
+            jdbcTemplate.execute("SELECT * FROM films WHERE filmcode IN (SELECT filmcode FROM cast);");
             return "Select done";
         } catch (Exception e) {
             return "Error: " + e;

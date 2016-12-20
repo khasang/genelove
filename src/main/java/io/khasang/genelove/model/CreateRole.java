@@ -16,12 +16,12 @@ public class CreateRole {
     private String create() {
         try {
             jdbcTemplate.execute("DROP TABLE IF EXISTS roles");
-            jdbcTemplate.execute("CREATE TABLE roles (\n" +
+            jdbcTemplate.execute("CREATE TABLE cast (\n" +
                     "    role       varchar(40) NOT NULL,\n" +
                     "    person       varchar(40) NOT NULL,\n" +
                     "    filmcode       char(5)\n" +
                     ");");
-            return "Table for Roles created";
+            return "Table for Cast created";
         } catch (Exception e) {
             return "Table creation failed: " + e;
         }
