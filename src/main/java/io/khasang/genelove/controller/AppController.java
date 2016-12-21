@@ -36,6 +36,5 @@ public class AppController {
         modelAndView.setViewName("encode");
         modelAndView.addObject("crypt", new BCryptPasswordEncoder().encode(name));
         return modelAndView;
-
     }
 }
