@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
-@PropertySource(value = {"classpath:util.properties"})
+@PropertySource(value = {"classpath:util.propertys.properties"})
 public class AppConfig {
     @Autowired
     Environment environment;
@@ -39,6 +39,6 @@ public class AppConfig {
 
     @Bean
     public CreateTable createTable() {
-        return new CreateTable(jdbcTemplate());
+    return new CreateTable(jdbcTemplate());
     }
 }
