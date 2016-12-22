@@ -25,7 +25,7 @@
 
 <div>
     <h2>Spring Security Page</h2>
-    <p>User: ${name}<br>Password: ${crypt}</p>
+    <p>Page: ${name}<br>Password: ${crypt}</p>
 </div>
 <div>
     <a href="http://localhost:8080/logout">Do you wish logOut this session ?</a>

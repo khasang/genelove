@@ -13,7 +13,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/admin/**").access("hasRole('ADMIN')")
+                .antMatchers("/admin/**").access("hasAnyRole('ADMIN', 'DB', 'USER')")
                 .antMatchers("/db/**").access("hasRole('DB')")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
     }
