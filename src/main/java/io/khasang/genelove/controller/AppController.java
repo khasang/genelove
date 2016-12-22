@@ -28,7 +28,7 @@ public class AppController {
     @Autowired
     MultipleSelect multipleSelect;
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model){
         model.addAttribute("index", "Hello World!!!");
         return "index";
@@ -43,31 +43,31 @@ public class AppController {
         return modelAndView;
     }
 
-    @RequestMapping("/hello")
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello(Model model){
         model.addAttribute("hello", "Hello World!!!");
         return "hello";
     }
 
-    @RequestMapping("/db/create")
+    @RequestMapping(value = "/db/create", method = RequestMethod.GET)
     public String createTable (Model model) {
         model.addAttribute("create", createTable.createTableStatus());
         return "create";
     }
 
-    @RequestMapping("db/insert")
+    @RequestMapping(value = "db/insert", method = RequestMethod.GET)
     public String insertTable (Model model) {
         model.addAttribute("insert", insertTable.insertTableStatus());
         return "insert";
     }
 
-    @RequestMapping("db/simpleSelect")
+    @RequestMapping(value = "db/simpleSelect", method = RequestMethod.GET)
     public String simpleSelect (Model model) {
         model.addAttribute("simpleSelect", simpleSelect.simpleSelectTableStatus());
         return "simpleSelect";
     }
 
-    @RequestMapping("db/multipleSelect")
+    @RequestMapping(value = "db/multipleSelect", method = RequestMethod.GET)
     public String multipleSelect (Model model) {
         model.addAttribute("multipleSelect", multipleSelect.multipleSelectTableStatus());
         return "multipleSelect";
