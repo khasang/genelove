@@ -2,6 +2,7 @@ package io.khasang.genelove.controller;
 
 import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.Message;
+import io.khasang.genelove.model.InsertTables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,8 @@ public class AppController {
     Message message;
     @Autowired
     CreateTable createTable;
-
+    @Autowired
+    InsertTables insertTables;
     @RequestMapping("/")
     public String hello(Model model){
         model.addAttribute("hello", message.getMessageOut());
@@ -26,4 +28,9 @@ public class AppController {
         return "create";
     }
 
+    @RequestMapping("/insert")
+    public String insertTables(Model model) {
+        model.addAttribute("insert", insertTables.insertTableStatus());
+        return "insert";
+    }
 }
