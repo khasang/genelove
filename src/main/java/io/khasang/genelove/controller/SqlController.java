@@ -17,7 +17,7 @@ public class SqlController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView sqls(){
         ModelAndView modelAndView=new ModelAndView("sql");
-        modelAndView.addObject("sqlResultCrearteTable",sqlTable.createTable());
+      //  modelAndView.addObject("sqlResultCrearteTable",sqlTable.createTable());
         modelAndView.addObject("sqlResultInsertTable",sqlTable.insertTable());
         return modelAndView;
     }

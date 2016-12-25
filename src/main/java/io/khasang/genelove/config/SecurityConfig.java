@@ -13,7 +13,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/adm-**").access("hasRole('ADMIN')")
+                .antMatchers("/adm-**").access("hasRole('ADMINISTRATOR')")
                 .antMatchers("/mng-**").access("hasRole('MANAGER')")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
     }
@@ -21,8 +21,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
-        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMINISTRATOR");
         auth.inMemoryAuthentication().withUser("manager").password("manager").roles("MANAGER");
-        auth.inMemoryAuthentication().withUser("superadmin").password("superadmin").roles("SUPERADMIN");
+
     }
 }

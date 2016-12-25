@@ -2,6 +2,8 @@ package io.khasang.genelove.model;
 
 
 import io.khasang.genelove.constants.SqlConstns;
+import io.khasang.genelove.constants.UserConstants;
+import io.khasang.genelove.entity.Role;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 
@@ -31,16 +33,16 @@ public class SQLTable {
 
     public String insertTable(){
         try {
-            jdbcTemplate.execute("insert into films (id, title) values (1, 'Love')");
+
+
             jdbcTemplate.execute("insert into films (id, title) values (2, 'Angry Birds')");
             jdbcTemplate.execute("insert into films (id, title) values (3, 'Gravitation')");
             jdbcTemplate.execute("insert into films (id, title) values (4, 'Java in action')");
-            jdbcTemplate.execute("insert into films (id, title) values (5, 'Batman')");
-
+            jdbcTemplate.execute("insert into films (id, title) values (1, 'Batman')");
             jdbcTemplate.execute("insert into users (id, name,id_film) values (1, 'Anton',2)");
             jdbcTemplate.execute("insert into users (id, name,id_film) values (2, 'Borys',4)");
             jdbcTemplate.execute("insert into users (id, name,id_film) values (3, 'Valera',4)");
-            jdbcTemplate.execute("insert into users (id, name,id_film) values (4, 'Ivan',5)");
+            jdbcTemplate.execute("insert into users (id, name,id_film) values (4, 'Ivan',1)");
             jdbcTemplate.execute("insert into users (id, name,id_film) values (5, 'Olena',3)");
 
             jdbcTemplate.execute("SELECT u.id, u.name, f.title AS film_watch " +
@@ -52,6 +54,18 @@ public class SQLTable {
             return "FAILED (reason : " + e +" )";
         }
     }
+    public String insertUsers(){
+        try {
+            String passwordAdmin="'admin'";
+            String passwordUser="'user'";
+            jdbcTemplate.execute("insert into users (id_user,login,password,role) values (1,'admin',"+passwordAdmin+",'ADMINISTRATOR')");
+            jdbcTemplate.execute("insert into users (id_user,login,password,role) values (2,'user',"+passwordUser+",'USER')");
 
+
+            return "SUCCESS";
+        }catch (Exception e){
+            return "FAILED (reason : " + e +" )";
+        }
+    }
 
 }
