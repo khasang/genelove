@@ -1,15 +1,17 @@
 package io.khasang.genelove.controller;
 
+import io.khasang.genelove.entity.Question;
 import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.Message;
+import io.khasang.genelove.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class AppController {
@@ -17,6 +19,8 @@ public class AppController {
     Message message;
     @Autowired
     CreateTable createTable;
+    @Autowired
+    QuestionService questionService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(Model model) {
@@ -36,5 +40,17 @@ public class AppController {
         modelAndView.setViewName("encode");
         modelAndView.addObject("crypt", new BCryptPasswordEncoder().encode(name));
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/db/addQuestion", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public Object addQuestion(@RequestBody Question question, HttpServletResponse response) {
+        try {
+            questionService.addQuestion(question);
+            return question;
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error adding question: " + e.getMessage();
+        }
     }
 }
