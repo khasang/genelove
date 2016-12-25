@@ -33,10 +33,12 @@ public class AppController {
         return "create";
     }
 
-    @RequestMapping("/databaseTraining")
+    @RequestMapping(value = "/databaseTraining", method = RequestMethod.GET)
     public String createExampleTables(Model model) {
         model.addAttribute("databaseTraining", databaseTraining.trainingStatus());
         return "databaseTraining";
+    }
+
     @RequestMapping(value = {"hello/{name}"}, method = RequestMethod.GET)
     public ModelAndView hello(@PathVariable("name") String name) {
         ModelAndView modelAndView = new ModelAndView();
