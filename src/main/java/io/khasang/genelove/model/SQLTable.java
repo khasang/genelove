@@ -5,6 +5,7 @@ import io.khasang.genelove.constants.SqlConstns;
 import io.khasang.genelove.constants.UserConstants;
 import io.khasang.genelove.entity.Role;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 public class SQLTable {
@@ -56,10 +57,12 @@ public class SQLTable {
     }
     public String insertUsers(){
         try {
-            String passwordAdmin="'admin'";
-            String passwordUser="'user'";
-            jdbcTemplate.execute("insert into users (id_user,login,password,role) values (1,'admin',"+passwordAdmin+",'ADMINISTRATOR')");
-            jdbcTemplate.execute("insert into users (id_user,login,password,role) values (2,'user',"+passwordUser+",'USER')");
+            String passwordAdmin=new BCryptPasswordEncoder().encode("admin");
+            String passwordUser=new BCryptPasswordEncoder().encode("user");
+            jdbcTemplate.execute("insert into users (id_user,login,password,role) values (1,'admin',"
+                    +"'"+passwordAdmin+"'"+",'ADMINISTRATOR')");
+            jdbcTemplate.execute("insert into users (id_user,login,password,role) values (2,'user',"
+                    +"'"+passwordUser+"'"+",'USER')");
 
 
             return "SUCCESS";

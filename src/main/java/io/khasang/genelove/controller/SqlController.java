@@ -18,7 +18,7 @@ public class SqlController {
     public ModelAndView sqls(){
         ModelAndView modelAndView=new ModelAndView("sql");
       //  modelAndView.addObject("sqlResultCrearteTable",sqlTable.createTable());
-        modelAndView.addObject("sqlResultInsertTable",sqlTable.insertTable());
+        modelAndView.addObject("sqlResultInsertTable",sqlTable.insertUsers());
         return modelAndView;
     }
 }
