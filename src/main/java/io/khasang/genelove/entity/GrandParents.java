@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
-public class Users {
-    public Users() {
+public class GrandParents {
+    public GrandParents() {
     }
 
     @Id
@@ -28,8 +28,8 @@ public class Users {
     @Column(name = "Gender")
     private Character gender;
 
-    @Column(name = "ParentId")
-    private long parentId;
+    @Column(name = "UserId")
+    private long userId;
 
     public long getId() {
         return id;
@@ -79,11 +79,11 @@ public class Users {
         this.gender = gender;
     }
 
-    public long getParentId() {
-        return parentId;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setParentId(long parentId) {
-        this.parentId = parentId;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }
