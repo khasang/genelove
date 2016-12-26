@@ -6,5 +6,6 @@
 </head>
 <body>
 ${hello}
+<a href="createUsers">Create users</a>
 </body>
 </html>

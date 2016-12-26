@@ -8,17 +8,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "/adm-sql")
-public class SqlController {
+@RequestMapping(value = "/createUsers")
+public class CreateUserController {
 
     @Autowired
     private SQLTable sqlTable;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView sqls(){
-        ModelAndView modelAndView=new ModelAndView("sql");
-      //  modelAndView.addObject("sqlResultCrearteTable",sqlTable.createTable());
-      //  modelAndView.addObject("sqlResultInsertTable",sqlTable.insertUsers());
+    public ModelAndView createUsersInDB(){
+        ModelAndView modelAndView=new ModelAndView("index");
+        modelAndView.addObject("sqlResultInsertUsers",sqlTable.insertUsers());
         return modelAndView;
     }
 }

@@ -58,11 +58,11 @@ public class SQLTable {
     public String insertUsers(){
         try {
             String passwordAdmin=new BCryptPasswordEncoder().encode("admin");
-            String passwordUser=new BCryptPasswordEncoder().encode("user");
+            String passwordUser=new BCryptPasswordEncoder().encode("manager");
             jdbcTemplate.execute("insert into users (id_user,login,password,role) values (1,'admin',"
                     +"'"+passwordAdmin+"'"+",'ADMINISTRATOR')");
-            jdbcTemplate.execute("insert into users (id_user,login,password,role) values (2,'user',"
-                    +"'"+passwordUser+"'"+",'USER')");
+            jdbcTemplate.execute("insert into users (id_user,login,password,role) values (2,'manager',"
+                    +"'"+passwordUser+"'"+",'MANAGER')");
 
 
             return "SUCCESS";

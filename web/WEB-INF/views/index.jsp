@@ -11,6 +11,9 @@
     <title>Title</title>
 </head>
 <body>
-${hello}
+<h3>create users : ${sqlResultInsertUsers}</h3>
+<a href="adm-sql">Admin page</a><p style="color: red">LOGIN : admin,PASSWORD : admin</p>
+
+<a href="mng-lemberg">Manager page</a><p style="color: red">LOGIN : manager,PASSWORD : manager</p>
 </body>
 </html>
