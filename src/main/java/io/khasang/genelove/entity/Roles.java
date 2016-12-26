@@ -9,10 +9,12 @@ public class Roles {
     public Roles() {
     }
 
+    private final String ROLE_NAME = "role_name";
+
     @Id
     private int id;
 
-    @Column(name = "role_name")
+    @Column(name = ROLE_NAME)
     private String roleName;
 
     private String descr;

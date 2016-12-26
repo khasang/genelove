@@ -9,13 +9,16 @@ public class UserRoleLink {
     public UserRoleLink() {
     }
 
+    private final String USER_ID = "user_id";
+    private final String ROLE_ID = "role_id";
+
     @Id
     private long id;
 
-    @Column(name = "user_id")
+    @Column(name = USER_ID)
     private long userId;
 
-    @Column(name = "role_id")
+    @Column(name = ROLE_ID)
     private int roleId;
 
     public long getId() {
