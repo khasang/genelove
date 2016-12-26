@@ -6,12 +6,12 @@ import javax.persistence.Id;
 @Entity
 public class Users {
     @Id
-    private long id;
+    private long user_id;
 
     private String login;
     private String name;
     private String password;
-    private int role_id;
+    //private int role_id;
     public Users() {
     }
 
@@ -24,11 +24,11 @@ public class Users {
     }
 
     public long getId() {
-        return id;
+        return user_id;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.user_id = id;
     }
 
     public String getLogin() {
@@ -46,12 +46,11 @@ public class Users {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    /*
     public int getRole_id() {
         return role_id;
     }
 
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
-    }
+    public void setRole_id(int role_id) { this.role_id = role_id; }
+    */
 }
