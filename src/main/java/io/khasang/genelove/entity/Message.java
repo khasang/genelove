@@ -4,9 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * @author Denis Guzikov
- * Date 26-12-2016
  * Сообщения
+ * @author Denis Guzikov
+ * @version 1.0
  */
 
 @Entity
@@ -17,8 +17,10 @@ public class Message {
     @Id
     private int id;
     private long userId;
-    private long toUserId;     //от кого
-    private long fromUserId;   //кому
+    /** Поле "от кого" */
+    private long toUserId;
+    /** Поле "кому" */
+    private long fromUserId;
     private String text;
 
     public int getId() {

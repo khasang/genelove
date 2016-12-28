@@ -4,9 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * @author Denis Guzikov
- * Date 26-12-2016
  * Родители
+ * @author Denis Guzikov
+ * @version 1.0
  */
 
 @Entity
@@ -16,9 +16,12 @@ public class Parent {
 
     @Id
     private long id;
-    private long personId;          //потомок
-    private long personParentId;    //родитель(предок)
-    private int type;               //мама или папа
+    /** Поле "потомок" */
+    private long personId;
+    /** Поле "родитель(предок)" */
+    private long personParentId;
+    /** Поле "тип" (мама или папа) */
+    private int type;
 
     public long getId() {
         return id;

@@ -4,9 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * @author Denis Guzikov
- * Date 26-12-2016
  * Альбомы мультимедиа (фото, видео, аудио)
+ * @author Denis Guzikov
+ * @version 1.0
  */
 
 @Entity

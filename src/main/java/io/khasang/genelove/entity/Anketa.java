@@ -4,9 +4,9 @@ import javax.persistence.Id;
 import java.util.Date;
 
 /**
- * @author Denis Guzikov
- * Date 26-12-2016
  * Личная информация
+ * @author Denis Guzikov
+ * @version 1.0
  */
 
 public class Anketa {
@@ -15,7 +15,9 @@ public class Anketa {
 
     @Id
     private long id;
-    private String info;         //о себе
+    /** Поле "о себе" */
+    private String info;
+    /** Поле "кого я ищу" */
     private String lookingFor;   //кого я ищу
     private String phone;
     private String email;

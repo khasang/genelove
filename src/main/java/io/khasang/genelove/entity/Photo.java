@@ -4,9 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * @author Denis Guzikov
- * Date 26-12-2016
  * Фото
+ * @author Denis Guzikov
+ * @version 1.0
  */
 
 @Entity
@@ -17,8 +17,10 @@ public class Photo {
     @Id
     private long id;
     private long albumId;
-    private int type;     //главное фото, обычное фото
-    private String address;  //путь файла в сети
+    /** Поле "тип" (главное фото, обычное фото) */
+    private int type;
+    /** Поле "адрес" (путь файла в сети) */
+    private String address;
 
     public long getId() {
         return id;

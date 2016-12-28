@@ -5,9 +5,9 @@ import javax.persistence.Id;
 import java.util.Date;
 
 /**
- * @author Denis Guzikov
- * Date 26-12-2016
  * Люди - однова генеалогического древа
+ * @author Denis Guzikov
+ * @version 1.0
  */
 @Entity
 public class Person {
@@ -19,7 +19,8 @@ public class Person {
     private String firstName;
     private String secondName;
     private String middleName;
-    private Date startDate;      //дата Рождения
+    /** Поле "дата Рождения" */
+    private Date startDate;
     private Date endDate;
     private long userId;
     private String info;
