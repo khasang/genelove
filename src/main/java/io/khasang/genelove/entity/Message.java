@@ -18,7 +18,6 @@ public class Message {
 
     private String message;
 
-    @Temporal(TemporalType.TIMESTAMP)
     private java.sql.Timestamp messageDatetime;
 
     public Message() {

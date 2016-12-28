@@ -21,7 +21,6 @@ public class User {
 
     private String smallphoto;
 
-    @Temporal(TemporalType.TIMESTAMP)
     private java.sql.Timestamp date;
 
     public User() {
