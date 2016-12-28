@@ -1,5 +1,6 @@
 package io.khasang.genelove.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -7,7 +8,7 @@ import javax.persistence.Id;
 public class Users {
     @Id
     private long user_id;
-
+    @Column
     private String login;
     private String name;
     private String password;
