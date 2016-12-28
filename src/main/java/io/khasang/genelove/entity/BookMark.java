@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
+ * @author Denis Guzikov
+ * Date 26-12-2016
  * Закладки(понравившиеся пользователи)
  */
 

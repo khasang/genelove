@@ -4,6 +4,8 @@ import javax.persistence.Id;
 import java.util.Date;
 
 /**
+ * @author Denis Guzikov
+ * Date 26-12-2016
  * Личная информация
  */
 
