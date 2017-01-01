@@ -8,7 +8,6 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
-
     @Column(length = 1255)
     private String question;
 
@@ -50,8 +49,8 @@ public class Question {
         return correctAnswers;
     }
 
-    public void setCorrectAnswers(String correectAnswers) {
-        this.correctAnswers = correectAnswers;
+    public void setCorrectAnswers(String correctAnswers) {
+        this.correctAnswers = correctAnswers;
     }
 
     public String getAnswer1() {
