@@ -69,4 +69,12 @@ public class AppController {
             return "Error adding question: " + e.getMessage();
         }
     }
+
+    @RequestMapping(value = "/db/allQuestion", method = RequestMethod.GET)
+    public String allQuestion(Model model) {
+        List<Question> list = questionService.getQuetionList();
+        model.addAttribute("allQuestion", list);
+        return "questions";
+    }
+
 }
