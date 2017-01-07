@@ -2,6 +2,7 @@ package io.khasang.genelove.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Закладки(понравившиеся пользователи)
@@ -14,8 +15,10 @@ public class BookMark {
 
     @Id
     private long id;
-    private long userId;
-    private long markUserId;
+    @ManyToOne
+    private Users user;
+    @ManyToOne
+    private Users markUser;
 
     public long getId() {
         return id;
@@ -25,19 +28,19 @@ public class BookMark {
         this.id = id;
     }
 
-    public long getUserId() {
-        return userId;
+    public Users getUser() {
+        return user;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
-    public long getMarkUserId() {
-        return markUserId;
+    public Users getMarkUser() {
+        return markUser;
     }
 
-    public void setMarkUserId(long markUserId) {
-        this.markUserId = markUserId;
+    public void setMarkUser(Users markUser) {
+        this.markUser = markUser;
     }
 }

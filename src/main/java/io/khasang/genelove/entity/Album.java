@@ -2,6 +2,7 @@ package io.khasang.genelove.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Альбомы мультимедиа (фото, видео, аудио)
@@ -16,7 +17,8 @@ public class Album {
     private long id;
     private String name;
     private String descr;
-    private long personId;
+    @ManyToOne
+    private Person person;
 
     public long getId() {
         return id;
@@ -42,11 +44,11 @@ public class Album {
         this.descr = descr;
     }
 
-    public long getPersonId() {
-        return personId;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPersonId(long personId) {
-        this.personId = personId;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }

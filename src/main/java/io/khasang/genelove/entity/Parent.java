@@ -2,6 +2,7 @@ package io.khasang.genelove.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Родители
@@ -14,8 +15,10 @@ public class Parent {
 
     @Id
     private long id;
-    private long personId;          //потомок
-    private long personParentId;    //родитель(предок)
+    @ManyToOne
+    private Person person;          //потомок
+    @ManyToOne
+    private Person personParent;    //родитель(предок)
     private int type;               //мама или папа
 
     public long getId() {
@@ -26,27 +29,27 @@ public class Parent {
         this.id = id;
     }
 
-    public long getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(long personId) {
-        this.personId = personId;
-    }
-
-    public long getPersonParentId() {
-        return personParentId;
-    }
-
-    public void setPersonParentId(long personParentId) {
-        this.personParentId = personParentId;
-    }
-
     public int getType() {
         return type;
     }
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Person getPersonParent() {
+        return personParent;
+    }
+
+    public void setPersonParent(Person personParent) {
+        this.personParent = personParent;
     }
 }

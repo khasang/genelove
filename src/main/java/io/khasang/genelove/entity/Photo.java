@@ -2,6 +2,7 @@ package io.khasang.genelove.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Фото
@@ -14,7 +15,8 @@ public class Photo {
 
     @Id
     private long id;
-    private long albumId;
+    @ManyToOne
+    private Album album;
     private int type;     //главное фото, обычное фото
     private String address;  //путь файла в сети
 
@@ -24,14 +26,6 @@ public class Photo {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getAlbumId() {
-        return albumId;
-    }
-
-    public void setAlbumId(long albumId) {
-        this.albumId = albumId;
     }
 
     public int getType() {
@@ -48,5 +42,13 @@ public class Photo {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
     }
 }

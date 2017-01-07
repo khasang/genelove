@@ -2,6 +2,7 @@ package io.khasang.genelove.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Сообщения
@@ -14,9 +15,12 @@ public class Message {
 
     @Id
     private int id;
-    private long userId;
-    private long toUserId;     //от кого
-    private long fromUserId;   //кому
+    @ManyToOne
+    private Users user;
+    @ManyToOne
+    private Users toUser;     //от кого
+    @ManyToOne
+    private Users fromUser;   //кому
     private String text;
 
     public int getId() {
@@ -27,35 +31,19 @@ public class Message {
         this.id = id;
     }
 
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public long getToUserId() {
-        return toUserId;
-    }
-
-    public void setToUserId(long toUserId) {
-        this.toUserId = toUserId;
-    }
-
-    public long getFromUserId() {
-        return fromUserId;
-    }
-
-    public void setFromUserId(long fromUserId) {
-        this.fromUserId = fromUserId;
-    }
-
     public String getText() {
         return text;
     }
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
     }
 }

@@ -3,6 +3,8 @@ package io.khasang.genelove.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
 @Entity
 public class Roles {
@@ -18,6 +20,8 @@ public class Roles {
     private String roleName;
 
     private String descr;
+//    @ManyToMany
+//    private List<Users> users;
 
     public int getId() {
         return id;

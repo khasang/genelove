@@ -2,6 +2,7 @@ package io.khasang.genelove.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 /**
@@ -19,7 +20,8 @@ public class Person {
     private String middleName;
     private Date startDate;      //дата Рождения
     private Date endDate;
-    private long userId;
+    @ManyToOne
+    private Users user;
     private String info;
 
     public long getId() {
@@ -70,19 +72,19 @@ public class Person {
         this.endDate = endDate;
     }
 
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
     public String getInfo() {
         return info;
     }
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
     }
 }

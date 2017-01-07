@@ -1,6 +1,7 @@
 package io.khasang.genelove.entity;
 
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 /**
@@ -18,7 +19,8 @@ public class Anketa {
     private String phone;
     private String email;
     private String address;
-    private long personId;
+    @ManyToOne
+    private Person person;
 
     public long getId() {
         return id;
@@ -68,11 +70,11 @@ public class Anketa {
         this.address = address;
     }
 
-    public long getPersonId() {
-        return personId;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPersonId(long personId) {
-        this.personId = personId;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }
