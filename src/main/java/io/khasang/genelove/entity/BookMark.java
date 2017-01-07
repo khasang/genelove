@@ -6,6 +6,8 @@ import javax.persistence.ManyToOne;
 
 /**
  * Закладки(понравившиеся пользователи)
+ * @author Denis Guzikov
+ * @version 1.0
  */
 
 @Entity

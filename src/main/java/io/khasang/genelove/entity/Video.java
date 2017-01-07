@@ -6,6 +6,8 @@ import javax.persistence.ManyToOne;
 
 /**
  * Видео
+ * @author Denis Guzikov
+ * @version 1.0
  */
 
 @Entity
@@ -17,8 +19,10 @@ public class Video {
     private long id;
     @ManyToOne
     private  Album album;
-    private int type;     //главное видео, обычное видео
-    private String address;  //путь файла в сети
+    /** Поле "тип" (главное фото, обычное фото) */
+    private int type;
+    /** Поле "адрес" (путь файла в сети) */
+    private String address;
 
     public long getId() {
         return id;

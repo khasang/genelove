@@ -6,6 +6,8 @@ import javax.persistence.ManyToOne;
 
 /**
  * Родители
+ * @author Denis Guzikov
+ * @version 1.0
  */
 
 @Entity
@@ -15,11 +17,14 @@ public class Parent {
 
     @Id
     private long id;
+    /** Поле "потомок" */
     @ManyToOne
-    private Person person;          //потомок
+    private Person person;
+    /** Поле "родитель(предок)" */
     @ManyToOne
-    private Person personParent;    //родитель(предок)
-    private int type;               //мама или папа
+    private Person personParent;
+    /** Поле "тип" (мама или папа) */
+    private int type;
 
     public long getId() {
         return id;

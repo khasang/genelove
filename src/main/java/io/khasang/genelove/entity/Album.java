@@ -6,6 +6,8 @@ import javax.persistence.ManyToOne;
 
 /**
  * Альбомы мультимедиа (фото, видео, аудио)
+ * @author Denis Guzikov
+ * @version 1.0
  */
 
 @Entity

@@ -7,6 +7,8 @@ import java.util.Date;
 
 /**
  * Люди - однова генеалогического древа
+ * @author Denis Guzikov
+ * @version 1.0
  */
 @Entity
 public class Person {
@@ -18,7 +20,8 @@ public class Person {
     private String firstName;
     private String secondName;
     private String middleName;
-    private Date startDate;      //дата Рождения
+    /** Поле "дата Рождения" */
+    private Date startDate;
     private Date endDate;
     @ManyToOne
     private Users user;

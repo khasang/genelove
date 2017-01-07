@@ -6,6 +6,8 @@ import javax.persistence.ManyToOne;
 
 /**
  * Фото
+ * @author Denis Guzikov
+ * @version 1.0
  */
 
 @Entity
@@ -17,8 +19,10 @@ public class Photo {
     private long id;
     @ManyToOne
     private Album album;
-    private int type;     //главное фото, обычное фото
-    private String address;  //путь файла в сети
+    /** Поле "тип" (главное фото, обычное фото) */
+    private int type;
+    /** Поле "адрес" (путь файла в сети) */
+    private String address;
 
     public long getId() {
         return id;
@@ -26,6 +30,14 @@ public class Photo {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(long albumId) {
+        this.albumId = albumId;
     }
 
     public int getType() {
