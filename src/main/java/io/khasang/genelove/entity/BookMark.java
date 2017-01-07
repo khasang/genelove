@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- * Закладки(понравившиеся пользователи)
+ * BookMarks(favorite users)
  * @author Denis Guzikov
  * @version 1.0
  */

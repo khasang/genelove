@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- * Альбомы мультимедиа (фото, видео, аудио)
+ * Multimedia albums (photo, video, audio)
  * @author Denis Guzikov
  * @version 1.0
  */

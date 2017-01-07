@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- * Сообщения
+ * Messages
  * @author Denis Guzikov
  * @version 1.0
  */
@@ -19,10 +19,10 @@ public class Message {
     private int id;
     @ManyToOne
     private Users user;
-    /** Поле "от кого" */
+    /** Field "from user" */
     @ManyToOne
     private Users toUser;
-    /** Поле "кому" */
+    /** Field "to user" */
     @ManyToOne
     private Users fromUser;
     private String text;

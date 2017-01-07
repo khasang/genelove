@@ -2,24 +2,23 @@ package io.khasang.genelove.entity;
 
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.util.Date;
 
 /**
- * Личная информация
+ * Personal info
  * @author Denis Guzikov
  * @version 1.0
  */
 
-public class Anketa {
-    public Anketa() {
+public class PersInfo {
+    public PersInfo() {
     }
 
     @Id
     private long id;
-    /** Поле "о себе" */
+    /** Field "about me" */
     private String info;
-    /** Поле "кого я ищу" */
-    private String lookingFor;   //кого я ищу
+    /** Field "who I seek" */
+    private String lookingFor;
     private String phone;
     private String email;
     private String address;

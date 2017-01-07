@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- * Фото
+ * Photo
  * @author Denis Guzikov
  * @version 1.0
  */
@@ -19,9 +19,9 @@ public class Photo {
     private long id;
     @ManyToOne
     private Album album;
-    /** Поле "тип" (главное фото, обычное фото) */
+    /** Field "type" (main photo, usual photo) */
     private int type;
-    /** Поле "адрес" (путь файла в сети) */
+    /** Field "address" (net file path) */
     private String address;
 
     public long getId() {

@@ -6,7 +6,7 @@ import javax.persistence.ManyToOne;
 import java.util.Date;
 
 /**
- * Люди - однова генеалогического древа
+ * People - basis of the family tree
  * @author Denis Guzikov
  * @version 1.0
  */
@@ -20,7 +20,7 @@ public class Person {
     private String firstName;
     private String secondName;
     private String middleName;
-    /** Поле "дата Рождения" */
+    /** Поле "BirthDay" */
     private Date startDate;
     private Date endDate;
     @ManyToOne
