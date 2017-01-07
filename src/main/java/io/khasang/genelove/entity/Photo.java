@@ -32,14 +32,6 @@ public class Photo {
         this.id = id;
     }
 
-    public long getAlbumId() {
-        return albumId;
-    }
-
-    public void setAlbumId(long albumId) {
-        this.albumId = albumId;
-    }
-
     public int getType() {
         return type;
     }

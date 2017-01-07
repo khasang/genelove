@@ -50,4 +50,20 @@ public class Message {
     public void setUser(Users user) {
         this.user = user;
     }
+
+    public Users getToUser() {
+        return toUser;
+    }
+
+    public void setToUser(Users toUser) {
+        this.toUser = toUser;
+    }
+
+    public Users getFromUser() {
+        return fromUser;
+    }
+
+    public void setFromUser(Users fromUser) {
+        this.fromUser = fromUser;
+    }
 }
