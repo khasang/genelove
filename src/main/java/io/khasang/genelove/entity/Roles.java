@@ -7,7 +7,7 @@ import javax.persistence.Id;
 @Entity
 public class Roles {
     @Id
-    private int role_id;
+    private int id;
     @Column
     private String role_name;
 
@@ -15,11 +15,11 @@ public class Roles {
     }
 
     public int getId() {
-        return role_id;
+        return id;
     }
 
     public void setId(int id) {
-        this.role_id = id;
+        this.id = id;
     }
 
     public String getRole_name() {

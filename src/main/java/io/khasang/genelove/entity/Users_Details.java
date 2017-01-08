@@ -8,23 +8,23 @@ import java.util.Date;
 @Entity
 public class Users_Details {
     @Id
-    private long user_id;
+    private long id;
     @Column
     private String FirstName;
     private String SurName;
     private String LastName;
     private Date Date_of_Birth;
-    private Date Date_of_Deatb;
+    private Date Date_of_End;
     //
     public Users_Details() {
     }
 
-    public long getUser_id() {
-        return user_id;
+    public long get_id() {
+        return id;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void set_id(long user_id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -59,11 +59,11 @@ public class Users_Details {
         Date_of_Birth = date_of_Birth;
     }
 
-    public Date getDate_of_Deatb() {
-        return Date_of_Deatb;
+    public Date getDate_of_End() {
+        return Date_of_End;
     }
 
-    public void setDate_of_Deatb(Date date_of_Deatb) {
-        Date_of_Deatb = date_of_Deatb;
+    public void setDate_of_End(Date date_of_End) {
+        Date_of_End = date_of_End;
     }
 }

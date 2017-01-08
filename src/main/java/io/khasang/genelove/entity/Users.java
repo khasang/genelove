@@ -3,11 +3,14 @@ package io.khasang.genelove.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Users {
     @Id
-    private long user_id;
+    private long id;
     @Column
     private String login;
     private String name;
@@ -16,6 +19,11 @@ public class Users {
     public Users() {
     }
 
+    @OneToMany
+    private List<Roles> roles = new ArrayList<>();
+    public List<Roles> getRoles() {
+        return roles;
+    }
     public String getName() {
         return name;
     }
@@ -25,11 +33,11 @@ public class Users {
     }
 
     public long getId() {
-        return user_id;
+        return id;
     }
 
     public void setId(long id) {
-        this.user_id = id;
+        this.id = id;
     }
 
     public String getLogin() {
