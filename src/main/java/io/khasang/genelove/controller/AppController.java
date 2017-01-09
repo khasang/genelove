@@ -92,10 +92,46 @@ public class AppController {
         }
     }
 
+    @RequestMapping(value = "/db/addQuestion2", method = RequestMethod.PUT, produces = "application/json")
+    @ResponseBody
+    public Object addQuestion2(@RequestBody Question question, HttpServletResponse response) {
+        try {
+            questionService.addQuestion(question);
+            return question;
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error adding question: " + e.getMessage();
+        }
+    }
+
     @RequestMapping(value = "/db/allQuestion", method = RequestMethod.GET)
     public String allQuestion(Model model) {
         List<Question> list = questionService.getQuetionList();
         model.addAttribute("allQuestion", list);
         return "questions";
+    }
+
+    @RequestMapping(value = "/db/deleteQuestion", method = RequestMethod.DELETE, produces = "application/json")
+    @ResponseBody
+    public Object deleteQuestion(@RequestBody Question question, HttpServletResponse response) {
+        try {
+            questionService.deleteQuestion(question);
+            return question;
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error deleting question: " + e.getMessage();
+        }
+    }
+
+    @RequestMapping(value = "/db/updateQuestion", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public Object updateQuestion(@RequestBody Question question, HttpServletResponse response) {
+        try {
+            questionService.updateQuestion(question);
+            return question;
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error updating question: " + e.getMessage();
+        }
     }
 }
