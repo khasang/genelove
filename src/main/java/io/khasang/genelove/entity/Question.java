@@ -4,9 +4,11 @@ import javax.persistence.*;
 
 @Entity
 public class Question {
+    private final String ID = "id";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = ID)
     private int id;
 
     @Column(length = 1255)
