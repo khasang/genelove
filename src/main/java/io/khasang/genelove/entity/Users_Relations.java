@@ -1,8 +1,6 @@
 package io.khasang.genelove.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Users_Relations {
@@ -10,8 +8,15 @@ public class Users_Relations {
     private long uniq_rec_id;
     @Column
     private long id;
+    /*
     @Column
     private long relative_id;
+    */
+    @ManyToOne
+    @JoinColumn(name = "relative_id",
+            foreignKey = @ForeignKey(name = "USERS_ID_FK")
+    )
+    private Users users;
 
     public Users_Relations() {
     }
@@ -32,11 +37,4 @@ public class Users_Relations {
         this.id = id;
     }
 
-    public long getRelative_id() {
-        return relative_id;
-    }
-
-    public void setRelative_id(long relative_id) {
-        this.relative_id = relative_id;
-    }
 }

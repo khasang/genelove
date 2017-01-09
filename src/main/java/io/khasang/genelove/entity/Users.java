@@ -1,9 +1,6 @@
 package io.khasang.genelove.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,14 +13,19 @@ public class Users {
     private String name;
     private String password;
     //private int role_id;
+    @ManyToMany
+    private List<Roles> roles = new ArrayList<>();
+
     public Users() {
     }
-
+    /*
     @OneToMany
     private List<Roles> roles = new ArrayList<>();
+    */
     public List<Roles> getRoles() {
         return roles;
     }
+
     public String getName() {
         return name;
     }

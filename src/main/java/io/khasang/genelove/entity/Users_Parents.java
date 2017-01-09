@@ -6,20 +6,24 @@ import javax.persistence.*;
 public class Users_Parents {
     @Id
     private long id;
+
     @Column
     private long mother_id;
+    @Column
     private long father_id;
 
     public Users_Parents() {
     }
-
+    /*
     public long get_id() {
         return id;
     }
-
-    public void set_id(long id) {
+    */
+    /* public void set_id(long id) {
         this.id = id;
     }
+    */
+
     public long getMother_id() {
         return mother_id;
     }
