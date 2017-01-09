@@ -31,8 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/admin/**").access("hasAnyRole('ADMIN', 'DB', 'USER')")
-                .antMatchers("/db/**").access("hasRole('DB')")
+                .antMatchers("/admin/**").access("hasAnyRole('ROLE_ADM', 'ROLE_ADMIN')")
+                .antMatchers("/db/**").access("ROLE_DB")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
     }
 /*
@@ -43,5 +43,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN", "DB", "USER");
         auth.inMemoryAuthentication().withUser("adm").password("adm").roles("ADMIN");
         auth.inMemoryAuthentication().withUser("superadmin").password("superadmin").roles("SUPERADMIN");
-    }  */
+    }*/
 }

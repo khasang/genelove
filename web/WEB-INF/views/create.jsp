@@ -5,7 +5,7 @@
     <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
-<div>
+<div id=""left">
 <ul id="navMenu">
     <li><a href="">Main page</a></li>
     <li><a href="hello">Hello page</a></li>

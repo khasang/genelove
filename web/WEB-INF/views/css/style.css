@@ -28,3 +28,38 @@ div {
     padding: 25px;
     margin: 50px auto;
 }
+
+#left {
+    width: 350px;
+    float: left;
+}
+#navMenu {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    background-color: rgba(200, 50, 50, 1);
+}
+
+#navMenu li:last-of-type a {
+
+    border-bottom: 2px solid #900;
+}
+
+#navMenu a {
+    color: #FFF;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-top: 1px solid #900;
+    padding: 7px 5px;
+    display: block;
+    background-position: 0 2px;
+    border-bottom: none;
+    padding: 7px 5px 7px 30px;
+}
+
+#navMenu a:hover {
+    background-color: rgba(200, 50, 50, .5);
+}
+
