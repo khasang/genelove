@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
-                .antMatchers("/db/**").access("hasRole('DBADMIN')")
+                .antMatchers("/db/**").access("hasAnyRole('DBADMIN','ADMIN','SUPERADMIN')")
                 .antMatchers("/sql/**").access("hasAnyRole('USER','ADMIN','SUPERADMIN')")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
     }
