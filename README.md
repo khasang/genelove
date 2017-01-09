@@ -1,14 +1,29 @@
-# genelove
+# Genelove
 
-## What's up
-## No! that's the first!
+description
 
-``` java
-run()
+## Install 
 
-## Hello my darling
-## White starts and wins
+(что надо для установки приложения)
 
-``` java
-hello()
-```
+## Java Mail Sending 
+
+что надо установить чтобы JMS работал (Active MQ)
+
+## AdminController
+
+какие методы, что делают
+
+## UserController
+
+какие методы, что делают
+
+## Сущности
+
+какие есть таблицы и зачем
+
+## Доступы к объектам
+
+какие методы и зачем
+
+
