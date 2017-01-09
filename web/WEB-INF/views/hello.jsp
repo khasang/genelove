@@ -6,15 +6,15 @@
 </head>
 <body>
 
-<div id=""left">
-<ul id="navMenu">
+<ul class="navMenu">
     <li><a href="">Main page</a></li>
     <li><a href="hello">Hello page</a></li>
-    <li><a href="db/create">Create table <strong>films</strong></a></li>
-    <li><a href="insert">Insert data into table <strong>films</strong></a></li>
-    <li><a href="simpleSelect">Simple select from table <strong>films</strong></a></li>
-    <li><a href="multipleSelect">Multiple select from table <strong>films</strong></a></li>
+    <li><a href="db/create">Create table / Entry<strong>films</strong></a></li>
+    <li><a href="insert">Insert data<strong>films</strong></a></li>
+    <li><a href="simpleSelect">Simple select<strong>films</strong></a></li>
+    <li><a href="multipleSelect">Multiple select<strong>films</strong></a></li>
 </ul>
+<div>
 <hr>
 <h2>${hello}</h2>
     If you want  get the access to security zone, please use 'db' as login & password:<br>

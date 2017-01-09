@@ -5,16 +5,17 @@
     <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
-<div id="left">
-    <ul id="navMenu">
-        <li><a href="">Main page</a></li>
-        <li><a href="hello">Hello page</a></li>
-        <li><a href="db/create">Create table <strong>films</strong></a></li>
-        <li><a href="insert">Insert data into table <strong>films</strong></a></li>
-        <li><a href="simpleSelect">Simple select from table <strong>films</strong></a></li>
-        <li><a href="multipleSelect">Multiple select from table <strong>films</strong></a></li>
-    </ul>
-<hr><h2>${index}</h2>
+<ul class="navMenu">
+    <li><a href="">Main page</a></li>
+    <li><a href="hello">Hello page</a></li>
+    <li><a href="db/create">Create table / Entry</a></li>
+    <li><a href="insert">Insert data into <strong>films</strong></a></li>
+    <li><a href="simpleSelect">Simple select into <strong>films</strong></a></li>
+    <li><a href="multipleSelect">Multiple select into <strong>films</strong></a></li>
+</ul>
+<div>
+<hr>
+<h2>${index}</h2>
     If you want  get the access to security zone, please use 'db' as login & password:<br>
     <strong>Login: </strong><cite>db</cite><br>
     <strong>Password: </strong><cite>db</cite>
