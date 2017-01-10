@@ -1,7 +1,7 @@
 package io.khasang.genelove.service;
 
 import io.khasang.genelove.dao.QuestionDAO;
-import io.khasang.genelove.entity.Question;
+import io.khasang.genelove.entity.test.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

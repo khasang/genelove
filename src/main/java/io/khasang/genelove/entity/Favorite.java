@@ -5,14 +5,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- * BookMarks(favorite users)
+ * Favorites(favorite users)
  * @author Denis Guzikov
  * @version 1.0
  */
 
 @Entity
-public class BookMark {
-    public BookMark() {
+public class Favorite {
+    public Favorite() {
     }
 
     @Id

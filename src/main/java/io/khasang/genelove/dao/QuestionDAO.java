@@ -1,6 +1,6 @@
 package io.khasang.genelove.dao;
 
-import io.khasang.genelove.entity.Question;
+import io.khasang.genelove.entity.test.Question;
 
 import java.util.List;
 

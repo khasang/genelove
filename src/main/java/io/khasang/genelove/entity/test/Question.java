@@ -1,4 +1,4 @@
-package io.khasang.genelove.entity;
+package io.khasang.genelove.entity.test;
 
 import javax.persistence.*;
 

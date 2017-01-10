@@ -1,6 +1,6 @@
 package io.khasang.genelove.controller;
 
-import io.khasang.genelove.entity.Question;
+import io.khasang.genelove.entity.test.Question;
 import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.Message;
 import io.khasang.genelove.model.NewClass;

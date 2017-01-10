@@ -27,6 +27,7 @@ public class Person {
     private Users user;
     private String info;
     private boolean thisUser;
+    private boolean gender;
 
     public long getId() {
         return id;
@@ -98,5 +99,13 @@ public class Person {
 
     public void setThisUser(boolean thisUser) {
         this.thisUser = thisUser;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
     }
 }
