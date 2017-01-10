@@ -12,7 +12,8 @@ description
 
 ## AdminController
 
-какие методы, что делают
+methods:
+/admin/usersList - user administration screen
 
 ## UserController
 

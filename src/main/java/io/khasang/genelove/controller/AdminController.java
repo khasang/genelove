@@ -18,8 +18,10 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/usersList", method = RequestMethod.GET)
     public String allQuestion(Model model) {
-        List<User> list = adminService.getUsersList();
-        model.addAttribute("usersList", list);
+        List<User> usersList = adminService.getUsersList();
+        long allUsersCount = adminService.getAllUsersCount();
+        model.addAttribute("usersList", usersList);
+        model.addAttribute("allUsersCount", allUsersCount);
         return "usersList";
     }
 

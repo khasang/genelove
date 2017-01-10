@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface AdminDAO {
     List<User> getUsersList();
+
+    long getAllUsersCount();
 }

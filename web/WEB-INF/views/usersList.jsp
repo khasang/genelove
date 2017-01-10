@@ -6,6 +6,26 @@
 </head>
 <body>
 <table>
+    <thead><tr>
+        <th>Statitistics</th>
+    </tr>
+    </thead>
+    <tr>
+        <td>Total Users</td>
+        <td>Blocked Users</td>
+        <td>Administrators</td>
+    </tr>
+    <tr>
+        <td>${allUsersCount}</td>
+        <td>-</td>
+        <td>-</td>
+    </tr>
+</table>
+<table>
+    <thead><tr>
+        <th>Users List</th>
+    </tr>
+    </thead>
     <tr>
         <td>ID</td>
         <td>Login</td>
@@ -23,9 +43,10 @@
             <td>${usersList.lastName}</td>
             <td>${usersList.email}</td>
             <td>${usersList.accountStatus}</td>
-            <%--<td>${usersList.role_id}</td>--%>
+                <%--<td>${usersList.role_id}</td>--%>
         </tr>
     </c:forEach>
+</table>
 </table>
 </body>
 </html>

@@ -14,6 +14,9 @@ public class AdminService {
     @Autowired
     AdminDAO adminDAO;
 
+    public long getAllUsersCount() {
+        return adminDAO.getAllUsersCount();
+    }
     public List<User> getUsersList() {
         return adminDAO.getUsersList();
     }
