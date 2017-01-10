@@ -26,6 +26,7 @@ public class Person {
     @ManyToOne
     private Users user;
     private String info;
+    private boolean thisUser;
 
     public long getId() {
         return id;
@@ -89,5 +90,13 @@ public class Person {
 
     public void setUser(Users user) {
         this.user = user;
+    }
+
+    public boolean isThisUser() {
+        return thisUser;
+    }
+
+    public void setThisUser(boolean thisUser) {
+        this.thisUser = thisUser;
     }
 }
