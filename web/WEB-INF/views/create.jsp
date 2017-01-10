@@ -6,8 +6,7 @@
 </head>
 <body>
 <ul class="navMenu">
-    <li><a href="">Main page</a></li>
-    <li><a href="hello">Hello page</a></li>
+    <li><a href="http://localhost:8080">Main page</a></li>
     <li><a href="create">Create table / Entry</a></li>
     <li><a href="insert">Insert data into <strong>films</strong></a></li>
     <li><a href="simpleSelect">Simple select into <strong>films</strong></a></li>
@@ -15,9 +14,24 @@
     <li><a href="http://localhost:8080/logout">Log Out</a></li>
 </ul>
 
-<div>
-<hr>
-    <h2>Create table Example</h2>
-Table creation status<br>${create}</div>
+<div id="container">
+    <div id="left"><h2>LEFT MENU</h2><hr>
+        <ul id="leftMenu">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+        </ul>
+        <hr>
+        <p>Advertisment</p>
+
+    </div>
+    <div id="main">
+        <h1>Create table Example</h1>
+        <hr>
+                <p>Table creation status<br>${create}</p>
+        <hr>
+    </div></div>
+<div id="footer"><h1>Footer</h1></div>
 </body>
 </html>

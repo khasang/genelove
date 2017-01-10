@@ -13,7 +13,7 @@
 </head>
 <body>
 <ul class="navMenu">
-    <li><a href="">Main page</a></li>
+    <li><a href="http://localhost:8080">Main page</a></li>
     <li><a href="hello">Hello page</a></li>
     <li><a href="db/create">Create table / Entry</a></li>
     <li><a href="insert">Insert data into <strong>films</strong></a></li>

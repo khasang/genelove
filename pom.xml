@@ -17,7 +17,7 @@
 
     <dependencies>
         
-        <!--Spring Framework-->
+        <!-- Spring Framework -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -44,7 +44,7 @@
             <version>${spring.version}</version>
         </dependency>
 
-        <!--Spring Security-->
+        <!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
@@ -75,21 +75,21 @@
             <version>${hibernate-version}</version>
         </dependency>
 
-        <!-- PostgreSQL JDBC driver-->
+        <!-- PostgreSQL JDBC driver -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.4.1212.jre7</version>
         </dependency>
 
-        <!--JSP -->
+        <!-- JSP -->
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
 
-        <!--Javax-->
+        <!-- Javax -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
