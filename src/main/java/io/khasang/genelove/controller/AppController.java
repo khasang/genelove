@@ -1,7 +1,9 @@
 package io.khasang.genelove.controller;
 
+import io.khasang.genelove.entity.Question;
+import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.Message;
-import io.khasang.genelove.model.MyMessage;
+import io.khasang.genelove.service.QuestionService;
 import io.khasang.genelove.model.SQLExamples;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,23 +13,37 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import io.khasang.genelove.model.MyMessage;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 public class AppController {
     @Autowired
     Message message;
-
     @Autowired
     MyMessage myMessage;
-
     @Autowired
     SQLExamples sqlExamples;
 
-    @RequestMapping("/")
+    @Autowired
+    CreateTable createTable;
+    
+    @Autowired
+    QuestionService questionService;
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(Model model){
         model.addAttribute("hello", message.getMessageOut());
         model.addAttribute("message", myMessage.getMessage());
         return "hello";
+    }
+
+    @RequestMapping(value = "/admin/create", method = RequestMethod.GET)
+    public String createTable(Model model) {
+        model.addAttribute("create", createTable.createTableStatus());
+        return "create";
     }
 
     @RequestMapping(value = {"hello/{name}"}, method = RequestMethod.GET)
@@ -36,6 +52,25 @@ public class AppController {
         modelAndView.setViewName("encode");
         modelAndView.addObject("crypt", new BCryptPasswordEncoder().encode(name));
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/db/addQuestion", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public Object addQuestion(@RequestBody Question question, HttpServletResponse response) {
+        try {
+            questionService.addQuestion(question);
+            return question;
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error adding question: " + e.getMessage();
+        }
+    }
+
+    @RequestMapping(value = "/db/allQuestion", method = RequestMethod.GET)
+    public String allQuestion(Model model) {
+        List<Question> list = questionService.getQuetionList();
+        model.addAttribute("allQuestion", list);
+        return "questions";
     }
 
     @RequestMapping("/sql/delete")

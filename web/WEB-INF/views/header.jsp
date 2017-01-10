@@ -4,7 +4,6 @@
     <title>Title</title>
 </head>
 <body>
-<h2>Table creation status</h2>
-<p>${create}</p>
+
 </body>
 </html>
