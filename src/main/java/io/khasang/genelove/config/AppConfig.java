@@ -21,9 +21,6 @@ public class AppConfig {
     @Autowired
     Environment environment;
 
-    @Autowired
-    Environment environment;
-
     @Bean
     public UserDetailsService userDetailsService() {
         JdbcDaoImpl jdbcImpl = new JdbcDaoImpl();
@@ -48,6 +45,11 @@ public class AppConfig {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
         jdbcTemplate.setDataSource(dataSource());
         return jdbcTemplate;
+    }
+
+    @Bean
+    public CreateTable createTable() {
+        return new CreateTable(jdbcTemplate());
     }
 
     @Bean
