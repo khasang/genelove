@@ -13,22 +13,16 @@ public class Children {
     @Id
     private long id;
 
-    @Column(name = "FirstName")
     private String firstName;
 
-    @Column(name = "LastName")
     private String lastName;
 
-    @Column(name = "MiddleName")
     private String middleName;
 
-    @Column(name = "BirthDate")
     private Date date;
 
-    @Column(name = "Gender")
     private Character gender;
 
-    @Column(name = "UserId")
     private long userId;
 
     public long getId() {

@@ -1,8 +1,6 @@
 package io.khasang.genelove.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -11,31 +9,26 @@ public class Users {
     }
 
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
-    @Column(name = "FirstName")
     private String firstName;
 
-    @Column(name = "LastName")
     private String lastName;
 
-    @Column(name = "MiddleName")
     private String middleName;
 
-    @Column(name = "BirthDate")
     private Date date;
 
-    @Column(name = "Gender")
     private Character gender;
 
-    @Column(name = "ParentId")
     private long parentId;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

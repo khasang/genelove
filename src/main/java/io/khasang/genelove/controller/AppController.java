@@ -1,6 +1,8 @@
 package io.khasang.genelove.controller;
 
+import io.khasang.genelove.entity.Credentials;
 import io.khasang.genelove.model.*;
+import io.khasang.genelove.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -8,7 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class AppController {
@@ -24,6 +29,8 @@ public class AppController {
     InserData insertData;
     @Autowired
     JoinQuery joinQuery;
+    @Autowired
+    UsersService usersService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(Model model){
@@ -67,5 +74,17 @@ public class AppController {
         modelAndView.setViewName("encode");
         modelAndView.addObject("crypt", new BCryptPasswordEncoder().encode(name));
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/db/addUser", method = RequestMethod.POST)
+    @ResponseBody
+    public Object addUser(Credentials credentials, HttpServletResponse response) {
+        try {
+            usersService.addUser(credentials);
+            return credentials;
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error adding user " + e.getMessage();
+        }
     }
 }

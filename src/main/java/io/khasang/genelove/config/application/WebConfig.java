@@ -11,7 +11,8 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"io.khasang.genelove.config", "io.khasang.genelove.controller", "io.khasang.genelove.model"})
+@ComponentScan({"io.khasang.genelove.config", "io.khasang.genelove.controller", "io.khasang.genelove.model",
+                 "io.khasang.genelove.dao", "io.khasang.genelove.service"})
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public InternalResourceViewResolver viewResolver() {
