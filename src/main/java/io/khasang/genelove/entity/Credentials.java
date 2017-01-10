@@ -5,9 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Credetials {
+public class Credentials {
 
-    public Credetials() {}
+    public Credentials() {}
 
     @Id
     private long id;
