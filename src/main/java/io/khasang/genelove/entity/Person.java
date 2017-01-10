@@ -20,7 +20,7 @@ public class Person {
     private String firstName;
     private String secondName;
     private String middleName;
-    /** Поле "BirthDay" */
+    /** Field "BirthDay" */
     private Date startDate;
     private Date endDate;
     @ManyToOne
