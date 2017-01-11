@@ -16,9 +16,6 @@ description
 
 ## UserController
 
-# Genelove
-
-## UserController
 ### зарегистрироваться
 `String registration()`
 ### войти в систему
