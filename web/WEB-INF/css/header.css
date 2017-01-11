@@ -1,0 +1,14 @@
+table {
+    background-color: #179b77;
+    font-family: arial, verdana, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    line-height:25px;
+    margin-top: 10px;
+}
+
+a {
+    color: #fff;
+}
