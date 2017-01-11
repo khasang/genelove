@@ -20,7 +20,7 @@ public class Album {
     private String name;
     private String descr;
     @ManyToOne
-    private Person person;
+    private Relative relative;
 
     public long getId() {
         return id;
@@ -46,11 +46,11 @@ public class Album {
         this.descr = descr;
     }
 
-    public Person getPerson() {
-        return person;
+    public Relative getRelative() {
+        return relative;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setRelative(Relative relative) {
+        this.relative = relative;
     }
 }

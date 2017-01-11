@@ -19,10 +19,10 @@ public class Parent {
     private long id;
     /** Field "child" */
     @ManyToOne
-    private Person person;
+    private Relative relative;
     /** Field "parent(progenitor)" */
     @ManyToOne
-    private Person personParent;
+    private Relative relativeParent;
     /** Field "type" (mother or father) */
     private int type;
 
@@ -42,19 +42,19 @@ public class Parent {
         this.type = type;
     }
 
-    public Person getPerson() {
-        return person;
+    public Relative getRelative() {
+        return relative;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setRelative(Relative relative) {
+        this.relative = relative;
     }
 
-    public Person getPersonParent() {
-        return personParent;
+    public Relative getRelativeParent() {
+        return relativeParent;
     }
 
-    public void setPersonParent(Person personParent) {
-        this.personParent = personParent;
+    public void setRelativeParent(Relative relativeParent) {
+        this.relativeParent = relativeParent;
     }
 }
