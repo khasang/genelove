@@ -11,8 +11,8 @@ import java.util.Date;
  * @version 1.0
  */
 @Entity
-public class Person {
-    public Person() {
+public class Relative {
+    public Relative() {
     }
 
     @Id

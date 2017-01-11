@@ -1,19 +1,61 @@
-# genelove
+# Genelove
 
-## What's up
+## UserController
+### зарегистрироваться
+`String registration()`
+### войти в систему
+`String login()`
+### выйти из системы
+`String logout()`
 
-``` java
-run()
+### отправить сообщение другому пользователю
+`String messagePost()`
+### получить сообщение от другого пользователя
+`String messageGet()`
+### удалить сообщение из своей переписки
+`String messageDelete()`
+### просмотреть все сообщения
+`String messageAll()`
 
-## Hello my darling
+### добавить другого пользователя в закладки
+`String favoriteAdd()`
+### удалить другого пользователя из закладок
+`favoriteDelete()`
+### просмотреть все закладки
+`favoriteAll()`
 
-``` java
-hello()
-```
+### добавить человека в генеалогическое дерево
+`relativeNodeAdd()`
+### удалить человека из генеалогического дерева
+`relativeNodeDelete()`
+### изменить данные человека в генеалогическом дереве
+`relativeNodeUpdate()`
+### посмотреть всё дерево
+`relativeNodeAll()`
 
-## Rembo
+### добавить личную анкету
+`persInfoAdd()`
+### удалить личную анкету
+`persInfoDelete()`
+### изменить данные по личной анкете
+`persInfoUpdate()`
+### просмотреть анкету
+`persInfoView()`
 
-Rembo was created by Stallone
+### добавить мультимедиа-альбом
+`albumAdd()`
+### удалить мультимедиа-альбом
+`albumDelete()`
+### изменить мультимедиа-альбом
+`albumUpdate()`
+### просмотреть альбом (все файлы)
+`albumView()`
+### просмотреть все альбомы
+`albumAll()`
 
-## Terminator. Genesis
-`I will be back`
+### добавить файл фото/видео в альбом
+`fileAdd()`
+### удалить файл фото/видео из альбома
+`fileDelete()`
+### изменить файл фото/видео в альбоме
+`fileUpdate()`
