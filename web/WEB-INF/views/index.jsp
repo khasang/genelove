@@ -20,6 +20,7 @@
     <li>Item 2</li>
     <li>Item 3</li>
     <li>Item 4</li>
+    <li><a href="db/addQuestion" action="post">Add Question</a></li>
 </ul>
     <hr>
     <p>Advertisment</p>
