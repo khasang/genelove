@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
@@ -16,6 +17,14 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
+    @RequestMapping(value = "/admin/usersList", method = RequestMethod.GET)
+    public String allQuestion(Model model) {
+        List<User> usersList = adminService.getUsersList();
+        long allUsersCount = adminService.getAllUsersCount();
+        model.addAttribute("usersList", usersList);
+        model.addAttribute("allUsersCount", allUsersCount);
+        return "usersList";
+    
     @RequestMapping(value = "users", method = RequestMethod.GET)
     public String users(Model model){
         model.addAttribute("users", adminService.getUsers());

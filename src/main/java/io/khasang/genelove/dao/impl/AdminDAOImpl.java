@@ -31,6 +31,22 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
+    public long getAllUsersCount() {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
+        criteria.setProjection(Projections.rowCount());
+        return (long)criteria.uniqueResult();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<User> getUsersList() {
+        Criteria criteria = sessionFactory.
+                getCurrentSession().
+                createCriteria(User.class);
+        return (List<User>) criteria.list();
+    }
+
+    @Override
     public List<User> getUsers() {
 
         CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();

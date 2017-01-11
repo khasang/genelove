@@ -7,6 +7,10 @@ import java.util.List;
 
 public interface AdminDAO {
 
+    List<User> getUsersList();
+
+    long getAllUsersCount();
+
     void addUser(User user);
 
     void updateUser(User user);
