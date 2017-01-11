@@ -33,7 +33,7 @@
         <td>Last Name</td>
         <td>E-mail</td>
         <td>Account Status</td>
-        <%--<td>Role ID</td>--%>
+        <td>Roles</td>
     </tr>
     <c:forEach items="${usersList}" var="usersList">
         <tr>
@@ -43,7 +43,11 @@
             <td>${usersList.lastName}</td>
             <td>${usersList.email}</td>
             <td>${usersList.accountStatus}</td>
-                <%--<td>${usersList.role_id}</td>--%>
+            <td>
+            <c:forEach var="role" items="${usersList.roles}">
+                ${role.roleName},
+            </c:forEach>
+            </td>
         </tr>
     </c:forEach>
 </table>

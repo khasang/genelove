@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AdminDAO {
 
-    List<User> getUsersList();
+//    List<User> getUsersList();
 
     long getAllUsersCount();
 

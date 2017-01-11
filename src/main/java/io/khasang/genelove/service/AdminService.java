@@ -19,10 +19,10 @@ public class AdminService {
     public long getAllUsersCount() {
     	return adminDAO.getAllUsersCount();
     }
-    public List<User> getUsersList() {
-        return adminDAO.getUsersList();
-    }
-    
+
+//    public List<User> getUsersList() {
+//        return adminDAO.getUsersList();
+//    }
     
     public List<User> getUsers() {
         return adminDAO.getUsers();

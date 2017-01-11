@@ -5,8 +5,10 @@ import io.khasang.genelove.entity.Role;
 import io.khasang.genelove.entity.User;
 import io.khasang.genelove.entity.Authorisation;
 import io.khasang.genelove.dao.AdminDAO;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,14 +39,14 @@ public class AdminDAOImpl implements AdminDAO {
         return (long)criteria.uniqueResult();
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<User> getUsersList() {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(User.class);
-        return (List<User>) criteria.list();
-    }
+//    @Override
+//    @SuppressWarnings("unchecked")
+//    public List<User> getUsersList() {
+//        Criteria criteria = sessionFactory.
+//                getCurrentSession().
+//                createCriteria(User.class);
+//        return (List<User>) criteria.list();
+//    }
 
     @Override
     public List<User> getUsers() {

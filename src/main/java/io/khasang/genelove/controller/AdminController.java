@@ -19,11 +19,12 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/usersList", method = RequestMethod.GET)
     public String allQuestion(Model model) {
-        List<User> usersList = adminService.getUsersList();
+        List<User> usersList = adminService.getUsers();
         long allUsersCount = adminService.getAllUsersCount();
         model.addAttribute("usersList", usersList);
         model.addAttribute("allUsersCount", allUsersCount);
         return "usersList";
+    }
     
     @RequestMapping(value = "users", method = RequestMethod.GET)
     public String users(Model model){

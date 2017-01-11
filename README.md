@@ -12,7 +12,7 @@ description
 
 ## AdminController
 
-/admin/users - список пользователей
+/admin/usersList - список пользователей
 
 /admin/user/id/{id} - пользователь с ID = {id}
 
