@@ -12,7 +12,7 @@ public class AppController {
     @Autowired
     SQLTable sqlTable;
 
-    @RequestMapping("/")
+    @RequestMapping("/page")
     public String hello(Model model){
         model.addAttribute("hello", "Hello World");
         return "hello";
