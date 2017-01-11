@@ -10,6 +10,7 @@
 <blockquote>
     <p>${hello}</p>
 </blockquote>
+<h2>${message}</h2>
 <jsp:include page="footer.jsp"/>
 </body>
 </html>

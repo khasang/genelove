@@ -12,7 +12,15 @@ description
 
 ## AdminController
 
-какие методы, что делают
+/admin/usersList - список пользователей
+
+/admin/user/id/{id} - пользователь с ID = {id}
+
+/admin/user/login/{login} - пользователь с login = {login}
+
+/admin/delete/id/{id} - удалить пользователя с ID = {id}
+
+
 
 ## UserController
 

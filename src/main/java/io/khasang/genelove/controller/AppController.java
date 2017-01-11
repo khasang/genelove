@@ -4,12 +4,14 @@ import io.khasang.genelove.entity.Question;
 import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.Message;
 import io.khasang.genelove.service.QuestionService;
+import io.khasang.genelove.model.SQLExamples;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import io.khasang.genelove.model.MyMessage;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -19,13 +21,20 @@ public class AppController {
     @Autowired
     Message message;
     @Autowired
+    MyMessage myMessage;
+    @Autowired
+    SQLExamples sqlExamples;
+
+    @Autowired
     CreateTable createTable;
+    
     @Autowired
     QuestionService questionService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String hello(Model model) {
+    public String hello(Model model){
         model.addAttribute("hello", message.getMessageOut());
+        model.addAttribute("message", myMessage.getMessage());
         return "hello";
     }
 
@@ -62,4 +71,27 @@ public class AppController {
         return "questions";
     }
 
+    @RequestMapping("/sql/delete")
+    public String delete(Model model) {
+        model.addAttribute("delete", sqlExamples.tableDelete());
+        return "sql";
+    }
+
+    @RequestMapping("/sql/create")
+    public String create(Model model) {
+        model.addAttribute("create", sqlExamples.tableCreate());
+        return "sql";
+    }
+
+    @RequestMapping("/sql/insert")
+    public String insert(Model model) {
+        model.addAttribute("insert", sqlExamples.tableInsert());
+        return "sql";
+    }
+
+    @RequestMapping("/sql/select")
+    public String select(Model model) {
+        model.addAttribute("select", sqlExamples.tableSelect());
+        return "sql";
+    }
 }
