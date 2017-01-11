@@ -6,11 +6,16 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<%--
 <p>hello</p>
---%>
 <blockquote>
-    <p>${hello}</p>
+   <div class="container">
+     <div class="row">
+        <div class="col-lg-4"> </div>
+        <div class="col-lg-4"> </div>
+        <div class="col-lg-4"> </div>
+        <p>${hello}</p>
+     </div>
+   </div>
 </blockquote>
 <jsp:include page="footer.jsp"/>
 </body>
