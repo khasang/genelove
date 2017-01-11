@@ -1,11 +1,19 @@
 package io.khasang.genelove.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller(value = "/account")
+@Controller
+@RequestMapping(value = "/account")
 public class UserController {
+
+    @RequestMapping("/qwerty")
+    public String test(Model model){
+        model.addAttribute("hello", "");
+        return "hello";
+    }
 
     /** User registration" */
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
