@@ -8,7 +8,7 @@
 <jsp:include page="header.jsp"/>
 <p>hello</p>
 <blockquote>
-   <p>${hello}</p>
+    <p>${hello}</p>
 </blockquote>
 <jsp:include page="footer.jsp"/>
 </body>
