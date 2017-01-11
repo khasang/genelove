@@ -6,16 +6,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title><p>${hello}</p></title>
+        <title>Имя пользователя</title>
         <link rel="stylesheet" type="text/css" href="css/userPage.css"/>
     </head>
-
+    
     <body>
-        <!--<%@ include file="header.jsp" %>
-        -->
-
+        <
+        <%@ include file="header.jsp"%>
+        
         <a href="changeFoto.jsp">
-            <img src="resources/smile.jpg" alt="Фото" class="foto">
+           <img src="images/smile.jpg" alt="Фото" class="foto"> 
         </a>
         <h1 class="heading1">
             Личная информация
@@ -23,42 +23,42 @@
             <a class="horizontalSpace"></a>
             <a href="mainPage.jsp" class="textInfo1">Выйти</a>
         </h1>
-        <p class="textInfo">
+        <p class="textInfo"> 
             Имя, фамилия пользователя:
             <jsp:getProperty name="profile" property="name"/><br><br>
             дата рождения:
             <jsp:getProperty name="profile" property="birthDate"/><br><br>
-            регион поиска:
+            регион поиска: 
             <jsp:getProperty name="profile" property="region"/><br><br>
             <!--подумать откуда брать статус-->
-            статус <br><br>
+            статус <br><br> 
             <a href="frinendList.jsp" class="ref">
-                друзья:
+                друзья: 
                 <jsp:getProperty name="friends" property="friends"/><br><br>
             </a>
             <br><br>
         </p>
         <a href="genealogicTree.jsp">
-            <img src="resources/genealDrevo.jpg" alt="генеалогическое древо" class="drevo"
-                 href="genealogicTree.jsp">
+            <img src="images/genealDrevo.jpg" alt="генеалогическое древо" class="drevo"
+             href="genealogicTree.jsp">
         </a>
-
+        
         <h1 class="heading1">Место учебы</h1>
         <p class="textInfo">
-            школа:
+            школа: 
             <jsp:getProperty name="profile" property="school"/><br><br>
-            университет:
+            университет: 
             <jsp:getProperty name="profile" property="university"/><br><br>
         </p>
-
+        
         <h1 class="heading1">Хобби</h1>
         <p class="textInfo">
-            увлечения:
+            увлечения: 
             <jsp:getProperty name="profile" property="hobby"/><br><br>
             любимые занятия:
             <jsp:getProperty name="profile" property="actions"/><br><br>
         </p>
-
-        <%@ include file="footer.jsp" %>
+        
+         <%@ include file="footer.jsp" %>
     </body>
 </html>

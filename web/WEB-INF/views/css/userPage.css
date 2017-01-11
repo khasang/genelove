@@ -1,0 +1,58 @@
+body {
+    font-size: 16px;
+    font-family: arial, verdana, sans-serif;
+    font-style: italic;
+}
+
+IMG.foto {
+    float: left; 
+    margin-left: 10px; 
+    width: 250px;
+    height: 200px;     
+ }
+
+IMG.drevo {
+    float: left;
+    position: absolute;
+    margin-left: 10px; 
+    margin-top: 10px; 
+    width: 250px;
+    height: 250px;
+}
+
+p.textInfo {
+    margin-left: 300px;
+    margin-top: 1em;
+    background-color: #fff;
+    color: #179b77;
+}
+
+a.textInfo1 {
+    font-size: 10px;
+    font-style: italic;
+    text-decoration: underline;
+    color: #777;
+    padding-left: 10em;
+}
+
+a.horizontalSpace {
+    padding-left: 20em;
+}
+
+a.space {
+    background-color: #179b77;
+}
+
+a.ref {
+    color: #179b77;
+    text-decoration: none;
+}
+
+h1.heading1 {
+    font-size: 18px;
+    font-family: arial, verdana, sans-serif;
+    color: #179b77;
+    font-style: italic;
+    margin-left: 350px;
+}
+
