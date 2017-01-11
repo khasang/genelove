@@ -1,65 +1,92 @@
 package io.khasang.genelove.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.sql.Timestamp;
+import javax.persistence.*;
+import java.util.Date;
 
-@Entity
+@Entity(name = "messages")
 public class Message {
 
     @Id
-    private int messageId;
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    private int id;
 
-    private int user_id1;
+    @ManyToOne
+    @JoinColumn(name = "conversation_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "messages_conversations_fkey"))
+    private Conversation conversation;
 
-    private int user_id2;
+    @ManyToOne
+    @JoinColumn(name = "from_user", referencedColumnName = "id", foreignKey = @ForeignKey(name = "messages_users_from_fkey"))
+    private User fromUser;
 
-    private String message;
+    @ManyToOne
+    @JoinColumn(name = "to_user", referencedColumnName = "id", foreignKey = @ForeignKey(name = "messages_users_to_fkey"))
+    private User toUser;
 
-    private java.sql.Timestamp messageDatetime;
+    @Column(length = 2500)
+    private String text;
+
+    @Column
+    private Date date;
+
+    @Column(name = "parent_message")
+    private int parentMessage;
 
     public Message() {
     }
 
-    public int getMessageId() {
-        return messageId;
+    public int getId() {
+        return id;
     }
 
-    public void setMessageId(int messageId) {
-        this.messageId = messageId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getUser_id1() {
-        return user_id1;
+    public User getFromUser() {
+        return fromUser;
     }
 
-    public void setUser_id1(int user_id1) {
-        this.user_id1 = user_id1;
+    public void setFromUser(User fromUser) {
+        this.fromUser = fromUser;
     }
 
-    public int getUser_id2() {
-        return user_id2;
+    public User getToUser() {
+        return toUser;
     }
 
-    public void setUser_id2(int user_id2) {
-        this.user_id2 = user_id2;
+    public void setToUser(User toUser) {
+        this.toUser = toUser;
     }
 
-    public String getMessage() {
-        return message;
+    public String getText() {
+        return text;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public Timestamp getMessageDatetime() {
-        return messageDatetime;
+    public Date getDate() {
+        return date;
     }
 
-    public void setMessageDatetime(Timestamp messageDatetime) {
-        this.messageDatetime = messageDatetime;
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getParentMessage() {
+        return parentMessage;
+    }
+
+    public void setParentMessage(int parentMessage) {
+        this.parentMessage = parentMessage;
+    }
+
+    public Conversation getConversation() {
+        return conversation;
+    }
+
+    public void setConversation(Conversation conversation) {
+        this.conversation = conversation;
     }
 }

@@ -1,30 +1,48 @@
 package io.khasang.genelove.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.sql.Timestamp;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity
+@Entity(name = "users")
 public class User {
+
+    public enum AccountStatus {
+        NEW, ACTIVE, SUSPENDED
+    }
+
     @Id
+    @GeneratedValue
     private int id;
 
-    private String email;
-
+    @Column(length = 255, unique = true)
     private String login;
 
+    @Column(length = 255)
     private String password;
 
-    private String fullname;
+    @Column(name = "first_name", length = 255)
+    private String firstName;
 
-    private String smallphoto;
+    @Column(name = "last_name", length = 255)
+    private String lastName;
 
-    private java.sql.Timestamp date;
+    @Column(length = 255)
+    private String email;
 
-    public User() {
-    }
+    @Column(name = "account_status")
+    @Enumerated(EnumType.STRING)
+    private AccountStatus accountStatus;
+
+    @OneToMany(mappedBy = "fromUser")
+    private List<Message> sentMessages;
+
+    @OneToMany(mappedBy = "toUser")
+    private List<Message> receivedMessages;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "authorisations", joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
+    private List<Role> roles;
 
     public int getId() {
         return id;
@@ -32,14 +50,6 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getLogin() {
@@ -58,27 +68,59 @@ public class User {
         this.password = password;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getSmallphoto() {
-        return smallphoto;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSmallphoto(String smallphoto) {
-        this.smallphoto = smallphoto;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public Timestamp getDate() {
-        return date;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDate(Timestamp date) {
-        this.date = date;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
+    }
+
+    public List<Message> getSentMessages() {
+        return sentMessages;
+    }
+
+    public void setSentMessages(List<Message> sentMessages) {
+        this.sentMessages = sentMessages;
+    }
+
+    public List<Message> getReceivedMessages() {
+        return receivedMessages;
+    }
+
+    public void setReceivedMessages(List<Message> receivedMessages) {
+        this.receivedMessages = receivedMessages;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
