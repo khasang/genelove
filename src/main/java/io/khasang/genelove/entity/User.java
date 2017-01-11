@@ -1,6 +1,7 @@
 package io.khasang.genelove.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "users")
@@ -34,10 +35,14 @@ public class User {
     private AccountStatus accountStatus;
 
     @OneToMany(mappedBy = "fromUser")
-    public List<Message> sentMessages;
+    private List<Message> sentMessages;
 
     @OneToMany(mappedBy = "toUser")
-    public List<Message> receivedMessages;
+    private List<Message> receivedMessages;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "authorisations", joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
+    private List<Role> roles;
 
     public int getId() {
         return id;
@@ -93,5 +98,29 @@ public class User {
 
     public void setAccountStatus(AccountStatus accountStatus) {
         this.accountStatus = accountStatus;
+    }
+
+    public List<Message> getSentMessages() {
+        return sentMessages;
+    }
+
+    public void setSentMessages(List<Message> sentMessages) {
+        this.sentMessages = sentMessages;
+    }
+
+    public List<Message> getReceivedMessages() {
+        return receivedMessages;
+    }
+
+    public void setReceivedMessages(List<Message> receivedMessages) {
+        this.receivedMessages = receivedMessages;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }

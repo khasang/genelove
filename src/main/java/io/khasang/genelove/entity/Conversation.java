@@ -14,7 +14,7 @@ public class Conversation {
     private String description;
 
     @OneToMany(mappedBy = "conversation")
-    public List<Message> messages;
+    private List<Message> messages;
 
     public int getId() {
         return id;
@@ -30,5 +30,13 @@ public class Conversation {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 }
