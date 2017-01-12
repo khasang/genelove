@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 public class AppController {
@@ -88,5 +89,12 @@ public class AppController {
     public String multipleSelect (Model model) {
         model.addAttribute("multipleSelect", multipleSelect.multipleSelectTableStatus());
         return "multipleSelect";
+    }
+
+    @RequestMapping(value = "/db/allQuestion", method = RequestMethod.GET)
+    public String allQuestion(Model model) {
+        List<Question> list = questionService.getQuetionList();
+        model.addAttribute("allQuestion", list);
+        return "questions";
     }
 }

@@ -17,11 +17,11 @@
 
 <div id="container">
     <div id="left"><h2>LEFT MENU</h2><hr>
-        <ul id="leftMenu">
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>Item 4</li>
+        <ul class="leftMenu">
+            <li><a href="/db/allQuestion">All Question</a></li>
+            <li><a href="/">Main</a></li>
+            <li><a href="/">Main</a></li>
+            <li><a href="/">Main</a></li>
         </ul>
         <hr>
         <p>Advertisment</p>
@@ -30,8 +30,8 @@
     <div id="main">
         <h1>Multiple Select Example</h1>
         <hr>
-        <p><strong>Here is raw-list:</strong>  ${multipleSelect}
-        <table border="1">
+        <p><strong>Here is raw-list:</strong> ${multipleSelect}</p>
+        <table>
             <tr>
                 <th>Code</th>
                 <th>Title</th>
@@ -45,7 +45,6 @@
                 </tr>
             </c:forEach>
         </table>
-        </p>
         <hr>
     </div></div>
 <div id="footer"><h1>Footer</h1></div>

@@ -15,13 +15,11 @@
 </ul>
 <div id="container">
 <div id="left"><h2>LEFT MENU</h2><hr>
-<ul id="leftMenu">
-    <li>Item 1</li>
-    <li>Item 2</li>
-    <li>Item 3</li>
-    <li>Item 4</li>
-    <li><a href="db/addQuestion" action="post">Add Question</a></li>
-</ul>
+    <ul class="leftMenu">
+        <li><a href="/">Main</a></li>
+        <li><a href="/">Main</a></li>
+        <li><a href="/">Main</a></li>
+    </ul>
     <hr>
     <p>Advertisment</p>
 
