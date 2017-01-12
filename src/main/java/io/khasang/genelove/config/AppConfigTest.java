@@ -14,9 +14,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 
 @Configuration
-@PropertySource(value = {"classpath:util.properties"})
+@PropertySource(value = {"classpath:utilTest.properties"})
 @PropertySource(value = {"classpath:auth.properties"})
-public class AppConfig {
+public class AppConfigTest {
     @Autowired
     Environment environment;
 
