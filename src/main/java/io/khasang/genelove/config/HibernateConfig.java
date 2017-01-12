@@ -15,9 +15,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-/**
- * Hibernate config - settings at hibernate.properties file
- */
 @Configuration
 @EnableTransactionManagement
 @PropertySource(value = {"classpath:hibernate.properties"})
