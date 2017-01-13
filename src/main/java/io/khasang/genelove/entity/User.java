@@ -5,7 +5,7 @@ import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 
-@Entity(name = UserConstants.Entity.TABLE_NAME_USER)
+//@Entity(name = UserConstants.Entity.TABLE_NAME_USER)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

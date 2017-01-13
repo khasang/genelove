@@ -24,9 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/adm-**").access("hasRole('ADMINISTRATOR')")
-               /*даже даже так пробую,и дальше выскакиваэт почему то Access is denied*/
-                .antMatchers("/mng-**").hasRole(UserConstants.Role.ROLE_MANAGER)
+                /*.antMatchers("/adm-**").access("hasRole('ADMINISTRATOR')")
+               *//*даже даже так пробую,и дальше выскакиваэт почему то Access is denied*//*
+                .antMatchers("/mng-**").hasRole(UserConstants.Role.ROLE_MANAGER)*/
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
     }
 
