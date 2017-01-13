@@ -1,17 +1,11 @@
-.navbar {
-    margin-bottom: 0;
-    border-radius: 0;
+
+.row.content {height: 100%;
+padding: 20px;
 }
-.row.content {height: 100%}
 
 .sidenav {
     padding-top: 20px;
     height: 100%;
-}
-footer {
-    background-color: #555;
-    color: white;
-    padding: 15px;
 }
 
 @media screen and (max-width: 767px) {

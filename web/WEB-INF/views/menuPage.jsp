@@ -11,14 +11,9 @@
 </head>
 <body style="background: url(resources/images/loveFone.jpg) no-repeat fixed center;">
 
-<c:import url="header.jsp"/>
+<jsp:include page="header.jsp"/>
 
     <div class="row content" id="menuBox">
-        <div class="col-sm-2 sidenav" id="">
-            <p><a href="#">Link</a></p>
-            <p><a href="#">Link</a></p>
-            <p><a href="#">Link</a></p>
-        </div>
         <div class="col-sm-10 text-left">
             <div class="container">
                 <div class="row">
@@ -91,7 +86,7 @@
 
     </div>
 
-<c:import url="footer.jsp"/>
+<jsp:include page="footer.jsp"/>
 
 </body>
 </html>
