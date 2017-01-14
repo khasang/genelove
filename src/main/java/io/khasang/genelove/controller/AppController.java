@@ -1,7 +1,9 @@
 package io.khasang.genelove.controller;
 
+import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.Question;
 import io.khasang.genelove.model.CreateTable;
+import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.service.QuestionService;
 import io.khasang.genelove.model.SQLExamples;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class AppController {
     
     @Autowired
     QuestionService questionService;
+
+    @Autowired
+    MessageService messageService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(Model model){
@@ -65,6 +70,19 @@ public class AppController {
         List<Question> list = questionService.getQuetionList();
         model.addAttribute("allQuestion", list);
         return "questions";
+    }
+
+
+    @RequestMapping(value = "/db/message/{id}", method = RequestMethod.GET)
+    public String getMessageById (@PathVariable("id") int id, Model model){
+        model.addAttribute("message", messageService.getMessageById(id));
+        return "message";
+
+        //Message mess = new Message();
+        //List list = messageService.getMessageById(0);
+        //mess =  mess.setId(Integer.parseInt(list.get(0).toString()));
+        //mess.setText((list.get(1).toString()));
+        //model.addAttribute("message", mess);
     }
 
     @RequestMapping("/sql/delete")

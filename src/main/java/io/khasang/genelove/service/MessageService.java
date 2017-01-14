@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @Transactional
 public class MessageService {
@@ -21,12 +24,26 @@ public class MessageService {
         messageDAO.deleteMessage(message);
     }
 
-//    public void editMessage(Message message) {
-//        messageDAO.editMessage(message);
-//    }
+    public void editMessage(Message message) {
+        messageDAO.editMessage(message);
+    }
 
-//    public List<Message> getMessageAll() {
-//        return messageDAO.getMessageAll();
-//    }
+    public List<Message> getMessageById(int id) {
+        List<Message> messages = new ArrayList<>();
+        messages.add(messageDAO.getMessageById(id));
+        return messages;
+    }
+
+    public List<Message> getMessageByKeyWord(String keyWord) {
+        return messageDAO.getMessageByKeyWord(keyWord);
+    }
+
+    public List<Message> getMessageByDate(String date) {
+        return messageDAO.getMessageByDate(date);
+    }
+
+    public List<Message> getMessageAll() {
+        return messageDAO.getMessageAll();
+    }
 
 }

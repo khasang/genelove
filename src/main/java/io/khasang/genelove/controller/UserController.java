@@ -1,13 +1,23 @@
 package io.khasang.genelove.controller;
 
+import io.khasang.genelove.entity.Message;
+import io.khasang.genelove.service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping(value = "/account")
 public class UserController {
+
+    @Autowired
+    MessageService messageService;
 
     @RequestMapping("/qwerty")
     public String test(Model model){
@@ -35,8 +45,15 @@ public class UserController {
 
     /** Post message to another user" */
     @RequestMapping(value = "/postMessage", method = RequestMethod.POST)
-    public String messagePost(){
-        return "messagePostPage";
+    @ResponseBody
+    public Object messagePost(@RequestBody Message message, HttpServletResponse response){
+        try {
+            messageService.addMessage(message);
+            return message;
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error adding message: " + e.getMessage();
+        }
     }
 
     /** Get message from another user" */
