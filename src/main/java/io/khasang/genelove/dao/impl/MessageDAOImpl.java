@@ -15,9 +15,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
+
 
 @Repository
 @Transactional
@@ -47,6 +46,16 @@ public class MessageDAOImpl implements MessageDAO {
     }
 
     @Override
+    public List<Message> getMessageAll () {
+        CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();
+        CriteriaQuery<Message> cq = cb.createQuery(Message.class);
+        Root<Message> root = cq.from(Message.class);
+        cq.select(root);
+        TypedQuery<Message> query = sessionFactory.getCurrentSession().createQuery(cq);
+        return query.getResultList();
+    }
+
+    @Override
     public Message getMessageById (int id) {
         CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<Message> cq = cb.createQuery(Message.class);
@@ -57,18 +66,6 @@ public class MessageDAOImpl implements MessageDAO {
         query.setParameter(p, id);
         return query.getSingleResult();
     }
-
-    //var2 criteria - working
-    /*public Message getMessageById (int id) {
-        CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();
-        CriteriaQuery<Message> cq = cb.createQuery(Message.class);
-        Root<Message> root = cq.from(Message.class);
-        ParameterExpression<Integer> p = cb.parameter(Integer.class);
-        cq.select(root).where(cb.equal(root.get("id"), p));
-        TypedQuery<Message> query = sessionFactory.getCurrentSession().createQuery(cq);
-        query.setParameter(p, id);
-        return query.getSingleResult();
-    }*/
 
     //var1 - java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to io.khasang.genelove.entity.Message
     /*public Message getMessageById (int id) {
@@ -100,12 +97,4 @@ public class MessageDAOImpl implements MessageDAO {
         //
         return messagesByDate;
     }
-
-    @Override
-    public List<Message> getMessageAll () {
-        List<Message> messagesALL = new ArrayList<>();
-        //
-        return messagesALL;
-    }
-
 }

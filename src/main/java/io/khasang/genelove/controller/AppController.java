@@ -78,12 +78,21 @@ public class AppController {
         model.addAttribute("message", messageService.getMessageById(id));
         return "message";
 
-        //Message mess = new Message();
-        //List list = messageService.getMessageById(0);
-        //mess =  mess.setId(Integer.parseInt(list.get(0).toString()));
-        //mess.setText((list.get(1).toString()));
-        //model.addAttribute("message", mess);
+        //variant for nativeSQL but not working
+        /*Message mess = new Message();
+        List list = messageService.getMessageById(0);
+        mess =  mess.setId(Integer.parseInt(list.get(0).toString()));
+        mess.setText((list.get(1).toString()));
+        model.addAttribute("message", mess);*/
     }
+
+    @RequestMapping(value = "/db/messagesAll", method = RequestMethod.GET)
+    public String getMessageAll(Model model) {
+        List<Message> list = messageService.getMessageAll();
+        model.addAttribute("messagesAll", list);
+        return "message";
+    }
+
 
     @RequestMapping("/sql/delete")
     public String delete(Model model) {
