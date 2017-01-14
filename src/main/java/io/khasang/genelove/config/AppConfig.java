@@ -58,11 +58,6 @@ public class AppConfig {
     }
 
     @Bean
-    public Message message(){
-        return new Message("Hello my bean");
-    }
-
-    @Bean
     public MyMessage myMessage() {
         return new MyMessage("This is a new message!");
     }

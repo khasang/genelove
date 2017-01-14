@@ -2,8 +2,8 @@ package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.Question;
 import io.khasang.genelove.model.CreateTable;
-import io.khasang.genelove.model.Message;
 import io.khasang.genelove.service.QuestionService;
+import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.model.SQLExamples;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,8 +19,6 @@ import java.util.List;
 @Controller
 public class AppController {
     @Autowired
-    Message message;
-    @Autowired
     MyMessage myMessage;
     @Autowired
     SQLExamples sqlExamples;
@@ -31,11 +29,19 @@ public class AppController {
     @Autowired
     QuestionService questionService;
 
+    @Autowired
+    MessageService messageService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(Model model){
-        model.addAttribute("hello", message.getMessageOut());
         model.addAttribute("message", myMessage.getMessage());
         return "hello";
+    }
+
+    @RequestMapping(value = "/message/{id}", method = RequestMethod.GET)
+    public String messageById(@PathVariable("id") int id, Model model){
+        model.addAttribute("message", messageService.getMessageById(id));
+        return "message";
     }
 
     @RequestMapping(value = "/admin/create", method = RequestMethod.GET)

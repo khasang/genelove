@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.ArrayList;
 
-@Component("UserService")
+@Component("AdminService")
 @Transactional
 public class AdminService {
 
