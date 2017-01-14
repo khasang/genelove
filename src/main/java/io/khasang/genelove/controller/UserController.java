@@ -1,16 +1,15 @@
 package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.Message;
+import io.khasang.genelove.entity.User;
 import io.khasang.genelove.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/account")
@@ -26,7 +25,7 @@ public class UserController {
     }
 
     /** User registration" */
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(){
         return "registrationPage";
     }
@@ -63,10 +62,25 @@ public class UserController {
     }
 
     /** Delete message from message list" */
-    @RequestMapping(value = "/deleteMessage", method = RequestMethod.DELETE)
-    public String messageDelete(){
-        return "messageDeletePage";
+    @RequestMapping(value = "/deleteMessage/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public String deleteMessage(@PathVariable(value = "id") String inputId, HttpServletResponse response) {
+        try {
+            int messageId = Integer.valueOf(inputId);
+            Message message = (Message)messageService.getMessageById(messageId);
+            if (message != null) {
+                messageService.deleteMessage(message);
+                return "Message with id:" + messageId + " successfully deleted.";
+            } else {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                return "Message with id: " + messageId + " not found.";
+            }
+        } catch (NumberFormatException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return "Bad message id format: " + inputId;
+        }
     }
+
 
     /** View message list" */
     @RequestMapping(value = "/allMessage", method = RequestMethod.GET)
