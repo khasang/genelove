@@ -1,15 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <title>Title</title>
-</head>
-<body>
+<!-- Include HEADER-->
 <jsp:include page="header.jsp"/>
-<p>hello</p>
-<blockquote>
-    <p>${hello}</p>
-</blockquote>
+<!--PAGE CONTENT -->
+<div class="page-content">
+    <div class="row">
+        <!-- Include leff menu-->
+        <jsp:include page="left_menu.jsp"/>
+        <!--Main Content of page -->
+    </div>
+</div>
+<!-- Include FOOTER-->
 <jsp:include page="footer.jsp"/>
-</body>
-</html>
