@@ -33,7 +33,7 @@ public class QuestionDAOImpl implements QuestionDAO {
         final String query = "SELECT question from question WHERE id=:id";
         String oldQuestion = (String) sessionFactory.
                 getCurrentSession().
-                createSQLQuery(query).
+                createNativeQuery(query).
                 setParameter("id", question.getId()).
                 uniqueResult();
         question.setQuestion(oldQuestion);
