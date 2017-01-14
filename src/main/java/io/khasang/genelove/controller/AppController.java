@@ -1,19 +1,20 @@
 package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.test.Question;
-import io.khasang.genelove.model.CreateTable;
-import io.khasang.genelove.model.Message;
-import io.khasang.genelove.model.NewClass;
-import io.khasang.genelove.model.SqlExample;
+import io.khasang.genelove.model.*;
+import io.khasang.genelove.service.OrderService;
 import io.khasang.genelove.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -133,5 +134,39 @@ public class AppController {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return "Error updating question: " + e.getMessage();
         }
+    }
+
+
+
+    @Autowired
+    OrderService orderService;
+
+    @RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
+    public String prepareProduct(ModelMap model) {
+        return "index";
+    }
+
+    @RequestMapping(value = { "/newOrder" }, method = RequestMethod.GET)
+    public String prepareOrder(ModelMap model) {
+        Order order = new Order();
+        model.addAttribute("order", order);
+        return "order";
+    }
+
+    @RequestMapping(value = { "/newOrder" }, method = RequestMethod.POST)
+    public String sendOrder(@Valid Order order, BindingResult result,
+                            ModelMap model) {
+        if (result.hasErrors()) {
+            return "order";
+        }
+        orderService.sendOrder(order);
+        model.addAttribute("success", "Order for " + order.getProductName() + " registered.");
+        return "ordersuccess";
+    }
+
+    @RequestMapping(value = { "/checkStatus" }, method = RequestMethod.GET)
+    public String checkOrderStatus(ModelMap model) {
+        model.addAttribute("orders", orderService.getAllOrders());
+        return "orderstatus";
     }
 }

@@ -1,8 +1,11 @@
 package io.khasang.genelove.config.application;
 
+        import io.khasang.genelove.config.MessagingConfiguration;
+        import io.khasang.genelove.config.MessagingListnerConfiguration;
         import org.springframework.context.annotation.Bean;
         import org.springframework.context.annotation.ComponentScan;
         import org.springframework.context.annotation.Configuration;
+        import org.springframework.context.annotation.Import;
         import org.springframework.web.servlet.config.annotation.EnableWebMvc;
         import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
         import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -12,6 +15,7 @@ package io.khasang.genelove.config.application;
 @Configuration
 @EnableWebMvc
 @ComponentScan({"io.khasang.genelove.config", "io.khasang.genelove.controller", "io.khasang.genelove.model", "io.khasang.genelove.dao", "io.khasang.genelove.service"})
+@Import({MessagingConfiguration.class,MessagingListnerConfiguration.class})
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public InternalResourceViewResolver viewResolver() {
@@ -27,6 +31,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/views/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/views/js/");
+
+        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
     }
 
 }
