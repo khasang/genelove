@@ -12,9 +12,7 @@ description
 
 ## AdminController
 
-/admin - Экран администрирования
-
-/admin/usersList - Список пользователей
+/admin/usersList - список пользователей
 
 /admin/user/id/{id} - пользователь с ID = {id}
 
