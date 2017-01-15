@@ -145,19 +145,21 @@ public class AppController {
     }
 
     @RequestMapping(value = "/sendEmail.do", method = RequestMethod.POST)
-    public String doSendEmail(HttpServletRequest request) {
+    public String doSendEmail(HttpServletRequest request) throws Exception{
         // takes input from e-mail form
+        request.setCharacterEncoding("UTF8");
         String recipientAddress = request.getParameter("recipient");
         String subject = request.getParameter("subject");
         String message = request.getParameter("message");
 
-        // prints debug info
-        System.out.println("To: " + recipientAddress);
-        System.out.println("Subject: " + subject);
-        System.out.println("Message: " + message);
+//        // prints debug info
+//        System.out.println("To: " + recipientAddress);
+//        System.out.println("Subject: " + subject);
+//        System.out.println("Message: " + message);
 
         // creates a simple e-mail object
         SimpleMailMessage email = new SimpleMailMessage();
+        email.setFrom("dendrito@list.ru");
         email.setTo(recipientAddress);
         email.setSubject(subject);
         email.setText(message);
