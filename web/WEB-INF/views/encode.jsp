@@ -1,12 +1,9 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>lemberg</title>
+    <title>Spring Security</title>
 </head>
 <body>
-<p>My home work</p>
-${lembergMessage}
-<p>end</p>
+<p>Password: ${crypt}</p>
 </body>
 </html>

@@ -1,8 +1,6 @@
 package io.khasang.genelove.config;
 
-import io.khasang.genelove.model.LembergMessage;
-import io.khasang.genelove.model.Message;
-import io.khasang.genelove.model.SQLTable;
+import io.khasang.genelove.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +10,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
+
+import javax.sql.DataSource;
 
 @Configuration
 @PropertySource(value = {"classpath:util.properties"})
@@ -61,4 +61,31 @@ public class AppConfig {
         jdbcImpl.setAuthoritiesByUsernameQuery(environment.getRequiredProperty("rolesByQuery"));
         return jdbcImpl;
     }
+
+/* 
+    @Bean
+    public CreateTable createTable() {
+        return new CreateTable(jdbcTemplate());
+    }
+
+    @Bean
+    public SelectQuery dataBaseQueries() {
+        return  new SelectQuery(jdbcTemplate());
+    }
+
+    @Bean
+    public CaseQuery caseQuery() {
+        return new CaseQuery(jdbcTemplate());
+    }
+
+    @Bean
+    public InserData inserData() {
+        return new InserData(jdbcTemplate());
+    }
+
+    @Bean
+    public JoinQuery joinQuery() {
+        return new JoinQuery(jdbcTemplate());
+    }
+*/
 }

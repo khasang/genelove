@@ -1,0 +1,60 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+html {
+  overflow-y: scroll;
+}
+body {
+    margin: 0;
+    padding: 0;
+    border-spacing: 0;
+    background: #c1bdba;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 16px;
+    font-style: italic;
+    color: grey;
+    height: 100%;
+}
+h1 {
+  text-align: center;
+  color: #ffffff;
+  font-weight: 300;
+  margin: 0 0 40px;
+}
+h1.heading1 {
+    font-size: 18px;
+    color: black;
+}
+a {
+  text-decoration: mintcream;
+}
+a.underlinedText {
+    font-size: 12px;
+    text-decoration: underline;
+}
+.ref {
+    text-decoration: none;
+    color: #777777;
+}
+.textInfo1{
+    margin-left: 100%;
+    margin-top: 1em;
+    color: grey;
+}
+.leftMargin {
+    margin-left: 30em;
+}
+.leftMargin23em {
+  margin-left: 29em;
+}
+.topMargin {
+    margin-left: 1em;
+}
+.leftAlign {
+    text-align: left;
+}
+.bottomPadding {
+  padding-bottom: 20px;
+}
+
+

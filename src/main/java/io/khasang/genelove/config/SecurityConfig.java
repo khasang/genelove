@@ -19,23 +19,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
 
-
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeRequests()
                 .antMatchers("/").permitAll()
-                /*.antMatchers("/adm-**").access("hasRole('ADMINISTRATOR')")
-               *//*даже даже так пробую,и дальше выскакиваэт почему то Access is denied*//*
-                .antMatchers("/mng-**").hasRole(UserConstants.Role.ROLE_MANAGER)*/
+                .antMatchers("/db/**").access("hasRole('DB')")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
+    }
+
+    @Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+            auth.userDetailsService(userDetailsService).passwordEncoder(getBCryptPasswordEncoder());
     }
 
     @Bean(name = "passwordEncoder")
     public PasswordEncoder getBCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(getBCryptPasswordEncoder());
-    }
+
 }
