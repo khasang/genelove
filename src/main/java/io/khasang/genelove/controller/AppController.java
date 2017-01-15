@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
@@ -138,36 +139,38 @@ public class AppController {
         }
     }
 
-
     @RequestMapping(value = "/sendEmail.do", method = RequestMethod.GET)
     public String openMailForm(Model model) {
         return "emailform";
     }
 
     @RequestMapping(value = "/sendEmail.do", method = RequestMethod.POST)
-    public String doSendEmail(HttpServletRequest request) throws Exception{
-        // takes input from e-mail form
-        request.setCharacterEncoding("UTF8");
-        String recipientAddress = request.getParameter("recipient");
-        String subject = request.getParameter("subject");
-        String message = request.getParameter("message");
+    public String doSendEmail(HttpServletRequest request, Model model) throws UnsupportedEncodingException{
+        ModelAndView modelAndView = new ModelAndView();
 
-//        // prints debug info
-//        System.out.println("To: " + recipientAddress);
-//        System.out.println("Subject: " + subject);
-//        System.out.println("Message: " + message);
+        try {
+            // takes input from e-mail form
+            request.setCharacterEncoding("UTF8");
+            String recipientAddress = request.getParameter("recipient");
+            String subject = request.getParameter("subject");
+            String message = request.getParameter("message");
 
-        // creates a simple e-mail object
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setFrom("dendrito@list.ru");
-        email.setTo(recipientAddress);
-        email.setSubject(subject);
-        email.setText(message);
+            // creates a simple e-mail object
+            SimpleMailMessage email = new SimpleMailMessage();
+            email.setFrom("dendrito@list.ru");
+            email.setTo(recipientAddress);
+            email.setSubject(subject);
+            email.setText(message);
 
-        // sends the e-mail
-        mailSender.send(email);
+            // sends the e-mail
+            mailSender.send(email);
 
-        // forwards to the view named "Result"
-        return "Result";
+            // forwards to the view named "Result"
+            return "emailresult";
+
+        } catch(Exception mess){
+            model.addAttribute("exception", mess.getMessage());
+            return "emailerror";
+        }
     }
 }
