@@ -2,19 +2,18 @@ package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.test.Question;
 import io.khasang.genelove.model.*;
-import io.khasang.genelove.service.OrderService;
 import io.khasang.genelove.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -29,6 +28,9 @@ public class AppController {
     SqlExample sqlExample;
     @Autowired
     QuestionService questionService;
+
+    @Autowired
+    private JavaMailSender mailSender;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(Model model){
@@ -137,36 +139,33 @@ public class AppController {
     }
 
 
-
-    @Autowired
-    OrderService orderService;
-
-    @RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
-    public String prepareProduct(ModelMap model) {
-        return "index";
+    @RequestMapping(value = "/sendEmail.do", method = RequestMethod.GET)
+    public String openMailForm(Model model) {
+        return "emailform";
     }
 
-    @RequestMapping(value = { "/newOrder" }, method = RequestMethod.GET)
-    public String prepareOrder(ModelMap model) {
-        Order order = new Order();
-        model.addAttribute("order", order);
-        return "order";
-    }
+    @RequestMapping(value = "/sendEmail.do", method = RequestMethod.POST)
+    public String doSendEmail(HttpServletRequest request) {
+        // takes input from e-mail form
+        String recipientAddress = request.getParameter("recipient");
+        String subject = request.getParameter("subject");
+        String message = request.getParameter("message");
 
-    @RequestMapping(value = { "/newOrder" }, method = RequestMethod.POST)
-    public String sendOrder(@Valid Order order, BindingResult result,
-                            ModelMap model) {
-        if (result.hasErrors()) {
-            return "order";
-        }
-        orderService.sendOrder(order);
-        model.addAttribute("success", "Order for " + order.getProductName() + " registered.");
-        return "ordersuccess";
-    }
+        // prints debug info
+        System.out.println("To: " + recipientAddress);
+        System.out.println("Subject: " + subject);
+        System.out.println("Message: " + message);
 
-    @RequestMapping(value = { "/checkStatus" }, method = RequestMethod.GET)
-    public String checkOrderStatus(ModelMap model) {
-        model.addAttribute("orders", orderService.getAllOrders());
-        return "orderstatus";
+        // creates a simple e-mail object
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(recipientAddress);
+        email.setSubject(subject);
+        email.setText(message);
+
+        // sends the e-mail
+        mailSender.send(email);
+
+        // forwards to the view named "Result"
+        return "Result";
     }
 }
