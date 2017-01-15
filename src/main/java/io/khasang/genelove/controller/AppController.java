@@ -18,13 +18,7 @@ public class AppController {
     @Autowired
     Message message;
     @Autowired
-    CreateTable createTable;
-    @Autowired
     SelectQuery selectQuery;
-    @Autowired
-    CaseQuery caseQuery;
-    @Autowired
-    InserData insertData;
     @Autowired
     JoinQuery joinQuery;
     @Autowired
@@ -36,28 +30,10 @@ public class AppController {
         return "hello";
     }
 
-    @RequestMapping(value = "/db/create", method = RequestMethod.GET)
-    public String createTable(Model model){
-        model.addAttribute("create", createTable.createTableStatus());
-        return "create";
-    }
-
     @RequestMapping(value = "/db/select", method = RequestMethod.GET)
     public String selectData(Model model) {
         model.addAttribute("select", selectQuery.selectData());
         return "select";
-    }
-
-    @RequestMapping(value = "/db/selectCase", method = RequestMethod.GET)
-    public String selectWithCase(Model model) {
-        model.addAttribute("selectCase", caseQuery.caseQuery());
-        return "selectCase";
-    }
-
-    @RequestMapping(value = "/db/insert", method = RequestMethod.GET)
-    public String insertData(Model model) {
-        model.addAttribute("insert", insertData.inserData());
-        return "insert";
     }
 
     @RequestMapping(value = "/db/join", method = RequestMethod.GET)

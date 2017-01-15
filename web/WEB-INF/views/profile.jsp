@@ -34,13 +34,9 @@
             <strong class="leftMargin23em">
                 ${profile.region}<br><br>
             </strong>
-            <strong class="leftMargin23em">
-                <jsp:getProperty name="profile" property="region"/><br><br>
-                <br><br>
-            </strong>
         </div>
         <a href="${pageContext.request.contextPath}/tree">
-            <img src="resources/genealDrevo.jpg" alt="генеалогическое древо" class="profilePageFoto" >
+            <img src="resources/drevo.jpg" alt="генеалогическое древо" class="profilePageFoto" >
         </a>
 
         <div>
