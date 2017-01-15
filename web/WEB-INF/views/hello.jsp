@@ -1,64 +1,66 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="profile"
-             class="io.khasang.genelove.dao.UserProfileDao"/>
-<jsp:useBean id="friends"
-             class="io.khasang.genelove.dao.FriendListDao"/>
+             class="io.khasang.genelove.service.ProfileService"/>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title><p>${hello}</p></title>
-        <link rel="stylesheet" type="text/css" href="css/userPage.css"/>
+        <title>Profile</title>
+        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="css/images.css"/>
+
     </head>
 
-    <body>
-        <!--<%@ include file="header.jsp" %>
-        -->
+    <body class="background">
 
-        <a href="changeFoto.jsp">
-            <img src="resources/smile.jpg" alt="Фото" class="foto">
-        </a>
-        <h1 class="heading1">
-            Личная информация
-            <a href="modifyProfile.jsp" class="textInfo1">Изменить анкету</a>
-            <a class="horizontalSpace"></a>
-            <a href="mainPage.jsp" class="textInfo1">Выйти</a>
-        </h1>
-        <p class="textInfo">
-            Имя, фамилия пользователя:
-            <jsp:getProperty name="profile" property="name"/><br><br>
-            дата рождения:
-            <jsp:getProperty name="profile" property="birthDate"/><br><br>
-            регион поиска:
-            <jsp:getProperty name="profile" property="region"/><br><br>
-            <!--подумать откуда брать статус-->
-            статус <br><br>
-            <a href="frinendList.jsp" class="ref">
-                друзья:
-                <jsp:getProperty name="friends" property="friends"/><br><br>
+    <%@ include file="header.jsp" %><br><br>
+        <div>
+            <a href="changeFoto.jsp">
+                <img src="resources/smile.jpg" alt="Фото" class="profilePageFoto">
+            </a><br>
+
+            <div class="leftMargin topMargin">
+                <h1 class="heading1">Personal information</h1>
+                <a href="${pageContext.request.contextPath}/modifyProfile"
+                   class="ref leftMargin23em">Edit profile</a><br><br>
+                <strong class="leftMargin23em">
+                    ${profile.firstName} ${profile.lastName}<br><br>
+                </strong>
+                <strong class="leftMargin23em">
+                    ${profile.birthDate}<br><br>
+                </strong>
+                <strong class="leftMargin23em">
+                    ${profile.region}<br><br>
+                </strong>
+                <strong class="leftMargin23em">
+                    <jsp:getProperty name="profile" property="region"/><br><br>
+                    <br><br>
+                </strong>
+            </div>
+            <a href="${pageContext.request.contextPath}/tree">
+                <img src="resources/genealDrevo.jpg" alt="генеалогическое древо" class="profilePageFoto" >
             </a>
-            <br><br>
-        </p>
-        <a href="genealogicTree.jsp">
-            <img src="resources/genealDrevo.jpg" alt="генеалогическое древо" class="drevo"
-                 href="genealogicTree.jsp">
-        </a>
 
-        <h1 class="heading1">Место учебы</h1>
-        <p class="textInfo">
-            школа:
-            <jsp:getProperty name="profile" property="school"/><br><br>
-            университет:
-            <jsp:getProperty name="profile" property="university"/><br><br>
-        </p>
+            <div>
+                <h1 class="heading1">Education: </h1>
+                <strong class="leftMargin">School: </strong>
+                ${profile.school}<br><br>
+                <strong class="leftMargin">University: </strong>
+                ${profile.university}<br><br>
+            </div>
 
-        <h1 class="heading1">Хобби</h1>
-        <p class="textInfo">
-            увлечения:
-            <jsp:getProperty name="profile" property="hobby"/><br><br>
-            любимые занятия:
-            <jsp:getProperty name="profile" property="actions"/><br><br>
-        </p>
+            <div>
+                <h1 class="heading1">Hobby</h1>
+                <strong class="leftMargin">Hobby: </strong>
+                <${profile.hobby}/><br><br>
+                <strong class="leftMargin bottomPadding">Activities: </strong>
+                <${profile.activity}/><br><br>
+            </div>
+        </div>
 
-        <%@ include file="footer.jsp" %>
+    <%@ include file="footer_d.jsp" %>
+
     </body>
 </html>

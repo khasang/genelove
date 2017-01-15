@@ -1,0 +1,16 @@
+body.background {
+    background: url(../resources/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+IMG.profilePageFoto {
+    float: left;
+    margin-left: 10px; 
+    margin-bottom: 10em;
+    position: absolute;
+    width: 30%;
+    height: 40%;
+ }

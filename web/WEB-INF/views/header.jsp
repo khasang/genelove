@@ -1,18 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-    <head>
-        <title>Title</title>
-        <link rel="stylesheet" type="text/css" href="css/header.css"/>
-    </head>
-    <body>
-        <footer>
-            <table width="100%">
-                <tr>
-                    <td><a href="myPage.jsp">Домой</a></td>
-                    <td><a href="messages.jsp">Сообщения</a></td>
-                    <td><a href="findPeople.jsp">Поиск</a></td>
-                </tr>
-            </table>
-        </footer>
-    </body>
-</html>
+<link rel="stylesheet" href="css/header.css"/>
+
+<header class="headerStyle">
+
+        <a><p class="logo">Genelove</p></a>
+        <a class="headerText" href="${pageContext.request.contextPath}/myPage">My Page</a>
+        <a class="headerText" href="${pageContext.request.contextPath}/messages">Messages</a>
+        <a class="headerText" href="${pageContext.request.contextPath}/friends">My Friends</a>
+        <a class="headerText" href="${pageContext.request.contextPath}/findPeople">Find frinends</a>
+        <a class="headerText" href="${pageContext.request.contextPath}/logout">Lou out</a>
+
+</header>
