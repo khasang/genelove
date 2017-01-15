@@ -1,6 +1,7 @@
 package io.khasang.genelove.service;
 
 import io.khasang.genelove.dao.AdminDAO;
+import io.khasang.genelove.entity.Role;
 import io.khasang.genelove.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.ArrayList;
 
-@Component("UserService")
+@Component("AdminService")
 @Transactional
 public class AdminService {
 
@@ -19,14 +20,18 @@ public class AdminService {
     public long getAllUsersCount() {
     	return adminDAO.getAllUsersCount();
     }
-
-//    public List<User> getUsersList() {
-//        return adminDAO.getUsersList();
-//    }
     
     public List<User> getUsers() {
         return adminDAO.getUsers();
     }
+
+    public int getRoleId(String role) { return adminDAO.getRoleId(role); }
+
+    public boolean checkUserRole(User user, Role role) { return adminDAO.checkUserRole(user, role); }
+
+    public void addRole(User user, Role role) { adminDAO.addRole(user, role); }
+
+    public void removeRole(User user, Role role) { adminDAO.removeRole(user, role); }
 
     public List<User> getUserById(int id) {
         List<User> users = new ArrayList<>();
