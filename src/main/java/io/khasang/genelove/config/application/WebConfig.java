@@ -40,15 +40,17 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
         //Using gmail
-        mailSender.setHost("smtp.gmail.com");
-        mailSender.setPort(587);
-        mailSender.setUsername("fromemail@gmail.com");
-        mailSender.setPassword("frompassword");
+        mailSender.setHost("smtp.yandex.ru");
+        mailSender.setPort(25);
+        mailSender.setUsername("guzikov@yandex.ru");
+        mailSender.setPassword("");
 
         Properties javaMailProperties = new Properties();
         javaMailProperties.put("mail.smtp.starttls.enable", "true");
         javaMailProperties.put("mail.smtp.auth", "true");
         javaMailProperties.put("mail.transport.protocol", "smtp");
+        javaMailProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        javaMailProperties.put("mail.smtp.socketFactory.fallback", "true");
 //        javaMailProperties.put("mail.debug", "true");//Prints out everything on screen
 
         mailSender.setJavaMailProperties(javaMailProperties);
