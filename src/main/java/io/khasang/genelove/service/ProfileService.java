@@ -1,7 +1,7 @@
 package io.khasang.genelove.service;
 
 
-import io.khasang.genelove.model.UserProfile;
+// import io.khasang.genelove.model.UserProfile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,11 +11,11 @@ import java.util.List;
 @Service
 @Transactional
 public class ProfileService {
-
+    /*
     public List<UserProfile> getFriendsList(String login){
         return new ArrayList<>();
     }
-
+    */
     public String getFirstName() {
         return "myName";
     }

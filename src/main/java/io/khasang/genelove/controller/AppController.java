@@ -115,13 +115,13 @@ public class AppController {
         model.addAttribute("modifyProfile", "");
         return "modifyProfile";
     }
-
+    /*
     @RequestMapping(value = "/friends", method = RequestMethod.GET)
     public ModelAndView friends(Model model){
         model.addAttribute("friends", "");
         return new ModelAndView("invites","friends", profileService.getFriendsList(""));
     }
-
+    */
     @RequestMapping(value = "/tree", method = RequestMethod.GET)
     public String tree(Model model){
         model.addAttribute("tree", "");
