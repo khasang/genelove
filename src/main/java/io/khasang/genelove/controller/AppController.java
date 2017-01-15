@@ -97,4 +97,33 @@ public class AppController {
         model.addAttribute("allQuestion", list);
         return "questions";
     }
+
+    @RequestMapping(value = "/db/getQuestionById/{id}", method = RequestMethod.GET)
+    public String getQuestionById(@PathVariable("id") int id, Model model) {
+        Question question = questionService.getQuestionById(id);
+        model.addAttribute("getQuestionById", question);
+        return "question";
+    }
+
+    @RequestMapping(
+            value = "/db/deleteQuestionById/{id}",
+            method = RequestMethod.DELETE,
+            produces = "application/json")
+    @ResponseBody
+    public String deleteQuestionById(@PathVariable(value = "id") String inputId, HttpServletResponse response) {
+        try {
+            int questionId = Integer.valueOf(inputId);
+            Question question = questionService.getQuestionById(questionId);
+            if (question != null) {
+                questionService.deleteQuestion(question);
+                return "Question #" + questionId + " successfully deleted.";
+            } else {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                return "Question #" + questionId + " not found.";
+            }
+        } catch (NumberFormatException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return "Bad question id format: " + inputId;
+        }
+    }
 }

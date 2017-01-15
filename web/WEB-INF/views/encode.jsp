@@ -12,6 +12,7 @@
 <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
+<div id="header"><h1><span id="gene">GENE</span><span id="love">LOVE</span></h1>
 <ul class="navMenu">
     <li><a href="http://localhost:8080">Main page</a></li>
     <li><a href="hello">Hello page</a></li>
@@ -19,7 +20,7 @@
     <li><a href="insert">Insert data into <strong>films</strong></a></li>
     <li><a href="simpleSelect">Simple select into <strong>films</strong></a></li>
     <li><a href="multipleSelect">Multiple select into <strong>films</strong></a></li>
-</ul>
+</ul></div>
 
 <div>
 <hr>

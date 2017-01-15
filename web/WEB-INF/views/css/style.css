@@ -60,10 +60,10 @@ tr:nth-of-type(odd) {
 
 .navMenu {
     list-style-type: none;
+    padding-top:34px;
     padding-left: 0px;
     margin-left: 0px;
     list-style: none;
-    border-bottom: 1px dashed #000;
     text-align: center;
 }
 
@@ -73,7 +73,7 @@ tr:nth-of-type(odd) {
 
 .navMenu a {
     display: inline-block;
-    border: 1px dashed #000;
+    border: 1px solid #000;
     border-bottom: none;
     padding: 5px 15px 5px 15px;
     background-color: #999;
@@ -101,7 +101,6 @@ tr:nth-of-type(odd) {
     padding-left: 0px;
     margin-left: 0px;
     list-style: none;
-    border-bottom: 1px dashed #000;
     text-align: center;
 }
 
@@ -118,26 +117,50 @@ tr:nth-of-type(odd) {
 }
 
 .leftMenu a:hover {
-    background-color: #666;
+    background-color: darkgray;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
     color: yellow;
-}
-
-#container {
-    min-height: 70%;
+    border-radius: 0px 15px 15px 0px;
 }
 
 #main {
     margin-left: 220px;
     padding: 10px;
-    min-height: 70%;
     background: #FFF;
 }
 
+#header {
+    margin: 0 auto;
+    height: 100px;
+    background: #5da;
+}
+
 #footer {
-    padding: 10px;
+    clear: both;
+    position: relative;
+    bottom: 0px;
+    width: 100%;
     background: #666666;
-    height: 125px;
+    height: 100px;
     color: white;
 }
+
+#gene {
+    color: blue;
+}
+
+#love {
+   color:  red;
+}
+
+#activeMenu {
+    background: white;
+    color: black;
+}
+
+.active {
+     box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+     border-radius: 0px 15px 15px 0px;
+ }
 
 

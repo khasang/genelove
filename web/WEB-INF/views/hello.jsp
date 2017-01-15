@@ -1,19 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Hello</title>
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-
+<div id="header"><h1><span id="gene">GENE</span><span id="love">LOVE</span></h1>
 <ul class="navMenu">
-    <li><a href="http://localhost:8080">Main page</a></li>
-    <li><a href="hello">Hello page</a></li>
+    <li><a href="/">Main page</a></li>
+    <li><a href="hello" id="activeMenu">Hello page</a></li>
     <li><a href="db/create">Create table / Entry<strong>films</strong></a></li>
     <li><a href="insert">Insert data<strong>films</strong></a></li>
     <li><a href="simpleSelect">Simple select<strong>films</strong></a></li>
     <li><a href="multipleSelect">Multiple select into <strong>films</strong></a></li>
-</ul>
+</ul></div>
 <div id="container">
     <div id="left"><h2>LEFT MENU</h2><hr>
         <ul class="leftMenu">
