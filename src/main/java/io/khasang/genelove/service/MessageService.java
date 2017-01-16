@@ -1,8 +1,11 @@
 package io.khasang.genelove.service;
 
 import io.khasang.genelove.dao.MessageDAO;
+import io.khasang.genelove.dao.UserDAO;
 import io.khasang.genelove.entity.Message;
+import io.khasang.genelove.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +19,9 @@ public class MessageService {
     @Autowired
     MessageDAO messageDAO;
 
+    @Autowired
+    UserDAO userDAO;
+
     public void addMessage(Message message) {
         messageDAO.addMessage(message);
     }
@@ -28,10 +34,20 @@ public class MessageService {
         messageDAO.editMessage(message);
     }
 
+    public Message getMessageById(int id) {
+        return messageDAO.getMessageById(id);
+    }
+
+    /*
     public List<Message> getMessageById(int id) {
         List<Message> messages = new ArrayList<>();
         messages.add(messageDAO.getMessageById(id));
         return messages;
+    }*/
+
+    public List<Message> getMessagesWith (int id) {
+        int otherId = userDAO.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
+        return messageDAO.getMessagesWith (id, otherId);
     }
 
     public List<Message> getMessageByKeyWord(String keyWord) {

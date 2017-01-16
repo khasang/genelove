@@ -1,33 +1,24 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Message</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>Message by ID</title>
 </head>
 <body>
-<table>
-    <tr>
-        <td>ID</td>
-        <td>message</td>
+<jsp:include page="header.jsp"/>
 
+<tr>
+    <td>ID</td>
+    <td>message</td>
+    <td>date</td>
+</tr>
 
+<tr>
+<td>${message.id}</td>
+<td>${message.text}</td>
+<td>${message.date}</td>
+</tr>
 
-
-
-    </tr>
-    <c:forEach items="${message}" var="message">
-        <tr>
-
-            <td>${message.text}</td>
-            <td>${message.id}</td>
-            <td>${message.date}</td>
-            <td>${message.parentMessage}</td>
-            <td>${message.conversation}</td>
-            <td>${message.fromUser}</td>
-            <td>${message.toUser}</td>
-
-        </tr>
-    </c:forEach>
-</table>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>
