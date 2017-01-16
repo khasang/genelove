@@ -29,6 +29,7 @@ import static org.junit.Assert.assertEquals;
         countTemp++;
     }
 
+    // test
     @Test (timeout = 100)
     public void testGetMessageWithParam() {
         assertEquals("Error assert!", countTemp, temp.sum(2));
