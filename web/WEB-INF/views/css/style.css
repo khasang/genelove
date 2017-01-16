@@ -29,6 +29,7 @@ p {
     padding: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     background-color: rgba(240,240,60,0.5);
+    text-align: center;
 }
 
 div {
@@ -63,6 +64,11 @@ input, textarea {
     background-color: #e4b9c0;
     color: darkred;
     height: 3em;
+}
+
+textarea {
+    width: 100%;
+    height: 6em;
 }
 
 .navMenu {
@@ -183,5 +189,10 @@ input, textarea {
     color: #2a6496;
     padding-left: 3em;
     padding-right: 3em;
+}
+
+#errorMessage {
+    width: 90%;
+    text-align: center;
 }
 

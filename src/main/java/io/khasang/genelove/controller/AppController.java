@@ -153,7 +153,7 @@ public class AppController {
 
             // creates a simple e-mail object
             SimpleMailMessage email = new SimpleMailMessage();
-            email.setFrom("dendrito@list.ru");
+            email.setFrom("genelove@mail.ru");
             email.setTo(recipientAddress);
             email.setSubject(subject);
             email.setText(message);

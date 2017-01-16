@@ -46,8 +46,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         //Using mail
         mailSender.setHost("smtp.mail.ru");
         mailSender.setPort(465);
-        mailSender.setUsername("dendrito@list.ru");
-        mailSender.setPassword("");
+        mailSender.setUsername("genelove@mail.ru");
+        mailSender.setPassword("Khasang2017team");
 
         Properties javaMailProperties = new Properties();
         javaMailProperties.put("mail.smtp.starttls.enable", "true");
