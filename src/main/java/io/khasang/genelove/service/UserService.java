@@ -28,16 +28,12 @@ public class UserService {
         userDAO.editUser(user);
     }
 
-    public List<User> getUserByLogin(String login){
-        List<User> users = new ArrayList<>();
-        users.add(userDAO.getUserByLogin(login));
-        return users;
+    public User getUserByLogin(String login){
+        return userDAO.getUserByLogin(login);
     }
 
-    public List<User> getUserById(int id){
-        List<User> users = new ArrayList<>();
-        users.add(userDAO.getUserById(id));
-        return users;
+    public User getUserById(int id){
+        return userDAO.getUserById(id);
     }
 
     public List<User> getUserAll(){
