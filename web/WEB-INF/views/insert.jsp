@@ -32,6 +32,6 @@
         <p>Insert into table <strong>films</strong></p>
         <hr>
     </div></div>
-<div id="footer"><h1>Footer</h1></div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

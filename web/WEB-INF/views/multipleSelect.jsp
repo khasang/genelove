@@ -48,7 +48,7 @@
         </table>
         <hr>
     </div></div>
-<div id="footer"><h1>Footer</h1></div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
 
