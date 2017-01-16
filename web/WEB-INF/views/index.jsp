@@ -18,7 +18,7 @@
 <div id="left"><h2>LEFT MENU</h2><hr>
     <ul class="leftMenu">
         <li><a href="/" class="active">Main</a></li>
-        <li><a href="/account/">Account Test Info</a></li>
+        <li><a href="/accountTest/">Account Test Info</a></li>
         <li><a href="/account/info">User Info</a></li>
         <li><a href="/">Main</a></li>
     </ul>
