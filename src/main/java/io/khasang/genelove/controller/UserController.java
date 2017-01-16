@@ -1,7 +1,6 @@
 package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.Message;
-import io.khasang.genelove.entity.User;
 import io.khasang.genelove.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,11 +54,15 @@ public class UserController {
         }
     }
 
+
     /** Get message from another user" */
-    @RequestMapping(value = "/getMessage", method = RequestMethod.GET)
-    public String messageGet(){
-        return "messageGetPage";
+    @RequestMapping(value = "/messagesWith/{otherId}", method = RequestMethod.GET)
+    public String messagesWithOther (@PathVariable("otherId") int otherId, Model model) {
+        List<Message> list = messageService.getMessagesWith(otherId);
+        model.addAttribute("messages", list);
+        return "messages";
     }
+
 
     /** Delete message from message list" */
     @RequestMapping(value = "/deleteMessage/{id}", method = RequestMethod.POST)
@@ -67,7 +70,7 @@ public class UserController {
     public String deleteMessage(@PathVariable(value = "id") String inputId, HttpServletResponse response) {
         try {
             int messageId = Integer.valueOf(inputId);
-            Message message = (Message)messageService.getMessageById(messageId);
+            Message message = messageService.getMessageById(messageId);
             if (message != null) {
                 messageService.deleteMessage(message);
                 return "Message with id:" + messageId + " successfully deleted.";
@@ -80,7 +83,6 @@ public class UserController {
             return "Bad message id format: " + inputId;
         }
     }
-
 
     /** View message list" */
     @RequestMapping(value = "/allMessage", method = RequestMethod.GET)

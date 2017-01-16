@@ -14,6 +14,8 @@ public interface MessageDAO {
 
     Message getMessageById(int id);
 
+    List<Message> getMessagesWith(int id, int otherId);
+
     List<Message> getMessageByKeyWord(String keyWord);
 
     List<Message> getMessageByDate(String date);

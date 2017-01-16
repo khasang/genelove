@@ -47,15 +47,30 @@ public class MessageDAOImpl implements MessageDAO {
 
     @Override
     public List<Message> getMessageAll () {
-        CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();
-        CriteriaQuery<Message> cq = cb.createQuery(Message.class);
-        Root<Message> root = cq.from(Message.class);
-        cq.select(root);
-        TypedQuery<Message> query = sessionFactory.getCurrentSession().createQuery(cq);
+        TypedQuery<Message> query = sessionFactory.getCurrentSession().createNativeQuery("SELECT * FROM messages", Message.class);
         return query.getResultList();
     }
 
     @Override
+    public List<Message> getMessagesWith (int UserId, int OtherUserId) {
+        TypedQuery<Message> query = sessionFactory.getCurrentSession().
+                createNativeQuery("SELECT * FROM messages WHERE from_user in ( :otherUserId, :userId) " +
+                        "and to_user in (:userId, :otherUserId) order by date ", Message.class);
+        query.setParameter("userId", UserId);
+        query.setParameter("otherUserId", OtherUserId);
+        return query.getResultList();
+    }
+
+    @Override
+    public Message getMessageById (int id) {
+        TypedQuery<Message> query = sessionFactory.getCurrentSession().createNativeQuery("" +
+                "SELECT * FROM messages WHERE id = ?", Message.class);
+        query.setParameter(1, id);
+        return query.getSingleResult();
+    }
+
+    //var2 - criteria working
+    /*@Override
     public Message getMessageById (int id) {
         CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<Message> cq = cb.createQuery(Message.class);
@@ -65,24 +80,7 @@ public class MessageDAOImpl implements MessageDAO {
         TypedQuery<Message> query = sessionFactory.getCurrentSession().createQuery(cq);
         query.setParameter(p, id);
         return query.getSingleResult();
-    }
-
-    //var1 - java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to io.khasang.genelove.entity.Message
-    /*public Message getMessageById (int id) {
-        String sql = "SELECT id, text from messages WHERE id=:id";
-        Query query = sessionFactory.getCurrentSession().createNativeQuery(sql);
-        query.setParameter("id", id);
-        //List is used to escape unchecked exception
-        List results = query.getResultList();
-        Message foundMessage = null;
-        if(!results.isEmpty()) {
-            //ignores multiple results
-            foundMessage = (Message) results.get(0);
-        }
-        return foundMessage;
     }*/
-
-
 
     @Override
     public List<Message> getMessageByKeyWord (String keyWord) {
