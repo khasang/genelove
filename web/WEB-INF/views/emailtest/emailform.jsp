@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Email with Spring MVC</title>
+    <link href="http://localhost:8080/css/style.css" rel="stylesheet">
 </head>
 <body>
 <center>
@@ -22,7 +23,7 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input type="submit" value="Send E-mail" />
+                    <input id="button" type="submit" value="Send E-mail" />
                 </td>
             </tr>
         </table>

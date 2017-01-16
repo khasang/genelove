@@ -57,6 +57,13 @@ tr:nth-of-type(even) {
 tr:nth-of-type(odd) {
     background-color: rgba(140, 140, 240, .5);
 }
+input, textarea {
+    border: 1px solid red;
+    border-radius: 10px;
+    background-color: #e4b9c0;
+    color: darkred;
+    height: 3em;
+}
 
 .navMenu {
     list-style-type: none;
@@ -167,5 +174,14 @@ tr:nth-of-type(odd) {
     text-align: center;
     padding-bottom: 15px;
     padding-top: 35px;
+}
+
+#button {
+    border: 3px solid lightgray;
+    border-radius: 10px;
+    background-color: #d9edf7;
+    color: #2a6496;
+    padding-left: 3em;
+    padding-right: 3em;
 }
 
