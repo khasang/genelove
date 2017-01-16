@@ -20,7 +20,7 @@
         <ul class="leftMenu">
             <li><a href="/">Main</a></li>
             <li><a href="/db/allQuestion">All Question</a></li>
-            <li><a href="/people/info" class="active">User Info</a></li>
+            <li><a href="/account/info" class="active">User Info</a></li>
             <li><a href="/">Main</a></li>
             <li><a href="/">Main</a></li>
         </ul>

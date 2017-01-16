@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>User Info</title>
+    <title>Account Test Info</title>
     <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -20,7 +20,8 @@
         <ul class="leftMenu">
             <li><a href="/">Main</a></li>
             <li><a href="/db/allQuestion">All Question</a></li>
-            <li><a href="/account/info" class="active">User Info</a></li>
+            <li><a href="/account" class="active">Account Test Info</a></li>
+            <li><a href="/account/info">User Info</a></li>
             <li><a href="/">Main</a></li>
             <li><a href="/">Main</a></li>
         </ul>
@@ -29,7 +30,7 @@
 
     </div>
     <div id="main">
-        <h1>User Info</h1>
+        <h1>Account Test Info</h1>
         <hr>
         <p>${userInfo}</p>
         <hr>

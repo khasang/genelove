@@ -7,12 +7,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller (value = "/people")
+@Controller //(value = "/account")
+@RequestMapping(value = "/account")
 public class UserController {
     @Autowired
     UserModel user;
 
-    @RequestMapping(value = "/people/info", method = RequestMethod.GET)
+    @RequestMapping(value = "/")
+    public String test () {
+        return "accountTest";
+    }
+
+    @RequestMapping(value = "/account/info", method = RequestMethod.GET)
     public String userInfo (Model userModel) {
         userModel.addAttribute("userInfo", user.userInfoStatus());
         return "userInfo";
