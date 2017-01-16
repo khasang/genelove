@@ -3,6 +3,7 @@
 <head>
     <title>Index</title>
     <link href="../css/style.css" rel="stylesheet">
+    <!-- <link href="../css/bootstrap.min.css" rel="stylesheet"> -->
 </head>
 <body>
 <div id="header"><h1><span id="gene">GENE</span><span id="love">LOVE</span></h1>
@@ -17,7 +18,7 @@
 <div id="left"><h2>LEFT MENU</h2><hr>
     <ul class="leftMenu">
         <li><a href="/" class="active">Main</a></li>
-        <li><a href="/">Main</a></li>
+        <li><a href="/people/info">User Info</a></li>
         <li><a href="/">Main</a></li>
     </ul>
     <hr>
