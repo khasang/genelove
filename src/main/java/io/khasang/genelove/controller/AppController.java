@@ -23,13 +23,13 @@ public class AppController {
     JoinQuery joinQuery;
     @Autowired
     ProfileService profileService;
-
+    /*
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(Model model){
         model.addAttribute("hello", message.getMessage());
         return "hello";
     }
-
+    */
     @RequestMapping(value = "/db/select", method = RequestMethod.GET)
     public String selectData(Model model) {
         model.addAttribute("select", selectQuery.selectData());
