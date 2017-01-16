@@ -44,35 +44,23 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> getUserAll () {
-        CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();
-        CriteriaQuery<User> cq = cb.createQuery(User.class);
-        Root<User> root = cq.from(User.class);
-        cq.select(root);
-        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(cq);
+        TypedQuery<User> query = sessionFactory.getCurrentSession().createNativeQuery("SELECT * FROM users", User.class);
         return query.getResultList();
     }
 
     @Override
     public User getUserById (int id) {
-        CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();
-        CriteriaQuery<User> cq = cb.createQuery(User.class);
-        Root<User> root = cq.from(User.class);
-        ParameterExpression<Integer> p = cb.parameter(Integer.class);
-        cq.select(root).where(cb.equal(root.get("id"), p));
-        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(cq);
-        query.setParameter(p, id);
+        TypedQuery<User> query = sessionFactory.getCurrentSession().createNativeQuery("" +
+                "SELECT * FROM users WHERE id = ?", User.class);
+        query.setParameter(1, id);
         return query.getSingleResult();
     }
 
     @Override
     public User getUserByLogin (String login) {
-        CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();
-        CriteriaQuery<User> cq = cb.createQuery(User.class);
-        Root<User> root = cq.from(User.class);
-        ParameterExpression<String> p = cb.parameter(String.class);
-        cq.select(root).where(cb.equal(root.get("login"), p));
-        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(cq);
-        query.setParameter(p, login);
+        TypedQuery<User> query = sessionFactory.getCurrentSession().createNativeQuery("" +
+                "SELECT * FROM users WHERE login = ?", User.class);
+        query.setParameter(1, login);
         return query.getSingleResult();
     }
 
@@ -90,25 +78,17 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public Role getRoleById (int id) {
-        CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();
-        CriteriaQuery<Role> cq = cb.createQuery(Role.class);
-        Root<Role> root = cq.from(Role.class);
-        ParameterExpression<Integer> p = cb.parameter(Integer.class);
-        cq.select(root).where(cb.equal(root.get("id"), p));
-        TypedQuery<Role> query = sessionFactory.getCurrentSession().createQuery(cq);
-        query.setParameter(p, id);
+        TypedQuery<Role> query = sessionFactory.getCurrentSession().createNativeQuery("" +
+                "SELECT * FROM roles WHERE id = ?", Role.class);
+        query.setParameter(1, id);
         return query.getSingleResult();
     }
 
     @Override
     public Role getRoleByName (String name) {
-        CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();
-        CriteriaQuery<Role> cq = cb.createQuery(Role.class);
-        Root<Role> root = cq.from(Role.class);
-        ParameterExpression<String> p = cb.parameter(String.class);
-        cq.select(root).where(cb.equal(root.get("role_name"), p));
-        TypedQuery<Role> query = sessionFactory.getCurrentSession().createQuery(cq);
-        query.setParameter(p, name);
+        TypedQuery<Role> query = sessionFactory.getCurrentSession().createNativeQuery("" +
+                "SELECT * FROM roles WHERE role_name = ?", Role.class);
+        query.setParameter(1, name);
         return query.getSingleResult();
     }
 

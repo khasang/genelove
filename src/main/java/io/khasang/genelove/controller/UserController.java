@@ -1,11 +1,14 @@
 package io.khasang.genelove.controller;
 
-import io.khasang.genelove.entity.Message;
+import io.khasang.genelove.entity.*;
 import io.khasang.genelove.service.MessageService;
+import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -16,6 +19,9 @@ public class UserController {
 
     @Autowired
     MessageService messageService;
+
+    @Autowired
+    UserService userService;
 
     @RequestMapping("/qwerty")
     public String test(Model model){
@@ -28,6 +34,29 @@ public class UserController {
     public String registration(){
         return "registrationPage";
     }
+
+    /** User ends registration" */
+    @RequestMapping(value = "/postRegistration", method = RequestMethod.POST)
+    public ModelAndView addNewUser(@ModelAttribute ("user") User user){
+        String message="Error performing registration";
+        try {
+            if (userService.getUserByLogin(user.getLogin()) != null){
+                message = user.getLogin();
+                return new ModelAndView("registrationResult", "message", message );
+            }
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+            userService.addUser(user);
+            User us = userService.getUserByLogin(user.getLogin());
+            Role role = userService.getRoleByName(Role.RolesList.ROLE_USER.toString());
+            userService.addAuthorisation(us, role);
+            message = "You successfully registered!";
+            return new ModelAndView("registrationResult","message",message);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ModelAndView("registrationResult","message",message);
+        }
+    }
+
 
     /** Login user to system" */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
