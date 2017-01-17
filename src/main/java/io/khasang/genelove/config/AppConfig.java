@@ -1,7 +1,6 @@
 package io.khasang.genelove.config;
 
 import io.khasang.genelove.model.CreateTable;
-import io.khasang.genelove.model.Message;
 import io.khasang.genelove.model.MyMessage;
 import io.khasang.genelove.model.SQLExamples;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -26,21 +27,63 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Autowired
     public AdminDAOImpl(SessionFactory sessionFactory) {
-
         this.sessionFactory = sessionFactory;
     }
 
     @Override
+    public long getAllUsersCount() {
+        CriteriaBuilder criteriaBuilder = sessionFactory.getCurrentSession().getCriteriaBuilder();
+        CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+        Root<User> root = criteriaQuery.from(User.class);
+        criteriaQuery.select(criteriaBuilder.count(root));
+        return sessionFactory.getCurrentSession().createQuery(criteriaQuery).getSingleResult();
+    }
+
+    @Override
     public List<User> getUsers() {
+        CriteriaBuilder criteriaBuilder = sessionFactory.getCurrentSession().getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root<User> root = criteriaQuery.from(User.class);
+        criteriaQuery.select(root);
+        criteriaQuery.orderBy(criteriaBuilder.asc(root.get("id")));
+        TypedQuery<User> typedQuery = sessionFactory.getCurrentSession().createQuery(criteriaQuery);
+//        typedQuery.setFirstResult(firstRow);
+//        typedQuery.setMaxResults(pageSize);
+        return typedQuery.getResultList();
+    }
 
-        CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();
+    @Override
+    public int getRoleId(String roleName) {
+        CriteriaBuilder criteriaBuilder = sessionFactory.getCurrentSession().getCriteriaBuilder();
+        CriteriaQuery<Integer> criteriaQuery = criteriaBuilder.createQuery(Integer.class);
+        Root<Role> root = criteriaQuery.from(Role.class);
+        criteriaQuery.select(root.get("id"));
+        criteriaQuery.where(criteriaBuilder.equal(root.get("roleName"),roleName));
+        return sessionFactory.getCurrentSession().createQuery(criteriaQuery).getSingleResult();
+    }
 
-        CriteriaQuery<User> cq = cb.createQuery(User.class);
-        Root<User> root = cq.from(User.class);
-        cq.select(root);
+    @Override
+    public boolean checkUserRole(User user, Role role) {
+        AuthorisationKey key = new AuthorisationKey();
+        key.setUserId(user.getId());
+        key.setRoleId(role.getId());
 
-        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(cq);
-        return query.getResultList();
+        Authorisation authorisation = new Authorisation();
+        authorisation.setAuthorisationKey(key);
+
+        CriteriaBuilder criteriaBuilder = sessionFactory.getCurrentSession().getCriteriaBuilder();
+        CriteriaQuery<AuthorisationKey> criteriaQuery = criteriaBuilder.createQuery(AuthorisationKey.class);
+        Root<Authorisation> root = criteriaQuery.from(Authorisation.class);
+        criteriaQuery.select(root.get("authorisationKey"));
+        criteriaQuery.where(criteriaBuilder.equal(root.get("authorisationKey"),authorisation.getAuthorisationKey()));
+
+        try {
+            sessionFactory.getCurrentSession().createQuery(criteriaQuery).getSingleResult();
+            return true;
+        }
+        catch (NoResultException nre) {
+            return false;
+        }
     }
 
     @Override
@@ -62,7 +105,6 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void addRole(User user, Role role) {
-
         AuthorisationKey key = new AuthorisationKey();
         key.setUserId(user.getId());
         key.setRoleId(role.getId());
@@ -75,24 +117,14 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void removeRole(User user, Role role) {
+        AuthorisationKey key = new AuthorisationKey();
+        key.setUserId(user.getId());
+        key.setRoleId(role.getId());
 
-        Session session = sessionFactory.getCurrentSession();
+        Authorisation authorisation = new Authorisation();
+        authorisation.setAuthorisationKey(key);
 
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-
-        CriteriaQuery<Authorisation> cq = cb.createQuery(Authorisation.class);
-        Root<Authorisation> root = cq.from(Authorisation.class);
-        ParameterExpression<Integer> userId = cb.parameter(Integer.class);
-        ParameterExpression<Integer> roleId = cb.parameter(Integer.class);
-        cq.select(root).where(cb.and(cb.equal(root.get("user_id"), userId), cb.equal(root.get("role_id"), roleId)));
-
-        TypedQuery<Authorisation> query = session.createQuery(cq);
-        query.setParameter(userId, user.getId());
-        query.setParameter(roleId, role.getId());
-        Authorisation authorisation = query.getSingleResult();
-
-        session.delete(authorisation);
-        session.flush();
+        sessionFactory.getCurrentSession().delete(authorisation);
     }
 
     @Override

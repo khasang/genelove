@@ -6,7 +6,19 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<h2>${message.text}</h2>
+
+<tr>
+    <td>ID</td>
+    <td>message</td>
+    <td>date</td>
+</tr>
+
+<tr>
+<td>${message.id}</td>
+<td>${message.text}</td>
+<td>${message.date}</td>
+</tr>
+
 <jsp:include page="footer.jsp"/>
 </body>
 </html>

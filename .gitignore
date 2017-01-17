@@ -2,4 +2,5 @@
 /target/
 /out/
 *.iml
+/classes/
 *.class
