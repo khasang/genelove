@@ -2,6 +2,7 @@ package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.test.Question;
 import io.khasang.genelove.model.*;
+import io.khasang.genelove.service.EmailService;
 import io.khasang.genelove.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -29,9 +30,8 @@ public class AppController {
     SqlExample sqlExample;
     @Autowired
     QuestionService questionService;
-
     @Autowired
-    private JavaMailSender mailSender;
+    EmailService emailService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(Model model){
@@ -146,26 +146,11 @@ public class AppController {
 
     /** Sending e-mail message to client" */
     @RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
-    public String doSendEmail(HttpServletRequest request, Model model) throws UnsupportedEncodingException{
+    public String doSendEmail(HttpServletRequest request, Model model){
         ModelAndView modelAndView = new ModelAndView();
 
         try {
-            // takes input from e-mail form
-            request.setCharacterEncoding("UTF8");
-            String recipientAddress = request.getParameter("recipient");
-            String subject = request.getParameter("subject");
-            String message = request.getParameter("message");
-
-            // creates a simple e-mail object
-            SimpleMailMessage email = new SimpleMailMessage();
-            email.setFrom("genelove@mail.ru");
-            email.setTo(recipientAddress);
-            email.setSubject(subject);
-            email.setText(message);
-
-            // sends the e-mail
-            mailSender.send(email);
-
+            emailService.sendEmail(request);
             // forwards to the view named "Result"
             return "emailtest/emailresult";
 
