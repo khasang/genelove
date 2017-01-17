@@ -139,12 +139,13 @@ public class AppController {
         }
     }
 
-    @RequestMapping(value = "/sendEmail.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/sendEmail", method = RequestMethod.GET)
     public String openMailForm(Model model) {
-        return "emailform";
+        return "emailtest/emailform";
     }
 
-    @RequestMapping(value = "/sendEmail.do", method = RequestMethod.POST)
+    /** Sending e-mail message to client" */
+    @RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
     public String doSendEmail(HttpServletRequest request, Model model) throws UnsupportedEncodingException{
         ModelAndView modelAndView = new ModelAndView();
 
@@ -157,7 +158,7 @@ public class AppController {
 
             // creates a simple e-mail object
             SimpleMailMessage email = new SimpleMailMessage();
-            email.setFrom("dendrito@list.ru");
+            email.setFrom("genelove@mail.ru");
             email.setTo(recipientAddress);
             email.setSubject(subject);
             email.setText(message);
@@ -166,11 +167,11 @@ public class AppController {
             mailSender.send(email);
 
             // forwards to the view named "Result"
-            return "emailresult";
+            return "emailtest/emailresult";
 
         } catch(Exception mess){
             model.addAttribute("exception", mess.getMessage());
-            return "emailerror";
+            return "emailtest/emailerror";
         }
     }
 }

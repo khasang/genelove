@@ -6,7 +6,7 @@
 <body>
 <center>
     <h1>Sending e-mail with Spring MVC</h1>
-    <form method="post" action="sendEmail.do">
+    <form method="post" action="sendEmail">
         <table border="0" width="80%">
             <tr>
                 <td>To:</td>
