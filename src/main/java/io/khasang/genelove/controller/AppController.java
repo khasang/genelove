@@ -3,6 +3,7 @@ package io.khasang.genelove.controller;
 import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.Question;
 import io.khasang.genelove.model.CreateTable;
+import io.khasang.genelove.service.EmailService;
 import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.service.QuestionService;
 import io.khasang.genelove.model.SQLExamples;
@@ -38,7 +39,7 @@ public class AppController {
     MessageService messageService;
 
     @Autowired
-    private JavaMailSender mailSender;
+    EmailService emailService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(Model model){
@@ -117,6 +118,7 @@ public class AppController {
         return "sql";
     }
 
+    /** Open new e-mail form to send" */
     @RequestMapping(value = "/sendEmail", method = RequestMethod.GET)
     public String openMailForm(Model model) {
         return "emailtest/emailform";
@@ -128,21 +130,7 @@ public class AppController {
         ModelAndView modelAndView = new ModelAndView();
 
         try {
-            // takes input from e-mail form
-            request.setCharacterEncoding("UTF8");
-            String recipientAddress = request.getParameter("recipient");
-            String subject = request.getParameter("subject");
-            String message = request.getParameter("message");
-
-            // creates a simple e-mail object
-            SimpleMailMessage email = new SimpleMailMessage();
-            email.setFrom("genelove@mail.ru");
-            email.setTo(recipientAddress);
-            email.setSubject(subject);
-            email.setText(message);
-
-            // sends the e-mail
-            mailSender.send(email);
+            emailService.sendEmail(request);
 
             // forwards to the view named "Result"
             return "emailtest/emailresult";
