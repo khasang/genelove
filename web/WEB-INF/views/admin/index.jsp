@@ -3,9 +3,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
     <title>Genelove: Administration Screen</title>
 </head>
 <body>
+<jsp:include page="header.jsp"/>
 <h3>Administration Screen</h3>
 <c:url var="usersList" value="/admin/usersList"/>
 <form:form action="${usersList}" method="get">
