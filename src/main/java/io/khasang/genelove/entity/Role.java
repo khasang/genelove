@@ -6,6 +6,10 @@ import java.util.List;
 @Entity(name = "roles")
 public class Role {
 
+    public enum RolesList {
+        ROLE_ADMIN,ROLE_BACKUP,ROLE_USER
+    }
+
     @Id
     @GeneratedValue
     private int id;
