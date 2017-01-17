@@ -140,6 +140,7 @@ textarea {
     margin-left: 220px;
     padding: 10px;
     background: #FFF;
+    text-align: center;
 }
 
 #header {
@@ -183,13 +184,21 @@ textarea {
 }
 
 #button {
+    text-decoration: none;
     border: 3px solid lightgray;
-    border-radius: 10px;
-    background-color: #d9edf7;
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+    background-image: radial-gradient(white, lightblue);
     color: #2a6496;
-    padding-left: 3em;
-    padding-right: 3em;
+    margin: 50px;
 }
+#button:focus {
+    outline: none;
+    background-image: radial-gradient(white, lightblue);
+    border: 3px solid gray;
+}
+
 
 #errorMessage {
     width: 90%;

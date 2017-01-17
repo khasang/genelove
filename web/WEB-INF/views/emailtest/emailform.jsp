@@ -43,12 +43,8 @@
                 <td>Message:</td>
                 <td><textarea cols="50" rows="10" name="message"></textarea></td>
             </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <input id="button" type="submit" value="Send E-mail" />
-                </td>
-            </tr>
         </table>
+        <input id="button" type="submit" value="Send" />
     </form>
 </div>
 <div id="footer"><h1>Footer</h1>
