@@ -2,14 +2,13 @@ package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.Question;
+import io.khasang.genelove.entity.User;
 import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.service.EmailService;
 import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.service.QuestionService;
 import io.khasang.genelove.model.SQLExamples;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +19,7 @@ import io.khasang.genelove.model.MyMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -120,8 +120,19 @@ public class AppController {
 
     /** Open new e-mail form to send" */
     @RequestMapping(value = "/sendEmail", method = RequestMethod.GET)
-    public String openMailForm(Model model) {
-        return "emailtest/emailform";
+    public String openMailForm() {
+        return "emailtest/emailForm";
+    }
+    /** Open new e-mail form to send" */
+
+    @RequestMapping(value = "/sendEmailToUser", method = RequestMethod.GET)
+    public String openMailFormToUser() {
+        return "emailtest/email2User";
+    }
+
+    @RequestMapping(value = "/sendEmailToSomeUsers", method = RequestMethod.GET)
+    public String openMailFormToSomeUsers() {
+        return "emailtest/email2SomeUsers";
     }
 
     /** Sending e-mail message to client" */
@@ -133,11 +144,67 @@ public class AppController {
             emailService.sendEmail(request);
 
             // forwards to the view named "Result"
-            return "emailtest/emailresult";
+            return "emailtest/emailResult";
 
         } catch(Exception mess){
             model.addAttribute("exception", mess.getMessage());
-            return "emailtest/emailerror";
+            return "emailtest/emailError";
+        }
+    }
+
+    // Sending e-mail message to client (user)
+    @RequestMapping(value = "/sendEmailToUser", method = RequestMethod.POST)
+    public String doSendEmailToUser(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
+        ModelAndView modelAndView = new ModelAndView();
+        User user = new User();
+        user.setEmail("python239@mail.ru");
+        user.setFirstName("Alexander");
+        user.setLastName("Pyankov");
+        user.setGender("male");
+
+        try {
+            emailService.sendEmail(user);
+
+            // forwards to the view named "Result"
+            return "emailtest/emailResult2User";
+
+        } catch(Exception mess){
+            model.addAttribute("exception", mess.getMessage());
+            return "emailtest/emailError2User";
+        }
+    }
+
+    // Sending e-mail message to client (user)
+    @RequestMapping(value = "/sendEmailToSomeUsers", method = RequestMethod.POST)
+    public String doSendEmailToSomeUsers(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
+        ModelAndView modelAndView = new ModelAndView();
+
+        User user1 = new User();
+        user1.setEmail("python239@mail.ru");
+        user1.setFirstName("Alexander");
+        user1.setLastName("Pyankov");
+        user1.setGender("male");
+
+        User user2 = new User();
+        user2.setEmail("dendrito@list.ru");
+        user2.setFirstName("Denis");
+        user2.setLastName("Guzikov");
+        user2.setGender("male");
+
+        ArrayList<User> list = new ArrayList<>();
+        list.add(user1);
+        list.add(user2);
+
+
+        try {
+            emailService.sendEmail(list);
+
+            // forwards to the view named "Result"
+            return "emailtest/emailResult2SomeUsers";
+
+        } catch(Exception mess){
+            model.addAttribute("exception", mess.getMessage());
+            return "emailtest/emailError2SomeUsers";
         }
     }
 }

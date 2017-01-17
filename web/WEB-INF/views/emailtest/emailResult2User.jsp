@@ -5,7 +5,7 @@
 </head>
 <body>
 <center>
-    <h2>Thank you, your email has been sent to Some Users.</h2>
+    <h2>Thank you, your email has been sent to User.</h2>
 </center>
 </body>
 </html>
