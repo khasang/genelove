@@ -18,7 +18,8 @@
     <%@ include file="header_r.jsp" %><br><br>
     <div>
         <a href="changeFoto.jsp">
-            <img src="resources/smile.jpg" alt="Фото" class="profilePageFoto">
+            <img src="resources/images/smile.jpg" alt="Фото" class="profilePageFoto">
+            <%-- <img src="resources/smile.jpg" alt="Фото" class="profilePageFoto"> --%>
         </a><br>
 
         <div class="leftMargin topMargin">
@@ -36,7 +37,8 @@
             </strong>
         </div>
         <a href="${pageContext.request.contextPath}/tree">
-            <img src="resources/drevo.jpg" alt="генеалогическое древо" class="profilePageFoto" >
+            <img src="resources/images/drevo.jpg" alt="генеалогическое древо" class="profilePageFoto" >
+            <%-- <img src="resources/drevo.jpg" alt="генеалогическое древо" class="profilePageFoto" > --%>
         </a>
 
         <div>

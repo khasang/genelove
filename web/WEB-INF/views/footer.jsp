@@ -3,6 +3,7 @@
     <head>
         <title>Title</title>
         <link rel="stylesheet" type="text/css" href="css/footer.css"/>
+        <%-- <link rel="stylesheet" type="text/css" href="css/footer_d.css"/> --%>
     </head>
     <body>
         <footer>

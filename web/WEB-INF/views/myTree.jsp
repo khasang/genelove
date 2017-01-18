@@ -4,7 +4,8 @@
 <html>
 <head>
     <title>My Tree</title>
-    <link href="resources/css/myTree.css" rel="stylesheet" type="text/css" media="all" />
+    <%-- <link href="resources/css/myTree.css" rel="stylesheet" type="text/css" media="all" /> --%>
+    <link href="css/myTree.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body style="background: url(resources/images/loveFone.jpg) no-repeat fixed center;" >
