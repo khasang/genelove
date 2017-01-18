@@ -8,6 +8,7 @@ import io.khasang.genelove.service.EmailService;
 import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.service.QuestionService;
 import io.khasang.genelove.model.SQLExamples;
+import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -42,10 +43,43 @@ public class AppController {
     @Autowired
     EmailService emailService;
 
+	@Autowired
+    UserService userService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(Model model){
         model.addAttribute("message", myMessage.getMessage());
         return "hello";
+    }
+
+    /** Login user to system" */
+    /*@RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(){
+        return "loginPage";
+    }*/
+
+    /** User registration" */
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String registration(){
+        return "registrationPage";
+    }
+
+    /** User ends registration" */
+    @RequestMapping(value = "/postRegistration", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public Object addNewUser(@RequestBody User user, HttpServletResponse response){
+        String login = user.getLogin();
+        if (userService.getUserByLogin(login)!= null) {
+            return "User with login name " + login + " already exists, please try another name!";
+        }
+        try {
+            userService.addUser(user);
+            userService.addAuthorisation(user);
+            return "You successfully registered!";
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error performing registration: " + e.getMessage();
+        }
     }
 
     @RequestMapping(value = "/admin/create", method = RequestMethod.GET)
