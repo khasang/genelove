@@ -19,6 +19,7 @@
             <select name="role" id="role" class="form-control">
                 <option value="ROLE_ADMIN">admin</option>
                 <option value="ROLE_USER">user</option>
+                <option value="ROLE_DB">user</option>
             </select>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="submit" class="btn btn-success" value="Add user">
