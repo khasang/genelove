@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import io.khasang.genelove.model.MyMessage;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,11 +44,6 @@ public class AppController {
     EmailService emailService;
     @Autowired
     Environment environment;
-    @Autowired
-    UserService userService;
-
-//    SimpleMailMessage simpleMailMessage;
-
 	@Autowired
     UserService userService;
 
@@ -67,6 +63,20 @@ public class AppController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(){
         return "registrationPage";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String registerUser(@ModelAttribute("registerUser") User user,
+                               RedirectAttributes redirectAttributes) {
+        String message;
+        try {
+            userService.addUser(user);
+            message = "User " + user.getLogin() + " successfully registered.";
+        } catch (Exception e) {
+            message = "Registration error " + e.getMessage();
+        }
+        redirectAttributes.addFlashAttribute("message", message);
+        return "redirect:/registration";
     }
 
     /** User ends registration" */
