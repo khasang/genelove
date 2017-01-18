@@ -40,8 +40,8 @@ public class UserService {
         return userDAO.getUserAll();
     }
 
-    public void addAuthorisation(User user, Role role){
-        userDAO.addAuthorisation(user, role);
+    public void addAuthorisation(User user){
+        userDAO.addAuthorisation(user);
     }
 
     public Role getRoleByName(String name){
