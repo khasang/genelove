@@ -5,6 +5,7 @@ import io.khasang.genelove.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +29,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void addUser(User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         this.sessionFactory.getCurrentSession().save(user);
     }
 
@@ -65,14 +67,13 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void addAuthorisation(User user, Role role) {
+    public void addAuthorisation(User user) {
         AuthorisationKey key = new AuthorisationKey();
         key.setUserId(user.getId());
-        key.setRoleId(role.getId());
+        key.setRoleId(3);
         Authorisation authorisation = new Authorisation();
         authorisation.setAuthorisationKey(key);
         sessionFactory.getCurrentSession().save(authorisation);
-
     }
 
 

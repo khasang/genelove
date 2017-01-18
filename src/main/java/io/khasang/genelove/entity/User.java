@@ -1,18 +1,19 @@
 package io.khasang.genelove.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "users")
 public class User {
-
     public enum AccountStatus {
         NEW, ACTIVE, SUSPENDED
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(length = 255, unique = true)

@@ -18,7 +18,7 @@ public interface UserDAO {
 
     List<User> getUserAll();
 
-    void addAuthorisation(User user, Role role);
+    void addAuthorisation(User user);
 
     Role getRoleByName(String name);
 
