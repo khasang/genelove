@@ -43,38 +43,31 @@ public class EmailService {
                 request.getParameter("message")
         );
 
-        // sends the e-mail
         mailSender.send(setEmailFields(eMail));
     }
 
     public void sendEmail(User user) throws UnsupportedEncodingException {
-        // takes input from e-mail form
+        // Test e-Mail
         String subject = "Hi " + user.getFirstName() + " " + user.getLastName() + "!";
-        String text = "text"; //+
+        String text = "This is the First test Letter from Genelove Java Mail Service.\n" +
+            "Here some your personal data: \n" +
+            "Your First Name is: " + user.getFirstName() + ".\n" +
+            "Your Last Name is: " + user.getLastName() + ".\n" +
+            "Your Gender is: " + user.getGender() + ".\n";
 
-        // Sorry, the email was not sent To User because of the following error:
-        // Failed messages: com.sun.mail.smtp.SMTPSendFailedException: 451 Ratelimit exceeded for mailbox . Try again later.
+/*
+* Sorry, the email was not sent To User because of the following error:
+* Failed messages: com.sun.mail.smtp.SMTPSendFailedException: 451 Ratelimit exceeded for mailbox . Try again later.
+*/
 
 
-              //  " Here some your personal data: \n" ; //+
-           //     "Your First Name is " + user.getFirstName() + "\n" +
-          //      "Your Last Name is " + user.getLastName() + "\n" +
-         //       "Your Gender is " + user.getGender() + "\n" ;
+        eMail = new EMail(user.getEmail(),
+                environment.getProperty("mail.username"), subject, text);
 
-        eMail = new EMail(
-                user.getEmail(),
-                environment.getProperty("mail.username"),
-                subject,
-                text);
-
-        // sends the e-mail
         mailSender.send(setEmailFields(eMail));
     }
 
-
     public void sendEmail(ArrayList<User> users) throws UnsupportedEncodingException {
-        // takes input from e-mail form
-
         for (User user: users) {
             sendEmail(user);
         }
