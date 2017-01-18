@@ -8,7 +8,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -29,7 +28,6 @@ public class MessageDAOImpl implements MessageDAO {
         this.sessionFactory = sessionFactory;
     }
 
-    @Override
     public void addMessage(Message message) {
         this.sessionFactory.getCurrentSession().save(message);
     }
