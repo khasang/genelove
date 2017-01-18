@@ -5,16 +5,9 @@ import io.khasang.genelove.entity.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-@Component("MessageService")
-=======
 import io.khasang.genelove.dao.UserDAO;
-import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +18,6 @@ public class MessageService {
 
     @Autowired
     MessageDAO messageDAO;
-
-    public Message getMessageById(int id) {
-            return messageDAO.getMessageById(id);
-        }
 
     @Autowired
     UserDAO userDAO;

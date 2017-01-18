@@ -28,14 +28,6 @@ public class MessageDAOImpl implements MessageDAO {
         this.sessionFactory = sessionFactory;
     }
 
-    @Override
-
-    public Message getMessageById(int id) {
-        TypedQuery<Message> query = sessionFactory.getCurrentSession().createNativeQuery("SELECT * FROM messages WHERE id = ?", Message.class);
-        query.setParameter(1, id);
-        return query.getSingleResult();
-    }
-
     public void addMessage(Message message) {
         this.sessionFactory.getCurrentSession().save(message);
     }

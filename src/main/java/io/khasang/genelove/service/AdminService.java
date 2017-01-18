@@ -33,16 +33,12 @@ public class AdminService {
 
     public void removeRole(User user, Role role) { adminDAO.removeRole(user, role); }
 
-    public List<User> getUserById(int id) {
-        List<User> users = new ArrayList<>();
-        users.add(adminDAO.getUserById(id));
-        return users;
+    public User getUserById(int id) {
+        return adminDAO.getUserById(id);
     }
 
-    public List<User> getUserByLogin(String login) {
-        List<User> users = new ArrayList<>();
-        users.add(adminDAO.getUserByLogin(login));
-        return users;
+    public User getUserByLogin(String login) {
+        return adminDAO.getUserByLogin(login);
     }
 
     public void addUser(User user) {
