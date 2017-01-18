@@ -76,7 +76,7 @@ public class AppController {
             message = "Registration error " + e.getMessage();
         }
         redirectAttributes.addFlashAttribute("message", message);
-        return "redirect:/registration";
+        return "redirect:/login";
     }
 
     /** User ends registration" */
