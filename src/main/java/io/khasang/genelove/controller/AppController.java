@@ -3,8 +3,8 @@ package io.khasang.genelove.controller;
 import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.Question;
 import io.khasang.genelove.model.CreateTable;
-import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.service.QuestionService;
+import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.model.SQLExamples;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -37,6 +37,7 @@ public class AppController {
     @Autowired
     MessageService messageService;
 
+
     @Autowired
     private JavaMailSender mailSender;
 
@@ -44,6 +45,12 @@ public class AppController {
     public String hello(Model model){
         model.addAttribute("message", myMessage.getMessage());
         return "hello";
+    }
+
+    @RequestMapping(value = "/message/{id}", method = RequestMethod.GET)
+    public String messageById(@PathVariable("id") int id, Model model){
+        model.addAttribute("message", messageService.getMessageById(id));
+        return "message";
     }
 
     @RequestMapping(value = "/admin/create", method = RequestMethod.GET)

@@ -32,30 +32,35 @@ public class AdminController {
         return "admin/usersList";
     }
     
-    @RequestMapping(value = "users", method = RequestMethod.GET)
+    /*@RequestMapping(value = "users", method = RequestMethod.GET)
     public String users(Model model){
         model.addAttribute("users", adminService.getUsers());
-        return "admin/users";
-    }
+        return "admin/user";
+    }*/
 
     @RequestMapping(value = "user/id/{id}", method = RequestMethod.GET)
     public String userById(@PathVariable("id") int id, Model model){
-        model.addAttribute("users", adminService.getUserById(id));
-        return "admin/users";
+        model.addAttribute("user", adminService.getUserById(id));
+        return "admin/user";
     }
 
     @RequestMapping(value = "user/login/{login}", method = RequestMethod.GET)
     public String userByLogin(@PathVariable("login") String login, Model model){
-        model.addAttribute("users", adminService.getUserByLogin(login));
-        return "admin/users";
+        model.addAttribute("user", adminService.getUserByLogin(login));
+        return "admin/user";
     }
 
-    @RequestMapping(value = "delete/id/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
     @ResponseBody
-    public Object deleteUser(@RequestBody User user, HttpServletResponse response){
+    public Object deleteUser(@ModelAttribute("user") User user, HttpServletResponse response){
         try {
-            adminService.deleteUser(user);
-            return "User deleted successfully";
+            if (user != null) {
+                adminService.deleteUser(user);
+                return "User deleted successfully";
+            }
+            else {
+                return "User not found";
+            }
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return "Error deleting user: " + e.getMessage();
@@ -83,11 +88,15 @@ public class AdminController {
 
     @RequestMapping(value = "block", method = RequestMethod.POST)
     @ResponseBody
-    public Object blockUser(@ModelAttribute("user") User user){
+    public Object blockUser(@ModelAttribute("user") User user) {
         try {
             Role role = new Role();
             role.setId(adminService.getRoleId("ROLE_BLOCKED"));
-            if(adminService.checkUserRole(user, role)) {
+
+            if (user == null) {
+                return "User not found";
+            }
+            if (adminService.checkUserRole(user, role)) {
                 adminService.removeRole(user, role);
                 return "User was unblocked";
             }
