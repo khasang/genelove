@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+<jsp:include page="header.jsp"/>
 <h2>User List</h2>
 <table border="1">
     <thead>
