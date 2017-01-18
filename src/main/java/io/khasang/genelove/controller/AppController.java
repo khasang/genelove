@@ -9,6 +9,7 @@ import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.service.QuestionService;
 import io.khasang.genelove.model.SQLExamples;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,8 +76,10 @@ public class AppController {
 
     @RequestMapping(value = "/db/allQuestion", method = RequestMethod.GET)
     public String allQuestion(Model model) {
-        List<Question> list = questionService.getQuetionList();
-        model.addAttribute("allQuestion", list);
+//        List<Question> list = questionService.getQuetionList();
+        PagedListHolder myList = new PagedListHolder(questionService.getQuetionList());
+        myList.setPageSize(10);
+        model.addAttribute("allQuestion", myList);
         return "questions";
     }
 
