@@ -58,8 +58,7 @@ public class AppController {
 
     /** User ends registration" */
     @RequestMapping(value = "/postRegistration", method = RequestMethod.POST, produces = "application/json")
-    @ResponseBody
-    public Object addNewUser(@RequestBody User user, HttpServletResponse response){
+    public Object addNewUser(@ModelAttribute("addNewUser") User user, HttpServletResponse response){
         String login = user.getLogin();
         if (userService.getUserByLogin(login)!= null) {
             return "User with login name " + login + " already exists, please try another name!";
