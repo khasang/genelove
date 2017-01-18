@@ -1,5 +1,6 @@
 package io.khasang.genelove.controller;
 
+import io.khasang.genelove.entity.EMail;
 import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.Question;
 import io.khasang.genelove.entity.User;
@@ -8,8 +9,11 @@ import io.khasang.genelove.service.EmailService;
 import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.service.QuestionService;
 import io.khasang.genelove.model.SQLExamples;
+import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.core.env.Environment;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,18 +33,20 @@ public class AppController {
     MyMessage myMessage;
     @Autowired
     SQLExamples sqlExamples;
-
     @Autowired
     CreateTable createTable;
-    
     @Autowired
     QuestionService questionService;
-
     @Autowired
     MessageService messageService;
-
     @Autowired
     EmailService emailService;
+    @Autowired
+    Environment environment;
+    @Autowired
+    UserService userService;
+
+//    SimpleMailMessage simpleMailMessage;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(Model model){
@@ -142,13 +148,20 @@ public class AppController {
     @RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
     public String doSendEmail(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         ModelAndView modelAndView = new ModelAndView();
+        request.setCharacterEncoding("UTF8");
+
+        EMail eMail = new EMail(
+                request.getParameter("recipient"),
+                environment.getProperty("mail.username"),
+                request.getParameter("subject"),
+                request.getParameter("message")
+        );
+        emailService.setEmailFields(eMail);
 
         try {
             emailService.sendEmail(request);
 
-            // forwards to the view named "Result"
-            return "emailtest/emailResult";
-
+            return "emailtest/emailResult";  // forwards to the view named "Result"
         } catch(Exception mess){
             model.addAttribute("exception", mess.getMessage());
             return "emailtest/emailError";
@@ -159,18 +172,19 @@ public class AppController {
     @RequestMapping(value = "/sendEmailToUser", method = RequestMethod.POST)
     public String doSendEmailToUser(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         ModelAndView modelAndView = new ModelAndView();
+
         User user = new User();
-        user.setEmail("python239@mail.ru");
+        /*user.setEmail("python239@mail.ru");
         user.setFirstName("Alexander");
         user.setLastName("Pyankov");
-        user.setGender("male");
+        user.setGender("male");*/
+
+        userService.getUserById(1);
 
         try {
             emailService.sendEmail(user);
 
-            // forwards to the view named "Result"
-            return "emailtest/emailResult2User";
-
+            return "emailtest/emailResult2User";  // forwards to the view named "Result"
         } catch(Exception mess){
             model.addAttribute("exception", mess.getMessage());
             return "emailtest/emailError2User";
@@ -182,7 +196,7 @@ public class AppController {
     public String doSendEmailToSomeUsers(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         ModelAndView modelAndView = new ModelAndView();
 
-        User user1 = new User();
+        /*User user1 = new User();
         user1.setEmail("python239@mail.ru");
         user1.setFirstName("Alexander");
         user1.setLastName("Pyankov");
@@ -192,12 +206,14 @@ public class AppController {
         user2.setEmail("dendrito@list.ru");
         user2.setFirstName("Denis");
         user2.setLastName("Guzikov");
-        user2.setGender("male");
+        user2.setGender("male");*/
 
-        ArrayList<User> list = new ArrayList<>();
+        /*ArrayList<User> list = new ArrayList<>();
         list.add(user1);
-        list.add(user2);
+        list.add(user2);*/
 
+//        List<User> list = emailService.getRecipientList();
+        List<User> list = userService.getUserAll();
 
         try {
             emailService.sendEmail(list);
