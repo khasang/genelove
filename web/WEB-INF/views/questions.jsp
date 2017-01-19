@@ -15,7 +15,7 @@
         <td>answer4</td>
         <td>correctanswers</td>
     </tr>
-    <c:forEach items="${allQuestion}" var="question">
+    <c:forEach items="${allQuestion.pageList}" var="question" varStatus="status">
         <tr>
                 <td>${question.id}</td>
                 <td>${question.question}</td>
@@ -26,6 +26,10 @@
                 <td>${question.correctAnswers}</td>
         </tr>
     </c:forEach>
+    <tr>
+        <td><a href="?page=previous">&lt;</a>
+        <td><a href="?page=next">&gt;</a>
+    </tr>
 </table>
 </body>
 </html>

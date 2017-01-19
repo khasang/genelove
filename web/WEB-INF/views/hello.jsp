@@ -11,6 +11,12 @@
     <p>${hello}</p>
 </blockquote>
 <h2>${message}</h2>
+<hr>
+<ul>
+    <li><a href="/sendMail">Mail Sender</a></li>
+</ul>
+<hr>
+
 <jsp:include page="footer.jsp"/>
 </body>
 </html>

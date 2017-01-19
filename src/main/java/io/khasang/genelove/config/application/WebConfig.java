@@ -32,27 +32,4 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/views/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/views/js/");
     }
-
-    /** E-mail server settings for sending e-mail message to client" */
-    @Bean
-    public JavaMailSender getMailSender() {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-
-        //Using mail
-        mailSender.setHost("smtp.mail.ru");
-        mailSender.setPort(465);
-        mailSender.setUsername("genelove@mail.ru");
-        mailSender.setPassword("Khasang2017team");
-
-        Properties javaMailProperties = new Properties();
-        javaMailProperties.put("mail.smtp.starttls.enable", "true");
-        javaMailProperties.put("mail.smtp.auth", "true");
-        javaMailProperties.put("mail.transport.protocol", "smtp");
-        javaMailProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        javaMailProperties.put("mail.smtp.socketFactory.fallback", "true");
-        javaMailProperties.put("mail.debug", "true");//Prints out everything on screen
-
-        mailSender.setJavaMailProperties(javaMailProperties);
-        return mailSender;
-    }
 }

@@ -1,18 +1,19 @@
 package io.khasang.genelove.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "users")
 public class User {
-
     public enum AccountStatus {
         NEW, ACTIVE, SUSPENDED
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(length = 255, unique = true)
@@ -26,6 +27,9 @@ public class User {
 
     @Column(name = "last_name", length = 255)
     private String lastName;
+
+    @Column(name = "gender", length = 6)
+    private String gender;
 
     @Column(length = 255)
     private String email;
@@ -43,6 +47,14 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "authorisations", joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
     private List<Role> roles;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     public int getId() {
         return id;

@@ -36,6 +36,16 @@
             </tr>
 
             <tr>
+                <td><form:label path="email">e-mail</form:label></td>
+                <td><form:input path="email" value="${user.email}"/></td>
+            </tr>
+
+            <tr>
+                <td><form:label path="gender">Gender</form:label></td>
+                <td><form:input path="gender" value="${user.gender}"/></td>
+            </tr>
+
+            <tr>
                 <td><form:label path="roles">Roles</form:label></td>
                 <td>
                     <c:forEach var="role" items="${user.roles}">

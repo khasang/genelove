@@ -44,6 +44,13 @@ public class AdminController {
         return "admin/user";
     }
 
+    @RequestMapping(value = "submit", method = RequestMethod.GET)
+    @ResponseBody
+    public String submit(@ModelAttribute("user") User user){
+
+        return "admin/update";
+    }
+
     @RequestMapping(value = "user/login/{login}", method = RequestMethod.GET)
     public String userByLogin(@PathVariable("login") String login, Model model){
         model.addAttribute("user", adminService.getUserByLogin(login));
