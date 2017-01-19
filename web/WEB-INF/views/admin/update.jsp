@@ -1,16 +1,19 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: alex
-  Date: 19.01.17
-  Time: 13:50
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>$Title$</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <title>Genelove: User Data Update</title>
+
 </head>
+
 <body>
-$END$
+<jsp:include page="header.jsp"/>
+
+<h2>User ${user.login}</h2>
+Your data updated
+
 </body>
 </html>

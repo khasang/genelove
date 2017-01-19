@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-@Component("EmailService")
-public class EmailService {
+@Component("MailSender")
+public class MailSender {
 
     @Autowired
     Environment environment;
@@ -24,12 +24,12 @@ public class EmailService {
 
     // creates a simple e-mail object
     public SimpleMailMessage setEmailFields (EMail eMail) {
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setTo(eMail.getRecipient());
-        email.setFrom(eMail.getSender());
-        email.setSubject(eMail.getSubject());
-        email.setText(eMail.getText());
-        return email;
+        SimpleMailMessage eLetter = new SimpleMailMessage();
+        eLetter.setTo(eMail.getRecipient());
+        eLetter.setFrom(eMail.getSender());
+        eLetter.setSubject(eMail.getSubject());
+        eLetter.setText(eMail.getText());
+        return eLetter;
     }
 
     public void sendEmail(HttpServletRequest request) throws UnsupportedEncodingException {
@@ -49,10 +49,10 @@ public class EmailService {
         // Test e-Mail
         String subject = "Hi " + user.getFirstName() + " " + user.getLastName() + "!";
         String text = "This is the First test Letter from Genelove Java Mail Service.\n" +
-            "Here some your personal data: \n" +
-            "Your First Name is: " + user.getFirstName() + ".\n" +
-            "Your Last Name is: " + user.getLastName() + ".\n" +
-            "Your Gender is: " + user.getGender() + ".\n";
+                "Here some your personal data: \n" +
+                "Your First Name is: " + user.getFirstName() + ".\n" +
+                "Your Last Name is: " + user.getLastName() + ".\n" +
+                "Your Gender is: " + user.getGender() + ".\n";
 
         eMail = new EMail(user.getEmail(),
                 environment.getProperty("mail.username"), subject, text);
@@ -60,12 +60,24 @@ public class EmailService {
         mailSender.send(setEmailFields(eMail));
     }
 
-    public void sendEmail(List<User> users) throws UnsupportedEncodingException, InterruptedException {
-        for(int i = 0; i < users.size(); i++){
-            sendEmail(users.get(i));
-            if((i+1) != users.size()) {
-                Thread.sleep((1000 * 60) + 1000);
-            }
+    public void sendEmail(User user, EMail eMail) throws UnsupportedEncodingException {
+        eMail.setRecipient(user.getEmail());
+        mailSender.send(setEmailFields(eMail));
+    }
+
+    public void sendEmail(EMail eMail) throws UnsupportedEncodingException {
+        mailSender.send(setEmailFields(eMail));
+    }
+
+    public void sendEmail(List<User> listOfRecipients) throws UnsupportedEncodingException, InterruptedException {
+        for (User recipient: listOfRecipients) {
+            sendEmail(recipient);
+        }
+    }
+
+    public void sendEmail(List<User> listOfRecipients, EMail eMail) throws UnsupportedEncodingException, InterruptedException {
+        for (User recipient: listOfRecipients) {
+            sendEmail(recipient, eMail);
         }
     }
 }

@@ -7,21 +7,18 @@ import io.khasang.genelove.entity.User;
 import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.MyMessage;
 import io.khasang.genelove.model.SQLExamples;
-import io.khasang.genelove.service.EmailService;
+import io.khasang.genelove.service.MailSender;
 import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.service.QuestionService;
-import io.khasang.genelove.model.SQLExamples;
 import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.core.env.Environment;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import io.khasang.genelove.model.MyMessage;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +40,7 @@ public class AppController {
     @Autowired
     MessageService messageService;
     @Autowired
-    EmailService emailService;
+    MailSender emailService;
     @Autowired
     Environment environment;
 	@Autowired
@@ -184,31 +181,14 @@ public class AppController {
     }
 
     /**
-     * Open new e-mail form to send"
+     * Sending e-mail message to recipient"
      */
-    @RequestMapping(value = "/sendEmail", method = RequestMethod.GET)
-    public String openMailForm() {
-        return "emailtest/emailForm";
+    @RequestMapping(value = "/sendMail", method = RequestMethod.GET)
+    public String mailSender() {
+        return "emailtest/sendMail";
     }
 
-    /**
-     * Open new e-mail form to send"
-     */
-
-    @RequestMapping(value = "/sendEmailToUser", method = RequestMethod.GET)
-    public String openMailFormToUser() {
-        return "emailtest/email2User";
-    }
-
-    @RequestMapping(value = "/sendEmailToSomeUsers", method = RequestMethod.GET)
-    public String openMailFormToSomeUsers() {
-        return "emailtest/email2SomeUsers";
-    }
-
-    /**
-     * Sending e-mail message to client"
-     */
-    @RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
+    @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
     public String doSendEmail(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         ModelAndView modelAndView = new ModelAndView();
         request.setCharacterEncoding("UTF8");
@@ -223,72 +203,71 @@ public class AppController {
 
         try {
             emailService.sendEmail(request);
-
-            // forwards to the view named "Result"
-            return "emailtest/emailResult";
-
-        } catch (Exception mess) {
-            model.addAttribute("exception", mess.getMessage());
-            return "emailtest/emailError";
+            return "emailtest/sendMailResult";
+        } catch (Exception e) {
+            model.addAttribute("exception", e.getMessage());
+            return "emailtest/sendMailError";
         }
     }
 
     // Sending e-mail message to client (user)
-    @RequestMapping(value = "/sendEmailToUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/sendMailToUser", method = RequestMethod.POST)
     public String doSendEmailToUser(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
-        ModelAndView modelAndView = new ModelAndView();
+        //ModelAndView modelAndView = new ModelAndView();
 
         User user = new User();
-        /*user.setEmail("python239@mail.ru");
+        user.setEmail("python239@mail.ru");
         user.setFirstName("Alexander");
         user.setLastName("Pyankov");
-        user.setGender("male");*/
-
         user.setGender("male");
+
 
         try {
             emailService.sendEmail(user);
+            return "emailtest/sendMailResult";
 
-            // forwards to the view named "Result"
-            return "emailtest/emailResult2User";
-
-        } catch (Exception mess) {
-            model.addAttribute("exception", mess.getMessage());
-            return "emailtest/emailError2User";
+        } catch (Exception e) {
+            model.addAttribute("exception", e.getMessage());
+            return "emailtest/sendMailError";
         }
     }
 
     // Sending e-mail message to client (user)
-    @RequestMapping(value = "/sendEmailToSomeUsers", method = RequestMethod.POST)
+    @RequestMapping(value = "/sendMailToSomeUsers", method = RequestMethod.POST)
     public String doSendEmailToSomeUsers(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         ModelAndView modelAndView = new ModelAndView();
 
-        /*User user1 = new User();
+        User user1 = new User();
         user1.setEmail("python239@mail.ru");
         user1.setFirstName("Alexander");
         user1.setLastName("Pyankov");
         user1.setGender("male");
 
         User user2 = new User();
-        user2.setEmail("dendrito@list.ru");
-        user2.setFirstName("Denis");
-        user2.setLastName("Guzikov");
-        user2.setGender("male");*/
+        user2.setEmail("python239@mail.ru");
+        user2.setFirstName("Robert");
+        user2.setLastName("Stivenson");
+        user2.setGender("male");
 
-        /*ArrayList<User> list = new ArrayList<>();
+        User user3 = new User();
+        user3.setEmail("python239@mail.ru");
+        user3.setFirstName("Alexander");
+        user3.setLastName("Miln");
+        user3.setGender("male");
+
+        ArrayList<User> list = new ArrayList<>();
         list.add(user1);
-        list.add(user2);*/
+        list.add(user2);
+        list.add(user3);
 
 
         try {
-//            emailService.sendEmail(list);
+            emailService.sendEmail(list);
+            return "emailtest/sendMailResult";
 
-            // forwards to the view named "Result"
-            return "emailtest/emailResult2SomeUsers";
-
-        } catch (Exception mess) {
-            model.addAttribute("exception", mess.getMessage());
-            return "emailtest/emailError2SomeUsers";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "emailtest/sendMailError";
         }
     }
 }

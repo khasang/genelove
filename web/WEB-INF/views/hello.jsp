@@ -13,11 +13,10 @@
 <h2>${message}</h2>
 <hr>
 <ul>
-    <li><a href="/sendEmail">Send simple e-mail by form (Denis Guzikov)</a></li>
-    <li><a href="/sendEmailToUser">Send simple e-mail (Alexander Pyankov)</a></li>
-    <li><a href="/sendEmailToSomeUsers">Send multiple e-mail (Alexander Pyankov)</a></li>
+    <li><a href="/sendMail">Mail Sender</a></li>
 </ul>
 <hr>
+
 <jsp:include page="footer.jsp"/>
 </body>
 </html>
