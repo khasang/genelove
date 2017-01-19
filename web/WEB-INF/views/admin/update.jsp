@@ -3,17 +3,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-
-    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <title>Genelove: User Data Update</title>
-
+    <title>Genelove Administration: User Data Update</title>
 </head>
-
 <body>
-<jsp:include page="header.jsp"/>
-
-<h2>User ${user.login}</h2>
-Your data updated
-
+    <jsp:include page="header.jsp"/>
+    <br><br>
+    <h3>User ${user.login}</h3>
+    Your data updated
 </body>
 </html>
