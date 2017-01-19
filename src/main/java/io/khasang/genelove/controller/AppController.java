@@ -125,10 +125,14 @@ public class AppController {
         }
     }
 
+    /**
+     * Example request http://localhost:8089/db/allQuestion?page=next
+     * */
     @RequestMapping(value = "/db/allQuestion", method = RequestMethod.GET)
     public String allQuestion(Model model, @RequestParam(value = "page", required = false) String page) {
         PagedListHolder myList = new PagedListHolder(questionService.getQuestionList());
         myList.setPageSize(4);
+
         if(page != null) {
             if ("previous".equals(page)) {
                 myList.previousPage();
