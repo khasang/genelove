@@ -9,13 +9,10 @@
     <title>Mail Sender</title>
 </head>
 <body>
-<ul>
-    <li><a href="/sendMail">Mail Sender</a></li>
-</ul>
-<hr>
+<jsp:include page="navigation.jsp"/>
 <div class="systemErrorMessage">
     <p>Your Mail was <strong>NOT</strong> successfully delivered to Recipient(s) by reason:<br>
-    ${errorMessage}</p>
+    <span class="errorMessage">${errorMessage}</span></p>
 </div>
 </body>
 </html>

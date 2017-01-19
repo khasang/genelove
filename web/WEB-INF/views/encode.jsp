@@ -4,6 +4,7 @@
     <title>Spring Security</title>
 </head>
 <body>
-    <p>Password: ${crypt}</p>
+<p>Password: ${name}</p>
+<p>Password: ${crypt}</p>
 </body>
 </html>

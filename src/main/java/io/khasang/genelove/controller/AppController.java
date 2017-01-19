@@ -181,11 +181,38 @@ public class AppController {
     }
 
     /**
-     * Sending e-mail message to recipient"
+     *********************************** Mail Sender Service. *******************************
+     *
+     * In this section represents code of Mail Sender Sevice.
+     * Begin of this section here.
+     ****************************************************************************************
      */
     @RequestMapping(value = "/sendMail", method = RequestMethod.GET)
     public String mailSender() {
         return "emailtest/sendMail";
+    }
+
+    @RequestMapping(value = "/insertUsersIntoDB", method = RequestMethod.GET)
+    public String insertUsersIntoDB(Model model) {
+        String message = "About 40 new Users were added into database \"User\"";
+        model.addAttribute("message", message);
+        return "emailtest/sendMailResult";
+    }
+
+    @RequestMapping(value = "/viewAllUsers", method = RequestMethod.GET)
+    public String viewAllUsers(Model model) {
+        String message = "View all users from our database \"User\"";
+        model.addAttribute("message", message);
+        model.addAttribute("usersList", userService.getUserAll());
+        //model.addAttribute("allUsersCount", adminService.getAllUsersCount());
+        return "emailtest/viewUsersList";
+    }
+
+    @RequestMapping(value = "/noAction", method = RequestMethod.POST)
+    public String noAction(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
+        String message = "This is blank for the future usage";
+        model.addAttribute("message", message);
+        return "emailtest/sendMailResult";
     }
 
     @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
@@ -193,6 +220,11 @@ public class AppController {
         ModelAndView modelAndView = new ModelAndView();
         request.setCharacterEncoding("UTF8");
 
+        if (request.getParameter("recipient").equals("")) {
+            String message = "Recipient's address is null";
+            model.addAttribute("errorMessage", message);
+            return "emailtest/sendMailError";
+        }
         EMail eMail = new EMail(
                 request.getParameter("recipient"),
                 environment.getProperty("mail.username"),
@@ -203,9 +235,11 @@ public class AppController {
 
         try {
             emailService.sendEmail(request);
+            String message = "Your Mail was successfully delivered to Recipient";
+            model.addAttribute("message", message);
             return "emailtest/sendMailResult";
-        } catch (Exception e) {
-            model.addAttribute("exception", e.getMessage());
+        } catch (Exception exception) {
+            model.addAttribute("errorMessage", exception);
             return "emailtest/sendMailError";
         }
     }
@@ -221,13 +255,13 @@ public class AppController {
         user.setLastName("Pyankov");
         user.setGender("male");
 
-
         try {
             emailService.sendEmail(user);
+            String message = "Your Mail was successfully delivered to Recipient";
+            model.addAttribute("message", message);
             return "emailtest/sendMailResult";
-
-        } catch (Exception e) {
-            model.addAttribute("exception", e.getMessage());
+        } catch (Exception exception) {
+            model.addAttribute("errorMessage", exception);
             return "emailtest/sendMailError";
         }
     }
@@ -260,14 +294,23 @@ public class AppController {
         list.add(user2);
         list.add(user3);
 
-
         try {
             emailService.sendEmail(list);
+            String message = "Your Mail was successfully delivered to Recipients";
+            model.addAttribute("message", message);
             return "emailtest/sendMailResult";
 
-        } catch (Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
+        } catch (Exception exception) {
+            model.addAttribute("errorMessage", exception);
             return "emailtest/sendMailError";
         }
     }
+
+    /**
+     *********************************** Mail Sender Service. *******************************
+     *
+     * In this section represents code of Mail Sender Sevice.
+     * Finish of this section here.
+     ****************************************************************************************
+     */
 }

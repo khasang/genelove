@@ -8,12 +8,10 @@
     <title>Mail Sender</title>
 </head>
 <body>
-<ul>
-    <li><a href="/sendMail">Mail Sender</a></li>
-</ul>
-<hr>
+<jsp:include page="navigation.jsp"/>
 <div class="systemMessage">
-    <p>Your Mail was successfully delivered to Recipient(s)</p>
+    <p>Your request has been successfully completed<br>
+        <span class="systemResponce">${message}</span></p>
 </div>
 </body>
 </html>

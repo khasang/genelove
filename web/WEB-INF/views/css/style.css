@@ -17,6 +17,7 @@ a {
   -webkit-transition: .5s ease;
   transition: .5s ease;
 }
+
 a:hover {
   color: #179b77;
 }
@@ -35,11 +36,13 @@ a:hover {
   padding: 0;
   margin: 0 0 40px 0;
 }
+
 .tab-group:after {
   content: "";
   display: table;
   clear: both;
 }
+
 .tab-group li a {
   display: block;
   text-decoration: none;
@@ -54,10 +57,12 @@ a:hover {
   -webkit-transition: .5s ease;
   transition: .5s ease;
 }
+
 .tab-group li a:hover {
   background: #179b77;
   color: #ffffff;
 }
+
 .tab-group .active a {
   background: #1ab188;
   color: #ffffff;
@@ -106,16 +111,16 @@ label.highlight {
 }
 
 input, textarea {
-  font-size: 22px;
+  font-size: 20px;
   display: block;
   width: 100%;
   height: 100%;
-  padding: 5px 10px;
+  padding: 5px 5px;
   background: none;
   background-image: none;
   border: 1px solid #a0b3b0;
   color: #ffffff;
-  border-radius: 0;
+  border-radius: 5px;
   -webkit-transition: border-color .25s ease, box-shadow .25s ease;
   transition: border-color .25s ease, box-shadow .25s ease;
 }
@@ -177,6 +182,29 @@ textarea {
   text-align: right;
 }
 
+.usersList {
+  margin: 0 auto;
+  color: #2a6496;
+  width: 90%;
+  border: 1px solid grey;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 5px;
+}
+.usersList th {
+  background-color: lightblue;
+}
+
+.usersList tr:nth-of-type(odd) {
+  background-color: lightcyan;
+}
+
+.usersList tr:nth-of-type(even) {
+  background-color: lightyellow;
+}
+
 .submitMail {
   height: 120px;
   width: 120px;
@@ -185,34 +213,38 @@ textarea {
   border-radius: 60px;
   background-image: radial-gradient(white, lightblue);
   text-align: center;
-  margin: 20px auto;
+  margin: 15px auto;
 }
 
 .sendMail {
+  width: 30%;
+  float: left;
   border: 1px solid gray;
   border-radius: 25px;
   text-align: center;
-  margin: 25px auto;
-  padding: 25px;
+  margin: 15px;
+  padding: 15px;
   background-color: lightblue;
 }
 
 .systemMessage {
+  width: 50%;
   border: 1px solid gray;
   border-radius: 25px;
-  margin: 25px auto;
+  margin: 15px auto;
   text-align: center;
-  padding: 25px;
-  color: darkgray;
+  padding: 15px;
+  color: darkcyan;
   background-image: linear-gradient(to bottom, white, lightgreen);
 }
 
 .systemErrorMessage {
+  width: 50%;
   border: 1px solid gray;
   border-radius: 25px;
-  margin: 25px auto;
+  margin: 15px auto;
   text-align: center;
-  padding: 25px;
+  padding: 15px;
   color: darkred;
   background-image: linear-gradient(to bottom, white, yellow);
 }
@@ -220,4 +252,44 @@ textarea {
 .mailForm {
   margin: 25px auto;
   padding: 25px;
+}
+
+td {
+  text-align: center;
+}
+
+.hr {
+  clear: both;
+}
+
+.errorMessage {
+  color: red;
+}
+
+.systemResponce {
+  color: darkgreen;
+}
+
+.mailServiceMenu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mailServiceMenu li {
+  float: left;
+}
+
+.mailServiceMenu a {
+  display: block;
+  border: 1px solid seagreen;
+  padding: 5px;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: lightblue;
+}
+
+.mailServiceMenu a:hover {
+  color: darkslateblue;
+  background-color: white;
 }
