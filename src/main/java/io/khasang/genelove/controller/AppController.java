@@ -1,5 +1,6 @@
 package io.khasang.genelove.controller;
 
+import io.khasang.genelove.entity.EMail;
 import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.Question;
 import io.khasang.genelove.entity.User;
@@ -275,7 +276,7 @@ public class AppController {
 
 
         try {
-            emailService.sendEmail(list);
+//            emailService.sendEmail(list);
 
             // forwards to the view named "Result"
             return "emailtest/emailResult2SomeUsers";
