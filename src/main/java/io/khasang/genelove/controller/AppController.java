@@ -1,10 +1,11 @@
 package io.khasang.genelove.controller;
 
-import io.khasang.genelove.entity.EMail;
 import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.Question;
 import io.khasang.genelove.entity.User;
 import io.khasang.genelove.model.CreateTable;
+import io.khasang.genelove.model.MyMessage;
+import io.khasang.genelove.model.SQLExamples;
 import io.khasang.genelove.service.EmailService;
 import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.service.QuestionService;
@@ -48,7 +49,7 @@ public class AppController {
     UserService userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String hello(Model model){
+    public String hello(Model model) {
         model.addAttribute("message", myMessage.getMessage());
         return "hello";
     }
@@ -124,17 +125,23 @@ public class AppController {
     }
 
     @RequestMapping(value = "/db/allQuestion", method = RequestMethod.GET)
-    public String allQuestion(Model model) {
-//        List<Question> list = questionService.getQuetionList();
-        PagedListHolder myList = new PagedListHolder(questionService.getQuetionList());
-        myList.setPageSize(10);
+    public String allQuestion(Model model, @RequestParam("page") String page) {
+        PagedListHolder myList = new PagedListHolder(questionService.getQuestionList());
+        myList.setPageSize(4);
+
+        if ("previous".equals(page)) {
+            myList.previousPage();
+        } else if ("next".equals(page)) {
+            myList.nextPage();
+        }
+
         model.addAttribute("allQuestion", myList);
         return "questions";
     }
 
 
     @RequestMapping(value = "/db/message/{id}", method = RequestMethod.GET)
-    public String getMessageById (@PathVariable("id") int id, Model model){
+    public String getMessageById(@PathVariable("id") int id, Model model) {
         model.addAttribute("message", messageService.getMessageById(id));
         return "message";
     }
@@ -170,12 +177,17 @@ public class AppController {
         return "sql";
     }
 
-    /** Open new e-mail form to send" */
+    /**
+     * Open new e-mail form to send"
+     */
     @RequestMapping(value = "/sendEmail", method = RequestMethod.GET)
     public String openMailForm() {
         return "emailtest/emailForm";
     }
-    /** Open new e-mail form to send" */
+
+    /**
+     * Open new e-mail form to send"
+     */
 
     @RequestMapping(value = "/sendEmailToUser", method = RequestMethod.GET)
     public String openMailFormToUser() {
@@ -187,7 +199,9 @@ public class AppController {
         return "emailtest/email2SomeUsers";
     }
 
-    /** Sending e-mail message to client" */
+    /**
+     * Sending e-mail message to client"
+     */
     @RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
     public String doSendEmail(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         ModelAndView modelAndView = new ModelAndView();
@@ -204,8 +218,10 @@ public class AppController {
         try {
             emailService.sendEmail(request);
 
-            return "emailtest/emailResult";  // forwards to the view named "Result"
-        } catch(Exception mess){
+            // forwards to the view named "Result"
+            return "emailtest/emailResult";
+
+        } catch (Exception mess) {
             model.addAttribute("exception", mess.getMessage());
             return "emailtest/emailError";
         }
@@ -222,13 +238,15 @@ public class AppController {
         user.setLastName("Pyankov");
         user.setGender("male");*/
 
-        userService.getUserById(1);
+        user.setGender("male");
 
         try {
             emailService.sendEmail(user);
 
-            return "emailtest/emailResult2User";  // forwards to the view named "Result"
-        } catch(Exception mess){
+            // forwards to the view named "Result"
+            return "emailtest/emailResult2User";
+
+        } catch (Exception mess) {
             model.addAttribute("exception", mess.getMessage());
             return "emailtest/emailError2User";
         }
@@ -255,8 +273,6 @@ public class AppController {
         list.add(user1);
         list.add(user2);*/
 
-//        List<User> list = emailService.getRecipientList();
-        List<User> list = userService.getUserAll();
 
         try {
             emailService.sendEmail(list);
@@ -264,7 +280,7 @@ public class AppController {
             // forwards to the view named "Result"
             return "emailtest/emailResult2SomeUsers";
 
-        } catch(Exception mess){
+        } catch (Exception mess) {
             model.addAttribute("exception", mess.getMessage());
             return "emailtest/emailError2SomeUsers";
         }

@@ -15,7 +15,7 @@
         <td>answer4</td>
         <td>correctanswers</td>
     </tr>
-    <c:forEach items="${allQuestion.pageList}" var="question">
+    <c:forEach items="${allQuestion.pageList}" var="question" varStatus="status">
         <tr>
                 <td>${question.id}</td>
                 <td>${question.question}</td>

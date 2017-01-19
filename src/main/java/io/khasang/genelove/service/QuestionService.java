@@ -23,7 +23,7 @@ public class QuestionService {
         return questionDAO.getQuestionById(id);
     }
 
-    public List getQuetionList() {
+    public List getQuestionList() {
         return questionDAO.getQuestionList();
     }
 
