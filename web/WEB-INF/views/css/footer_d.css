@@ -10,7 +10,7 @@ a.footerStyle {
     margin: -20px auto 0 20em;
     width: 100%;
     color: #777777;
-    font-size: 10px;
+    font-size: 12px;
     transition: 0.5s ease-in-out;
     font-family: 'Montez', cursive; /*скачать шрифт можно с сайта https://www.google.com/fonts/*/
 }
