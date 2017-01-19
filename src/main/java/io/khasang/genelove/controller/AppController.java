@@ -126,14 +126,15 @@ public class AppController {
     }
 
     @RequestMapping(value = "/db/allQuestion", method = RequestMethod.GET)
-    public String allQuestion(Model model, @RequestParam("page") String page) {
+    public String allQuestion(Model model, @RequestParam(value = "page", required = false) String page) {
         PagedListHolder myList = new PagedListHolder(questionService.getQuestionList());
         myList.setPageSize(4);
-
-        if ("previous".equals(page)) {
-            myList.previousPage();
-        } else if ("next".equals(page)) {
-            myList.nextPage();
+        if(page != null) {
+            if ("previous".equals(page)) {
+                myList.previousPage();
+            } else if ("next".equals(page)) {
+                myList.nextPage();
+            }
         }
 
         model.addAttribute("allQuestion", myList);
