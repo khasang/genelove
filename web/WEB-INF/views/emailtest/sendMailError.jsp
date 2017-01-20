@@ -11,7 +11,7 @@
 <body>
 <jsp:include page="navigation.jsp"/>
 <div class="systemErrorMessage">
-    <p>Your Mail was <strong>NOT</strong> successfully delivered to Recipient(s) by reason:<br>
+    <p>Your request has <strong>NOT</strong> been completed by reason:</p>
     <span class="errorMessage">${errorMessage}</span></p>
 </div>
 </body>
