@@ -1,5 +1,6 @@
 package io.khasang.genelove.config;
 
+import io.khasang.genelove.model.AddUsersTemp;
 import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.MyMessage;
 import io.khasang.genelove.model.SQLExamples;
@@ -54,6 +55,11 @@ public class AppConfig {
     @Bean
     public CreateTable createTable() {
         return new CreateTable(jdbcTemplate());
+    }
+
+    @Bean
+    public AddUsersTemp insertTable() {
+        return new AddUsersTemp(jdbcTemplate());
     }
 
     @Bean

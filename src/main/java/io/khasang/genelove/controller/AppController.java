@@ -4,6 +4,7 @@ import io.khasang.genelove.entity.EMail;
 import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.Question;
 import io.khasang.genelove.entity.User;
+import io.khasang.genelove.model.AddUsersTemp;
 import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.MyMessage;
 import io.khasang.genelove.model.SQLExamples;
@@ -45,6 +46,8 @@ public class AppController {
     Environment environment;
 	@Autowired
     UserService userService;
+    @Autowired
+    AddUsersTemp addUsersTemp;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(Model model) {
@@ -193,9 +196,9 @@ public class AppController {
     }
 
     @RequestMapping(value = "/insertUsersIntoDB", method = RequestMethod.GET)
-    public String insertUsersIntoDB(Model model) {
-        String message = "About 40 new Users were added into database \"User\"";
-        model.addAttribute("message", message);
+    public String addUsersIntoDB(Model model) {
+        String response = addUsersTemp.addUsersIntoDB();
+        model.addAttribute("message", response);
         return "emailtest/sendMailResult";
     }
 
@@ -204,7 +207,6 @@ public class AppController {
         String message = "View all users from our database \"User\"";
         model.addAttribute("message", message);
         model.addAttribute("usersList", userService.getUserAll());
-        //model.addAttribute("allUsersCount", adminService.getAllUsersCount());
         return "emailtest/viewUsersList";
     }
 

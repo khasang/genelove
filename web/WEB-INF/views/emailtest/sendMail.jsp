@@ -42,7 +42,7 @@
     </form>
 </div>
 <div class="sendMail">
-    <h1>Empty<br>(For future usage)</h1>
+    <h1>Empty<br>Send multiple e-mail for all users</h1>
     <form method="post" action="noAction">
         <input class="submitMail" type="submit" value="Send Mail" />
     </form>
