@@ -42,8 +42,8 @@
     </form>
 </div>
 <div class="sendMail">
-    <h1>Empty<br>Send multiple e-mail for all users</h1>
-    <form method="post" action="noAction">
+    <h1>Send multiple e-mail for all users</h1>
+    <form method="get" action="sendMailToAllUsers">
         <input class="submitMail" type="submit" value="Send Mail" />
     </form>
 </div>

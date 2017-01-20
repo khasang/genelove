@@ -250,6 +250,39 @@ public class AppController {
         }
     }
 
+    @RequestMapping(value = "/sendMailToAllUsers", method = RequestMethod.GET)
+    public String sendMailToAllUsersGET(Model model) {
+        String message = "Do you wanna send the message to all users in really?";
+        model.addAttribute("message", message);
+        return "emailtest/sendMailToAllUsers";
+    }
+
+
+    @RequestMapping(value = "/sendMailToAllUsers", method = RequestMethod.POST)
+    public String sendMailToAllUsersPOST(HttpServletRequest request, Model model)
+            throws UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF8");
+        ArrayList<User> listOfRecipients = (ArrayList<User>) userService.getUserAll();
+        EMail eMail = new EMail(
+                environment.getProperty("mail.username"),
+                request.getParameter("subject"),
+                request.getParameter("message")
+        );
+        emailService.setEmailFields(eMail);
+
+        try {
+            int count = emailService.sendEmail(listOfRecipients, eMail);
+            String message = "Your Mail was successfully delivered to All <strong>" +
+                    count + "</strong> Recipients";
+            model.addAttribute("message", message);
+            return "emailtest/sendMailResult";
+        } catch (Exception exception) {
+            model.addAttribute("errorMessage", exception);
+            return "emailtest/sendMailError";
+        }
+    }
+
+
     @RequestMapping(value = "/sendMail/user/{id}", method = RequestMethod.GET)
     public String sendMailByIdGET(@PathVariable("id") int id, Model model) {
         String message = "Do you wanna send the message to user (ID = <strong>" +

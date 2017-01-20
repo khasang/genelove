@@ -224,6 +224,12 @@ th, td {
   margin: 15px auto;
 }
 
+.submitMail:hover {
+  background-image: radial-gradient(white, lightgreen);
+  color:lightseagreen;
+  border: 5px solid lightseagreen;
+}
+
 .sendMail {
   width: 30%;
   float: left;

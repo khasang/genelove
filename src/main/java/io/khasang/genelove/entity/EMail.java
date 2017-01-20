@@ -76,10 +76,24 @@ public class EMail {
         this.text = text;
     }
 
+    public EMail(EMail eMail) {
+        this.setRecipient(eMail.getRecipient());
+        this.setSender(eMail.getSender());
+        this.setSubject(eMail.getSubject());
+        this.setText(eMail.getText());
+    }
+
     public EMail(String recipient, String sender, String subject, String text) {
-        this.recipient = recipient;
-        this.sender = sender;
-        this.subject = subject;
-        this.text = text;
+        this.setRecipient(recipient);
+        this.setSender(sender);
+        this.setSubject(subject);
+        this.setText(text);
+    }
+
+    public EMail( String sender, String subject, String text) {
+        this.setRecipient(null);
+        this.setSender(sender);
+        this.setSubject(subject);
+        this.setText(text);
     }
 }

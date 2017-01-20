@@ -5,6 +5,8 @@ import io.khasang.genelove.entity.EMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
@@ -53,8 +55,12 @@ public class MailSender {
     }
 
     public void sendEmail(User user, EMail eMail) throws UnsupportedEncodingException {
-        eMail.setRecipient(user.getEmail());
-        mailSender.send(setEmailFields(eMail));
+        EMail temp = new EMail(eMail);
+        String msg = "Dear " + user.getFirstName() + " " + user.getLastName() + "!\n";
+        msg += "You have got new mail from " + eMail.getSender() + "\n";
+        temp.setText(msg + eMail.getText());
+        temp.setRecipient(user.getEmail());
+        mailSender.send(setEmailFields(temp));
     }
 
     // send e-mail from simple html form
@@ -62,24 +68,32 @@ public class MailSender {
         mailSender.send(setEmailFields(eMail));
     }
 
-    public void sendEmail(List<User> listOfRecipients) throws UnsupportedEncodingException, InterruptedException {
+    public int sendEmail(List<User> listOfRecipients) throws UnsupportedEncodingException, InterruptedException {
+        int count = 0;
         for (User recipient: listOfRecipients) {
             sendEmail(recipient);
+            count++;
         }
+        return count;
     }
 
-    public void sendEmail(List<User> listOfRecipients, EMail eMail) throws UnsupportedEncodingException, InterruptedException {
+    public int sendEmail(List<User> listOfRecipients, EMail eMail) throws UnsupportedEncodingException, InterruptedException {
+        int count = 0;
         for (User recipient: listOfRecipients) {
             sendEmail(recipient, eMail);
+            count++;
         }
+        return count;
     }
 
     public String getEmailById (int id) {
+        //SqlParameterSource namedParameters = new MapSqlParameterSource("id", id);
         System.out.println("SQL id: " + id);
-        String request = "SELECT email FROM users WHERE id = " + id + ";";
-        String response = "";
+        String request = "SELECT email FROM users WHERE id = " + id;
+        System.out.println(request);
         try {
-            response = jdbcTemplate.queryForObject (request, String.class);
+            String response = jdbcTemplate.queryForObject(request, String.class);
+
             return response.toString();
         }
         catch (Exception e) {

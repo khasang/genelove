@@ -25,7 +25,7 @@ public class AddUsersTemp {
                 "account_status, email, first_name, last_name, gender) VALUES (" +
                 index + ", 'robby', 'rob', " +
                 "'$2a$10$lF8zJ8UTZV4tqL/Mtp//ZuoRns4KeIYL/fcAPaddQTpW2HgiAjUpS',\n" +
-                "3, 'NEW', 'python239@mail.ru', 'Robert', 'Stivenson', 'male');";
+                "3, 'NEW', 'elena.ilyukhina@hotmail.com', 'Robert', 'Stivenson', 'male');";
         index++;
         String user2 = "INSERT INTO users (id, login, name, password, role_id, " +
                 "account_status, email, first_name, last_name, gender) VALUES (" +
@@ -37,13 +37,13 @@ public class AddUsersTemp {
                 "account_status, email, first_name, last_name, gender) VALUES (" +
                 index + ", 'oskar', 'oskar', " +
                 "'$2a$10$lF8zJ8UTZV4tqL/Mtp//ZuoRns4KeIYL/fcAPaddQTpW2HgiAjUpS',\n" +
-                "3, 'NEW', 'python239@mail.ru', 'Oskar', 'Li', 'male');";
+                "3, 'NEW', 'elena.ilyukhina@hotmail.com', 'Oskar', 'Li', 'male');";
         index++;
         String user4 = "INSERT INTO users (id, login, name, password, role_id, " +
                 "account_status, email, first_name, last_name, gender) VALUES (" +
                 index + ", 'john', 'jonny', " +
                 "'$2a$10$lF8zJ8UTZV4tqL/Mtp//ZuoRns4KeIYL/fcAPaddQTpW2HgiAjUpS',\n" +
-                "3, 'NEW', 'python239@mail.ru', 'John', 'White', 'male');";
+                "3, 'NEW', 'elena.ilyukhina@hotmail.com', 'John', 'White', 'male');";
         index++;
         String user5 = "INSERT INTO users (id, login, name, password, role_id, " +
                 "account_status, email, first_name, last_name, gender) VALUES (" +
