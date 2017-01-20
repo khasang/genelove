@@ -241,7 +241,7 @@ public class AppController {
         emailService.setEmailFields(eMail);
 
         try {
-            emailService.sendEmail(request);
+            emailService.sendEmail(eMail);
             String message = "Your Mail was successfully delivered to Recipient";
             model.addAttribute("message", message);
             return "emailtest/sendMailResult";
