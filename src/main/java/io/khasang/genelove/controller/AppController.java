@@ -199,7 +199,12 @@ public class AppController {
     public String addUsersIntoDB(Model model) {
         String response = addUsersTemp.addUsersIntoDB();
         model.addAttribute("message", response);
-        return "emailtest/sendMailResult";
+        if (response.equals("Ok"))
+            return "emailtest/sendMailResult";
+        else {
+            model.addAttribute("errorMessage", response);
+            return "emailtest/sendMailError";
+        }
     }
 
     @RequestMapping(value = "/viewAllUsers", method = RequestMethod.GET)
