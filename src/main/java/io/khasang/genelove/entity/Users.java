@@ -3,7 +3,7 @@ package io.khasang.genelove.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name = "users_old")
 public class Users {
     @Id
     private long id;

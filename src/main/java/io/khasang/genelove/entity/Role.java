@@ -1,12 +1,14 @@
 package io.khasang.genelove.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "roles")
 public class Role {
+
+    public enum RolesList {
+        ROLE_ADMIN,ROLE_BACKUP,ROLE_USER
+    }
 
     @Id
     @GeneratedValue

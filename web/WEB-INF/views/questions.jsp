@@ -15,15 +15,8 @@
         <td>answer4</td>
         <td>correctanswers</td>
     </tr>
-    <c:forEach items="${allQuestion}" var="question">
+    <c:forEach items="${allQuestion.pageList}" var="question" varStatus="status">
         <tr>
-            <%--<td><c:out value="${question.id}"/></td>--%>
-            <%--<td><c:out value="${question.question}"/></td>--%>
-            <%--<td><c:out value="${question.answer1}"/></td>--%>
-            <%--<td><c:out value="${question.answer2}"/></td>--%>
-            <%--<td><c:out value="${question.answer3}"/></td>--%>
-            <%--<td><c:out value="${question.answer4}"/></td>--%>
-            <%--<td><c:out value="${question.correctAnswers}"/></td>--%>
                 <td>${question.id}</td>
                 <td>${question.question}</td>
                 <td>${question.answer1}</td>
@@ -33,6 +26,10 @@
                 <td>${question.correctAnswers}</td>
         </tr>
     </c:forEach>
+    <tr>
+        <td><a href="?page=previous">&lt;</a>
+        <td><a href="?page=next">&gt;</a>
+    </tr>
 </table>
 </body>
 </html>

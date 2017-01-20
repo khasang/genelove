@@ -2,20 +2,22 @@
 <html>
 <head>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <title>Title</title>
+    <title>Message by ID</title>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<p>hello</p>
-<blockquote>
-    <p>${hello}</p>
-</blockquote>
-<h2>${message}</h2>
-<hr>
-<ul>
-    <li><a href="/sendMail">Mail Sender</a></li>
-</ul>
-<hr>
+
+<tr>
+    <td>ID</td>
+    <td>message</td>
+    <td>date</td>
+</tr>
+
+<tr>
+<td>${message.id}</td>
+<td>${message.text}</td>
+<td>${message.date}</td>
+</tr>
 
 <jsp:include page="footer.jsp"/>
 </body>
