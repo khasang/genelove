@@ -224,7 +224,6 @@ public class AppController {
 
     @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
     public String doSendEmail(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
-        ModelAndView modelAndView = new ModelAndView();
         request.setCharacterEncoding("UTF8");
 
         if (request.getParameter("recipient").equals("")) {
@@ -232,12 +231,12 @@ public class AppController {
             model.addAttribute("errorMessage", message);
             return "emailtest/sendMailError";
         }
-        EMail eMail = new EMail(
-                request.getParameter("recipient"),
-                environment.getProperty("mail.username"),
-                request.getParameter("subject"),
-                request.getParameter("message")
-        );
+            EMail eMail = new EMail(
+                    request.getParameter("recipient"),
+                    environment.getProperty("mail.username"),
+                    request.getParameter("subject"),
+                    request.getParameter("message")
+            );
         emailService.setEmailFields(eMail);
 
         try {
@@ -249,6 +248,44 @@ public class AppController {
             model.addAttribute("errorMessage", exception);
             return "emailtest/sendMailError";
         }
+    }
+
+    @RequestMapping(value = "/sendMail/user/{id}", method = RequestMethod.GET)
+    public String sendMailByIdGET(@PathVariable("id") int id, Model model) {
+        String message = "Do you wanna send the message to user (ID = <strong>" +
+                id+ "</strong>) in really? ";
+        model.addAttribute("message", message);
+        model.addAttribute("id", id);
+        return "emailtest/sendMailById";
+    }
+
+    @RequestMapping(value = "/sendMail/user/sendMailById", method = RequestMethod.POST)
+    public String sendMailByIdPOST(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF8");
+        int recipient = Integer.valueOf(request.getParameter("recipient"));
+        System.out.println("*************************************************");
+        System.out.println("mail: " + emailService.getEmailById(recipient));
+        System.out.println("id: " + recipient);
+        System.out.println("*************************************************");
+        EMail eMail = new EMail(
+                emailService.getEmailById(recipient),
+                environment.getProperty("mail.username"),
+                request.getParameter("subject"),
+                request.getParameter("message")
+        );
+        emailService.setEmailFields(eMail);
+
+        try {
+            emailService.sendEmail(eMail);
+            String id = request.getParameter("recipient");
+            String message = "Your Mail was successfully delivered to Recipient with ID = " + id;
+            model.addAttribute("message", message);
+            return "emailtest/sendMailResult";
+        } catch (Exception exception) {
+            model.addAttribute("errorMessage", exception);
+            return "emailtest/sendMailError";
+        }
+
     }
 
     // Sending e-mail message to client (user)

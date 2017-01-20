@@ -36,11 +36,12 @@
                 <td>${user.lastName}</td>
                 <td>${user.gender}</td>
                 <td>${user.email}</td>
-                <td><a href="sendMail?user=${user.id}">Send E-Mail</a></td>
+                <td><a href="sendMail/user/${user.id}">Send E-Mail</a></td>
                 <td><a href="sendMail?user=${user.id}">Send Private message</a></td>
             </tr>
         </c:forEach>
     </table>
 </div>
+<hr class="hr">
 </body>
 </html>

@@ -14,5 +14,6 @@
     <p>Your request has <strong>NOT</strong> been completed by reason:</p>
     <span class="errorMessage">${errorMessage}</span></p>
 </div>
+<hr class="hr">
 </body>
 </html>

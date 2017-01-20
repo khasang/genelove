@@ -318,6 +318,5 @@ public class AddUsersTemp {
         catch (Exception e) {
             return "Data insert into users failed: " + e;
         }
-
     }
 }

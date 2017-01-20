@@ -4,6 +4,7 @@ import io.khasang.genelove.entity.User;
 import io.khasang.genelove.entity.EMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
@@ -18,9 +19,13 @@ public class MailSender {
     Environment environment;
     @Autowired
     private JavaMailSender mailSender;
-
-
+    private JdbcTemplate jdbcTemplate;
     private EMail eMail;
+
+    public MailSender (JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+    public MailSender () {}
 
     // creates a simple e-mail object
     public SimpleMailMessage setEmailFields (EMail eMail) {
@@ -66,6 +71,19 @@ public class MailSender {
     public void sendEmail(List<User> listOfRecipients, EMail eMail) throws UnsupportedEncodingException, InterruptedException {
         for (User recipient: listOfRecipients) {
             sendEmail(recipient, eMail);
+        }
+    }
+
+    public String getEmailById (int id) {
+        System.out.println("SQL id: " + id);
+        String request = "SELECT email FROM users WHERE id = " + id + ";";
+        String response = "";
+        try {
+            response = jdbcTemplate.queryForObject (request, String.class);
+            return response.toString();
+        }
+        catch (Exception e) {
+            return "Select email from users failed: " + e;
         }
     }
 }
