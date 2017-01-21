@@ -47,7 +47,7 @@ public class UserController {
             user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
             userService.addUser(user);
             User us = userService.getUserByLogin(user.getLogin());
-            Role role = userService.getRoleByName(Role.RolesList.ROLE_USER.toString());
+            Role role = userService.getRoleByName(Role.RoleName.ROLE_USER.toString());
             userService.addAuthorisation(us, role);
             message = "You successfully registered!";
             return new ModelAndView("registrationResult","message",message);

@@ -154,4 +154,47 @@ public class AdminDAOImpl implements AdminDAO {
         query.setParameter(p, login);
         return query.getSingleResult();
     }
+
+    @Override
+    public Role getRoleById(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+
+        CriteriaQuery<Role> cq = cb.createQuery(Role.class);
+        Root<Role> root = cq.from(Role.class);
+        ParameterExpression<Integer> p = cb.parameter(Integer.class);
+        cq.select(root).where(cb.equal(root.get("id"), p));
+
+        TypedQuery<Role> query = session.createQuery(cq);
+        query.setParameter(p, id);
+        return query.getSingleResult();
+    }
+
+    @Override
+    public Role getRoleByName(Role.RoleName name) {
+        Session session = sessionFactory.getCurrentSession();
+
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Role> cq = cb.createQuery(Role.class);
+        Root<Role> root = cq.from(Role.class);
+        ParameterExpression<Role.RoleName> p = cb.parameter(Role.RoleName.class);
+        cq.select(root).where(cb.equal(root.get("roleName"), p));
+
+        TypedQuery<Role> query = session.createQuery(cq);
+        query.setParameter(p, name);
+        return query.getSingleResult();
+    }
+
+    @Override
+    public List<Role> getRoles() {
+        Session session= sessionFactory.getCurrentSession();
+
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Role> criteriaQuery = criteriaBuilder.createQuery(Role.class);
+        Root<Role> root = criteriaQuery.from(Role.class);
+        criteriaQuery.select(root);
+
+        TypedQuery<Role> typedQuery = session.createQuery(criteriaQuery);
+        return typedQuery.getResultList();
+    }
 }

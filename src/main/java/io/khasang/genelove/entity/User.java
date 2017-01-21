@@ -1,8 +1,7 @@
 package io.khasang.genelove.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity(name = "users")
 public class User {
@@ -12,7 +11,7 @@ public class User {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     @Column(length = 255, unique = true)
@@ -30,7 +29,7 @@ public class User {
     @Column(length = 255)
     private String email;
 
-    @Column(name = "account_status")
+    @Column(name = "account_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private AccountStatus accountStatus;
 
@@ -40,9 +39,21 @@ public class User {
     @OneToMany(mappedBy = "toUser")
     private List<Message> receivedMessages;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "authorisations", joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
+
+    public User() {
+        this.accountStatus = AccountStatus.NEW;
+    }
+
+    public static Map<AccountStatus, String> getAccountStatusList() {
+        Map<AccountStatus, String> accountStatusList = new HashMap<>();
+        for (AccountStatus status : AccountStatus.values()) {
+            accountStatusList.put(status, status.toString());
+        }
+        return accountStatusList;
+    }
 
     public int getId() {
         return id;
@@ -123,4 +134,5 @@ public class User {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
 }

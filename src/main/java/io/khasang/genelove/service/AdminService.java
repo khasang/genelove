@@ -25,6 +25,10 @@ public class AdminService {
         return adminDAO.getUsers();
     }
 
+    public List<Role> getRoles() {
+        return adminDAO.getRoles();
+    }
+
     public int getRoleId(String role) { return adminDAO.getRoleId(role); }
 
     public boolean checkUserRole(User user, Role role) { return adminDAO.checkUserRole(user, role); }
@@ -39,6 +43,14 @@ public class AdminService {
 
     public User getUserByLogin(String login) {
         return adminDAO.getUserByLogin(login);
+    }
+
+    public Role getRoleById(int id) {
+        return adminDAO.getRoleById(id);
+    }
+
+    public Role getRoleByName(Role.RoleName name) {
+        return adminDAO.getRoleByName(name);
     }
 
     public void addUser(User user) {

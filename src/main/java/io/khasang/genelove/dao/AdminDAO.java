@@ -29,4 +29,9 @@ public interface AdminDAO {
 
     List<User> getUsers();
 
+    Role getRoleById(int id);
+
+    Role getRoleByName(Role.RoleName name);
+
+    List<Role> getRoles();
 }
