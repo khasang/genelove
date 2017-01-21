@@ -7,14 +7,10 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
-
 import javax.persistence.TypedQuery;
-import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -26,7 +22,6 @@ public class MailSender {
     @Autowired
     private JavaMailSender mailSender;
     @Autowired
-    private SQLService sqlService;
 
     private JdbcTemplate jdbcTemplate;
     private SessionFactory sessionFactory;
@@ -34,10 +29,7 @@ public class MailSender {
 
     private String addEmailIntoDB (EMail eMail) {
 
-        String request = "INSERT into email (id, recipient, sender, subject, text)" +
-                " VALUES (1, " + eMail.getRecipient() + ", " + eMail.getSender() +
-                ", " + eMail.getSubject() + ", " + eMail.getText() + ");";
-        return sqlService.insert(request);
+        return "";
     }
 
     public MailSender (JdbcTemplate jdbcTemplate) {
