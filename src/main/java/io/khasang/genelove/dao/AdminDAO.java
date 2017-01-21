@@ -29,4 +29,13 @@ public interface AdminDAO {
 
     List<User> getUsers();
 
+    List<User> filterUsers(String filter);
+
+    Role getRoleById(int id);
+
+    Role getRoleByName(Role.RoleName name);
+
+    List<Role> getRoles();
+
+    //List<User> getUsers(String similarLogin, int page);
 }
