@@ -1,5 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<script type="text/javascript">
+    function aboutPopup() {
+        alert("About Form");
+    }
+</script>
+
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" media="screen">
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -15,14 +21,14 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/admin">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a onclick="aboutPopup()">About</a></li>
                 <li><a href="/admin/usersList">Users List</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
             <div class="col-sm-3 col-md-3 pull-right">
-                <form class="navbar-form" role="search">
+                <form action="/admin/usersList" class="navbar-form" role="search">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search By Login" name="srch-term" id="srch-term">
+                        <input type="text" class="form-control" placeholder="Search By Login" name="similarLogin" id="similarLogin">
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit">Search</button>
                         </div>

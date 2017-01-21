@@ -1,6 +1,20 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<script type="text/javascript">
+    function gotoUserById() {
+        var userId = document.getElementById("id").value;
+        window.location.href = "/admin/user/id/" + userId;
+        return false;
+    }
+    function gotoUserByLogin() {
+        var userLogin = document.getElementById("login").value;
+        window.location.href = "/admin/user/login/" + userLogin;
+        return false;
+    }
+</script>
+
 <html>
 <head>
     <title>Genelove Administration: Home</title>
@@ -10,32 +24,56 @@
     <div class="container">
         <br><br>
         <h3>Administration Screen</h3>
-
-        <c:url var="usersList" value="/admin/usersList"/>
-        <form:form action="${usersList}" method="get">
-            Users List:
-            <button class="btn btn-default" type="submit">Submit</button>
-        </form:form>
-
-        <c:url var="userId" value="/admin/user/id/"/>
-        <form:form class="col-lg-4" action="${userId}" method="get">
-            Search User By Id:
-            <input class="form-control" type="text" name="id"/>
-            <button class="btn btn-default" type="submit">Submit</button>
-        </form:form>
-
-        <c:url var="userLogin" value="/admin/user/login/"/>
-        <form:form class="col-lg-4" action="${userId}" method="get">
-            Search User By Login:
-            <input class="form-control" type="text" name="login"/>
-            <button class="btn btn-default" type="submit">Submit</button>
-        </form:form>
-
-        <c:url var="logout" value="/logout"/>
-        <form:form action="${logout}" method="get">
-            Logout:
-            <button class="btn btn-default" type="submit">Submit</button>
-        </form:form>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-block thumbnail">
+                        <h3 class="card-title">Users List</h3>
+                        <p class="card-text">Goto list of users, where administrators can see all users of Genelove project and can change their roles or delete all their data from DB.</p>
+                        <a href="/admin/usersList" class="btn btn-primary">Goto Screen List of Users</a>
+                        <p></p>
+                        <p class="card-text">Also administrators can filter list of users by user login.</p>
+                        <form action="/admin/usersList" class="input-group">
+                            <input type="text" class="form-control" placeholder="Search By Login" name="similarLogin" id="similarLogin">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">Search</button>
+                            </span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-block thumbnail">
+                        <h3 class="card-title">User Card</h3>
+                        <p class="card-text">Goto user card, where administrators can modify user profile. Navigation can be performed by user ID: </p>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="ID" id="id">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" onclick="gotoUserById()">Submit</button>
+                            </span>
+                        </div>
+                        <p></p>
+                        <p class="card-text">or by user Login: </p>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Login" id="login">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" onclick="gotoUserByLogin()">Submit</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-block thumbnail">
+                        <h3 class="card-title">Logout</h3>
+                        <p class="card-text">Logout from the current session of Genelove project.</p>
+                        <a href="/logout" class="btn btn-primary">Submit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

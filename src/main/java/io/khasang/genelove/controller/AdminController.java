@@ -25,9 +25,9 @@ public class AdminController {
     }
 
     @RequestMapping(value = "usersList", method = RequestMethod.GET)
-    public String usersList(Model model) {
+    public String usersList(@RequestParam(value = "similarLogin", required = false) final String similarLogin, Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("usersList", adminService.getUsers());
+        model.addAttribute("usersList", adminService.getUsers(similarLogin));
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
         return "admin/usersList";
     }
