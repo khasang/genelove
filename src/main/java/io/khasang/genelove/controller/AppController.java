@@ -1,6 +1,7 @@
 package io.khasang.genelove.controller;
 
 import io.khasang.genelove.model.*;
+import io.khasang.genelove.service.FindPeopleService;
 import io.khasang.genelove.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,18 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class AppController {
-    @Autowired
-    Message message;
     @Autowired
     SelectQuery selectQuery;
     @Autowired
     JoinQuery joinQuery;
     @Autowired
     ProfileService profileService;
+    @Autowired
+    FindPeopleService findPeopleService;
     /*
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello(Model model){
@@ -86,24 +89,6 @@ public class AppController {
         return "questions";
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(Model model){
-        model.addAttribute("logout", "");
-        return "logout";
-    }
-
-    @RequestMapping(value = "/messages", method = RequestMethod.GET)
-    public String messages(Model model){
-        model.addAttribute("messages", "");
-        return "messages";
-    }
-
-    @RequestMapping(value = "/findPeople", method = RequestMethod.GET)
-    public String findPeople(Model model){
-        model.addAttribute("findPeople", new ArrayList<String>() {});
-        return "findPeople";
-    }
-
     @RequestMapping(value = "/myPage", method = RequestMethod.GET)
     public String myPage(Model model){
         model.addAttribute("myPage", "");
@@ -115,13 +100,7 @@ public class AppController {
         model.addAttribute("modifyProfile", "");
         return "modifyProfile";
     }
-    /*
-    @RequestMapping(value = "/friends", method = RequestMethod.GET)
-    public ModelAndView friends(Model model){
-        model.addAttribute("friends", "");
-        return new ModelAndView("invites","friends", profileService.getFriendsList(""));
-    }
-    */
+
     @RequestMapping(value = "/tree", method = RequestMethod.GET)
     public String tree(Model model){
         model.addAttribute("tree", "");
@@ -129,8 +108,18 @@ public class AppController {
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profile(Model model){
-        model.addAttribute("profile", message.getMessage());
-        return "profile";
+    public ModelAndView profile(){
+        return new ModelAndView("profile", "profile", profileService);
+    }
+
+    @RequestMapping(value = "/findPeople", method = RequestMethod.GET)
+    public ModelAndView findPeople() {
+        return new ModelAndView("findPeople","friends", profileService);
+    }
+    @RequestMapping(value = "/searchResult", method = RequestMethod.GET)
+    public ModelAndView searchResult(HttpServletRequest request) {
+        List<ProfileService> results = findPeopleService.findPeople(request.getParameter("firstName"),
+                request.getParameter("lastName"), request.getParameter("region"), request.getParameter("Id"));
+        return new ModelAndView("searchResult","results", results);
     }
 }

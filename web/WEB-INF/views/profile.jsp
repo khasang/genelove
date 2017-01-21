@@ -1,8 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="profile"
-             class="io.khasang.genelove.service.ProfileService"/>
 
 <html>
     <head>
@@ -43,19 +41,15 @@
 
         <div>
             <h1 class="heading1">Education: </h1>
-            <strong class="leftMargin">School: </strong>
-            ${profile.school}<br><br>
-            <strong class="leftMargin">University: </strong>
-            ${profile.university}<br><br>
+            <strong class="leftMargin">School: ${profile.school}</strong><br><br>
+            <strong class="leftMargin">University: ${profile.university}</strong><br><br>
         </div>
 
         <div>
             <h1 class="heading1">Hobby</h1>
-            <strong class="leftMargin">Hobby: </strong>
-        <${profile.hobby}/><br><br>
-        <strong class="leftMargin bottomPadding">Activities: </strong>
-    <${profile.activity}/><br><br>
-    </div>
+            <strong class="leftMargin">Hobby: ${profile.hobby}</strong><br><br>
+            <strong class="leftMargin bottomPadding">Activities: ${profile.activity}</strong><br><br>
+        </div>
     </div>
 
     <%@ include file="footer_d.jsp" %>

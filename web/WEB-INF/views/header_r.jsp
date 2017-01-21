@@ -8,5 +8,5 @@
     <a class="headerText" href="${pageContext.request.contextPath}/messages">Messages</a>
     <a class="headerText" href="${pageContext.request.contextPath}/friends">My Friends</a>
     <a class="headerText" href="${pageContext.request.contextPath}/findPeople">Find friends</a>
-    <a class="headerText" href="${pageContext.request.contextPath}/logout">Log out</a>
+    <a class="headerText" href="${pageContext.request.contextPath}/">Log out</a>
 </nav>

@@ -1,5 +1,20 @@
-footer {
-    background-color: #555;
-    color: white;
-    padding: 15px;
+nav {
+   text-align: center;
+   padding-top: 50px;
+}
+
+a.footerStyle {
+   display: inline;
+   height: 20px;
+   text-decoration: none;
+   margin: -20px auto 0 20px;
+   width: 100%;
+   color: #555555;
+   font-size: 12px;
+   transition: 0.5s ease-in-out;
+   font-family: 'Montez', cursive; /*скачать шрифт можно с сайта https://www.google.com/fonts/*/
+}
+
+a.footerStyle:hover {
+   color: #f70211;
 }

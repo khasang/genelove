@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 
 import javax.sql.DataSource;
+import java.util.Date;
 
 @Configuration
 @PropertySource(value = {"classpath:util.properties"})
@@ -21,11 +22,11 @@ public class AppConfig {
     @Autowired
     Environment environment;
 
-    @Bean
-    public Message message(){
-        return new Message("Hello my bean");
+   /* @Bean
+    public MyMessage message(){
+        return new MyMessage("Hello my bean",2, new Date());
     }
-
+*/
     @Bean
     public LembergMessage lembergMessage(){
         return new LembergMessage();
