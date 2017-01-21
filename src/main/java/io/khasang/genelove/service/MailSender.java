@@ -1,13 +1,16 @@
 package io.khasang.genelove.service;
 
+import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.User;
 import io.khasang.genelove.entity.EMail;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
-import javax.servlet.http.HttpServletRequest;
+import javax.persistence.TypedQuery;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -18,9 +21,22 @@ public class MailSender {
     Environment environment;
     @Autowired
     private JavaMailSender mailSender;
+    @Autowired
 
-
+    private JdbcTemplate jdbcTemplate;
+    private SessionFactory sessionFactory;
     private EMail eMail;
+    private UserService userService;
+
+    private String addEmailIntoDB (EMail eMail) {
+
+        return "";
+    }
+
+    public MailSender (JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+    public MailSender () {}
 
     // creates a simple e-mail object
     public SimpleMailMessage setEmailFields (EMail eMail) {
@@ -30,19 +46,6 @@ public class MailSender {
         eLetter.setSubject(eMail.getSubject());
         eLetter.setText(eMail.getText());
         return eLetter;
-    }
-
-    public void sendEmail(HttpServletRequest request) throws UnsupportedEncodingException {
-        // takes input from e-mail form
-//        request.setCharacterEncoding("UTF8");
-        /*eMail = new EMail(
-                request.getParameter("recipient"),
-                environment.getProperty("mail.username"),
-                request.getParameter("subject"),
-                request.getParameter("message")
-        );*/
-
-        mailSender.send(setEmailFields(eMail));
     }
 
     public void sendEmail(User user) throws UnsupportedEncodingException {
@@ -58,26 +61,59 @@ public class MailSender {
                 environment.getProperty("mail.username"), subject, text);
 
         mailSender.send(setEmailFields(eMail));
+        System.out.println("RESPONSE: " + addEmailIntoDB(eMail));
     }
 
     public void sendEmail(User user, EMail eMail) throws UnsupportedEncodingException {
-        eMail.setRecipient(user.getEmail());
+        EMail temp = new EMail(eMail);
+        String msg = "Dear " + user.getFirstName() + " " + user.getLastName() + "!\n";
+        msg += "You have got new mail from " + eMail.getSender() + "\n";
+        temp.setText(msg + eMail.getText());
+        temp.setRecipient(user.getEmail());
+        mailSender.send(setEmailFields(temp));
+        System.out.println("RESPONSE: " + addEmailIntoDB(eMail));
+    }
+
+    public void sendEmail(EMail eMail) /*throws UnsupportedEncodingException*/ {
         mailSender.send(setEmailFields(eMail));
     }
 
-    public void sendEmail(EMail eMail) throws UnsupportedEncodingException {
-        mailSender.send(setEmailFields(eMail));
-    }
-
-    public void sendEmail(List<User> listOfRecipients) throws UnsupportedEncodingException, InterruptedException {
+    public int sendEmail(List<User> listOfRecipients) throws UnsupportedEncodingException, InterruptedException {
+        int count = 0;
         for (User recipient: listOfRecipients) {
             sendEmail(recipient);
+            count++;
         }
+        return count;
     }
 
-    public void sendEmail(List<User> listOfRecipients, EMail eMail) throws UnsupportedEncodingException, InterruptedException {
+    public int sendEmail(List<User> listOfRecipients, EMail eMail) throws UnsupportedEncodingException, InterruptedException {
+        int count = 0;
         for (User recipient: listOfRecipients) {
             sendEmail(recipient, eMail);
+            count++;
+        }
+        return count;
+    }
+
+    public String getEmailById (int id) {
+        //SqlParameterSource namedParameters = new MapSqlParameterSource("id", id);
+        //System.out.println("SQL id: " + id);
+
+        //String request = "SELECT email FROM users WHERE id = ?" ;
+        //System.out.println(request);
+        try {
+            //String response = jdbcTemplate.queryForObject(request, String.class);
+            //TypedQuery query = sessionFactory.getCurrentSession().createNativeQuery
+            //        ( "SELECT * FROM messages WHERE id = ?", Message.class);
+            //query.setParameter(1, id);
+            //String response = query.getSingleResult().toString();
+            //return response.toString();
+            //return userService.getUserById(id);
+            return "";
+        }
+        catch (Exception e) {
+            return "Select email from users_id failed: " + e;
         }
     }
 }

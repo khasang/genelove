@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Date;
 
 /* This Entity represents the e-mail letter.
 * Short description for fields of this Entity:
@@ -32,6 +33,9 @@ public class EMail {
 
     @Column(length = 9999)
     private String text;
+
+    @Column
+    private Date creationTime;
 
     public EMail() {
     }
@@ -76,10 +80,32 @@ public class EMail {
         this.text = text;
     }
 
+    public EMail(EMail eMail) {
+        this.setRecipient(eMail.getRecipient());
+        this.setSender(eMail.getSender());
+        this.setSubject(eMail.getSubject());
+        this.setText(eMail.getText());
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
     public EMail(String recipient, String sender, String subject, String text) {
-        this.recipient = recipient;
-        this.sender = sender;
-        this.subject = subject;
-        this.text = text;
+        this.setRecipient(recipient);
+        this.setSender(sender);
+        this.setSubject(subject);
+        this.setText(text);
+    }
+
+    public EMail( String sender, String subject, String text) {
+        this.setRecipient(null);
+        this.setSender(sender);
+        this.setSubject(subject);
+        this.setText(text);
     }
 }
