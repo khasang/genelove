@@ -5,7 +5,6 @@
     display: inline;
     transition: 0.5s ease-in-out;
     font-family: 'Montez', cursive;
-    background-color: #2196f3;
     height: 20px;
     margin-top: -20px;
 }
@@ -13,7 +12,7 @@
 a.headerText {
     display: inline-block;
     font-weight: bold;
-    color: #111;
+    color: white;
     text-decoration: none;
     padding-left: 5%;
     padding-right: 6%;
