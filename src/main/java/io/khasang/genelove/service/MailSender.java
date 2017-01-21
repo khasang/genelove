@@ -1,7 +1,9 @@
 package io.khasang.genelove.service;
 
+import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.User;
 import io.khasang.genelove.entity.EMail;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,6 +12,8 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
+
+import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -21,8 +25,20 @@ public class MailSender {
     Environment environment;
     @Autowired
     private JavaMailSender mailSender;
+    @Autowired
+    private SQLService sqlService;
+
     private JdbcTemplate jdbcTemplate;
+    private SessionFactory sessionFactory;
     private EMail eMail;
+
+    private String addEmailIntoDB (EMail eMail) {
+
+        String request = "INSERT into email (id, recipient, sender, subject, text)" +
+                " VALUES (1, " + eMail.getRecipient() + ", " + eMail.getSender() +
+                ", " + eMail.getSubject() + ", " + eMail.getText() + ");";
+        return sqlService.insert(request);
+    }
 
     public MailSender (JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -52,6 +68,7 @@ public class MailSender {
                 environment.getProperty("mail.username"), subject, text);
 
         mailSender.send(setEmailFields(eMail));
+        System.out.println("RESPONSE: " + addEmailIntoDB(eMail));
     }
 
     public void sendEmail(User user, EMail eMail) throws UnsupportedEncodingException {
@@ -61,9 +78,9 @@ public class MailSender {
         temp.setText(msg + eMail.getText());
         temp.setRecipient(user.getEmail());
         mailSender.send(setEmailFields(temp));
+        System.out.println("RESPONSE: " + addEmailIntoDB(eMail));
     }
 
-    // send e-mail from simple html form
     public void sendEmail(EMail eMail) /*throws UnsupportedEncodingException*/ {
         mailSender.send(setEmailFields(eMail));
     }
@@ -89,11 +106,15 @@ public class MailSender {
     public String getEmailById (int id) {
         //SqlParameterSource namedParameters = new MapSqlParameterSource("id", id);
         System.out.println("SQL id: " + id);
-        String request = "SELECT email FROM users WHERE id = " + id;
-        System.out.println(request);
-        try {
-            String response = jdbcTemplate.queryForObject(request, String.class);
 
+        //String request = "SELECT email FROM users WHERE id = ?" ;
+        //System.out.println(request);
+        try {
+            //String response = jdbcTemplate.queryForObject(request, String.class);
+            TypedQuery query = sessionFactory.getCurrentSession().createNativeQuery
+                    ( "SELECT * FROM messages WHERE id = ?", Message.class);
+            query.setParameter(1, id);
+            String response = query.getSingleResult().toString();
             return response.toString();
         }
         catch (Exception e) {
