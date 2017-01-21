@@ -396,4 +396,12 @@ public class AppController {
      * Finish of this section here.
      ******************************** Private Message Service. *******************************
      */
+    @RequestMapping(value = "/messenger", method = RequestMethod.GET)
+    public String messenger(Model model) {
+        String message = "Your Message Box is empty.<br>" +
+                "You haven't get any messages yet.";
+        model.addAttribute("message", message);
+        return "emailtest/messenger";
+    }
+
 }
