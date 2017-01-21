@@ -2,8 +2,7 @@
 <html>
 <head>
     <title>Mail Sender</title>
-    <link href="css/style.css" rel="stylesheet">
-</head>
+    <link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet"></head>
 <head>
     <title>Mail Sender</title>
 </head>
