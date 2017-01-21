@@ -49,11 +49,6 @@ public class AppController {
     @Autowired
     AddUsersTemp addUsersTemp;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String hello(Model model) {
-        model.addAttribute("message", myMessage.getMessage());
-        return "hello";
-    }
 
     /** Login user to system" */
     /*@RequestMapping(value = "/login", method = RequestMethod.GET)
