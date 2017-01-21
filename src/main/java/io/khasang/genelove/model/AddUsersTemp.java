@@ -1,5 +1,6 @@
 package io.khasang.genelove.model;
 
+import io.khasang.genelove.dao.SQLServiceDAO;
 import io.khasang.genelove.entity.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -9,7 +10,7 @@ import static io.khasang.genelove.entity.User.AccountStatus.NEW;
 
 public class AddUsersTemp {
     private JdbcTemplate jdbcTemplate;
-
+    //private SQLServiceDAO
     public AddUsersTemp(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -61,7 +62,7 @@ public class AddUsersTemp {
                 "account_status, email, first_name, last_name, gender) VALUES (" +
                 index + ", 'linda', 'lin', " +
                 "'$2a$10$lF8zJ8UTZV4tqL/Mtp//ZuoRns4KeIYL/fcAPaddQTpW2HgiAjUpS',\n" +
-                "3, 'NEW', 'python239@mail.ru', 'Linda', 'Sikorsky', 'male');";
+                "3, 'NEW', 'dendrito@list.ru', 'Linda', 'Sikorsky', 'male');";
         index++;
         String user8 = "INSERT INTO users (id, login, name, password, role_id, " +
                 "account_status, email, first_name, last_name, gender) VALUES (" +
@@ -79,7 +80,7 @@ public class AddUsersTemp {
                 "account_status, email, first_name, last_name, gender) VALUES (" +
                 index + ", 'linda', 'lin', " +
                 "'$2a$10$lF8zJ8UTZV4tqL/Mtp//ZuoRns4KeIYL/fcAPaddQTpW2HgiAjUpS',\n" +
-                "3, 'NEW', 'python239@mail.ru', 'Linda', 'Sikorsky', 'male');";
+                "3, 'NEW', 'dendrito@list.ru', 'Linda', 'Sikorsky', 'male');";
         index++;
         String user11 = "INSERT INTO users (id, login, name, password, role_id, " +
                 "account_status, email, first_name, last_name, gender) VALUES (" +
@@ -91,7 +92,7 @@ public class AddUsersTemp {
                 "account_status, email, first_name, last_name, gender) VALUES (" +
                 index + ", 'linda', 'lin', " +
                 "'$2a$10$lF8zJ8UTZV4tqL/Mtp//ZuoRns4KeIYL/fcAPaddQTpW2HgiAjUpS',\n" +
-                "3, 'NEW', 'python239@mail.ru', 'Linda', 'Sikorsky', 'male');";
+                "3, 'NEW', 'dendrito@list.ru', 'Linda', 'Sikorsky', 'male');";
         index++;
         String user13 = "INSERT INTO users (id, login, name, password, role_id, " +
                 "account_status, email, first_name, last_name, gender) VALUES (" +
@@ -103,7 +104,7 @@ public class AddUsersTemp {
                 "account_status, email, first_name, last_name, gender) VALUES (" +
                 index + ", 'linda', 'lin', " +
                 "'$2a$10$lF8zJ8UTZV4tqL/Mtp//ZuoRns4KeIYL/fcAPaddQTpW2HgiAjUpS',\n" +
-                "3, 'NEW', 'python239@mail.ru', 'Sidnay', 'Sikorsky', 'male');";
+                "3, 'NEW', 'dendrito@list.ru', 'Sidnay', 'Sikorsky', 'male');";
         index++;
         String user15 = "INSERT INTO users (id, login, name, password, role_id, " +
                 "account_status, email, first_name, last_name, gender) VALUES (" +
