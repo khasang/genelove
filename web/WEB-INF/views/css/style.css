@@ -297,6 +297,7 @@ td {
   margin: 0;
   padding: 0;
   list-style: none;
+  clear: both;
 }
 
 .mailServiceMenu li {
@@ -343,7 +344,7 @@ legend {
   text-align: center;
   float: right;
   width: 300px;
-  margin: 0;
+  margin: 0px 20px 20px 20px;
   text-align: center;
   padding: 0px;
   color: darkcyan;
@@ -360,4 +361,28 @@ legend {
 
 .fieldsetMessenger legend {
   text-align: right;
+}
+
+#headLink {
+  text-decoration: none;
+  color: white;
+}
+
+#head {
+  margin: 10px;
+  font-size: 20px;
+  color: white;
+  text-shadow: -4px 4px 3px #999, 1px -1px 2px #000;
+  letter-spacing: .5em;
+  font-weight: bold;
+}
+
+#gene {
+  color: lightgreen;
+  font-size: 40px;
+}
+
+#love {
+  color: hotpink;
+  font-size: 40px;
 }
