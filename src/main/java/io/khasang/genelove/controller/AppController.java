@@ -215,6 +215,14 @@ public class AppController {
         return "emailtest/viewUsersList";
     }
 
+    @RequestMapping(value = "/viewAllEMails", method = RequestMethod.GET)
+    public String viewAllUEMails(Model model) {
+        String message = "View all E-Mails";
+        model.addAttribute("message", message);
+        model.addAttribute("eMailsList", userService.getUserAll());
+        return "emailtest/viewEMailsList";
+    }
+
     @RequestMapping(value = "/noAction", method = RequestMethod.POST)
     public String noAction(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         String message = "This is blank for the future usage";
@@ -283,7 +291,7 @@ public class AppController {
     }
 
 
-    @RequestMapping(value = "/sendMail/user/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/sendMailById/{id}", method = RequestMethod.GET)
     public String sendMailByIdGET(@PathVariable("id") int id, Model model) {
         String message = "Do you wanna send the message to user (ID = <strong>" +
                 id+ "</strong>) in really? ";
@@ -292,7 +300,7 @@ public class AppController {
         return "emailtest/sendMailById";
     }
 
-    @RequestMapping(value = "/sendMail/user/sendMailById", method = RequestMethod.POST)
+    @RequestMapping(value = "/sendMailById/send", method = RequestMethod.POST)
     public String sendMailByIdPOST(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         request.setCharacterEncoding("UTF8");
         int recipient = Integer.valueOf(request.getParameter("recipient"));
@@ -301,7 +309,8 @@ public class AppController {
         System.out.println("id: " + recipient);
         System.out.println("*************************************************");
         EMail eMail = new EMail(
-                emailService.getEmailById(recipient),
+                //emailService.getEmailById(recipient),
+                userService.getUserById(recipient).getEmail(),
                 environment.getProperty("mail.username"),
                 request.getParameter("subject"),
                 request.getParameter("message")
@@ -318,7 +327,6 @@ public class AppController {
             model.addAttribute("errorMessage", exception);
             return "emailtest/sendMailError";
         }
-
     }
 
     // Sending e-mail message to client (user)
@@ -382,6 +390,9 @@ public class AppController {
             return "emailtest/sendMailError";
         }
     }
+
+    //*************************** End of the Mail Sender Service. ***************************
+
 
     /**
      *********************************** Mail Sender Service. *******************************

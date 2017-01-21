@@ -26,6 +26,7 @@ public class MailSender {
     private JdbcTemplate jdbcTemplate;
     private SessionFactory sessionFactory;
     private EMail eMail;
+    private UserService userService;
 
     private String addEmailIntoDB (EMail eMail) {
 
@@ -97,20 +98,22 @@ public class MailSender {
 
     public String getEmailById (int id) {
         //SqlParameterSource namedParameters = new MapSqlParameterSource("id", id);
-        System.out.println("SQL id: " + id);
+        //System.out.println("SQL id: " + id);
 
         //String request = "SELECT email FROM users WHERE id = ?" ;
         //System.out.println(request);
         try {
             //String response = jdbcTemplate.queryForObject(request, String.class);
-            TypedQuery query = sessionFactory.getCurrentSession().createNativeQuery
-                    ( "SELECT * FROM messages WHERE id = ?", Message.class);
-            query.setParameter(1, id);
-            String response = query.getSingleResult().toString();
-            return response.toString();
+            //TypedQuery query = sessionFactory.getCurrentSession().createNativeQuery
+            //        ( "SELECT * FROM messages WHERE id = ?", Message.class);
+            //query.setParameter(1, id);
+            //String response = query.getSingleResult().toString();
+            //return response.toString();
+            //return userService.getUserById(id);
+            return "";
         }
         catch (Exception e) {
-            return "Select email from users failed: " + e;
+            return "Select email from users_id failed: " + e;
         }
     }
 }

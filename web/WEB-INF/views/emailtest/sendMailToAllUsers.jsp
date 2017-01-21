@@ -19,11 +19,11 @@
     <form class="mailForm" method="post" action="/sendMailToAllUsers">
         <table border="0" align="center">
             <tr>
-                <td>Subject:</td>
+                <td><label>Subject:</label></td>
                 <td><input type="text" name="subject"/></td>
             </tr>
             <tr>
-                <td>Message:</td>
+                <td><label>Message:</label></td>
                 <td><textarea rows="4" name="message"></textarea></td>
             </tr>
         </table>
