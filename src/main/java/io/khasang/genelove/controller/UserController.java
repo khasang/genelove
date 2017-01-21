@@ -29,6 +29,42 @@ public class UserController {
         return "hello";
     }
 
+    /** User registration" *//*
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String registration(){
+        return "registrationPage";
+    }
+
+    *//** User ends registration" *//*
+    @RequestMapping(value = "/postRegistration", method = RequestMethod.POST)
+    public ModelAndView addNewUser(@ModelAttribute ("user") User user){
+        String message="Error performing registration";
+        try {
+            if (userService.getUserByLogin(user.getLogin()) != null){
+                message = user.getLogin();
+                return new ModelAndView("registrationResult", "message", message );
+            }
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+            userService.addUser(user);
+            User us = userService.getUserByLogin(user.getLogin());
+            Role role = userService.getRoleByName(Role.RoleName.ROLE_USER.toString());
+            userService.addAuthorisation(us, role);
+            message = "You successfully registered!";
+            return new ModelAndView("registrationResult","message",message);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ModelAndView("registrationResult","message",message);
+        }
+    }*/
+
+
+    /** Login user to system" */
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(){
+        return "loginPage";
+    }
+
+
     /** Logout user from system" */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(){

@@ -10,6 +10,12 @@
     <div class="container">
         <br><br>
         <h3>User List</h3>
+
+        <c:url var="newUser" value="/admin/new"/>
+        <form:form action="${newUser}" method="get">
+            <button class="btn btn-info" type="submit">Add User</button>
+        </form:form>
+
         <table class="table-bordered container">
         <thead>
             <tr>
@@ -17,14 +23,14 @@
                 <th>Login</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>E-mail</th>
+                <th>E-Mail Address</th>
                 <th>Account Status</th>
                 <th>Roles</th>
                 <th colspan="3">Actions</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${usersList}" var="user">
+            <c:forEach items="${usersList.pageList}" var="user" varStatus="status">
                 <tr>
                     <td>${user.id}</td>
                     <td><a href="/admin/user/id/${user.id}">${user.login}</a></td>
@@ -34,7 +40,7 @@
                     <td>${user.accountStatus}</td>
                     <td>
                         <c:forEach var="role" items="${user.roles}">
-                            ${role.roleName},
+                            ${role.roleName}&nbsp;
                         </c:forEach>
                     </td>
                     <td align="center">
@@ -65,13 +71,20 @@
 
         <div align="center">
             <ul class="pagination">
+                <li><a href="?page=previous">&lt;</a><li>
+                <li><a href="?page=next">&gt;</a></li>
+            </ul>
+        </div>
+
+ <%--       <div align="center">
+            <ul class="pagination">
                 <li class="active"><a href="/admin/usersList?page=1">1</a></li>
                 <li><a href="/admin/usersList?page=2">2</a></li>
                 <li><a href="/admin/usersList?page=3">3</a></li>
                 <li><a href="/admin/usersList?page=4">4</a></li>
                 <li><a href="/admin/usersList?page=5">5</a></li>
             </ul>
-        </div>
+        </div>--%>
 
         <br>
 
