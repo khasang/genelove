@@ -20,24 +20,19 @@
     <table class="tableData">
         <tr>
             <th>ID</th>
-            <th>Login</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Gender</th>
-            <th>E-Mail</th>
-            <th>Send E-Mail</th>
-            <th>Send Private Message</th>
+            <th>Recipient</th>
+            <th>Sender</th>
+            <th>Subject</th>
+            <th>Date of creation</th>
+            <th>Text</th>
         </tr>
         <c:forEach items="${usersList}" var="user">
             <tr>
-                <td>${user.id}</td>
-                <td>${user.login}</td>
+                <td>${eM.id}</td>
+                <td>${email.re}</td>
+                <td>${user.firstName}</td>
                 <td>${user.firstName}</td>
                 <td>${user.lastName}</td>
-                <td>${user.gender}</td>
-                <td>${user.email}</td>
-                <td><a href="sendMailById/${user.id}">Send E-Mail</a></td>
-                <td><a href="sendMail?user=${user.id}">Send Private message</a></td>
             </tr>
         </c:forEach>
     </table>

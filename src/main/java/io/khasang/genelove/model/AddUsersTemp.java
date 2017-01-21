@@ -1,6 +1,5 @@
 package io.khasang.genelove.model;
 
-import io.khasang.genelove.dao.SQLServiceDAO;
 import io.khasang.genelove.entity.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 

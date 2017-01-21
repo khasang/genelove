@@ -78,19 +78,20 @@ h1 {
   text-align: center;
   color: #ffffff;
   font-weight: 300;
-  margin: 0 0 auto;
+  margin: 15px;
 }
 
 label {
-  position: absolute;
+  /*position: absolute;
   -webkit-transform: translateY(6px);
           transform: translateY(6px);
-  left: 13px;
-  color: rgba(255, 255, 255, 0.5);
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease;
   -webkit-backface-visibility: hidden;
   pointer-events: none;
+  */
+  left: 13px;
+  color: white;
   font-size: 22px;
 }
 label .req {
@@ -190,7 +191,7 @@ textarea {
 *  *******************************
 */
 
-.usersList {
+.tableData {
   margin: 0 auto;
   color: #2a6496;
   width: 90%;
@@ -201,15 +202,15 @@ textarea {
 th, td {
   padding: 5px;
 }
-.usersList th {
+.tableData th {
   background-color: lightblue;
 }
 
-.usersList tr:nth-of-type(odd) {
+.tableData tr:nth-of-type(odd) {
   background-color: lightcyan;
 }
 
-.usersList tr:nth-of-type(even) {
+.tableData tr:nth-of-type(even) {
   background-color: lightyellow;
 }
 
@@ -233,22 +234,20 @@ th, td {
 .sendMail {
   width: 30%;
   float: left;
-  border: 1px solid gray;
-  border-radius: 25px;
+  border: 0px;
   text-align: center;
-  margin: 15px;
+  margin: 5px;
   padding: 15px;
-  background-color: lightblue;
+  background: #c1bdba;
 }
 
 .sendMailById {
   width: 50%;
-  border: 1px solid gray;
-  border-radius: 25px;
+  border: 0;
   text-align: center;
-  margin: 15px auto;
+  margin: 5px auto;
   padding: 15px;
-  background-color: lightblue;
+  background-color: #c1bdba;
 }
 
 .systemMessage {
@@ -274,8 +273,8 @@ th, td {
 }
 
 .mailForm {
-  margin: 15px auto;
-  padding: 15px;
+  margin: 10px auto;
+  padding: 10px;
 }
 
 td {
@@ -317,4 +316,48 @@ td {
 .mailServiceMenu a:hover {
   color: darkslateblue;
   background-color: white;
+}
+
+.fieldset {
+  margin: 0;
+  padding: 0;
+  border: 1px solid gray;
+  border-radius: 50px;
+  background-color: lightblue;
+}
+
+legend {
+  margin-left: 50px;
+  color: #2a6496;
+  text-align: left;
+}
+
+.fieldsetMessenger {
+  border: 1px solid gray;
+  border-radius: 15px;
+  background-image: linear-gradient(to bottom, white, yellow);
+  border: 1px solid darkred;
+}
+
+.Messenger {
+  text-align: center;
+  float: right;
+  width: 300px;
+  margin: 0;
+  text-align: center;
+  padding: 0px;
+  color: darkcyan;
+  border: 0;
+}
+
+.Messenger a {
+}
+
+#numberOfMessages {
+  text-align: right;
+  color: darkgray;
+}
+
+.fieldsetMessenger legend {
+  text-align: right;
 }

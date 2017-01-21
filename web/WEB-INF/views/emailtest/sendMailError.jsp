@@ -11,7 +11,7 @@
 <body>
 <jsp:include page="navigation.jsp"/>
 <div class="systemErrorMessage">
-    <p>Your request has <strong>NOT</strong> been completed by reason:</p>
+    <p>Your request has <strong>NOT</strong> been completed by reason:
     <span class="errorMessage">${errorMessage}</span></p>
 </div>
 <hr class="hr">
