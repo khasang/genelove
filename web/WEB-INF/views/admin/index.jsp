@@ -34,7 +34,7 @@
                         <p></p>
                         <p class="card-text">Also administrators can filter list of users by user login.</p>
                         <form action="/admin/usersList" class="input-group">
-                            <input type="text" class="form-control" placeholder="Search By Login" name="similarLogin" id="similarLogin">
+                            <input type="text" class="form-control" placeholder="Search By Login" name="filter" id="filter">
                             <span class="input-group-btn">
                                 <button class="btn btn-primary" type="submit">Search</button>
                             </span>

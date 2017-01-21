@@ -20,10 +20,18 @@ public class AdminService {
     public long getAllUsersCount() {
     	return adminDAO.getAllUsersCount();
     }
-    
-    public List<User> getUsers(String similarLogin, int page) {
-        return adminDAO.getUsers(similarLogin, page);
+
+    public List<User> getUsers() {
+        return adminDAO.getUsers();
     }
+
+    public List<User> filterUsers(String filter) {
+        return adminDAO.filterUsers(filter);
+    }
+
+    /*public List<User> getUsers(String similarLogin, int page) {
+        return adminDAO.getUsersPage(similarLogin, page);
+    }*/
 
     public List<Role> getRoles() {
         return adminDAO.getRoles();

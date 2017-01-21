@@ -39,7 +39,7 @@ public class AdminDAOImpl implements AdminDAO {
         return sessionFactory.getCurrentSession().createQuery(criteriaQuery).getSingleResult();
     }
 
-    @Override
+    /*@Override
     public List<User> getUsers(String similarLogin, int page) {
         int pageSize = 10;
         CriteriaBuilder criteriaBuilder = sessionFactory.getCurrentSession().getCriteriaBuilder();
@@ -52,6 +52,39 @@ public class AdminDAOImpl implements AdminDAO {
         TypedQuery<User> typedQuery = sessionFactory.getCurrentSession().createQuery(criteriaQuery);
         typedQuery.setFirstResult((page-1)*pageSize);
         typedQuery.setMaxResults(pageSize);
+        return typedQuery.getResultList();
+    }*/
+
+    @Override
+    public List<User> filterUsers(String filter) {
+        Session session = sessionFactory.getCurrentSession();
+
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+
+        Root<User> root = criteriaQuery.from(User.class);
+
+        criteriaQuery.select(root);
+        criteriaQuery.where(criteriaBuilder.like(criteriaBuilder.upper(root.get("login")),"%" + filter.toUpperCase() + "%"));
+        criteriaQuery.orderBy(criteriaBuilder.asc(root.get("id")));
+
+        TypedQuery<User> typedQuery = session.createQuery(criteriaQuery);
+        return typedQuery.getResultList();
+    }
+
+    @Override
+    public List<User> getUsers() {
+        Session session= sessionFactory.getCurrentSession();
+
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+
+        Root<User> root = criteriaQuery.from(User.class);
+
+        criteriaQuery.select(root);
+        criteriaQuery.orderBy(criteriaBuilder.asc(root.get("id")));
+
+        TypedQuery<User> typedQuery = session.createQuery(criteriaQuery);
         return typedQuery.getResultList();
     }
 

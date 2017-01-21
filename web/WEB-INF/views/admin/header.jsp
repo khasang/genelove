@@ -28,7 +28,7 @@
             <div class="col-sm-3 col-md-3 pull-right">
                 <form action="/admin/usersList" class="navbar-form" role="search">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search By Login" name="similarLogin" id="similarLogin">
+                        <input type="text" class="form-control" placeholder="Search By Login" name="filter" id="filter">
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit">Search</button>
                         </div>

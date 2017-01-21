@@ -29,13 +29,13 @@ public class UserController {
         return "hello";
     }
 
-    /** User registration" */
+    /** User registration" *//*
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(){
         return "registrationPage";
     }
 
-    /** User ends registration" */
+    *//** User ends registration" *//*
     @RequestMapping(value = "/postRegistration", method = RequestMethod.POST)
     public ModelAndView addNewUser(@ModelAttribute ("user") User user){
         String message="Error performing registration";
@@ -55,7 +55,7 @@ public class UserController {
             e.printStackTrace();
             return new ModelAndView("registrationResult","message",message);
         }
-    }
+    }*/
 
 
     /** Login user to system" */
