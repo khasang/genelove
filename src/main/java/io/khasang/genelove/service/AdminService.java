@@ -21,8 +21,8 @@ public class AdminService {
     	return adminDAO.getAllUsersCount();
     }
     
-    public List<User> getUsers(String similarLogin) {
-        return adminDAO.getUsers(similarLogin);
+    public List<User> getUsers(String similarLogin, int page) {
+        return adminDAO.getUsers(similarLogin, page);
     }
 
     public int getRoleId(String role) { return adminDAO.getRoleId(role); }

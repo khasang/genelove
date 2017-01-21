@@ -63,6 +63,16 @@
             </tbody>
         </table>
 
+        <div align="center">
+            <ul class="pagination">
+                <li class="active"><a href="/admin/usersList?page=1">1</a></li>
+                <li><a href="/admin/usersList?page=2">2</a></li>
+                <li><a href="/admin/usersList?page=3">3</a></li>
+                <li><a href="/admin/usersList?page=4">4</a></li>
+                <li><a href="/admin/usersList?page=5">5</a></li>
+            </ul>
+        </div>
+
         <br>
 
         <h3>Statistics</h3>

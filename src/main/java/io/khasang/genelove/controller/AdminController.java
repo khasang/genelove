@@ -25,18 +25,14 @@ public class AdminController {
     }
 
     @RequestMapping(value = "usersList", method = RequestMethod.GET)
-    public String usersList(@RequestParam(value = "similarLogin", required = false) final String similarLogin, Model model) {
+    public String usersList(@RequestParam(value = "similarLogin", required = false) final String similarLogin,
+                            @RequestParam(value = "page", required = false, defaultValue = "1") final String page,
+                            Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("usersList", adminService.getUsers(similarLogin));
+        model.addAttribute("usersList", adminService.getUsers(similarLogin,Integer.parseInt(page)));
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
         return "admin/usersList";
     }
-    
-    /*@RequestMapping(value = "users", method = RequestMethod.GET)
-    public String users(Model model){
-        model.addAttribute("users", adminService.getUsers());
-        return "admin/user";
-    }*/
 
     @RequestMapping(value = "user/id/{id}", method = RequestMethod.GET)
     public String userById(@PathVariable("id") int id, Model model){

@@ -27,5 +27,5 @@ public interface AdminDAO {
 
     User getUserByLogin(String login);
 
-    List<User> getUsers(String similarLogin);
+    List<User> getUsers(String similarLogin, int page);
 }
