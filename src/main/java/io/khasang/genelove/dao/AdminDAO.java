@@ -34,4 +34,6 @@ public interface AdminDAO {
     Role getRoleByName(Role.RoleName name);
 
     List<Role> getRoles();
+
+    List<User> getUsersPage(String similarLogin, int page);
 }

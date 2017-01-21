@@ -1,17 +1,19 @@
 package io.khasang.genelove.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.*;
 
 @Entity(name = "users")
 public class User {
-
     public enum AccountStatus {
         NEW, ACTIVE, SUSPENDED
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+
     private int id;
 
     @Column(length = 255, unique = true)
@@ -25,6 +27,9 @@ public class User {
 
     @Column(name = "last_name", length = 255)
     private String lastName;
+
+    @Column(name = "gender", length = 6)
+    private String gender;
 
     @Column(length = 255)
     private String email;
@@ -53,6 +58,14 @@ public class User {
             accountStatusList.put(status, status.toString());
         }
         return accountStatusList;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public int getId() {

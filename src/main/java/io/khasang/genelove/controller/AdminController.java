@@ -88,12 +88,16 @@ public class AdminController {
 
    /* @RequestMapping(value = "usersList", method = RequestMethod.GET)
     public String usersList(Model model) {
+    @RequestMapping(value = "usersList", method = RequestMethod.GET)
+    public String usersList(@RequestParam(value = "similarLogin", required = false) final String similarLogin,
+                            @RequestParam(value = "page", required = false, defaultValue = "1") final String page,
+                            Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("usersList", adminService.getUsers());
+        model.addAttribute("usersList", adminService.getUsers(similarLogin,Integer.parseInt(page)));
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
         return "admin/usersList";
     }
-*/
+
     @RequestMapping(value = "users", method = RequestMethod.GET)
     public String users(Model model) {
         model.addAttribute("users", adminService.getUsers());
@@ -132,6 +136,13 @@ public class AdminController {
         model.addAttribute("accountStatusList", User.getAccountStatusList());
         model.addAttribute("roleList", adminService.getRoles());
         return "admin/user";
+    }
+
+    @RequestMapping(value = "submit", method = RequestMethod.GET)
+    @ResponseBody
+    public String submit(@ModelAttribute("user") User user){
+
+        return "admin/update";
     }
 
     @RequestMapping(value = "user/login/{login}", method = RequestMethod.GET)

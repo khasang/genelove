@@ -64,6 +64,7 @@ public class UserController {
         return "loginPage";
     }
 
+
     /** Logout user from system" */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(){
@@ -82,7 +83,6 @@ public class UserController {
             return "Error adding message: " + e.getMessage();
         }
     }
-
 
     /** Get message from another user" */
     @RequestMapping(value = "/messagesWith/{otherId}", method = RequestMethod.GET)

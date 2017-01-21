@@ -71,7 +71,7 @@ h1 {
   text-align: center;
   color: #ffffff;
   font-weight: 300;
-  margin: 0 0 40px;
+  margin: 0 0 auto;
 }
 
 label {
@@ -175,4 +175,49 @@ textarea {
 .forgot {
   margin-top: -20px;
   text-align: right;
+}
+
+.submitMail {
+  height: 120px;
+  width: 120px;
+  color: darkgray;
+  border: 5px solid gray;
+  border-radius: 60px;
+  background-image: radial-gradient(white, lightblue);
+  text-align: center;
+  margin: 20px auto;
+}
+
+.sendMail {
+  border: 1px solid gray;
+  border-radius: 25px;
+  text-align: center;
+  margin: 25px auto;
+  padding: 25px;
+  background-color: lightblue;
+}
+
+.systemMessage {
+  border: 1px solid gray;
+  border-radius: 25px;
+  margin: 25px auto;
+  text-align: center;
+  padding: 25px;
+  color: darkgray;
+  background-image: linear-gradient(to bottom, white, lightgreen);
+}
+
+.systemErrorMessage {
+  border: 1px solid gray;
+  border-radius: 25px;
+  margin: 25px auto;
+  text-align: center;
+  padding: 25px;
+  color: darkred;
+  background-image: linear-gradient(to bottom, white, yellow);
+}
+
+.mailForm {
+  margin: 25px auto;
+  padding: 25px;
 }

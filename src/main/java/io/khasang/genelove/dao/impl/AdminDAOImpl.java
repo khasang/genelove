@@ -40,15 +40,18 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
-    public List<User> getUsers() {
+    public List<User> getUsers(String similarLogin, int page) {
+        int pageSize = 10;
         CriteriaBuilder criteriaBuilder = sessionFactory.getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<User> root = criteriaQuery.from(User.class);
         criteriaQuery.select(root);
         criteriaQuery.orderBy(criteriaBuilder.asc(root.get("id")));
+        if(similarLogin != null)
+            criteriaQuery.where(criteriaBuilder.like(criteriaBuilder.upper(root.get("login")),"%"+similarLogin.toUpperCase()+"%"));
         TypedQuery<User> typedQuery = sessionFactory.getCurrentSession().createQuery(criteriaQuery);
-//        typedQuery.setFirstResult(firstRow);
-//        typedQuery.setMaxResults(pageSize);
+        typedQuery.setFirstResult((page-1)*pageSize);
+        typedQuery.setMaxResults(pageSize);
         return typedQuery.getResultList();
     }
 

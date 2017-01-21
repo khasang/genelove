@@ -9,6 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,7 +69,7 @@ public class QuestionDAOImpl implements QuestionDAO {
     }
 
 //    with criteria
-    
+
 //    @Override
 //    @SuppressWarnings("unchecked")
 //    public List<Question> getQuestionList() {
@@ -83,7 +84,7 @@ public class QuestionDAOImpl implements QuestionDAO {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List<Question> getQuestionList() {
+    public List getQuestionList() {
         Query query = sessionFactory.getCurrentSession().createNativeQuery("select * from Question;");
         query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
         return query.list();

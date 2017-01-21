@@ -1,24 +1,30 @@
 package io.khasang.genelove.controller;
 
+import io.khasang.genelove.entity.EMail;
 import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.Question;
+import io.khasang.genelove.entity.User;
 import io.khasang.genelove.model.CreateTable;
-import io.khasang.genelove.service.QuestionService;
-import io.khasang.genelove.service.MessageService;
+import io.khasang.genelove.model.MyMessage;
 import io.khasang.genelove.model.SQLExamples;
+import io.khasang.genelove.service.MailSender;
+import io.khasang.genelove.service.MessageService;
+import io.khasang.genelove.service.QuestionService;
+import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.beans.support.PagedListHolder;
+import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import io.khasang.genelove.model.MyMessage;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -27,30 +33,67 @@ public class AppController {
     MyMessage myMessage;
     @Autowired
     SQLExamples sqlExamples;
-
     @Autowired
     CreateTable createTable;
-    
     @Autowired
     QuestionService questionService;
-
     @Autowired
     MessageService messageService;
-
-
     @Autowired
-    private JavaMailSender mailSender;
+    MailSender emailService;
+    @Autowired
+    Environment environment;
+	@Autowired
+    UserService userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String hello(Model model){
+    public String hello(Model model) {
         model.addAttribute("message", myMessage.getMessage());
         return "hello";
     }
 
-    @RequestMapping(value = "/message/{id}", method = RequestMethod.GET)
-    public String messageById(@PathVariable("id") int id, Model model){
-        model.addAttribute("message", messageService.getMessageById(id));
-        return "message";
+    /** Login user to system" */
+    /*@RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(){
+        return "loginPage";
+    }*/
+
+    /** User registration" */
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String registration(){
+        return "registrationPage";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String registerUser(@ModelAttribute("registerUser") User user,
+                               RedirectAttributes redirectAttributes) {
+        String message;
+        try {
+            userService.addUser(user);
+            message = "User " + user.getLogin() + " successfully registered.";
+        } catch (Exception e) {
+            message = "Registration error " + e.getMessage();
+        }
+        redirectAttributes.addFlashAttribute("message", message);
+        return "redirect:/login";
+    }
+
+    /** User ends registration" */
+    @RequestMapping(value = "/postRegistration", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public Object addNewUser(@RequestBody User user, HttpServletResponse response){
+        String login = user.getLogin();
+        if (userService.getUserByLogin(login)!= null) {
+            return "User with login name " + login + " already exists, please try another name!";
+        }
+        try {
+            userService.addUser(user);
+            userService.addAuthorisation(user);
+            return "You successfully registered!";
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error performing registration: " + e.getMessage();
+        }
     }
 
     @RequestMapping(value = "/admin/create", method = RequestMethod.GET)
@@ -79,16 +122,29 @@ public class AppController {
         }
     }
 
+    /**
+     * Example request http://localhost:8089/db/allQuestion?page=next
+     * */
     @RequestMapping(value = "/db/allQuestion", method = RequestMethod.GET)
-    public String allQuestion(Model model) {
-        List<Question> list = questionService.getQuetionList();
-        model.addAttribute("allQuestion", list);
+    public String allQuestion(Model model, @RequestParam(value = "page", required = false) String page) {
+        PagedListHolder myList = new PagedListHolder(questionService.getQuestionList());
+        myList.setPageSize(4);
+
+        if(page != null) {
+            if ("previous".equals(page)) {
+                myList.previousPage();
+            } else if ("next".equals(page)) {
+                myList.nextPage();
+            }
+        }
+
+        model.addAttribute("allQuestion", myList);
         return "questions";
     }
 
 
     @RequestMapping(value = "/db/message/{id}", method = RequestMethod.GET)
-    public String getMessageById (@PathVariable("id") int id, Model model){
+    public String getMessageById(@PathVariable("id") int id, Model model) {
         model.addAttribute("message", messageService.getMessageById(id));
         return "message";
     }
@@ -124,39 +180,94 @@ public class AppController {
         return "sql";
     }
 
-    @RequestMapping(value = "/sendEmail", method = RequestMethod.GET)
-    public String openMailForm(Model model) {
-        return "emailtest/emailform";
+    /**
+     * Sending e-mail message to recipient"
+     */
+    @RequestMapping(value = "/sendMail", method = RequestMethod.GET)
+    public String mailSender() {
+        return "emailtest/sendMail";
     }
 
-    /** Sending e-mail message to client" */
-    @RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
+    @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
     public String doSendEmail(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         ModelAndView modelAndView = new ModelAndView();
+        request.setCharacterEncoding("UTF8");
+
+        EMail eMail = new EMail(
+                request.getParameter("recipient"),
+                environment.getProperty("mail.username"),
+                request.getParameter("subject"),
+                request.getParameter("message")
+        );
+        emailService.setEmailFields(eMail);
 
         try {
-            // takes input from e-mail form
-            request.setCharacterEncoding("UTF8");
-            String recipientAddress = request.getParameter("recipient");
-            String subject = request.getParameter("subject");
-            String message = request.getParameter("message");
+            emailService.sendEmail(request);
+            return "emailtest/sendMailResult";
+        } catch (Exception e) {
+            model.addAttribute("exception", e.getMessage());
+            return "emailtest/sendMailError";
+        }
+    }
 
-            // creates a simple e-mail object
-            SimpleMailMessage email = new SimpleMailMessage();
-            email.setFrom("genelove@mail.ru");
-            email.setTo(recipientAddress);
-            email.setSubject(subject);
-            email.setText(message);
+    // Sending e-mail message to client (user)
+    @RequestMapping(value = "/sendMailToUser", method = RequestMethod.POST)
+    public String doSendEmailToUser(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
+        //ModelAndView modelAndView = new ModelAndView();
 
-            // sends the e-mail
-            mailSender.send(email);
+        User user = new User();
+        user.setEmail("python239@mail.ru");
+        user.setFirstName("Alexander");
+        user.setLastName("Pyankov");
+        user.setGender("male");
 
-            // forwards to the view named "Result"
-            return "emailtest/emailresult";
 
-        } catch(Exception mess){
-            model.addAttribute("exception", mess.getMessage());
-            return "emailtest/emailerror";
+        try {
+            emailService.sendEmail(user);
+            return "emailtest/sendMailResult";
+
+        } catch (Exception e) {
+            model.addAttribute("exception", e.getMessage());
+            return "emailtest/sendMailError";
+        }
+    }
+
+    // Sending e-mail message to client (user)
+    @RequestMapping(value = "/sendMailToSomeUsers", method = RequestMethod.POST)
+    public String doSendEmailToSomeUsers(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
+        ModelAndView modelAndView = new ModelAndView();
+
+        User user1 = new User();
+        user1.setEmail("python239@mail.ru");
+        user1.setFirstName("Alexander");
+        user1.setLastName("Pyankov");
+        user1.setGender("male");
+
+        User user2 = new User();
+        user2.setEmail("python239@mail.ru");
+        user2.setFirstName("Robert");
+        user2.setLastName("Stivenson");
+        user2.setGender("male");
+
+        User user3 = new User();
+        user3.setEmail("python239@mail.ru");
+        user3.setFirstName("Alexander");
+        user3.setLastName("Miln");
+        user3.setGender("male");
+
+        ArrayList<User> list = new ArrayList<>();
+        list.add(user1);
+        list.add(user2);
+        list.add(user3);
+
+
+        try {
+            emailService.sendEmail(list);
+            return "emailtest/sendMailResult";
+
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "emailtest/sendMailError";
         }
     }
 }
