@@ -390,10 +390,10 @@ public class AppController {
 
 
     /**
-     *********************************** Mail Sender Service. *******************************
+     ******************************** Private Message Service. ******************************
      *
-     * In this section represents code of Mail Sender Sevice.
+     * In this section represents code of Mail Sender Seкvice.
      * Finish of this section here.
-     ****************************************************************************************
+     ******************************** Private Message Service. *******************************
      */
 }
