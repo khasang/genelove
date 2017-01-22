@@ -47,7 +47,7 @@ public class DBLoaderController {
     public String DBLoader(Model model) {
         String message = "DB Loader is ready";
         model.addAttribute("message", message);
-        return "mailService/DBLoader";
+        return "mailService/DBActions";
     }
 
     @RequestMapping(value = "/clearTables", method = RequestMethod.POST)
@@ -57,7 +57,7 @@ public class DBLoaderController {
 
         String message = dbLoader.clearTable(table);
         model.addAttribute("message", message);
-        return "mailService/DBLoader";
+        return "mailService/DBActions";
     }
 
     @RequestMapping(value = "/loadTables", method = RequestMethod.POST)

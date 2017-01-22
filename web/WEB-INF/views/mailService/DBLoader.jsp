@@ -5,5 +5,4 @@
     <p>Your request has been successfully completed<br>
     <span class="systemResponce">${message}</span></p>
 </div>
-<hr class="hr">
 <jsp:include page="footer.jsp"/>
