@@ -40,6 +40,8 @@ public class AdminController {
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public String adminScreen(Model model) {
+        adminService.createAllRoles();
+
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
 
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);

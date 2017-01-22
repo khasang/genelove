@@ -124,6 +124,11 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
+    public void createRole(Role role) {
+        sessionFactory.getCurrentSession().save(role);
+    }
+
+    @Override
     public void addRole(User user, Role role) {
         AuthorisationKey key = new AuthorisationKey();
         key.setUserId(user.getId());
