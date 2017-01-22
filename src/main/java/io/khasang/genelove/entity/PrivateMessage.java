@@ -1,10 +1,12 @@
 package io.khasang.genelove.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
 
+@Entity(name = "private_message")
 public class PrivateMessage {
     public enum Status {
         READ, UNREAD
@@ -14,22 +16,22 @@ public class PrivateMessage {
     @GeneratedValue
     private long id;
 
-    @Column
+    @Column(name = "sender_id")
     private long sender_id;
 
-    @Column
+    @Column(name = "recipient_id")
     private long recipient_id;
 
-    @Column
+    @Column(name = "creation_time")
     private Date creationTime;
 
-    @Column
+    @Column(name = "reading_time")
     private Date readingTime;
 
     @Column
     private Enum status;
 
-    @Column(length = 9999)
+    @Column(name = "message", length = 9999)
     private String PrivateMessage;
 
     public PrivateMessage() {
