@@ -22,6 +22,10 @@ body {
     color: #555555;
     opacity: 1;
 }
+.italic {
+    font-style: italic;
+    color: #999999;
+}
 h1 {
   text-align: center;
   color: #ffffff;

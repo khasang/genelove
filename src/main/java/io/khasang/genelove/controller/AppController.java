@@ -53,6 +53,9 @@ public class AppController {
         return modelAndView;
     }
 
+    /*
+    Stub controllers for jsp pages
+     */
     @RequestMapping(value = "/support", method = RequestMethod.GET)
     public String support(Model model){
         model.addAttribute("support", "");
@@ -113,7 +116,8 @@ public class AppController {
     @RequestMapping(value = "/searchResult", method = RequestMethod.GET)
     public ModelAndView searchResult(HttpServletRequest request) {
         List<ProfileService> results = findPeopleService.findPeople(request.getParameter("firstName"),
-                request.getParameter("lastName"), request.getParameter("region"), request.getParameter("Id"));
+                request.getParameter("lastName"), request.getParameter("region"),
+                request.getParameter("minAge"), request.getParameter("maxAge"));
         return new ModelAndView("searchResult","results", results);
     }
 }

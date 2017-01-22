@@ -43,13 +43,17 @@ div {
     text-align: center;
 }
 
-#checkBox1 {display: none;}
+#checkBox1, #checkBox2, #checkBox3, #checkBox4 {
+    display: none;
+}
 [for="checkBox1"] {
     position: relative;
+    margin-left: 25%;
     display: inline-block;
-    width: 40px;
-    height: 10px;
-    border-radius: 3px;
+    align-content: flex-end;
+    width: 30px;
+    height: 5px;
+    border-radius: 2px;
     background: rgb(71, 71, 71);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.5), 0 1px 0 rgba(255,255,255,.2);
     cursor: pointer;
@@ -57,13 +61,110 @@ div {
 [for="checkBox1"]:before {
     content: "";
     position: absolute;
-    left: -8px; top: -3px;
+    left: -7px; top: -2px;
     display: block;
-    width: 16px;
+    width: 15px;
     height: 16px;
     background: #dfe5d7 radial-gradient(#dfe5d7, #b3bead 80%, #fff 80%) no-repeat 50% 50%;
     transition: .5s;
 }
+input[id=checkBox1]:checked ~ #fname {
+    display: none;
+}
 #checkBox1:checked ~ [for="checkBox1"]:before {
-    left: 32px;
+    left: 22px;
+}
+
+[for="checkBox2"] {
+    position: relative;
+    margin-left: 25%;
+    display: inline-block;
+    align-items: flex-end;
+    width: 30px;
+    height: 5px;
+    border-radius: 2px;
+    background: rgb(71, 71, 71);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.5), 0 1px 0 rgba(255,255,255,.2);
+    cursor: pointer;
+}
+[for="checkBox2"]:before {
+    content: "";
+    position: absolute;
+    left: -7px; top: -2px;
+    display: block;
+    width: 15px;
+    height: 16px;
+    background: #dfe5d7 radial-gradient(#dfe5d7, #b3bead 80%, #fff 80%) no-repeat 50% 50%;
+    transition: .5s;
+}
+#checkBox2:checked ~ [for="checkBox2"]:before {
+    left: 22px;
+}
+input[id=checkBox2]:checked ~ #lname {
+    display: none;
+}
+
+[for="checkBox3"] {
+    position: relative;
+    margin-left: 35%;
+    display: inline-block;
+    width: 30px;
+    height: 5px;
+    border-radius: 2px;
+    background: rgb(71, 71, 71);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.5), 0 1px 0 rgba(255,255,255,.2);
+    cursor: pointer;
+}
+[for="checkBox3"]:before {
+    content: "";
+    position: absolute;
+    left: -7px; top: -2px;
+    display: block;
+    width: 15px;
+    height: 16px;
+    background: #dfe5d7 radial-gradient(#dfe5d7, #b3bead 80%, #fff 80%) no-repeat 50% 50%;
+    transition: .5s;
+}
+#checkBox3:checked ~ [for="checkBox3"]:before {
+    left: 22px;
+}
+input[id=checkBox3]:checked ~ #region {
+    display: none;
+}
+
+[for="checkBox4"] {
+    position: relative;
+    margin-left: 45%;
+    display: inline-block;
+    width: 30px;
+    height: 5px;
+    border-radius: 2px;
+    background: rgb(71, 71, 71);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.5), 0 1px 0 rgba(255,255,255,.2);
+    cursor: pointer;
+}
+[for="checkBox4"]:before {
+    content: "";
+    position: absolute;
+    left: -7px; top: -2px;
+    display: block;
+    width: 15px;
+    height: 16px;
+    background: #dfe5d7 radial-gradient(#dfe5d7, #b3bead 80%, #fff 80%) no-repeat 50% 50%;
+    transition: .5s;
+}
+#checkBox4:checked ~ [for="checkBox4"]:before {
+    left: 22px;
+}
+input[id=checkBox4]:checked ~ #age {
+    display: none;
+}
+
+#minAge {
+    width: 40%;
+    padding: 12px 20px;
+}
+#maxAge {
+    width: 40%;
+    padding: 12px 20px;
 }

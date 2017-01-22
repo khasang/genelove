@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    Stub class for profile & findFriends jsp
+ */
 @Service
 @Transactional
 public class ProfileService {

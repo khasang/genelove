@@ -8,14 +8,17 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    Stub class for findPeople & searchResults jsp
+ */
 @Service
 @Transactional
 public class FindPeopleService {
 
-    public List<ProfileService> findPeople(String firstName, String lastName, String region, String id) {
+    public List<ProfileService> findPeople(String firstName, String lastName, String region, String minAge, String maxAge) {
         List<ProfileService> list = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            list.add(new ProfileService(firstName + i,lastName + i,"02/02/1991",id + i));
+            list.add(new ProfileService(firstName + i,lastName + i,"02/02/1991", String.valueOf(i)));
         }
         return list;
     }
