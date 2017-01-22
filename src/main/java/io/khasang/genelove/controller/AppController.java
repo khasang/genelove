@@ -39,20 +39,24 @@ public class AppController {
     MailSender emailService;
     @Autowired
     Environment environment;
-	@Autowired
+    @Autowired
     UserService userService;
 
-    static  int pageNum = 0;
+    static int pageNum = 0;
 
-    /** Login user to system" */
+    /**
+     * Login user to system"
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(){
+    public String login() {
         return "login";
     }
 
-    /** User registration" */
+    /**
+     * User registration"
+     */
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(){
+    public String registration() {
         return "registrationPage";
     }
 
@@ -106,13 +110,13 @@ public class AppController {
 
     /**
      * Example request http://localhost:8089/db/allQuestion?page=next
-     * */
+     */
     @RequestMapping(value = "/db/allQuestion", method = RequestMethod.GET)
     public String allQuestion(Model model, @RequestParam(value = "page", required = false) String page) {
         PagedListHolder questionList = new PagedListHolder(questionService.getQuestionList());
         questionList.setPageSize(4);
 
-        if(page != null) {
+        if (page != null) {
             if ("previous".equals(page)) {
                 questionList.previousPage();
                 pageNum--;
@@ -143,5 +147,7 @@ public class AppController {
         model.addAttribute("messages", list);
         return "messages";
     }
+
+}
 
 
