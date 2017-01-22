@@ -206,7 +206,11 @@ public class AdminDAOImpl implements AdminDAO {
 
         TypedQuery<Role> query = session.createQuery(cq);
         query.setParameter(p, name);
-        return query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
     @Override
