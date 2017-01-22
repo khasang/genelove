@@ -21,6 +21,8 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
+    PagedListHolder myList = new PagedListHolder();
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Role.class, new PropertyEditorSupport() {
@@ -56,13 +58,11 @@ public class AdminController {
                             @RequestParam(value = "filter", required = false) String filter,
                             Model model) {
 
-        PagedListHolder myList = null;
-
         if (filter == null) {
-            myList = new PagedListHolder(adminService.getUsers());
+            myList.setSource(adminService.getUsers());
         }
         else {
-            myList = new PagedListHolder(adminService.filterUsers(filter));
+            myList.setSource(adminService.filterUsers(filter));
         }
 
         myList.setPageSize(4);
