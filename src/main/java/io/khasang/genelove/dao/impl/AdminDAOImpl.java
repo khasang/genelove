@@ -1,9 +1,6 @@
 package io.khasang.genelove.dao.impl;
 
-import io.khasang.genelove.entity.AuthorisationKey;
-import io.khasang.genelove.entity.Role;
-import io.khasang.genelove.entity.User;
-import io.khasang.genelove.entity.Authorisation;
+import io.khasang.genelove.entity.*;
 import io.khasang.genelove.dao.AdminDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -109,11 +106,13 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void addUser(User user) {
+        // user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         sessionFactory.getCurrentSession().save(user);
     }
 
     @Override
     public void updateUser(User user) {
+        // user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         sessionFactory.getCurrentSession().update(user);
     }
 
@@ -122,6 +121,11 @@ public class AdminDAOImpl implements AdminDAO {
         Session session = sessionFactory.getCurrentSession();
         session.delete(user);
         session.flush();
+    }
+
+    @Override
+    public void createRole(Role role) {
+        sessionFactory.getCurrentSession().save(role);
     }
 
     @Override

@@ -6,9 +6,7 @@ import io.khasang.genelove.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-import java.util.ArrayList;
 
 @Component("AdminService")
 @Transactional
@@ -71,5 +69,15 @@ public class AdminService {
 
     public String getAssocRolesCount(Role role) {
         return adminDAO.getAssocRolesCount(role);
+    }
+
+    public void createAllRoles() {
+        for (Role.RoleName roleName : Role.RoleName.values()) {
+            if (adminDAO.getRoleByName(roleName) == null) {
+                Role role = new Role();
+                role.setRoleName(roleName);
+                adminDAO.createRole(role);
+            }
+        }
     }
 }
