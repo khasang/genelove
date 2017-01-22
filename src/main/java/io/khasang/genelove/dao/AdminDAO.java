@@ -37,5 +37,5 @@ public interface AdminDAO {
 
     List<Role> getRoles();
 
-    //List<User> getUsers(String similarLogin, int page);
+    String getAssocRolesCount(Role role);
 }
