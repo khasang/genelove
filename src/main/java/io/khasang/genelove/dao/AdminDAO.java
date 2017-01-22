@@ -19,6 +19,8 @@ public interface AdminDAO {
 
     void deleteUser(User user);
 
+    void createRole(Role role);
+
     void addRole(User user, Role role);
 
     void removeRole(User user, Role role);
@@ -37,5 +39,5 @@ public interface AdminDAO {
 
     List<Role> getRoles();
 
-    //List<User> getUsers(String similarLogin, int page);
+    String getAssocRolesCount(Role role);
 }

@@ -11,11 +11,6 @@
         <br><br>
         <h3>User List</h3>
 
-        <c:url var="newUser" value="/admin/new"/>
-        <form:form action="${newUser}" method="get">
-            <button class="btn btn-info" type="submit">Add User</button>
-        </form:form>
-
         <table class="table-bordered container">
         <thead>
             <tr>
@@ -76,16 +71,6 @@
             </ul>
         </div>
 
- <%--       <div align="center">
-            <ul class="pagination">
-                <li class="active"><a href="/admin/usersList?page=1">1</a></li>
-                <li><a href="/admin/usersList?page=2">2</a></li>
-                <li><a href="/admin/usersList?page=3">3</a></li>
-                <li><a href="/admin/usersList?page=4">4</a></li>
-                <li><a href="/admin/usersList?page=5">5</a></li>
-            </ul>
-        </div>--%>
-
         <br>
 
         <h3>Statistics</h3>
@@ -100,8 +85,8 @@
             <tbody>
             <tr>
                 <td>${allUsersCount}</td>
-                <td>-</td>
-                <td>-</td>
+                <td>${blockedUsersCount}</td>
+                <td>${adminUsersCount}</td>
             </tr>
             </tbody>
         </table>

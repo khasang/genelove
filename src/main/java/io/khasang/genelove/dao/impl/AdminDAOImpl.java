@@ -4,6 +4,7 @@ import io.khasang.genelove.entity.*;
 import io.khasang.genelove.dao.AdminDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,22 +36,6 @@ public class AdminDAOImpl implements AdminDAO {
         criteriaQuery.select(criteriaBuilder.count(root));
         return sessionFactory.getCurrentSession().createQuery(criteriaQuery).getSingleResult();
     }
-
-    /*@Override
-    public List<User> getUsers(String similarLogin, int page) {
-        int pageSize = 10;
-        CriteriaBuilder criteriaBuilder = sessionFactory.getCurrentSession().getCriteriaBuilder();
-        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
-        Root<User> root = criteriaQuery.from(User.class);
-        criteriaQuery.select(root);
-        criteriaQuery.orderBy(criteriaBuilder.asc(root.get("id")));
-        if(similarLogin != null)
-            criteriaQuery.where(criteriaBuilder.like(criteriaBuilder.upper(root.get("login")),"%"+similarLogin.toUpperCase()+"%"));
-        TypedQuery<User> typedQuery = sessionFactory.getCurrentSession().createQuery(criteriaQuery);
-        typedQuery.setFirstResult((page-1)*pageSize);
-        typedQuery.setMaxResults(pageSize);
-        return typedQuery.getResultList();
-    }*/
 
     @Override
     public List<User> filterUsers(String filter) {
@@ -136,6 +121,11 @@ public class AdminDAOImpl implements AdminDAO {
         Session session = sessionFactory.getCurrentSession();
         session.delete(user);
         session.flush();
+    }
+
+    @Override
+    public void createRole(Role role) {
+        sessionFactory.getCurrentSession().save(role);
     }
 
     @Override
@@ -231,5 +221,12 @@ public class AdminDAOImpl implements AdminDAO {
 
         TypedQuery<Role> typedQuery = session.createQuery(criteriaQuery);
         return typedQuery.getResultList();
+    }
+
+    @Override
+    public String getAssocRolesCount(Role role) {
+        Query query = sessionFactory.getCurrentSession().createNativeQuery(
+                "SELECT COUNT(*) FROM authorisations WHERE role_id = '" + role.getId() + "'");
+        return query.getSingleResult().toString();
     }
 }
