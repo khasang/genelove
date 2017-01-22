@@ -10,6 +10,9 @@ public class User {
     public enum AccountStatus {
         NEW, ACTIVE, SUSPENDED
     }
+    public enum Gender {
+        MALE, FEMALE, UNKNOWN
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
