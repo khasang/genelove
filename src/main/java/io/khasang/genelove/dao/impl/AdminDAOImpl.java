@@ -1,14 +1,12 @@
 package io.khasang.genelove.dao.impl;
 
-import io.khasang.genelove.entity.AuthorisationKey;
-import io.khasang.genelove.entity.Role;
-import io.khasang.genelove.entity.User;
-import io.khasang.genelove.entity.Authorisation;
+import io.khasang.genelove.entity.*;
 import io.khasang.genelove.dao.AdminDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -125,6 +123,11 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
+    public void createRole(Role role) {
+        sessionFactory.getCurrentSession().save(role);
+    }
+
+    @Override
     public void addRole(User user, Role role) {
         AuthorisationKey key = new AuthorisationKey();
         key.setUserId(user.getId());
@@ -203,7 +206,11 @@ public class AdminDAOImpl implements AdminDAO {
 
         TypedQuery<Role> query = session.createQuery(cq);
         query.setParameter(p, name);
-        return query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
     @Override

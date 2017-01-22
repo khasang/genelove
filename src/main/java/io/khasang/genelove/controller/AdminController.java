@@ -6,6 +6,7 @@ import io.khasang.genelove.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -20,6 +21,8 @@ public class AdminController {
 
     @Autowired
     AdminService adminService;
+
+    PagedListHolder myList = new PagedListHolder();
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -38,6 +41,8 @@ public class AdminController {
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public String adminScreen(Model model) {
+        adminService.createAllRoles();
+
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
 
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
@@ -53,13 +58,11 @@ public class AdminController {
                             @RequestParam(value = "filter", required = false) String filter,
                             Model model) {
 
-        PagedListHolder myList = null;
-
         if (filter == null) {
-            myList = new PagedListHolder(adminService.getUsers());
+            myList.setSource(adminService.getUsers());
         }
         else {
-            myList = new PagedListHolder(adminService.filterUsers(filter));
+            myList.setSource(adminService.filterUsers(filter));
         }
 
         myList.setPageSize(4);
@@ -93,16 +96,28 @@ public class AdminController {
     }
 
     @RequestMapping(value = "user/id/{id}", method = RequestMethod.GET)
-    public String userById(@PathVariable("id") int id, Model model){
-        model.addAttribute("user", adminService.getUserById(id));
+    public String userById(@PathVariable("id") int id,
+                           @RequestParam(value = "changePassword", required = false) boolean changePassword,
+                           Model model){
+        User user = adminService.getUserById(id);
+        if (changePassword) {
+            user.setPassword(null);
+        }
+        model.addAttribute("user", user);
         model.addAttribute("accountStatusList", User.getAccountStatusList());
         model.addAttribute("roleList", adminService.getRoles());
         return "admin/updateUser";
     }
 
     @RequestMapping(value = "user/login/{login}", method = RequestMethod.GET)
-    public String userByLogin(@PathVariable("login") String login, Model model){
-        model.addAttribute("user", adminService.getUserByLogin(login));
+    public String userByLogin(@PathVariable("login") String login,
+                              @RequestParam(value = "changePassword", required = false) boolean changePassword,
+                              Model model){
+        User user = adminService.getUserByLogin(login);
+        if (changePassword) {
+            user.setPassword(null);
+        }
+        model.addAttribute("user", user);
         model.addAttribute("accountStatusList", User.getAccountStatusList());
         model.addAttribute("roleList", adminService.getRoles());
         return "admin/updateUser";
@@ -113,6 +128,7 @@ public class AdminController {
     public Object addUser(@ModelAttribute(value = "user") User user, HttpServletResponse response) {
         try {
             if (user != null) {
+                user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
                 adminService.addUser(user);
                 return "User " + user.getLogin() + " added successfully";
             }
@@ -130,6 +146,12 @@ public class AdminController {
     public Object updateUser(@ModelAttribute(value = "user") User user, HttpServletResponse response) {
         try {
             if (user != null) {
+                // Get user details from the database
+                User dbUser = adminService.getUserById(user.getId());
+                // Check if the password was changed. If yes, encode the new password
+                if (!dbUser.getPassword().equals(user.getPassword())) {
+                    user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+                }
                 adminService.updateUser(user);
                 return "User updated successfully";
             }

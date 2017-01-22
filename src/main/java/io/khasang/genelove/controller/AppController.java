@@ -39,18 +39,24 @@ public class AppController {
     MailSender emailService;
     @Autowired
     Environment environment;
-	@Autowired
+    @Autowired
     UserService userService;
 
-    /** Login user to system" */
-    /*@RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(){
-        return "loginPage";
-    }*/
+    static int pageNum = 0;
 
-    /** User registration" */
+    /**
+     * Login user to system"
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
+    }
+
+    /**
+     * User registration"
+     */
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(){
+    public String registration() {
         return "registrationPage";
     }
 
@@ -58,32 +64,22 @@ public class AppController {
     public String registerUser(@ModelAttribute("registerUser") User user,
                                RedirectAttributes redirectAttributes) {
         String message;
+        String login = user.getLogin();
+        try {
+            userService.getUserByLogin(login);
+            return "User with login name " + login + " already exists, please try another name!";
+        } catch (Exception ex) {
+
+        }
         try {
             userService.addUser(user);
+            userService.addAuthorisation(user);
             message = "User " + user.getLogin() + " successfully registered.";
         } catch (Exception e) {
             message = "Registration error " + e.getMessage();
         }
         redirectAttributes.addFlashAttribute("message", message);
         return "redirect:/login";
-    }
-
-    /** User ends registration" */
-    @RequestMapping(value = "/postRegistration", method = RequestMethod.POST, produces = "application/json")
-    @ResponseBody
-    public Object addNewUser(@RequestBody User user, HttpServletResponse response){
-        String login = user.getLogin();
-        if (userService.getUserByLogin(login)!= null) {
-            return "User with login name " + login + " already exists, please try another name!";
-        }
-        try {
-            userService.addUser(user);
-            userService.addAuthorisation(user);
-            return "You successfully registered!";
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return "Error performing registration: " + e.getMessage();
-        }
     }
 
     @RequestMapping(value = "/admin/create", method = RequestMethod.GET)
@@ -114,21 +110,28 @@ public class AppController {
 
     /**
      * Example request http://localhost:8089/db/allQuestion?page=next
-     * */
+     */
     @RequestMapping(value = "/db/allQuestion", method = RequestMethod.GET)
     public String allQuestion(Model model, @RequestParam(value = "page", required = false) String page) {
-        PagedListHolder myList = new PagedListHolder(questionService.getQuestionList());
-        myList.setPageSize(4);
+        PagedListHolder questionList = new PagedListHolder(questionService.getQuestionList());
+        questionList.setPageSize(4);
 
-        if(page != null) {
+        if (page != null) {
             if ("previous".equals(page)) {
-                myList.previousPage();
+                questionList.previousPage();
+                pageNum--;
+                questionList.setPage(pageNum);
             } else if ("next".equals(page)) {
-                myList.nextPage();
+                questionList.nextPage();
+                pageNum++;
+                questionList.setPage(pageNum);
+            } else {
+                questionList.setPage(Integer.parseInt(page));
+                pageNum = Integer.parseInt(page);
             }
         }
 
-        model.addAttribute("allQuestion", myList);
+        model.addAttribute("allQuestion", questionList);
         return "questions";
     }
 
@@ -145,27 +148,6 @@ public class AppController {
         return "messages";
     }
 
-    @RequestMapping("/sql/delete")
-    public String delete(Model model) {
-        model.addAttribute("delete", sqlExamples.tableDelete());
-        return "sql";
-    }
-
-    @RequestMapping("/sql/create")
-    public String create(Model model) {
-        model.addAttribute("create", sqlExamples.tableCreate());
-        return "sql";
-    }
-
-    @RequestMapping("/sql/insert")
-    public String insert(Model model) {
-        model.addAttribute("insert", sqlExamples.tableInsert());
-        return "sql";
-    }
-
-    @RequestMapping("/sql/select")
-    public String select(Model model) {
-        model.addAttribute("select", sqlExamples.tableSelect());
-        return "sql";
-    }
 }
+
+
