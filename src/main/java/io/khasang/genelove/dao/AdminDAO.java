@@ -7,9 +7,11 @@ import java.util.List;
 
 public interface AdminDAO {
 
-//    List<User> getUsersList();
-
     long getAllUsersCount();
+
+    int getRoleId(String role);
+
+    boolean checkUserRole(User user, Role role);
 
     void addUser(User user);
 
@@ -26,4 +28,14 @@ public interface AdminDAO {
     User getUserByLogin(String login);
 
     List<User> getUsers();
+
+    List<User> filterUsers(String filter);
+
+    Role getRoleById(int id);
+
+    Role getRoleByName(Role.RoleName name);
+
+    List<Role> getRoles();
+
+    //List<User> getUsers(String similarLogin, int page);
 }

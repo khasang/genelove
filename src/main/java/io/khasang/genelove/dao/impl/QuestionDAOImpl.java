@@ -6,7 +6,10 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
+import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,13 +68,26 @@ public class QuestionDAOImpl implements QuestionDAO {
         return (Question) criteria.uniqueResult();
     }
 
+//    with criteria
+
+//    @Override
+//    @SuppressWarnings("unchecked")
+//    public List<Question> getQuestionList() {
+//        Criteria criteria = sessionFactory.
+//                getCurrentSession().
+//                createCriteria(Question.class);
+//        return (List<Question>) criteria.list();
+//    }
+
+    /**
+     * with native sql
+     */
     @Override
     @SuppressWarnings("unchecked")
-    public List<Question> getQuestionList() {
-        Criteria criteria = sessionFactory.
-                getCurrentSession().
-                createCriteria(Question.class);
-        return (List<Question>) criteria.list();
+    public List getQuestionList() {
+        Query query = sessionFactory.getCurrentSession().createNativeQuery("select * from Question;");
+        query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
+        return query.list();
     }
 
 }

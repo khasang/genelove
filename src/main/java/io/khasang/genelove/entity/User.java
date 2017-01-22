@@ -3,8 +3,7 @@ package io.khasang.genelove.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity(name = "users")
 public class User {
@@ -13,7 +12,8 @@ public class User {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+
     private int id;
 
     @Column(length = 255, unique = true)
@@ -28,10 +28,13 @@ public class User {
     @Column(name = "last_name", length = 255)
     private String lastName;
 
+    @Column(name = "gender", length = 6)
+    private String gender;
+
     @Column(length = 255)
     private String email;
 
-    @Column(name = "account_status")
+    @Column(name = "account_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private AccountStatus accountStatus;
 
@@ -41,9 +44,29 @@ public class User {
     @OneToMany(mappedBy = "toUser")
     private List<Message> receivedMessages;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "authorisations", joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
+
+    public User() {
+        this.accountStatus = AccountStatus.NEW;
+    }
+
+    public static Map<AccountStatus, String> getAccountStatusList() {
+        Map<AccountStatus, String> accountStatusList = new HashMap<>();
+        for (AccountStatus status : AccountStatus.values()) {
+            accountStatusList.put(status, status.toString());
+        }
+        return accountStatusList;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     public int getId() {
         return id;
@@ -124,4 +147,5 @@ public class User {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
 }
