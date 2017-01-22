@@ -80,6 +80,6 @@
         </div>
     </div>
 </div>
-<p class="agileits">© 2016 Online libary by Pasternak Ivan </p>
+<p class="agileits">© 2016 Online library by Pasternak Ivan </p>
 </body>
 </html>
