@@ -37,19 +37,16 @@ public class AdminController {
     }
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-    public String adminScreen() {
+    public String adminScreen(Model model) {
+        model.addAttribute("allUsersCount", adminService.getAllUsersCount());
+
+        Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
+        model.addAttribute("blockedUsersCount", adminService.getAssocRolesCount(roleBlocked));
+
+        Role roleAdmin = adminService.getRoleByName(Role.RoleName.ROLE_ADMIN);
+        model.addAttribute("adminUsersCount", adminService.getAssocRolesCount(roleAdmin));
         return "admin/index";
     }
-
-   /* @RequestMapping(value = "usersList", method = RequestMethod.GET)
-    public String usersList(@RequestParam(value = "similarLogin", required = false) final String similarLogin,
-                            @RequestParam(value = "page", required = false, defaultValue = "1") final String page,
-                            Model model) {
-        model.addAttribute("user", new User());
-        model.addAttribute("usersList", adminService.getUsersPage(similarLogin,Integer.parseInt(page)));
-        model.addAttribute("allUsersCount", adminService.getAllUsersCount());
-        return "admin/usersList";
-    }*/
 
     @RequestMapping(value = "usersList", method = RequestMethod.GET)
     public String usersList(@RequestParam(value = "page", required = false) String page,
@@ -78,6 +75,12 @@ public class AdminController {
         model.addAttribute("user", new User());
         model.addAttribute("usersList", myList);
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
+
+        Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
+        model.addAttribute("blockedUsersCount", adminService.getAssocRolesCount(roleBlocked));
+
+        Role roleAdmin = adminService.getRoleByName(Role.RoleName.ROLE_ADMIN);
+        model.addAttribute("adminUsersCount", adminService.getAssocRolesCount(roleAdmin));
         return "admin/usersList";
     }
 
@@ -104,13 +107,6 @@ public class AdminController {
         model.addAttribute("roleList", adminService.getRoles());
         return "admin/updateUser";
     }
-
-/*    @RequestMapping(value = "submit", method = RequestMethod.GET)
-    @ResponseBody
-    public String submit(@ModelAttribute("user") User user){
-
-        return "admin/update";
-    }*/
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
