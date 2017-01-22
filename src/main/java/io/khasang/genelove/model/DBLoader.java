@@ -1,11 +1,7 @@
 package io.khasang.genelove.model;
 
-import io.khasang.genelove.entity.User;
 import org.springframework.jdbc.core.JdbcTemplate;
-
 import java.util.ArrayList;
-
-import static io.khasang.genelove.entity.User.AccountStatus.NEW;
 
 public class DBLoader {
     private JdbcTemplate jdbcTemplate;
