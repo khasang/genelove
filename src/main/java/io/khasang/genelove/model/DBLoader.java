@@ -7,14 +7,14 @@ import java.util.ArrayList;
 
 import static io.khasang.genelove.entity.User.AccountStatus.NEW;
 
-public class AddUsersTemp {
+public class DBLoader {
     private JdbcTemplate jdbcTemplate;
     //private SQLServiceDAO
-    public AddUsersTemp(JdbcTemplate jdbcTemplate) {
+    public DBLoader(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public AddUsersTemp() {
+    public DBLoader() {
     }
 
     public String addUsersIntoDB () {

@@ -2,7 +2,7 @@ package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.EMail;
 import io.khasang.genelove.entity.User;
-import io.khasang.genelove.model.AddUsersTemp;
+import io.khasang.genelove.model.DBLoader;
 import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.MyMessage;
 import io.khasang.genelove.model.SQLExamples;
@@ -39,10 +39,11 @@ public class MailController {
 	@Autowired
     UserService userService;
     @Autowired
-    AddUsersTemp addUsersTemp;
+    DBLoader dbLoader;
 
     /*********************************** Mail Sender Service *******************************
     * In this section represents code of Mail Sender Service.
+    * Begin of this section here.
     ***************************************************************************************/
     @RequestMapping(value = "/sendMail", method = RequestMethod.GET)
     public String mailSender() {
@@ -51,7 +52,7 @@ public class MailController {
 
     @RequestMapping(value = "/insertUsersIntoDB", method = RequestMethod.GET)
     public String addUsersIntoDB(Model model) {
-        String response = addUsersTemp.addUsersIntoDB();
+        String response = dbLoader.addUsersIntoDB();
         model.addAttribute("message", response);
         if (response.equals("Ok"))
             return "mailService/sendMailResult";
@@ -234,24 +235,4 @@ public class MailController {
         }
     }
     /*************************** End of the Mail Sender Service ****************************/
-
-    /********************************* Private Message Service ******************************
-    * In this section represents code of Mail Sender Service.
-    * Begin of this section here.
-    ***************************************************************************************/
-    @RequestMapping(value = "/messenger", method = RequestMethod.GET)
-    public String messenger(Model model) {
-        String message = "Your Message Box is empty.<br>" +
-                "You haven't get any messages yet.";
-        model.addAttribute("message", message);
-        return "mailService/messenger";
-    }
-
-    @RequestMapping(value = "/sendMailToGroupOfUsers", method = RequestMethod.POST)
-    public String sendMailToGroupOfUsers(Model model) {
-        String message = "Send Mail to selected users";
-        model.addAttribute("message", message);
-        return "mailService/sendMailToSelectedUsers";
-    }
-    /************************** End of the Private Message Service *************************/
 }

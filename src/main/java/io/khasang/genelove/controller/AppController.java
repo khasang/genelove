@@ -3,7 +3,7 @@ package io.khasang.genelove.controller;
 import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.Question;
 import io.khasang.genelove.entity.User;
-import io.khasang.genelove.model.AddUsersTemp;
+import io.khasang.genelove.model.DBLoader;
 import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.MyMessage;
 import io.khasang.genelove.model.SQLExamples;
@@ -41,9 +41,6 @@ public class AppController {
     Environment environment;
 	@Autowired
     UserService userService;
-    @Autowired
-    AddUsersTemp addUsersTemp;
-
 
     /** Login user to system" */
     /*@RequestMapping(value = "/login", method = RequestMethod.GET)
