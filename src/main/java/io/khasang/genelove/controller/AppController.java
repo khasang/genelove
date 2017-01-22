@@ -51,46 +51,37 @@ public class AppController {
 
 
     /** Login user to system" */
-    /*@RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(){
-        return "loginPage";
-    }*/
+        return "login";
+    }
 
     /** User registration" */
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(){
-        return "registrationPage";
+        return "registration";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("registerUser") User user,
                                RedirectAttributes redirectAttributes) {
         String message;
+        String login = user.getLogin();
+        try {
+            userService.getUserByLogin(login);
+            return "User with login name " + login + " already exists, please try another name!";
+        } catch (Exception ex) {
+
+        }
         try {
             userService.addUser(user);
+            userService.addAuthorisation(user);
             message = "User " + user.getLogin() + " successfully registered.";
         } catch (Exception e) {
             message = "Registration error " + e.getMessage();
         }
         redirectAttributes.addFlashAttribute("message", message);
         return "redirect:/login";
-    }
-
-    /** User ends registration" */
-    @RequestMapping(value = "/postRegistration", method = RequestMethod.POST, produces = "application/json")
-    public Object addNewUser(@ModelAttribute("addNewUser") User user, HttpServletResponse response){
-        String login = user.getLogin();
-        if (userService.getUserByLogin(login)!= null) {
-            return "User with login name " + login + " already exists, please try another name!";
-        }
-        try {
-            userService.addUser(user);
-            userService.addAuthorisation(user);
-            return "You successfully registered!";
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return "Error performing registration: " + e.getMessage();
-        }
     }
 
     @RequestMapping(value = "/admin/create", method = RequestMethod.GET)
@@ -153,29 +144,6 @@ public class AppController {
         return "messages";
     }
 
-    @RequestMapping("/sql/delete")
-    public String delete(Model model) {
-        model.addAttribute("delete", sqlExamples.tableDelete());
-        return "sql";
-    }
-
-    @RequestMapping("/sql/create")
-    public String create(Model model) {
-        model.addAttribute("create", sqlExamples.tableCreate());
-        return "sql";
-    }
-
-    @RequestMapping("/sql/insert")
-    public String insert(Model model) {
-        model.addAttribute("insert", sqlExamples.tableInsert());
-        return "sql";
-    }
-
-    @RequestMapping("/sql/select")
-    public String select(Model model) {
-        model.addAttribute("select", sqlExamples.tableSelect());
-        return "sql";
-    }
 
     /**
      *********************************** Mail Sender Service. *******************************

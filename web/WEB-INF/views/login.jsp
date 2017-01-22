@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Login page</title>
@@ -49,24 +51,32 @@
             </form>
         </div>
         <div id="register" class="animate form">
-            <form  action="registration" method="post" autocomplete="on">
+<form:form action="/register" method="post" commandName="registerUser"
+           cssClass="form-inline form-group-sm">
+
                 <h2> Sign up </h2>
                 <p>
                     <label for="namesignup" class="uname" data-icon="u"><span>Your name</span></label>
-                    <input id="namesignup" name="firstName" required="required" type="text" placeholder="FIRST_NAME" />
+                    <input id="namesignup" name="firstName" required="required" type="text" placeholder="Name" />
                 </p>
                 <p>
                     <label for="surnamesignup" class="uname" data-icon="u"><span>Your surname</span></label>
-                    <input id="surnamesignup" name="lastName" required="required" type="text" placeholder="SECOND_NAME" />
+                    <input id="surnamesignup" name="lastName" required="required" type="text" placeholder="Surname" />
                 </p>
 
                 <p>
                     <label for="emailsignup" class="youmail" data-icon="e" ><span>Your email</span></label>
-                    <input id="emailsignup" name="mail" required="required" type="email" placeholder="EXAMPLE@MAIL.COM"/>
+                    <input id="emailsignup" name="email" required="required" type="email" placeholder="EXAMPLE@MAIL.COM"/>
                 </p>
+
+                <p>
+                     <label for="loginsignup" class="youlogin" data-icon="p"><span>Your login</span></label>
+                    <input id="loginsignup" name="login" required="required" type="login" placeholder="login"/>
+                 </p>
+
                 <p>
                     <label for="passwordsignup" class="youpasswd" data-icon="p"><span>Your password</span></label>
-                    <input id="passwordsignup" name="password" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                    <input id="passwordsignup" name="password" required="required" type="password" placeholder="X8df!90EO"/>
                 </p>
 
                 <p class="signin button">
@@ -76,7 +86,7 @@
                     <span>Already a member ?</span>
                     <a href="#tologin" class="to_register">Log In</a>
                 </p>
-            </form>
+</form:form>
         </div>
     </div>
 </div>
