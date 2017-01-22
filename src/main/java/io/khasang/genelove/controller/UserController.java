@@ -2,13 +2,14 @@ package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.*;
 import io.khasang.genelove.service.MessageService;
+import io.khasang.genelove.service.ProfileService;
 import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -23,40 +24,14 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ProfileService profileService;
+
     @RequestMapping("/qwerty")
     public String test(Model model){
         model.addAttribute("hello", "");
         return "hello";
     }
-
-    /** User registration" *//*
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(){
-        return "registrationPage";
-    }
-
-    *//** User ends registration" *//*
-    @RequestMapping(value = "/postRegistration", method = RequestMethod.POST)
-    public ModelAndView addNewUser(@ModelAttribute ("user") User user){
-        String message="Error performing registration";
-        try {
-            if (userService.getUserByLogin(user.getLogin()) != null){
-                message = user.getLogin();
-                return new ModelAndView("registrationResult", "message", message );
-            }
-            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-            userService.addUser(user);
-            User us = userService.getUserByLogin(user.getLogin());
-            Role role = userService.getRoleByName(Role.RoleName.ROLE_USER.toString());
-            userService.addAuthorisation(us, role);
-            message = "You successfully registered!";
-            return new ModelAndView("registrationResult","message",message);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ModelAndView("registrationResult","message",message);
-        }
-    }*/
-
 
     /** Login user to system" */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -162,15 +137,55 @@ public class UserController {
     }
 
     /** Add person info about user" */
-    @RequestMapping(value = "/addPersInfo", method = RequestMethod.POST)
-    public String persInfoAdd(){
-        return "persInfoAddPage";
+    @RequestMapping(value = "/profileNew", method = RequestMethod.GET)
+    public String profileNew(){
+        return "profileFind";
     }
 
-    /** Delete person info about user" */
-    @RequestMapping(value = "/deletePersInfo", method = RequestMethod.DELETE)
-    public String persInfoDelete(){
-        return "persInfoDeletePage";
+
+    @RequestMapping(value = "/addProfile", method = RequestMethod.POST)
+    public String addProfile(@ModelAttribute("addProfile") Profile profile,
+                               RedirectAttributes redirectAttributes) {
+        String message;
+        try {
+            profileService.addProfile(profile);
+            message = "New profile " + profile.getNickname() + " successfully created.";
+        } catch (Exception e) {
+            message = "Profile creation error: " + e.getMessage();
+        }
+        redirectAttributes.addFlashAttribute("message", message);
+        return "redirect:/profiles";
+    }
+
+    /**View profiles list**/
+    @RequestMapping(value = "/profiles", method = RequestMethod.GET)
+    public String userProfiles (Model model) {
+        User user = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<Profile> list = profileService.getUserProfiles(user);
+        model.addAttribute("profiles", list);
+        return "profiles";
+    }
+
+    /**Find profile**/
+    @RequestMapping(value = "/findProfileBy", method = RequestMethod.GET)
+    public String findProf(){
+        return "profileFind";
+    }
+
+
+    @RequestMapping(value = "/findProfile", method = RequestMethod.GET)
+    public String findProfiles (@RequestParam("ageFrom") int ageFrom,
+                                @RequestParam("ageTo") int ageTo,
+                                @RequestParam ("gender") String gender, Model model) {
+        model.addAttribute("profiles", profileService.getProfiles(ageFrom, ageTo, gender));
+        return "profiles";
+    }
+
+    /** View person info" */
+    @RequestMapping(value = "/viewPersInfo/{id}", method = RequestMethod.GET)
+    public String persInfoView(@PathVariable("id") int id, Model model){
+        model.addAttribute("profile", profileService.getProfileById(id));
+        return "profile";
     }
 
     /** Update person info about user" */
@@ -179,11 +194,12 @@ public class UserController {
         return "persInfoUpdatePage";
     }
 
-    /** View person info" */
-    @RequestMapping(value = "/viewPersInfo", method = RequestMethod.GET)
-    public String persInfoView(){
-        return "persInfoViewPage";
+    /** Delete person info about user" */
+    @RequestMapping(value = "/deletePersInfo", method = RequestMethod.DELETE)
+    public String persInfoDelete(){
+        return "persInfoDeletePage";
     }
+
 
     /** Add album to user relative album list" */
     @RequestMapping(value = "/addAlbum", method = RequestMethod.POST)
