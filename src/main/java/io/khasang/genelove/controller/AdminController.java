@@ -72,6 +72,8 @@ public class AdminController {
                 myList.previousPage();
             } else if ("next".equals(page)) {
                 myList.nextPage();
+            } else{
+                myList.setPage(Integer.parseInt(page));
             }
         }
 
