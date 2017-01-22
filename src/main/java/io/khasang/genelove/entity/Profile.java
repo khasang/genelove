@@ -15,7 +15,7 @@ public class Profile {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     @OneToOne(targetEntity = User.class)
