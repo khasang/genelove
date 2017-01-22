@@ -1,18 +1,24 @@
 package io.khasang.genelove.controller;
 
+import io.khasang.genelove.entity.EMail;
 import io.khasang.genelove.entity.Role;
 import io.khasang.genelove.entity.User;
 import io.khasang.genelove.service.AdminService;
+import io.khasang.genelove.service.MailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.core.env.Environment;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.beans.PropertyEditorSupport;
+import java.io.UnsupportedEncodingException;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -20,9 +26,21 @@ import java.beans.PropertyEditorSupport;
 public class AdminController {
 
     @Autowired
+    Environment environment;
+    @Autowired
     AdminService adminService;
+    @Autowired
+    MailSender emailService;
 
     PagedListHolder myList = new PagedListHolder();
+
+    private void init (AdminService adminService, Model model) {
+        Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
+        Role roleAdmin = adminService.getRoleByName(Role.RoleName.ROLE_ADMIN);
+        model.addAttribute("allUsersCount", adminService.getAllUsersCount());
+        model.addAttribute("blockedUsersCount", adminService.getAssocRolesCount(roleBlocked));
+        model.addAttribute("adminUsersCount", adminService.getAssocRolesCount(roleAdmin));
+    }
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -111,10 +129,47 @@ public class AdminController {
         return "admin/updateUser";
     }
 
+    @RequestMapping(value = "sendMailToUserByMail", method = RequestMethod.POST)
+    public String sendMailToUserByMail(HttpServletRequest request, Model model) {
+        adminService.createAllRoles();
+        init(adminService, model);
+        model.addAttribute("mailto", request.getParameter("email"));
+        return "admin/sendMailToUserByMail";
+    }
+
+    @RequestMapping(value = "sendMail", method = RequestMethod.POST)
+    public String sendMail(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
+        try {
+            request.setCharacterEncoding("UTF8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        adminService.createAllRoles();
+        String footer = "\n\n" + "This mail was sended to you from Administrator of " +
+                "Genelove Meeting Service. You don't need to answer on this letter.";
+        EMail eMail = new EMail(
+                request.getParameter("recipient"),
+                environment.getProperty("mail.username"),
+                request.getParameter("subject"),
+                request.getParameter("message") + footer
+        );
+        emailService.setEmailFields(eMail);
+        try {
+            emailService.sendEmail(eMail);
+            String message = "Your Mail was successfully delivered to User at address " +
+                    request.getParameter("recipient");
+            model.addAttribute("message", message);
+            return "admin/sendMailResult";
+        } catch (Exception exception) {
+            model.addAttribute("errorMessage", exception);
+            return "mailService/sendMailError";
+        }
+    }
+
     @RequestMapping(value = "user/login/{login}", method = RequestMethod.GET)
     public String userByLogin(@PathVariable("login") String login,
-                              @RequestParam(value = "changePassword", required = false) boolean changePassword,
-                              Model model){
+                              @RequestParam(value = "changePassword", required = false)
+                              boolean changePassword, Model model) {
         User user = adminService.getUserByLogin(login);
         if (changePassword) {
             user.setPassword(null);
@@ -201,6 +256,8 @@ public class AdminController {
             return "Error in promoteUser method: " + e.getMessage();
         }
     }
+
+
 
     @RequestMapping(value = "block", method = RequestMethod.POST)
     @ResponseBody
