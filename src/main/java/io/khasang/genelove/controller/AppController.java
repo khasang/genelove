@@ -89,12 +89,6 @@ public class AppController {
         return "questions";
     }
 
-    @RequestMapping(value = "/myPage", method = RequestMethod.GET)
-    public String myPage(Model model){
-        model.addAttribute("myPage", "");
-        return "profile";
-    }
-
     @RequestMapping(value = "/modifyProfile", method = RequestMethod.GET)
     public String modifyProfile(Model model){
         model.addAttribute("modifyProfile", "");

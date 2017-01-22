@@ -10,7 +10,7 @@
     </head>
     <body class="background">
         <jsp:include page="header_r.jsp" />
-        <h1 class="ref leftAlign leftFloat">Find new friends</h1><h1 class="alignCenter">Search results</h1>
+        <h1 class="alignCenter">Search results</h1>
         <div class="opacityBackground rowFlexContainer">
             <div class="toCenter flexElement quaterWidth fixedPosition">
                 <form action="searchResult.jsp" class="width noOpacity">
@@ -24,15 +24,12 @@
                         <label for="region" class="genericFont">State</label><br>
                         <input class="inputText" type="text" id="region" name="Region"><br>
 
-                        <label for="id" class="genericFont">Id</label><br>
-                        <input class="inputText" type="text" id="id" name="Id"><br>
-
                         <input type="submit" value="Search">
                     </div>
                 </form>
             </div>
 
-            <div class="quaterWidth righAlign flexElement rowFlexContainer leftPadding40">
+            <div class="width righAlign flexElement rowFlexContainer leftPadding40">
                 <c:if test="${empty results}">
                     <p class="genericFont">Requested person did not find:(</p>
                 </c:if>

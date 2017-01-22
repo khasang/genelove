@@ -11,17 +11,22 @@ import java.util.List;
 @Service
 @Transactional
 public class ProfileService {
-    private String firstName;
-    private String lastName;
-    private String birthDate;
-    private String region;
-    private String school;
-    private String university;
-    private String activity;
-    private String hobby;
-    private List friendlist;
+    private String firstName = "myName";
+    private String lastName = "mySurname";
+    private String birthDate  = "myDate";
+    private String region = "myRegion";
+    private String school = "mySchool";
+    private String university = "myUniversity";
+    private String activity = "myActivity";
+    private String hobby = "myHobby";
+    private List friendlist = new ArrayList<>();
 
-    public ProfileService() {}
+    public ProfileService() {
+        for (int i = 0; i < 6; i++) {
+            friendlist.add(new ProfileService("friend" + i, "FRIEND" + i,
+                    "01-01-1990", "Moscow" + i));
+        }
+    }
 
     public ProfileService(String firstName, String lastName, String birthDate, String region) {
         this.firstName = firstName;
@@ -31,51 +36,38 @@ public class ProfileService {
     }
 
     public List<ProfileService> getFriendsList(){
-        friendlist = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            friendlist.add(new ProfileService("friend" + i, "FRIEND" + i,
-                    "01-01-1990", "Moscow" + i));
-        }
         return friendlist;
     }
 
     public String getFirstName() {
-        firstName = "myName";
-        return firstName;
+       return firstName;
     }
 
     public String getLastName() {
-        lastName = "mySurname";
         return lastName;
     }
 
     public String getBirthDate() {
-        birthDate = "myDate";
         return birthDate;
     }
 
     public String getRegion() {
-        region = "myRegion";
         return region;
     }
 
     public String getSchool() {
-        school = "mySchool";
         return school;
     }
 
     public String getUniversity() {
-        university = "myUniversity";
         return university;
     }
 
     public String getActivity() {
-        activity = "myActivity";
         return activity;
     }
 
     public String getHobby() {
-        hobby = "myHobby";
         return hobby;
     }
 

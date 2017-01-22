@@ -11,13 +11,13 @@
     </head>
     <body class="background">
         <jsp:include page="header_r.jsp" />
-        <h1 class="ref leftAlign leftFloat">Find new friends</h1><h1 class="alignCenter">My Friends</h1>
+        <h1 class="alignCenter">My Friends</h1>
         <div class="opacityBackground rowFlexContainer">
             <div class="toCenter flexElement quaterWidth fixedPosition">
                 <form action="${pageContext.request.contextPath}/searchResult" class="width noOpacity">
                     <div class="noOpacity">
                         <label for="fname" class="genericFont">First Name</label><br>
-                        <input class="inputText" type="text" id="fname" name="firstName"><br>
+                        <input class="inputText" type="text" id="fname" name="firstName">
 
                         <label for="lname" class="genericFont">Last Name</label><br>
                         <input class="inputText"  type="text" id="lname" name="lastName"><br>
@@ -25,8 +25,8 @@
                         <label for="region" class="genericFont">State</label><br>
                         <input class="inputText" type="text" id="region" name="Region"><br>
 
-                        <label for="id" class="genericFont">Id</label><br>
-                        <input class="inputText" type="text" id="id" name="Id"><br>
+                        <label for="age" class="genericFont">Age</label><br>
+                        <input class="inputText" type="range" id="age" name="Age"><br>
 
                         <input type="submit" value="Search">
                     </div>
@@ -35,7 +35,7 @@
 
             <div class="quaterWidth righAlign flexElement rowFlexContainer leftPadding40">
                 <c:if test="${empty friends.friendsList}">
-                    <p class="genericFont">You have no friend yet:(</p>
+                    <p class="genericFont">You have no friends yet:(</p>
                 </c:if>
                 <c:forEach var="item" items="${friends.friendsList}">
                     <div class="panel panel-primary righAlign flexElement">
