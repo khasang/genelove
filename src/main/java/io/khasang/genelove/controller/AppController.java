@@ -187,7 +187,7 @@ public class AppController {
      */
     @RequestMapping(value = "/sendMail", method = RequestMethod.GET)
     public String mailSender() {
-        return "emailtest/sendMail";
+        return "mailService/sendMail";
     }
 
     @RequestMapping(value = "/insertUsersIntoDB", method = RequestMethod.GET)
@@ -195,10 +195,10 @@ public class AppController {
         String response = addUsersTemp.addUsersIntoDB();
         model.addAttribute("message", response);
         if (response.equals("Ok"))
-            return "emailtest/sendMailResult";
+            return "mailService/sendMailResult";
         else {
             model.addAttribute("errorMessage", response);
-            return "emailtest/sendMailError";
+            return "mailService/sendMailError";
         }
     }
 
@@ -207,7 +207,7 @@ public class AppController {
         String message = "View all users from our database \"User\"";
         model.addAttribute("message", message);
         model.addAttribute("usersList", userService.getUserAll());
-        return "emailtest/viewUsersList";
+        return "mailService/viewUsersList";
     }
 
     @RequestMapping(value = "/viewAllEMails", method = RequestMethod.GET)
@@ -215,14 +215,14 @@ public class AppController {
         String message = "View all E-Mails";
         model.addAttribute("message", message);
         model.addAttribute("eMailsList", userService.getUserAll());
-        return "emailtest/viewEMailsList";
+        return "mailService/viewEMailsList";
     }
 
     @RequestMapping(value = "/noAction", method = RequestMethod.POST)
     public String noAction(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         String message = "This is blank for the future usage";
         model.addAttribute("message", message);
-        return "emailtest/sendMailResult";
+        return "mailService/sendMailResult";
     }
 
     @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
@@ -232,7 +232,7 @@ public class AppController {
         if (request.getParameter("recipient").equals("")) {
             String message = "Recipient's address is null";
             model.addAttribute("errorMessage", message);
-            return "emailtest/sendMailError";
+            return "mailService/sendMailError";
         }
             EMail eMail = new EMail(
                     request.getParameter("recipient"),
@@ -246,18 +246,18 @@ public class AppController {
             emailService.sendEmail(eMail);
             String message = "Your Mail was successfully delivered to Recipient";
             model.addAttribute("message", message);
-            return "emailtest/sendMailResult";
+            return "mailService/sendMailResult";
         } catch (Exception exception) {
             model.addAttribute("errorMessage", exception);
-            return "emailtest/sendMailError";
+            return "mailService/sendMailError";
         }
     }
 
     @RequestMapping(value = "/sendMailToAllUsers", method = RequestMethod.GET)
     public String sendMailToAllUsersGET(Model model) {
-        String message = "Do you wanna send the message to all users in really?";
+        String message = "Do you wanna send the e-Mail to all users in really?";
         model.addAttribute("message", message);
-        return "emailtest/sendMailToAllUsers";
+        return "mailService/sendMailToAllUsers";
     }
 
     @RequestMapping(value = "/sendMailToAllUsers", method = RequestMethod.POST)
@@ -277,10 +277,10 @@ public class AppController {
             String message = "Your Mail was successfully delivered to All <strong>" +
                     count + "</strong> Recipients";
             model.addAttribute("message", message);
-            return "emailtest/sendMailResult";
+            return "mailService/sendMailResult";
         } catch (Exception exception) {
             model.addAttribute("errorMessage", exception);
-            return "emailtest/sendMailError";
+            return "mailService/sendMailError";
         }
     }
 
@@ -290,7 +290,7 @@ public class AppController {
                 id+ "</strong>) in really? ";
         model.addAttribute("message", message);
         model.addAttribute("id", id);
-        return "emailtest/sendMailById";
+        return "mailService/sendMailById";
     }
 
     @RequestMapping(value = "/sendMailById/send", method = RequestMethod.POST)
@@ -311,10 +311,10 @@ public class AppController {
             String id = request.getParameter("recipient");
             String message = "Your Mail was successfully delivered to Recipient with ID = " + id;
             model.addAttribute("message", message);
-            return "emailtest/sendMailResult";
+            return "mailService/sendMailResult";
         } catch (Exception exception) {
             model.addAttribute("errorMessage", exception);
-            return "emailtest/sendMailError";
+            return "mailService/sendMailError";
         }
     }
 
@@ -333,10 +333,10 @@ public class AppController {
             emailService.sendEmail(user);
             String message = "Your Mail was successfully delivered to Recipient";
             model.addAttribute("message", message);
-            return "emailtest/sendMailResult";
+            return "mailService/sendMailResult";
         } catch (Exception exception) {
             model.addAttribute("errorMessage", exception);
-            return "emailtest/sendMailError";
+            return "mailService/sendMailError";
         }
     }
 
@@ -372,11 +372,11 @@ public class AppController {
             emailService.sendEmail(list);
             String message = "Your Mail was successfully delivered to Recipients";
             model.addAttribute("message", message);
-            return "emailtest/sendMailResult";
+            return "mailService/sendMailResult";
 
         } catch (Exception exception) {
             model.addAttribute("errorMessage", exception);
-            return "emailtest/sendMailError";
+            return "mailService/sendMailError";
         }
     }
 
@@ -386,7 +386,7 @@ public class AppController {
     /**
      ******************************** Private Message Service. ******************************
      *
-     * In this section represents code of Mail Sender Seкvice.
+     * In this section represents code of Mail Sender Service.
      * Finish of this section here.
      ******************************** Private Message Service. *******************************
      */
@@ -396,14 +396,14 @@ public class AppController {
         String message = "Your Message Box is empty.<br>" +
                 "You haven't get any messages yet.";
         model.addAttribute("message", message);
-        return "emailtest/messenger";
+        return "mailService/messenger";
     }
 
     @RequestMapping(value = "/sendMailToGroupOfUsers", method = RequestMethod.POST)
     public String sendMailToGroupOfUsers(Model model) {
         String message = "Send Mail to selected users";
         model.addAttribute("message", message);
-        return "emailtest/sendMailToSelectedUsers";
+        return "mailService/sendMailToSelectedUsers";
     }
 
 }
