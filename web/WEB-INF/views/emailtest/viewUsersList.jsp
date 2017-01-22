@@ -16,9 +16,14 @@
         <span class="systemResponce">${message}</span></p>
 </div>
 <hr>
-<div>
+<div class="sendMailToSelectUsers">
+    <fieldset class="fieldset">
+        <legend>View all users</legend>
+        <h1> Please, select all users that you wanna, and ther push button "Select"</h1>
+        <form class="mailForm" method="post" action="sendMailToGroupOfUsers">
     <table class="tableData">
         <tr>
+            <th>Select</th>
             <th>ID</th>
             <th>Login</th>
             <th>First Name</th>
@@ -30,6 +35,7 @@
         </tr>
         <c:forEach items="${usersList}" var="user">
             <tr>
+                <td><input type="checkbox" name="choice" value="${user.id}"/></td>
                 <td>${user.id}</td>
                 <td>${user.login}</td>
                 <td>${user.firstName}</td>
@@ -41,7 +47,11 @@
             </tr>
         </c:forEach>
     </table>
+            <input class="submitMail" type="submit" value="Send Mail" />
+        </form>
+    </fieldset>
 </div>
 <hr class="hr">
+
 </body>
 </html>

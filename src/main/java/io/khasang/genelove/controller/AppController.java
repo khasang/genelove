@@ -260,7 +260,6 @@ public class AppController {
         return "emailtest/sendMailToAllUsers";
     }
 
-
     @RequestMapping(value = "/sendMailToAllUsers", method = RequestMethod.POST)
     public String sendMailToAllUsersPOST(HttpServletRequest request, Model model)
             throws UnsupportedEncodingException {
@@ -285,7 +284,6 @@ public class AppController {
         }
     }
 
-
     @RequestMapping(value = "/sendMailById/{id}", method = RequestMethod.GET)
     public String sendMailByIdGET(@PathVariable("id") int id, Model model) {
         String message = "Do you wanna send the message to user (ID = <strong>" +
@@ -299,10 +297,6 @@ public class AppController {
     public String sendMailByIdPOST(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         request.setCharacterEncoding("UTF8");
         int recipient = Integer.valueOf(request.getParameter("recipient"));
-        System.out.println("*************************************************");
-        System.out.println("mail: " + emailService.getEmailById(recipient));
-        System.out.println("id: " + recipient);
-        System.out.println("*************************************************");
         EMail eMail = new EMail(
                 //emailService.getEmailById(recipient),
                 userService.getUserById(recipient).getEmail(),
@@ -396,12 +390,20 @@ public class AppController {
      * Finish of this section here.
      ******************************** Private Message Service. *******************************
      */
+
     @RequestMapping(value = "/messenger", method = RequestMethod.GET)
     public String messenger(Model model) {
         String message = "Your Message Box is empty.<br>" +
                 "You haven't get any messages yet.";
         model.addAttribute("message", message);
         return "emailtest/messenger";
+    }
+
+    @RequestMapping(value = "/sendMailToGroupOfUsers", method = RequestMethod.POST)
+    public String sendMailToGroupOfUsers(Model model) {
+        String message = "Send Mail to selected users";
+        model.addAttribute("message", message);
+        return "emailtest/sendMailToSelectedUsers";
     }
 
 }

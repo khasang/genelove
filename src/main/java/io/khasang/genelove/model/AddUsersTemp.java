@@ -23,20 +23,20 @@ public class AddUsersTemp {
 
         String user1 = "INSERT INTO users (id, login, name, password, role_id, " +
                 "account_status, email, first_name, last_name, gender) VALUES (" +
-                index + ", 'robby', 'rob', " +
-                "'$2a$10$lF8zJ8UTZV4tqL/Mtp//ZuoRns4KeIYL/fcAPaddQTpW2HgiAjUpS',\n" +
+                index + ", 'admin', 'admin', " +
+                "'$2a$10$X8CUSvrFViVMvP6k0pftF.4vtxjIfVaEy04JcImj95lOPGdgXhZZq',\n" +
                 "3, 'NEW', 'elena.ilyukhina@hotmail.com', 'Robert', 'Stivenson', 'male');";
         index++;
         String user2 = "INSERT INTO users (id, login, name, password, role_id, " +
                 "account_status, email, first_name, last_name, gender) VALUES (" +
-                index + ", 'linda', 'lin', " +
-                "'$2a$10$lF8zJ8UTZV4tqL/Mtp//ZuoRns4KeIYL/fcAPaddQTpW2HgiAjUpS',\n" +
+                index + ", 'db', 'db', " +
+                "'$2a$10$ZRH9JMqGryNJS2JG4BNXNugFpHqb/6rrMxwcAScd0yb98jtHCcLie',\n" +
                 "3, 'NEW', 'python239@mail.ru', 'Linda', 'Sikorsky', 'female');";
         index++;
         String user3 = "INSERT INTO users (id, login, name, password, role_id, " +
                 "account_status, email, first_name, last_name, gender) VALUES (" +
-                index + ", 'oskar', 'oskar', " +
-                "'$2a$10$lF8zJ8UTZV4tqL/Mtp//ZuoRns4KeIYL/fcAPaddQTpW2HgiAjUpS',\n" +
+                index + ", 'user', 'user', " +
+                "'$2a$10$mCzZ1rk9BQfiYwAlyPZ1Gu8h.aWd13zbj1S0SjfJIQpkaqIYD4wwK',\n" +
                 "3, 'NEW', 'elena.ilyukhina@hotmail.com', 'Oskar', 'Li', 'male');";
         index++;
         String user4 = "INSERT INTO users (id, login, name, password, role_id, " +

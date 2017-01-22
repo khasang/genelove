@@ -101,7 +101,7 @@ label .req {
 
 label.active {
   -webkit-transform: translateY(50px);
-          transform: translateY(50px);
+  transform: translateY(50px);
   left: 2px;
   font-size: 14px;
 }
@@ -114,7 +114,7 @@ label.highlight {
   color: #ffffff;
 }
 
-input, textarea {
+fieldset.inputTextarea {
   font-size: 20px;
   display: block;
   width: 100%;
@@ -128,6 +128,7 @@ input, textarea {
   -webkit-transition: border-color .25s ease, box-shadow .25s ease;
   transition: border-color .25s ease, box-shadow .25s ease;
 }
+
 input:focus, textarea:focus {
   outline: 0;
   border-color: #1ab188;
@@ -203,7 +204,7 @@ th, td {
   padding: 5px;
 }
 .tableData th {
-  background-color: lightblue;
+  background-color: lightsteelblue;
 }
 
 .tableData tr:nth-of-type(odd) {
@@ -237,6 +238,15 @@ th, td {
   border: 0px;
   text-align: center;
   margin: 5px;
+  padding: 15px;
+  background: #c1bdba;
+}
+
+.sendMailToSelectUsers {
+  width: 90%;
+  border: 0px;
+  text-align: center;
+  margin: auto;
   padding: 15px;
   background: #c1bdba;
 }
@@ -320,7 +330,7 @@ td {
 }
 
 .fieldset {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   border: 1px solid gray;
   border-radius: 50px;
@@ -386,3 +396,4 @@ legend {
   color: hotpink;
   font-size: 40px;
 }
+

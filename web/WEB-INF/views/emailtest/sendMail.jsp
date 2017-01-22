@@ -16,15 +16,15 @@
         <table border="0" align="center">
             <tr>
                 <td><label>To:</label></td>
-                <td><input type="text" name="recipient"/></td>
+                <td><input type="text" name="recipient" class="inputTextarea"/></td>
             </tr>
             <tr>
                 <td><label>Subject:</label></td>
-                <td><input type="text" name="subject"/></td>
+                <td><input type="text" name="subject" class="inputTextarea"/></td>
             </tr>
             <tr>
                 <td><label>Message:</label></td>
-                <td><textarea rows="4" name="message"></textarea></td>
+                <td><textarea rows="4" name="message" class="inputTextarea"></textarea></td>
             </tr>
         </table>
         <input class="submitMail" type="submit" value="Send Mail" />
