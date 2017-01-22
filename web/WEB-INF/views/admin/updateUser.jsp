@@ -24,7 +24,12 @@
 
             <tr>
                 <td><form:label path="password">Password</form:label></td>
-                <td><form:password class="form-control" placeholder="Password" path="password" value="${user.password}"/></td>
+                <td><form:password class="form-control" placeholder="Password" path="password" value="${user.password}" readonly="${not param.changePassword}"/></td>
+            </tr>
+
+            <tr>
+                <td>&nbsp;</td>
+                <td><a href="?changePassword=true">Change password</a></td>
             </tr>
 
             <tr>
@@ -36,11 +41,6 @@
                 <td><form:label path="lastName">Last name</form:label></td>
                 <td><form:input class="form-control" placeholder="Last name" path="lastName" value="${user.lastName}"/></td>
             </tr>
-
-            <%--<tr>
-                <td><form:label path="gender">Gender</form:label></td>
-                <td><form:input class="form-control" placeholder="Gender" path="gender" value="${user.gender}"/></td>
-            </tr>--%>
 
             <tr>
                 <td><form:label path="email">E-Mail address</form:label></td>

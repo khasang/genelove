@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -106,13 +107,11 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void addUser(User user) {
-        // user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         sessionFactory.getCurrentSession().save(user);
     }
 
     @Override
     public void updateUser(User user) {
-        // user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         sessionFactory.getCurrentSession().update(user);
     }
 
