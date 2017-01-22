@@ -1,11 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Mail Sender</title>
-    <link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet"></head>
-<head>
-    <title>Mail Sender</title>
-</head>
+<jsp:include page="header.jsp"/>
 <body>
 <jsp:include page="navigation.jsp"/>
 <div class="systemMessage">
@@ -33,6 +26,4 @@
     </form>
     </fieldset>
 </div>
-
-</body>
-</html>
+<jsp:include page="footer.jsp"/>

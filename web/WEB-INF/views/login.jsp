@@ -15,7 +15,7 @@
     <link href="css/login/style.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body style="background: url(images/love2.jpg) no-repeat fixed center;">
-<h1 class="w3ls" style="color: black">WELLCOME</h1>
+<h1 class="w3ls" style="color: black">WELCOME</h1>
 <div id="container_demo" >
     <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
     <a class="hiddenanchor" id="toregister"></a>
@@ -80,6 +80,6 @@
         </div>
     </div>
 </div>
-<p class="agileits">© 2016 Online libary by Pasternak Ivan </p>
+<p class="agileits">© 2016 Online library by Pasternak Ivan </p>
 </body>
 </html>
