@@ -1,11 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Mail Sender</title>
-    <link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet"></head>
-<head>
-    <title>Mail Sender</title>
-</head>
+<jsp:include page="header.jsp"/>
 <body>
 <jsp:include page="navigation.jsp"/>
 <div class="systemMessage">
@@ -16,7 +9,7 @@
 <div class="sendMailById">
     <fieldset class="fieldset">
         <legend>E-Mail Service</legend>
-    <h1>Send e-mail to selected users</h1>
+    <h1>Send simple e-mail by User's Id</h1>
     <form class="mailForm" method="post" action="send">
         <input type="hidden" name="recipient" value="${id}"/>
         <table border="0" align="center">
@@ -33,6 +26,4 @@
     </form>
     </fieldset>
 </div>
-
-</body>
-</html>
+<jsp:include page="footer.jsp"/>

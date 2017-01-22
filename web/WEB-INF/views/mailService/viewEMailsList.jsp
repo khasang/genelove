@@ -3,9 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Mail Sender</title>
-    <link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet"></head>
-<head>
+    <link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet">
     <title>Mail Sender</title>
 </head>
 <body>
@@ -36,6 +34,4 @@
         </c:forEach>
     </table>
 </div>
-<hr class="hr">
-</body>
-</html>
+<jsp:include page="footer.jsp"/>
