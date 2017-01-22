@@ -42,6 +42,8 @@ public class AppController {
 	@Autowired
     UserService userService;
 
+    static  int pageNum = 0;
+
     /** Login user to system" */
     /*@RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(){
@@ -117,18 +119,25 @@ public class AppController {
      * */
     @RequestMapping(value = "/db/allQuestion", method = RequestMethod.GET)
     public String allQuestion(Model model, @RequestParam(value = "page", required = false) String page) {
-        PagedListHolder myList = new PagedListHolder(questionService.getQuestionList());
-        myList.setPageSize(4);
+        PagedListHolder questionList = new PagedListHolder(questionService.getQuestionList());
+        questionList.setPageSize(4);
 
         if(page != null) {
             if ("previous".equals(page)) {
-                myList.previousPage();
+                questionList.previousPage();
+                pageNum--;
+                questionList.setPage(pageNum);
             } else if ("next".equals(page)) {
-                myList.nextPage();
+                questionList.nextPage();
+                pageNum++;
+                questionList.setPage(pageNum);
+            } else {
+                questionList.setPage(Integer.parseInt(page));
+                pageNum = Integer.parseInt(page);
             }
         }
 
-        model.addAttribute("allQuestion", myList);
+        model.addAttribute("allQuestion", questionList);
         return "questions";
     }
 
