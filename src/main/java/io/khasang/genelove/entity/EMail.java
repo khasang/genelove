@@ -1,9 +1,6 @@
 package io.khasang.genelove.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /* This Entity represents the e-mail letter.
@@ -16,10 +13,11 @@ import java.util.Date;
 * - Subject: Subject is the subject of e-Mail. It's easy :-)
 * - Text: Text is the text of e-Mail. It's easy :-)
 */
-@Entity
+
+@Entity(name = "email")
 public class EMail {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     @Column(length = 9999)
@@ -34,7 +32,7 @@ public class EMail {
     @Column(length = 9999)
     private String text;
 
-    @Column
+    @Column(name = "creation_time")
     private Date creationTime;
 
     public EMail() {

@@ -24,9 +24,9 @@ public interface UserDAO {
 
     Role getRoleById(int id);
 
-    void addFavourite(User user, Favourite favourite);
+    void addFavourite(User user, User favourite);
 
-    void deleteFavourite(User user, Favourite favourite);
+    void deleteFavourite(User user, User favourite);
 
-
+    void update(); // to be removed
 }

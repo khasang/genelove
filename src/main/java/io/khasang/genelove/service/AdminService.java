@@ -80,4 +80,11 @@ public class AdminService {
             }
         }
     }
+
+    public void updateAllUsers() {
+        for (User user : getUsers()) {
+            user.setReceiveNotifications(false);
+            updateUser(user);
+        }
+    }
 }

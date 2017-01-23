@@ -19,6 +19,7 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>E-Mail Address</th>
+                <th>Send eMail</th>
                 <th>Account Status</th>
                 <th>Roles</th>
                 <th colspan="3">Actions</th>
@@ -31,7 +32,13 @@
                     <td><a href="/admin/user/id/${user.id}">${user.login}</a></td>
                     <td><a href="/admin/user/id/${user.id}">${user.firstName}</a></td>
                     <td><a href="/admin/user/id/${user.id}">${user.lastName}</a></td>
-                    <td>${user.email}</td>
+                    <td><a href="/admin/user/id/${user.id}">${user.email}</a></td>
+                    <td>
+                        <form method="post" action="sendMailToUserByMail">
+                            <input type="hidden" name="email" value="${user.email}"/>
+                            <button class="btn btn-info" type="submit">Send Mail</button>
+                        </form>
+                    </td>
                     <td>${user.accountStatus}</td>
                     <td>
                         <c:forEach var="role" items="${user.roles}">
@@ -64,12 +71,7 @@
             </tbody>
         </table>
 
-        <div align="center">
-            <ul class="pagination">
-                <li><a href="?page=previous">&lt;</a><li>
-                <li><a href="?page=next">&gt;</a></li>
-            </ul>
-        </div>
+        <%@ include file="/WEB-INF/views/pagination.jsp" %>
 
         <br>
 

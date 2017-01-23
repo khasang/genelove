@@ -49,13 +49,12 @@ public class MailSender {
     }
 
     public void sendEmail(User user) throws UnsupportedEncodingException {
-        // Test e-Mail
         String subject = "Hi " + user.getFirstName() + " " + user.getLastName() + "!";
         String text = "This is the First test Letter from Genelove Java Mail Service.\n" +
                 "Here some your personal data: \n" +
                 "Your First Name is: " + user.getFirstName() + ".\n" +
                 "Your Last Name is: " + user.getLastName() + ".\n" +
-                "Your Gender is: " + user.getGender() + ".\n";
+                "Your Gender is: " + "Undefined" + ".\n";
 
         eMail = new EMail(user.getEmail(),
                 environment.getProperty("mail.username"), subject, text);
@@ -74,7 +73,7 @@ public class MailSender {
         System.out.println("RESPONSE: " + addEmailIntoDB(eMail));
     }
 
-    public void sendEmail(EMail eMail) /*throws UnsupportedEncodingException*/ {
+    public void sendEmail(EMail eMail) {
         mailSender.send(setEmailFields(eMail));
     }
 

@@ -1,35 +1,46 @@
 package io.khasang.genelove.entity;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Entity(name = "messages")
 public class Message {
 
+    public enum MessageStatus {
+        NEW, SENT, RECEIVED
+    }
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "conversation_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "messages_conversations_fkey"))
-    private Conversation conversation;
+    @JoinColumn(name = "sender_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "messages_users_sender_fk"))
+    private User sender;
 
     @ManyToOne
-    @JoinColumn(name = "from_user", referencedColumnName = "id", foreignKey = @ForeignKey(name = "messages_users_from_fkey"))
-    private User fromUser;
+    @JoinColumn(name = "receiver_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "messages_users_receiver_fk"))
+    private User receiver;
 
-    @ManyToOne
-    @JoinColumn(name = "to_user", referencedColumnName = "id", foreignKey = @ForeignKey(name = "messages_users_to_fkey"))
-    private User toUser;
+    @Column(name = "created_date")
+    private Timestamp createdDate;
+
+    @Column(name = "sent_date")
+    private Timestamp sentDate;
+
+    @Column(name = "received_date")
+    private Timestamp receivedDate;
+
+    @Column(name = "message_status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private MessageStatus messageStatus;
 
     @Column(length = 2500)
     private String text;
 
-    @Column
-    private Date date;
-
-    @Column(name = "parent_message")
-    private int parentMessage;
+    public Message() {
+        this.messageStatus = MessageStatus.NEW;
+    }
 
     public int getId() {
         return id;
@@ -39,20 +50,20 @@ public class Message {
         this.id = id;
     }
 
-    public User getFromUser() {
-        return fromUser;
+    public User getSender() {
+        return sender;
     }
 
-    public void setFromUser(User fromUser) {
-        this.fromUser = fromUser;
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
-    public User getToUser() {
-        return toUser;
+    public User getReceiver() {
+        return receiver;
     }
 
-    public void setToUser(User toUser) {
-        this.toUser = toUser;
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
     }
 
     public String getText() {
@@ -63,30 +74,35 @@ public class Message {
         this.text = text;
     }
 
-    public Date getDate() {
-        return date;
+    public Timestamp getCreatedDate() {
+        return createdDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public int getParentMessage() {
-        return parentMessage;
+    public Timestamp getSentDate() {
+        return sentDate;
     }
 
-    public void setParentMessage(int parentMessage) {
-        this.parentMessage = parentMessage;
+    public void setSentDate(Timestamp sentDate) {
+        this.sentDate = sentDate;
     }
 
-    public Conversation getConversation() {
-        return conversation;
+    public Timestamp getReceivedDate() {
+        return receivedDate;
     }
 
-    public void setConversation(Conversation conversation) {
-        this.conversation = conversation;
+    public void setReceivedDate(Timestamp receivedDate) {
+        this.receivedDate = receivedDate;
     }
 
+    public MessageStatus getMessageStatus() {
+        return messageStatus;
+    }
 
-
+    public void setMessageStatus(MessageStatus messageStatus) {
+        this.messageStatus = messageStatus;
+    }
 }

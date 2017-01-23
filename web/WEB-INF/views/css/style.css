@@ -74,6 +74,32 @@ a:hover {
   display: none;
 }
 
+html {
+  overflow-y: scroll;
+}
+body {
+    margin: 0;
+    padding: 0;
+    border-spacing: 0;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #ffffff;
+    height: 100%;
+}
+
+.genericFont {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #555555;
+    opacity: 1;
+}
+.italic {
+    font-style: italic;
+    color: #999999;
+}
+
 h1 {
   text-align: center;
   color: #ffffff;
@@ -401,4 +427,106 @@ legend {
   text-align: center;
   color: white;
 }
+/*
+  margin: 0 0 40px;
+}
+*/
+h1.heading1 {
+    font-size: 18px;
+    color: #f2f2f2;
+}
+a {
+  text-decoration: mintcream;
+}
+a.underlinedText {
+    font-size: 12px;
+    text-decoration: underline;
+}
+.ref {
+    text-decoration: none;
+    color: #f2f2f2;
+}
+.textInfo1{
+    margin-left: 100%;
+    margin-top: 1em;
+    color: grey;
+}
+.leftMargin {
+    margin-left: 30em;
+}
+.leftMargin23em {
+  margin-left: 29em;
+}
+.leftPadding40 {
+    padding-left: 40%;
+}
+.topMargin {
+    margin-left: 1em;
+}
+.leftAlign {
+    text-align: left;
+}
+.righAlign {
+    text-align: right;
+}
+.bottomPadding {
+  padding-bottom: 20px;
+}
+.halfWidth {
+    width: 50%;
+}
+.quaterWidth {
+    width: 25%;
+}
+.width{
+    width: auto;
+}
+.friends {
+    padding-left: 5%;
+}
+.leftFloat{
+    float: left;
+}
 
+.toCenter {
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+.tableStyle {
+    border-collapse: collapse;
+    width: 50%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #2196f3;
+    color: white;
+}
+.flexContainer {
+    display: inline-flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    align-content: center;
+}
+.rowFlexContainer{
+    display: inline-flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+.flexElement {
+    align-self: baseline;
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin: auto;
+}
+.fixedPosition{
+    position: fixed;
+}

@@ -1,4 +1,41 @@
+.headerStyle {
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+    display: inline;
+    transition: 0.5s ease-in-out;
+    font-family: 'Montez', cursive;
+    height: 20px;
+    margin-top: -20px;
+}
+
+a.headerText {
+    display: inline-block;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    padding-left: 8%;
+}
+
+a.headerText:hover {
+    color: #f70211;
+}
+
+p.logo {
+    display: inline-block;
+    padding-left: 8%;
+    font-size: 20px;
+    font-family: fantasy;
+    text-align: left;
+}
+
+p.logo::first-letter {
+    color: red;
+}
+
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
 }
+
+

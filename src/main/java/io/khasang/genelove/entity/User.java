@@ -1,7 +1,5 @@
 package io.khasang.genelove.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.*;
 
@@ -9,9 +7,6 @@ import java.util.*;
 public class User {
     public enum AccountStatus {
         NEW, ACTIVE, SUSPENDED
-    }
-    public enum Gender {
-        MALE, FEMALE, UNKNOWN
     }
 
     @Id
@@ -30,21 +25,15 @@ public class User {
     @Column(name = "last_name", length = 255)
     private String lastName;
 
-    @Column(name = "gender", length = 6)
-    private String gender;
-
     @Column(length = 255)
     private String email;
+
+    @Column(name = "receive_notifications")
+    private boolean receiveNotifications = false;
 
     @Column(name = "account_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private AccountStatus accountStatus;
-
-    @OneToMany(mappedBy = "fromUser")
-    private List<Message> sentMessages;
-
-    @OneToMany(mappedBy = "toUser")
-    private List<Message> receivedMessages;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "authorisations", joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
@@ -60,14 +49,6 @@ public class User {
             accountStatusList.put(status, status.toString());
         }
         return accountStatusList;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public int getId() {
@@ -126,22 +107,6 @@ public class User {
         this.accountStatus = accountStatus;
     }
 
-    public List<Message> getSentMessages() {
-        return sentMessages;
-    }
-
-    public void setSentMessages(List<Message> sentMessages) {
-        this.sentMessages = sentMessages;
-    }
-
-    public List<Message> getReceivedMessages() {
-        return receivedMessages;
-    }
-
-    public void setReceivedMessages(List<Message> receivedMessages) {
-        this.receivedMessages = receivedMessages;
-    }
-
     public List<Role> getRoles() {
         return roles;
     }
@@ -150,4 +115,12 @@ public class User {
         this.roles = roles;
     }
 
+    public boolean isReceiveNotifications() {
+        return receiveNotifications;
+    }
+
+    public void setReceiveNotifications(boolean receiveNotifications) {
+        this.receiveNotifications = receiveNotifications;
+    }
+    
 }

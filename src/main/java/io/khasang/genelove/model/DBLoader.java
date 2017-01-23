@@ -1,16 +1,21 @@
 package io.khasang.genelove.model;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class DBLoader {
     private JdbcTemplate jdbcTemplate;
-    //private SQLServiceDAO
+
+    public DBLoader() { }
     public DBLoader(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-    }
-
-    public DBLoader() {
     }
 
     public String addUsersIntoDB () {
@@ -299,14 +304,15 @@ public class DBLoader {
         sql.add(user40);
 
         for (String user: sql) {
-            String msg = insert(user);
+            String msg = executeRequest(user);
             if (!msg.equals("Ok")) {
                 return "Error: " + msg;
             }
         }
         return "Ok";
     }
-    public String insert (String sql) {
+
+    public String executeRequest (String sql) {
         try {
             jdbcTemplate.execute (sql);
             return "Ok";
@@ -314,5 +320,97 @@ public class DBLoader {
         catch (Exception e) {
             return "Data insert into users failed: " + e;
         }
+    }
+
+    public void getInfoAboutFile (File datafile) {
+        System.out.println("File get Name: " + datafile.getName());
+        System.out.println("File get Path: " + datafile.getPath());
+        System.out.println("File get Absolute Path: " + datafile.getAbsolutePath());
+        System.out.println("File get Parent: " + datafile.getParent());
+        System.out.println("File exists: " + datafile.exists());
+        System.out.println("File can Write: " + datafile.canWrite());
+        System.out.println("File can Read: " + datafile.canRead());
+        System.out.println("File can Execute: " + datafile.canExecute());
+        System.out.println("File is Directory: " + datafile.isDirectory());
+        System.out.println("File is File: " + datafile.isFile());
+        System.out.println("File  s Absolute: " + datafile.isAbsolute());
+        System.out.println("File last Modified: " + datafile.lastModified());
+        System.out.println("File length: " + datafile.length());
+    }
+
+    public String clearTable (String table) {
+        String request = "DELETE FROM " + table + ";";
+        return executeRequest(request);
+    }
+
+    public String insertFromFile (ArrayList<String> request) {
+        boolean status = true;
+        String buf = null;
+        for (String str: request) {
+            String responce = executeRequest(str);
+            if (!responce.equals("Ok")) {
+                status = false;
+                buf += responce + " ";
+            }
+        }
+        if (status) return "Ok";
+        else return buf;
+    }
+
+    public ArrayList<String> loadFromFile (String fileName) {
+        File file = new File (fileName);
+        ArrayList<String> answer = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> fields = new ArrayList<>();
+        ArrayList<String> params;
+        ArrayList<ArrayList<String>> parameters = new ArrayList<>();
+
+        try {
+            list = this.openFile(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String separator = ";";
+        Scanner scanner = new Scanner(list.get(0)).useDelimiter(separator);
+        while(scanner.hasNext()) {
+            fields.add(scanner.next());
+        }
+        list.remove(0);
+        scanner.close();
+
+        for (String line: list) {
+            params = new ArrayList<>();
+            scanner = new Scanner(line).useDelimiter(separator);
+            while(scanner.hasNext()) {
+                params.add(scanner.next());
+            }
+            parameters.add(params);
+            String table = file.getName().substring(0, file.getName().length()-4);
+            String requestSQL = ("INSERT INTO " + table + " (");
+            for (String s: fields) requestSQL += s + ", ";
+            requestSQL = requestSQL.substring(0, requestSQL.length()-2);
+            requestSQL += ") VALUES ('";
+            for (String s: params) requestSQL += s + "', '";
+            requestSQL = requestSQL.substring(0, requestSQL.length()-3);
+            requestSQL += ");";
+            answer.add(requestSQL);
+        }
+        return answer;
+    }
+
+    public ArrayList<String> openFile (File datafile) throws FileNotFoundException {
+        ArrayList<String> list = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(
+                        new FileInputStream(datafile), StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                list.add(line);
+            }
+        } catch (IOException e){
+            System.out.println("Sorry, IOException occurred: " + e);
+            list = null;
+        }
+        return list;
     }
 }

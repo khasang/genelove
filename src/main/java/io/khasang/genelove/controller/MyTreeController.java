@@ -12,7 +12,6 @@ public class MyTreeController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView meTreeAcount(){
         ModelAndView modelAndView=new ModelAndView("myTree");
-
         return modelAndView;
     }
 }
