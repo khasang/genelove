@@ -5,12 +5,15 @@ import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.service.ProfileService;
 import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -33,17 +36,20 @@ public class UserController {
         return "hello";
     }
 
-    /** Login user to system" */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(){
-        return "loginPage";
+    /** View menu page */
+    @RequestMapping(value = "/menuPage", method = RequestMethod.GET)
+    public String menuPage(){
+        return "menuPage";
     }
-
 
     /** Logout user from system" */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(){
-        return "logoutPage";
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/login";
     }
 
     /** Post message to another user" */

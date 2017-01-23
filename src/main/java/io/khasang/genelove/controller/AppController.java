@@ -44,12 +44,10 @@ public class AppController {
 
     static int pageNum = 0;
 
-    /**
-     * Login user to system"
-     */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
-        return "login";
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String menuPage() {
+        return "redirect:/account/menuPage";
     }
 
     /**
@@ -79,7 +77,7 @@ public class AppController {
             message = "Registration error " + e.getMessage();
         }
         redirectAttributes.addFlashAttribute("message", message);
-        return "redirect:/login";
+        return "redirect:/account/menuPage";
     }
 
     @RequestMapping(value = "/admin/create", method = RequestMethod.GET)
