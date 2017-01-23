@@ -36,7 +36,7 @@
                     <td>
                         <form method="post" action="sendMailToUserByMail">
                             <input type="hidden" name="email" value="${user.email}"/>
-                            <input type="submit" value="Send Mail" />
+                            <button class="btn btn-info" type="submit">Send Mail</button>
                         </form>
                     </td>
                     <td>${user.accountStatus}</td>
