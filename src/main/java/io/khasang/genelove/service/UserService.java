@@ -60,5 +60,8 @@ public class UserService {
         userDAO.deleteFavourite(user, favourite);
     }
 
+    public void update() {
+        userDAO.update(); // to be removed
+    }
 
 }

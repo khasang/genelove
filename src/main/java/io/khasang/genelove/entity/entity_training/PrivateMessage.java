@@ -1,4 +1,4 @@
-package io.khasang.genelove.entity;
+package io.khasang.genelove.entity.entity_training;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,32 +6,32 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
 
-@Entity(name = "private_message")
+//@Entity(name = "private_message")
 public class PrivateMessage {
     public enum Status {
         READ, UNREAD
     }
 
-    @Id
-    @GeneratedValue
+    //@Id
+    //@GeneratedValue
     private long id;
 
-    @Column(name = "sender_id")
+    //@Column(name = "sender_id")
     private long sender_id;
 
-    @Column(name = "recipient_id")
+    //@Column(name = "recipient_id")
     private long recipient_id;
 
-    @Column(name = "creation_time")
+    //@Column(name = "creation_time")
     private Date creationTime;
 
-    @Column(name = "reading_time")
+    //@Column(name = "reading_time")
     private Date readingTime;
 
-    @Column
+    //@Column
     private Enum status;
 
-    @Column(name = "message", length = 9999)
+    //@Column(name = "message", length = 9999)
     private String PrivateMessage;
 
     public PrivateMessage() {

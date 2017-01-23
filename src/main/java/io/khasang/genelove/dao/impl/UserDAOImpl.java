@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -22,9 +23,9 @@ import java.util.List;
 public class UserDAOImpl implements UserDAO {
 
     private SessionFactory sessionFactory;
+
     @Autowired
     public UserDAOImpl(SessionFactory sessionFactory) {
-
         this.sessionFactory = sessionFactory;
     }
 
@@ -124,4 +125,11 @@ public class UserDAOImpl implements UserDAO {
     public void deleteFavourite(User user, Favourite favourite){
 
     }*/
+
+    @Override
+    public void update() {
+        Query query = sessionFactory.getCurrentSession()
+                .createNativeQuery("UPDATE users SET receive_notifications = true");
+        query.executeUpdate();
+    }
 }

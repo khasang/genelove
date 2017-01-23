@@ -28,5 +28,5 @@ public interface UserDAO {
 
     void deleteFavourite(User user, User favourite);
 
-
+    void update(); // to be removed
 }
