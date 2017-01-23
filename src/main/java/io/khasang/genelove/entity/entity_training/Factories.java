@@ -1,4 +1,4 @@
-package io.khasang.genelove.entity;
+package io.khasang.genelove.entity.entity_training;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

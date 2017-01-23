@@ -1,7 +1,6 @@
 package io.khasang.genelove.entity;
 
 import javax.persistence.*;
-import java.util.*;
 
 @Entity(name = "roles")
 public class Role {
@@ -21,18 +20,6 @@ public class Role {
     public Role() {
 
     }
-
-    /*public Role(RoleName roleName) {
-        this.roleName = roleName;
-    }
-
-    public static Map<RoleName, String> getRoleList() {
-        Map<RoleName, String> roleList = new HashMap<>();
-        for (RoleName role : RoleName.values()) {
-            roleList.put(role, role.toString());
-        }
-        return roleList;
-    }*/
 
     public int getId() {
         return id;

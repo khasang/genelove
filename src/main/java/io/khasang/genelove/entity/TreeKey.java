@@ -9,12 +9,12 @@ import java.io.Serializable;
 @Embeddable
 public class TreeKey implements Serializable {
 
-    @ManyToOne(targetEntity = Relation.class)
-    @JoinColumn(name = "relation", referencedColumnName = "id", foreignKey = @ForeignKey(name = "trees_relations_relation_fkey"))
+    @ManyToOne
+    @JoinColumn(name = "relation", referencedColumnName = "id", foreignKey = @ForeignKey(name = "trees_relations_relation_fk"))
     private Relation relation;
 
-    @ManyToOne(targetEntity = Relation.class)
-    @JoinColumn(name = "parent", referencedColumnName = "id", foreignKey = @ForeignKey(name = "trees_relations_parent_fkey"))
+    @ManyToOne
+    @JoinColumn(name = "parent", referencedColumnName = "id", foreignKey = @ForeignKey(name = "trees_relations_parent_fk"))
     private Relation parent;
 
     public Relation getRelation() {

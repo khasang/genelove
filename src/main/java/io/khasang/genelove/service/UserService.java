@@ -52,11 +52,11 @@ public class UserService {
         return userDAO.getRoleById(id);
     }
 
-    public void addFavourite(User user,Favourite favourite){
+    public void addFavourite(User user, User favourite){
         userDAO.addFavourite(user, favourite);
     }
 
-    public void deleteFavourite(User user, Favourite favourite) {
+    public void deleteFavourite(User user, User favourite) {
         userDAO.deleteFavourite(user, favourite);
     }
 

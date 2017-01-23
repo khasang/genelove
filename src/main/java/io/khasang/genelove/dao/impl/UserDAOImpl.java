@@ -1,6 +1,7 @@
 package io.khasang.genelove.dao.impl;
 
 import io.khasang.genelove.dao.UserDAO;
+import io.khasang.genelove.dao.AdminDAO;
 import io.khasang.genelove.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -26,6 +27,9 @@ public class UserDAOImpl implements UserDAO {
 
         this.sessionFactory = sessionFactory;
     }
+
+    @Autowired
+    AdminDAO adminDAO;
 
     @Override
     public void addUser(User user) {
@@ -69,8 +73,8 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void addAuthorisation(User user) {
         AuthorisationKey key = new AuthorisationKey();
-        key.setUserId(user.getId());
-        key.setRoleId(3);
+        key.setUser(user);
+        key.setRole(adminDAO.getRoleByName(Role.RoleName.ROLE_USER));
         Authorisation authorisation = new Authorisation();
         authorisation.setAuthorisationKey(key);
         sessionFactory.getCurrentSession().save(authorisation);
@@ -94,15 +98,18 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void addFavourite(User user, Favourite favourite) {
+    public void addFavourite(User user, User favourite) {
         FavouriteKey key = new FavouriteKey();
-        key.setUserId(user.getId());
-        favourite.setFavouriteKey(key);
+        key.setUser(user);
+        key.setFavourite(favourite);
+
+        Favourite fav = new Favourite();
+        fav.setFavouriteKey(key);
         sessionFactory.getCurrentSession().save(favourite);
     }
 
-    public void deleteFavourite(User user, Favourite favourite){
+    @Override
+    public void deleteFavourite(User user, User favourite) {
 
     }
-
 }

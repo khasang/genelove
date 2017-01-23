@@ -42,6 +42,8 @@ public class AdminController {
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public String adminScreen(Model model) {
         adminService.createAllRoles();
+        //adminService.updateAllUsers(); Rewrite to update receiveNotifications to false for all
+        // Set messages status to NEW for existing messages
 
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
 

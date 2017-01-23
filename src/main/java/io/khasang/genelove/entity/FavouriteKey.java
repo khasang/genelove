@@ -1,34 +1,33 @@
 package io.khasang.genelove.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Embeddable
 public class FavouriteKey implements Serializable {
 
-    @Column(name = "user_id", nullable = false)
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "favourites_user_fk"))
+    private User user;
 
-    @Column(name = "favourite_id", nullable = false)
-    private int favouriteId;
+    @ManyToOne
+    @JoinColumn(name = "favourite_id", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "favourites_favourite_fk"))
+    private User favourite;
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getFavouriteId() {
-        return favouriteId;
+    public User getFavourite() {
+        return favourite;
     }
 
-    public void setFavouriteId(int favouriteId) {
-        this.favouriteId = favouriteId;
+    public void setFavourite(User favourite) {
+        this.favourite = favourite;
     }
 
     @Override
@@ -38,14 +37,14 @@ public class FavouriteKey implements Serializable {
 
         FavouriteKey that = (FavouriteKey) o;
 
-        if (userId != that.userId) return false;
-        return favouriteId == that.favouriteId;
+        if (user != null ? !user.equals(that.user) : that.user != null) return false;
+        return favourite != null ? favourite.equals(that.favourite) : that.favourite == null;
     }
 
     @Override
     public int hashCode() {
-        int result = userId;
-        result = 31 * result + favouriteId;
+        int result = user != null ? user.hashCode() : 0;
+        result = 31 * result + (favourite != null ? favourite.hashCode() : 0);
         return result;
     }
 }

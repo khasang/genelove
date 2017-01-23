@@ -84,8 +84,8 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public boolean checkUserRole(User user, Role role) {
         AuthorisationKey key = new AuthorisationKey();
-        key.setUserId(user.getId());
-        key.setRoleId(role.getId());
+        key.setUser(user);
+        key.setRole(role);
 
         Authorisation authorisation = new Authorisation();
         authorisation.setAuthorisationKey(key);
@@ -130,8 +130,8 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public void addRole(User user, Role role) {
         AuthorisationKey key = new AuthorisationKey();
-        key.setUserId(user.getId());
-        key.setRoleId(role.getId());
+        key.setUser(user);
+        key.setRole(role);
 
         Authorisation authorisation = new Authorisation();
         authorisation.setAuthorisationKey(key);
@@ -142,8 +142,8 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public void removeRole(User user, Role role) {
         AuthorisationKey key = new AuthorisationKey();
-        key.setUserId(user.getId());
-        key.setRoleId(role.getId());
+        key.setUser(user);
+        key.setRole(role);
 
         Authorisation authorisation = new Authorisation();
         authorisation.setAuthorisationKey(key);
@@ -206,7 +206,11 @@ public class AdminDAOImpl implements AdminDAO {
 
         TypedQuery<Role> query = session.createQuery(cq);
         query.setParameter(p, name);
-        return query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override
