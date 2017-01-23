@@ -47,10 +47,6 @@ public class Profile {
     @Column(name = "photo_url")
     private String photoURL;
 
-/*    @OneToOne
-    @JoinColumn(name = "tree_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "users_trees_fk"))
-    private Tree tree;*/
-
     public Profile() {
         this.gender = Gender.OTHER;
         this.maritalStatus = MaritalStatus.OTHER;
