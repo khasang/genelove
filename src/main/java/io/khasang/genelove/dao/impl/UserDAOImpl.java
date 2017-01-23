@@ -1,6 +1,7 @@
 package io.khasang.genelove.dao.impl;
 
 import io.khasang.genelove.dao.UserDAO;
+import io.khasang.genelove.dao.AdminDAO;
 import io.khasang.genelove.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -21,11 +23,14 @@ import java.util.List;
 public class UserDAOImpl implements UserDAO {
 
     private SessionFactory sessionFactory;
+
     @Autowired
     public UserDAOImpl(SessionFactory sessionFactory) {
-
         this.sessionFactory = sessionFactory;
     }
+
+    @Autowired
+    AdminDAO adminDAO;
 
     @Override
     public void addUser(User user) {
@@ -69,9 +74,8 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void addAuthorisation(User user) {
         AuthorisationKey key = new AuthorisationKey();
-        key.setUserId(user.getId());
-        Role role = this.getRoleByName("ROLE_USER");
-        key.setRoleId(role.getId());
+        key.setUser(user);
+        key.setRole(adminDAO.getRoleByName(Role.RoleName.ROLE_USER));
         Authorisation authorisation = new Authorisation();
         authorisation.setAuthorisationKey(key);
         sessionFactory.getCurrentSession().save(authorisation);
@@ -95,6 +99,22 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public void addFavourite(User user, User favourite) {
+        FavouriteKey key = new FavouriteKey();
+        key.setUser(user);
+        key.setFavourite(favourite);
+
+        Favourite fav = new Favourite();
+        fav.setFavouriteKey(key);
+        sessionFactory.getCurrentSession().save(favourite);
+    }
+
+    @Override
+    public void deleteFavourite(User user, User favourite) {
+
+    }
+
+    /*@Override
     public void addFavourite(User user, Favourite favourite) {
         FavouriteKey key = new FavouriteKey();
         key.setUserId(user.getId());
@@ -104,6 +124,12 @@ public class UserDAOImpl implements UserDAO {
 
     public void deleteFavourite(User user, Favourite favourite){
 
-    }
+    }*/
 
+    @Override
+    public void update() {
+        Query query = sessionFactory.getCurrentSession()
+                .createNativeQuery("UPDATE users SET receive_notifications = true");
+        query.executeUpdate();
+    }
 }

@@ -1,9 +1,8 @@
 package io.khasang.genelove.service;
 
 import io.khasang.genelove.dao.QuestionDAO;
-import io.khasang.genelove.entity.Question;
+import io.khasang.genelove.entity.entity_training.Question;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

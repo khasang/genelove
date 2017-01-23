@@ -6,22 +6,28 @@ import java.util.Date;
 @Entity(name = "relations")
 public class Relation {
 
+    public enum RelationType {
+        MOTHER, FATHER, SISTER, BROTHER, WIFE, HUSBAND, DAUGHTER, SON, NONE
+    }
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
-    @Column
-    private String relation; // e.g. Mother, Father, Daughter, etc.
+    @Column(name = "relation_type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private RelationType relationType;
 
     @Column
     private String name;
 
-    @Column
-    private Date dateOfBirth;
-
-    @OneToOne(targetEntity = Tree.class)
+    @OneToOne
     @JoinColumn(name = "tree_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "relations_trees_fkey"))
     private Tree tree;
+
+    public Relation() {
+        this.relationType = RelationType.NONE;
+    }
 
     public int getId() {
         return id;
@@ -31,12 +37,12 @@ public class Relation {
         this.id = id;
     }
 
-    public String getRelation() {
-        return relation;
+    public RelationType getRelationType() {
+        return relationType;
     }
 
-    public void setRelation(String relation) {
-        this.relation = relation;
+    public void setRelationType(RelationType relationType) {
+        this.relationType = relationType;
     }
 
     public String getName() {
@@ -45,14 +51,6 @@ public class Relation {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 
     public Tree getTree() {

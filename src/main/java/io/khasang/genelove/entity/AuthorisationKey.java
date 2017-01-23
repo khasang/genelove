@@ -1,32 +1,33 @@
 package io.khasang.genelove.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Embeddable
 public class AuthorisationKey implements Serializable {
 
-    @Column(name = "user_id", nullable = false)
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "authorisations_user_fk"))
+    private User user;
 
-    @Column(name = "role_id", nullable = false)
-    private int roleId;
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "authorisations_role_fk"))
+    private Role role;
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override
@@ -36,14 +37,14 @@ public class AuthorisationKey implements Serializable {
 
         AuthorisationKey that = (AuthorisationKey) o;
 
-        if (userId != that.userId) return false;
-        return roleId == that.roleId;
+        if (user != null ? !user.equals(that.user) : that.user != null) return false;
+        return role != null ? role.equals(that.role) : that.role == null;
     }
 
     @Override
     public int hashCode() {
-        int result = userId;
-        result = 31 * result + roleId;
+        int result = user != null ? user.hashCode() : 0;
+        result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
     }
 }

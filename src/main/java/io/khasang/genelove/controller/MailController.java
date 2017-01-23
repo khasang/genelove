@@ -183,7 +183,7 @@ public class MailController {
         user.setEmail("python239@mail.ru");
         user.setFirstName("Alexander");
         user.setLastName("Pyankov");
-        user.setGender("male");
+        //user.setGender("male");
 
         try {
             emailService.sendEmail(user);
@@ -204,19 +204,19 @@ public class MailController {
         user1.setEmail("python239@mail.ru");
         user1.setFirstName("Alexander");
         user1.setLastName("Pyankov");
-        user1.setGender("male");
+       //user1.setGender("male");
 
         User user2 = new User();
         user2.setEmail("python239@mail.ru");
         user2.setFirstName("Robert");
         user2.setLastName("Stivenson");
-        user2.setGender("male");
+        //user2.setGender("male");
 
         User user3 = new User();
         user3.setEmail("python239@mail.ru");
         user3.setFirstName("Alexander");
         user3.setLastName("Miln");
-        user3.setGender("male");
+        //user3.setGender("male");
 
         ArrayList<User> list = new ArrayList<>();
         list.add(user1);

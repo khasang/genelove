@@ -2,6 +2,7 @@ package io.khasang.genelove.dao.impl;
 
 import io.khasang.genelove.dao.MessageDAO;
 import io.khasang.genelove.entity.Message;
+import io.khasang.genelove.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -52,8 +53,8 @@ public class MessageDAOImpl implements MessageDAO {
     @Override
     public List<Message> getMessagesWith (int UserId, int OtherUserId) {
         TypedQuery<Message> query = sessionFactory.getCurrentSession().
-                createNativeQuery("SELECT * FROM messages WHERE from_user in ( :otherUserId, :userId) " +
-                        "and to_user in (:userId, :otherUserId) order by date ", Message.class);
+                createNativeQuery("SELECT * FROM messages WHERE sender_id in ( :otherUserId, :userId) " +
+                        "and receiver_id in (:userId, :otherUserId) order by created_date ", Message.class);
         query.setParameter("userId", UserId);
         query.setParameter("otherUserId", OtherUserId);
         return query.getResultList();
@@ -92,5 +93,34 @@ public class MessageDAOImpl implements MessageDAO {
         List<Message> messagesByDate = new ArrayList<>();
         //
         return messagesByDate;
+    }
+
+    @Override
+    public List<Message> getMessagesFrom(User sender) {
+        TypedQuery<Message> query = sessionFactory.getCurrentSession().
+                createNativeQuery("SELECT * FROM messages WHERE sender_id = :sender_id " +
+                                     "order by created_date", Message.class);
+        query.setParameter("sender_id", sender.getId());
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Message> getMessagesTo(User receiver) {
+        TypedQuery<Message> query = sessionFactory.getCurrentSession().
+                createNativeQuery("SELECT * FROM messages WHERE receiver_id = :receiver_id " +
+                                     "order by created_date", Message.class);
+        query.setParameter("receiver_id", receiver.getId());
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Message> getMessagesFromTo(User sender, User receiver) {
+        TypedQuery<Message> query = sessionFactory.getCurrentSession().
+                createNativeQuery("SELECT * FROM messages " +
+                                     "WHERE sender_id = :sender_id and receiver_id = :receiver_id " +
+                                     "order by created_date", Message.class);
+        query.setParameter("sender_id", sender.getId());
+        query.setParameter("receiver_id", receiver.getId());
+        return query.getResultList();
     }
 }

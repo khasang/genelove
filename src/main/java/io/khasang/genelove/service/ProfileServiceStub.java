@@ -1,5 +1,5 @@
 package io.khasang.genelove.service;
-import io.khasang.genelove.model.UserProfile;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
