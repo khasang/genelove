@@ -70,7 +70,8 @@ public class UserDAOImpl implements UserDAO {
     public void addAuthorisation(User user) {
         AuthorisationKey key = new AuthorisationKey();
         key.setUserId(user.getId());
-        key.setRoleId(3);
+        Role role = this.getRoleByName("ROLE_USER");
+        key.setRoleId(role.getId());
         Authorisation authorisation = new Authorisation();
         authorisation.setAuthorisationKey(key);
         sessionFactory.getCurrentSession().save(authorisation);
