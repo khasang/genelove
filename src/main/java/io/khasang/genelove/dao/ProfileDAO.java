@@ -13,11 +13,11 @@ public interface ProfileDAO {
 
     Profile getProfileById (int id);
 
-    void editProfile(Profile profile);
+    void updateProfile(Profile profile);
 
     void hideProfile(Profile profile);
 
     void shareProfile(Profile profile);
 
-    List<Profile> getProfiles(int ageFrom, int ageTo, String gender);
+    List<Profile> getProfiles(int ageFrom, int ageTo, String gender, String marital, User user);
 }

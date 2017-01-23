@@ -82,6 +82,14 @@
                             <div class="panel-footer">City :  <a href="#">More info</a></div>
                         </div>
                     </div>
+                    <div style="margin:5px;"><a href="${pageContext.request.contextPath}/account/find">
+                        <button class="btn btn-success btn-sm">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                            Find new person
+                        </button>
+                    </a>
+                    </div>
+
                 </div>
             </div>
         </div>

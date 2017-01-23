@@ -34,8 +34,8 @@ public class ProfileService {
         return profileDAO.getProfileById(id);
     }
 
-    public void editProfile(Profile profile) {
-        profileDAO.editProfile(profile);
+    public void updateProfile(Profile profile) {
+        profileDAO.updateProfile(profile);
     }
 
     public void hideProfile(Profile profile) {
@@ -46,8 +46,9 @@ public class ProfileService {
         profileDAO.shareProfile(profile);
     }
 
-    public List<Profile> getProfiles(int ageFrom, int ageTo, String gender){
-        return profileDAO.getProfiles(ageFrom, ageTo, gender);
+    public List<Profile> getProfiles(int ageFrom, int ageTo, String gender, String marital){
+        User user = userDAO.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        return profileDAO.getProfiles(ageFrom, ageTo, gender, marital, user);
     }
 
 }
