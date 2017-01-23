@@ -27,8 +27,8 @@
             <form  action="j_spring_security_check" method="post" autocomplete="on">
                 <h2>Log in</h2>
                 <p>
-                    <label for="username" class="uname" data-icon="u" ><span>Your email</span></label>
-                    <input id="username" name="j_username" required="required" type="email" placeholder="EMAIL"/>
+                    <label for="username" class="uname" data-icon="u" ><span>Your login</span></label>
+                    <input id="username" name="j_username" required="required" type="text" placeholder="login"/>
                 </p>
                 <p>
                     <label for="password" class="youpasswd" data-icon="p"><span>Your password</span></label>
