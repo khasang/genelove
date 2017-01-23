@@ -137,15 +137,15 @@ public class UserController {
     }
 
     /** View user relative tree" */
-    @RequestMapping(value = "/allRelativeNode", method = RequestMethod.GET)
+    @RequestMapping(value = "/myTree", method = RequestMethod.GET)
     public String relativeNodeAll(){
-        return "relativeNodeAllPage";
+        return "myTree";
     }
 
     /** Add person info about user" */
     @RequestMapping(value = "/profileNew", method = RequestMethod.GET)
     public String profileNew(){
-        return "profileFind";
+        return "profileNew";
     }
 
 
@@ -160,7 +160,7 @@ public class UserController {
             message = "Profile creation error: " + e.getMessage();
         }
         redirectAttributes.addFlashAttribute("message", message);
-        return "redirect:/profiles";
+        return "redirect:/account/profiles";
     }
 
     /**View profiles list**/
@@ -173,17 +173,18 @@ public class UserController {
     }
 
     /**Find profile**/
-    @RequestMapping(value = "/findProfileBy", method = RequestMethod.GET)
-    public String findProf(){
+
+    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    public String findProfiles (){
         return "profileFind";
     }
 
-
     @RequestMapping(value = "/findProfile", method = RequestMethod.GET)
-    public String findProfiles (@RequestParam("ageFrom") int ageFrom,
-                                @RequestParam("ageTo") int ageTo,
-                                @RequestParam ("gender") String gender, Model model) {
-        model.addAttribute("profiles", profileService.getProfiles(ageFrom, ageTo, gender));
+    public String findProfilesWithParam (@RequestParam("ageFrom") int ageFrom, @RequestParam("ageTo") int ageTo,
+                                @RequestParam ("gender") String gender, @RequestParam ("marital") String marital,
+                                         Model model) {
+        List<Profile> list = profileService.getProfiles(ageFrom, ageTo, gender, marital);
+        model.addAttribute("profiles", list);
         return "profiles";
     }
 
@@ -195,9 +196,17 @@ public class UserController {
     }
 
     /** Update person info about user" */
-    @RequestMapping(value = "/updatePersInfo", method = RequestMethod.POST)
-    public String persInfoUpdate(){
-        return "persInfoUpdatePage";
+
+    @RequestMapping(value = "/editProfile/{id}", method = RequestMethod.GET)
+    public String editProfile(@PathVariable("id") int id, Model model){
+        model.addAttribute("profile", profileService.getProfileById(id));
+        return "profileEdit";
+    }
+
+    @RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
+    public String updateProfile(@ModelAttribute("profile") Profile profile){
+        profileService.updateProfile(profile);
+        return "profiles";
     }
 
     /** Delete person info about user" */

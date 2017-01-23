@@ -5,6 +5,7 @@ import io.khasang.genelove.entity.Profile;
 import io.khasang.genelove.entity.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +44,7 @@ public class ProfileDAOImpl implements ProfileDAO {
     }
 
     @Override
-    public void editProfile(Profile profile) {
+    public void updateProfile(Profile profile) {
         this.sessionFactory.getCurrentSession().update(profile);
     }
 
@@ -58,12 +59,15 @@ public class ProfileDAOImpl implements ProfileDAO {
     }
 
     @Override
-    public List<Profile> getProfiles(int ageFrom, int ageTo, String gender){
+    public List<Profile> getProfiles(int ageFrom, int ageTo, String gender, String marital, User user){
         TypedQuery<Profile> query = sessionFactory.getCurrentSession().
-                createNativeQuery("SELECT * FROM profiles WHERE age BETWEEN ? AND ? AND gender = ?", Profile.class);
+                createNativeQuery("SELECT * FROM profiles WHERE age BETWEEN ? AND ? AND gender = ? " +
+                        "AND marital_status = ? AND user_id != ?", Profile.class);
         query.setParameter(1, ageFrom);
         query.setParameter(2, ageTo);
         query.setParameter(3, gender);
+        query.setParameter(4, marital);
+        query.setParameter(5, user.getId());
         return query.getResultList();
     }
 }
