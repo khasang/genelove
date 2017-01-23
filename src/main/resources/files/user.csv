@@ -1,0 +1,6 @@
+login;password;firstName;lastName;gender;email;accountStatus
+admin;$2a$10$KTQ3y4oKYUhxm3b6Idenu.nTd7dx.OpYLttUNraJ4zqtwz8byufAK;Admin;Adminovich;MALE;python239@mail.ru;NEW
+db;$2a$10$vqXAV82eMPwgR3VC7iIdMO0caMDW.7/TrVrL79J/nqGRdpKepSqfW;Admin;DBservice;MALE;python239@mail.ru;NEW
+user;$2a$10$kKeR0IteaXjqleyZ4zR1e.YfoOjxP/lADhbanNjy7SrhE30OmVEru;user;user;MALE;python239@mail.ru;NEW
+linda;$2a$10$kKeR0IteaXjqleyZ4zR1e.YfoOjxP/lADhbanNjy7SrhE30OmVEru;Lena;Ilyukhina;FEMALE;elena.ilyukhina@hotmail.com;NEW
+den;$2a$10$kKeR0IteaXjqleyZ4zR1e.YfoOjxP/lADhbanNjy7SrhE30OmVEru;Denis;Guzikov;MALE;dendrito@list.ru;NEW
