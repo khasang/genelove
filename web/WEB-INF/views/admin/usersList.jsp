@@ -10,7 +10,12 @@
     <div class="container">
         <br><br>
         <h3>User List</h3>
-
+        <div class="col-sm-10 text-left">
+            <div class="container">
+                <p>Hello, Dear <strong>${currentUser.firstName} ${currentUser.lastName}</strong>
+                    Welcome to your personal cabinet!</p>
+            </div>
+        </div>
         <table class="table-bordered container">
         <thead>
             <tr>

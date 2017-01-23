@@ -18,6 +18,14 @@
 <div class="row content" id="menuBox">
     <div class="col-sm-10 text-left">
         <div class="container">
+            <p>Hello, Dear <strong>${currentUser.firstName} ${currentUser.lastName}</strong>
+                Welcome to your personal cabinet!</p>
+        </div>
+    </div>
+
+
+    <div class="col-sm-10 text-left">
+        <div class="container">
             <table>
                 <tr>
                     <td>Nickname</td>
