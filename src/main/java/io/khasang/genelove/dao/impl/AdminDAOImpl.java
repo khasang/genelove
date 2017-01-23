@@ -208,7 +208,7 @@ public class AdminDAOImpl implements AdminDAO {
         query.setParameter(p, name);
         try {
             return query.getSingleResult();
-        } catch (NoResultException e) {
+        } catch (NoResultException nre) {
             return null;
         }
     }

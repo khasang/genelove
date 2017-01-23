@@ -74,6 +74,32 @@ a:hover {
   display: none;
 }
 
+html {
+  overflow-y: scroll;
+}
+body {
+    margin: 0;
+    padding: 0;
+    border-spacing: 0;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #ffffff;
+    height: 100%;
+}
+
+.genericFont {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #555555;
+    opacity: 1;
+}
+.italic {
+    font-style: italic;
+    color: #999999;
+}
+
 h1 {
   text-align: center;
   color: #ffffff;
@@ -101,7 +127,7 @@ label .req {
 
 label.active {
   -webkit-transform: translateY(50px);
-          transform: translateY(50px);
+  transform: translateY(50px);
   left: 2px;
   font-size: 14px;
 }
@@ -114,7 +140,7 @@ label.highlight {
   color: #ffffff;
 }
 
-input, textarea {
+fieldset.inputTextarea {
   font-size: 20px;
   display: block;
   width: 100%;
@@ -128,6 +154,7 @@ input, textarea {
   -webkit-transition: border-color .25s ease, box-shadow .25s ease;
   transition: border-color .25s ease, box-shadow .25s ease;
 }
+
 input:focus, textarea:focus {
   outline: 0;
   border-color: #1ab188;
@@ -203,7 +230,7 @@ th, td {
   padding: 5px;
 }
 .tableData th {
-  background-color: lightblue;
+  background-color: lightsteelblue;
 }
 
 .tableData tr:nth-of-type(odd) {
@@ -237,6 +264,15 @@ th, td {
   border: 0px;
   text-align: center;
   margin: 5px;
+  padding: 15px;
+  background: #c1bdba;
+}
+
+.sendMailToSelectUsers {
+  width: 90%;
+  border: 0px;
+  text-align: center;
+  margin: auto;
   padding: 15px;
   background: #c1bdba;
 }
@@ -297,6 +333,7 @@ td {
   margin: 0;
   padding: 0;
   list-style: none;
+  clear: both;
 }
 
 .mailServiceMenu li {
@@ -319,7 +356,7 @@ td {
 }
 
 .fieldset {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   border: 1px solid gray;
   border-radius: 50px;
@@ -343,7 +380,7 @@ legend {
   text-align: center;
   float: right;
   width: 300px;
-  margin: 0;
+  margin: 0px 20px 20px 20px;
   text-align: center;
   padding: 0px;
   color: darkcyan;
@@ -360,4 +397,136 @@ legend {
 
 .fieldsetMessenger legend {
   text-align: right;
+}
+
+#headLink {
+  text-decoration: none;
+  color: white;
+}
+
+#head {
+  margin: 10px;
+  font-size: 20px;
+  color: white;
+  text-shadow: -4px 4px 3px #999, 1px -1px 2px #000;
+  letter-spacing: .5em;
+  font-weight: bold;
+}
+
+#gene {
+  color: lightgreen;
+  font-size: 40px;
+}
+
+#love {
+  color: hotpink;
+  font-size: 40px;
+}
+
+#footer {
+  text-align: center;
+  color: white;
+}
+/*
+  margin: 0 0 40px;
+}
+*/
+h1.heading1 {
+    font-size: 18px;
+    color: #f2f2f2;
+}
+a {
+  text-decoration: mintcream;
+}
+a.underlinedText {
+    font-size: 12px;
+    text-decoration: underline;
+}
+.ref {
+    text-decoration: none;
+    color: #f2f2f2;
+}
+.textInfo1{
+    margin-left: 100%;
+    margin-top: 1em;
+    color: grey;
+}
+.leftMargin {
+    margin-left: 30em;
+}
+.leftMargin23em {
+  margin-left: 29em;
+}
+.leftPadding40 {
+    padding-left: 40%;
+}
+.topMargin {
+    margin-left: 1em;
+}
+.leftAlign {
+    text-align: left;
+}
+.righAlign {
+    text-align: right;
+}
+.bottomPadding {
+  padding-bottom: 20px;
+}
+.halfWidth {
+    width: 50%;
+}
+.quaterWidth {
+    width: 25%;
+}
+.width{
+    width: auto;
+}
+.friends {
+    padding-left: 5%;
+}
+.leftFloat{
+    float: left;
+}
+
+.toCenter {
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+.tableStyle {
+    border-collapse: collapse;
+    width: 50%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #2196f3;
+    color: white;
+}
+.flexContainer {
+    display: inline-flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    align-content: center;
+}
+.rowFlexContainer{
+    display: inline-flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+.flexElement {
+    align-self: baseline;
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin: auto;
+}
+.fixedPosition{
+    position: fixed;
 }

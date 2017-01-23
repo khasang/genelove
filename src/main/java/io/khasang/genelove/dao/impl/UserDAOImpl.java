@@ -112,4 +112,16 @@ public class UserDAOImpl implements UserDAO {
     public void deleteFavourite(User user, User favourite) {
 
     }
+
+    /*@Override
+    public void addFavourite(User user, Favourite favourite) {
+        FavouriteKey key = new FavouriteKey();
+        key.setUserId(user.getId());
+        favourite.setFavouriteKey(key);
+        sessionFactory.getCurrentSession().save(favourite);
+    }
+
+    public void deleteFavourite(User user, Favourite favourite){
+
+    }*/
 }

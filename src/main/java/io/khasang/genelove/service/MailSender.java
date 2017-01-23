@@ -49,7 +49,6 @@ public class MailSender {
     }
 
     public void sendEmail(User user) throws UnsupportedEncodingException {
-        // Test e-Mail
         String subject = "Hi " + user.getFirstName() + " " + user.getLastName() + "!";
         String text = "This is the First test Letter from Genelove Java Mail Service.\n" +
                 "Here some your personal data: \n" +
@@ -74,7 +73,7 @@ public class MailSender {
         System.out.println("RESPONSE: " + addEmailIntoDB(eMail));
     }
 
-    public void sendEmail(EMail eMail) /*throws UnsupportedEncodingException*/ {
+    public void sendEmail(EMail eMail) {
         mailSender.send(setEmailFields(eMail));
     }
 
@@ -94,26 +93,5 @@ public class MailSender {
             count++;
         }
         return count;
-    }
-
-    public String getEmailById (int id) {
-        //SqlParameterSource namedParameters = new MapSqlParameterSource("id", id);
-        //System.out.println("SQL id: " + id);
-
-        //String request = "SELECT email FROM users WHERE id = ?" ;
-        //System.out.println(request);
-        try {
-            //String response = jdbcTemplate.queryForObject(request, String.class);
-            //TypedQuery query = sessionFactory.getCurrentSession().createNativeQuery
-            //        ( "SELECT * FROM messages WHERE id = ?", Message.class);
-            //query.setParameter(1, id);
-            //String response = query.getSingleResult().toString();
-            //return response.toString();
-            //return userService.getUserById(id);
-            return "";
-        }
-        catch (Exception e) {
-            return "Select email from users_id failed: " + e;
-        }
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LogginController {
 
-    @RequestMapping(value = {"/","/login"})
+    @RequestMapping(value = {"/login"})
     public ModelAndView login(@RequestParam(value = "error", required = false) String error) {
         ModelAndView model = new ModelAndView();
         if (error != null) {
