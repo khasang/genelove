@@ -47,9 +47,9 @@ public class Profile {
     @Column(name = "photo_url")
     private String photoURL;
 
-    @OneToOne
+/*    @OneToOne
     @JoinColumn(name = "tree_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "users_trees_fk"))
-    private Tree tree;
+    private Tree tree;*/
 
     public Profile() {
         this.gender = Gender.OTHER;
@@ -135,4 +135,5 @@ public class Profile {
     public void setPhotoURL(String photoURL) {
         this.photoURL = photoURL;
     }
+
 }

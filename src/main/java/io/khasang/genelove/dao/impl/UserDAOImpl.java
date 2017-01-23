@@ -129,7 +129,9 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void update() {
         Query query = sessionFactory.getCurrentSession()
-                .createNativeQuery("UPDATE users SET receive_notifications = true");
+                .createNativeQuery("UPDATE users " +
+                                      "SET receive_notifications = true " +
+                                      "WHERE receive_notifications IS NULL");
         query.executeUpdate();
     }
 }
