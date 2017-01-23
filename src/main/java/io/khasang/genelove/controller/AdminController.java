@@ -5,10 +5,12 @@ import io.khasang.genelove.entity.Role;
 import io.khasang.genelove.entity.User;
 import io.khasang.genelove.service.AdminService;
 import io.khasang.genelove.service.MailSender;
+import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.core.env.Environment;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +33,8 @@ public class AdminController {
     AdminService adminService;
     @Autowired
     MailSender emailService;
+    @Autowired
+    UserService userService;
 
     PagedListHolder myList = new PagedListHolder();
 
@@ -77,6 +81,7 @@ public class AdminController {
     public String usersList(@RequestParam(value = "page", required = false) String page,
                             @RequestParam(value = "filter", required = false) String filter,
                             Model model) {
+        User user = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
 
         if (filter == null) {
             myList.setSource(adminService.getUsers());
@@ -97,6 +102,7 @@ public class AdminController {
             }
         }
 
+        model.addAttribute("currentUser", user);
         model.addAttribute("user", new User());
         model.addAttribute("usersList", myList);
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
