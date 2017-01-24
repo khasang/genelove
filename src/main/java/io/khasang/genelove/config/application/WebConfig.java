@@ -15,7 +15,8 @@ import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"io.khasang.genelove.config", "io.khasang.genelove.controller", "io.khasang.genelove.model", "io.khasang.genelove.dao", "io.khasang.genelove.service"})
+@ComponentScan({"io.khasang.genelove.config", "io.khasang.genelove.controller", "io.khasang.genelove.model",
+                 "io.khasang.genelove.dao", "io.khasang.genelove.service"})
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public InternalResourceViewResolver viewResolver() {
@@ -32,5 +33,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/views/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/views/js/");
         registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/views/images/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/views/resources/");
     }
 }

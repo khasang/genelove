@@ -1,7 +1,7 @@
 package io.khasang.genelove.dao.impl;
 
 import io.khasang.genelove.dao.QuestionDAO;
-import io.khasang.genelove.entity.Question;
+import io.khasang.genelove.entity.entity_training.Question;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,7 +9,6 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

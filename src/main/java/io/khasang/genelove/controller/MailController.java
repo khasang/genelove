@@ -12,6 +12,7 @@ import io.khasang.genelove.service.QuestionService;
 import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 @Controller
+@RequestMapping(value = "/")
 public class MailController {
     @Autowired
     MyMessage myMessage;
@@ -41,12 +43,22 @@ public class MailController {
     @Autowired
     DBLoader dbLoader;
 
+    private String getCurrentUserName () {
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        String name = currentUser.getFirstName();
+        String lastName = currentUser.getFirstName();
+        if (name != null && lastName != null)
+            return name + " " + lastName;
+        else return "Anonymous User";
+    }
+
     /*********************************** Mail Sender Service *******************************
     * In this section represents code of Mail Sender Service.
     * Begin of this section here.
     ***************************************************************************************/
     @RequestMapping(value = "/sendMail", method = RequestMethod.GET)
-    public String mailSender() {
+    public String mailSender(Model model) {
+        model.addAttribute("currentUser", getCurrentUserName());
         return "mailService/sendMail";
     }
 
@@ -65,6 +77,8 @@ public class MailController {
     @RequestMapping(value = "/viewAllUsers", method = RequestMethod.GET)
     public String viewAllUsers(Model model) {
         String message = "View all users from our database \"User\"";
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", "");
         model.addAttribute("message", message);
         model.addAttribute("usersList", userService.getUserAll());
         return "mailService/viewUsersList";
@@ -183,7 +197,7 @@ public class MailController {
         user.setEmail("python239@mail.ru");
         user.setFirstName("Alexander");
         user.setLastName("Pyankov");
-        user.setGender("male");
+        //user.setGender("male");
 
         try {
             emailService.sendEmail(user);
@@ -204,19 +218,19 @@ public class MailController {
         user1.setEmail("python239@mail.ru");
         user1.setFirstName("Alexander");
         user1.setLastName("Pyankov");
-        user1.setGender("male");
+       //user1.setGender("male");
 
         User user2 = new User();
         user2.setEmail("python239@mail.ru");
         user2.setFirstName("Robert");
         user2.setLastName("Stivenson");
-        user2.setGender("male");
+        //user2.setGender("male");
 
         User user3 = new User();
         user3.setEmail("python239@mail.ru");
         user3.setFirstName("Alexander");
         user3.setLastName("Miln");
-        user3.setGender("male");
+        //user3.setGender("male");
 
         ArrayList<User> list = new ArrayList<>();
         list.add(user1);

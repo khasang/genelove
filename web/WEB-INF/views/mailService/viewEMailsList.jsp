@@ -7,7 +7,7 @@
     <title>Mail Sender</title>
 </head>
 <body>
-<jsp:include page="navigation.jsp"/>
+<jsp:include page="include/navigation.jsp"/>
 <div class="systemMessage">
     <p>Your request has been successfully completed<br>
         <span class="systemResponce">${message}</span></p>
@@ -34,4 +34,4 @@
         </c:forEach>
     </table>
 </div>
-<jsp:include page="footer.jsp"/>
+<jsp:include page="include/footer.jsp"/>

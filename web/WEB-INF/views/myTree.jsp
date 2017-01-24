@@ -1,29 +1,17 @@
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
-<head>
-    <title>My Tree</title>
-    <%-- <link href="resources/css/myTree.css" rel="stylesheet" type="text/css" media="all" /> --%>
-    <link href="css/myTree.css" rel="stylesheet" type="text/css" media="all" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
+<jsp:include page="head.jsp"/>
 <body style="background: url(images/loveFone.jpg) no-repeat fixed center;" >
-
 <jsp:include page="header.jsp"/>
-
 <div class="container" id="myProfile">
     <div class="left">
         <div id="Photo">
             <a href="images/Zidane.jpg">
-                <img id="picture" alt="Profile picture" src="images/Zidane.jpg" width="200" height="200" />
+                <img id="picture" alt="Profile picture" src="/images/Zidane.jpg" width="200" height="200" />
             </a>
         </div>
         <label class="btn btn-raised btn-success glyphicon glyphicon-folder-open">
             Select Photo
         </label>
         <input id="file-submit" style="display: none;" type="submit" value="Load Photo">
-
         <p id="image-msg" style="display: none;">
     </div>
     <hr>

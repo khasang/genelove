@@ -1,7 +1,6 @@
 package io.khasang.genelove.dao;
 
-import io.khasang.genelove.entity.Question;
-import org.springframework.beans.support.PagedListHolder;
+import io.khasang.genelove.entity.entity_training.Question;
 
 import java.util.List;
 

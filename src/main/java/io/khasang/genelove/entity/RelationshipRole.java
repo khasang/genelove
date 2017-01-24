@@ -1,20 +1,16 @@
 package io.khasang.genelove.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
-@Entity(name = "conversations")
-public class Conversation {
+@Entity(name = "relationship_roles")
+public class RelationshipRole {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     @Column
     private String description;
-
-    @OneToMany(mappedBy = "conversation")
-    private List<Message> messages;
 
     public int getId() {
         return id;
@@ -30,13 +26,5 @@ public class Conversation {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
     }
 }

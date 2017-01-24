@@ -1,6 +1,5 @@
 package io.khasang.genelove.entity;
 
-import javax.annotation.Generated;
 import javax.persistence.*;
 
 @Entity(name = "profiles")
@@ -11,15 +10,15 @@ public class Profile {
     };
 
     public enum MaritalStatus {
-        SINGLE, MARRIED, SEPARATED, DIVORCED, WIDOWED
+        SINGLE, MARRIED, SEPARATED, DIVORCED, WIDOWED, OTHER
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
-    @OneToOne(targetEntity = User.class)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "profiles_users_fkey"))
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "profiles_users_fk"))
     private User user;
 
     @Column(name = "nickname", length = 255)
@@ -28,11 +27,11 @@ public class Profile {
     @Column
     private int age;
 
-    @Column
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(name = "marital_status")
+    @Column(name = "marital_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private MaritalStatus maritalStatus;
 
@@ -48,9 +47,10 @@ public class Profile {
     @Column(name = "photo_url")
     private String photoURL;
 
-    @OneToOne(targetEntity = Tree.class)
-    @JoinColumn(name = "tree_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "users_trees_fkey"))
-    private Tree tree;
+    public Profile() {
+        this.gender = Gender.OTHER;
+        this.maritalStatus = MaritalStatus.OTHER;
+    }
 
     public int getId() {
         return id;
@@ -131,4 +131,5 @@ public class Profile {
     public void setPhotoURL(String photoURL) {
         this.photoURL = photoURL;
     }
+
 }

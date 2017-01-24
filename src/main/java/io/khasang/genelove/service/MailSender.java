@@ -54,7 +54,7 @@ public class MailSender {
                 "Here some your personal data: \n" +
                 "Your First Name is: " + user.getFirstName() + ".\n" +
                 "Your Last Name is: " + user.getLastName() + ".\n" +
-                "Your Gender is: " + user.getGender() + ".\n";
+                "Your Gender is: " + "Undefined" + ".\n";
 
         eMail = new EMail(user.getEmail(),
                 environment.getProperty("mail.username"), subject, text);

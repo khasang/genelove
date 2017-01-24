@@ -1,16 +1,13 @@
 package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.Message;
-import io.khasang.genelove.entity.Question;
+import io.khasang.genelove.entity.entity_training.Question;
 import io.khasang.genelove.entity.User;
 import io.khasang.genelove.model.DBLoader;
 import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.MyMessage;
 import io.khasang.genelove.model.SQLExamples;
-import io.khasang.genelove.service.MailSender;
-import io.khasang.genelove.service.MessageService;
-import io.khasang.genelove.service.QuestionService;
-import io.khasang.genelove.service.UserService;
+import io.khasang.genelove.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.core.env.Environment;
@@ -21,6 +18,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletResponse;
+
+import io.khasang.genelove.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -44,9 +54,9 @@ public class AppController {
 
     static int pageNum = 0;
 
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String menuPage() {
+        userService.update(); // to be removed
         return "redirect:/account/menuPage";
     }
 
@@ -146,6 +156,82 @@ public class AppController {
         return "messages";
     }
 
+    /*
+    Stub controllers for jsp pages
+    */
+    SelectQuery selectQuery;
+    @Autowired
+    JoinQuery joinQuery;
+    @Autowired
+    ProfileServiceStub profileServiceStub;
+    @Autowired
+    FindPeopleService findPeopleService;
+
+    @RequestMapping(value = "/support", method = RequestMethod.GET)
+    public String support(Model model){
+        model.addAttribute("support", "");
+        return "support";
+    }
+
+    @RequestMapping(value = "/about", method = RequestMethod.GET)
+    public String about(Model model){
+        model.addAttribute("about", "");
+        return "about";
+    }
+
+    @RequestMapping(value = "/services", method = RequestMethod.GET)
+    public String services(Model model){
+        model.addAttribute("services", "");
+        return "services";
+    }
+
+    @RequestMapping(value = "/docs", method = RequestMethod.GET)
+    public String docs(Model model){
+        model.addAttribute("docs", "");
+        return "docs";
+    }
+
+    @RequestMapping(value = "/help", method = RequestMethod.GET)
+    public String help(Model model){
+        model.addAttribute("help", "");
+        return "help";
+    }
+
+    @RequestMapping(value = "/questions", method = RequestMethod.GET)
+    public String questions(Model model){
+        model.addAttribute("questions", "");
+        return "questions";
+    }
+
+    @RequestMapping(value = "/modifyProfile", method = RequestMethod.GET)
+    public String modifyProfile(Model model){
+        model.addAttribute("modifyProfile", "");
+        return "modifyProfile";
+    }
+
+    @RequestMapping(value = "/tree", method = RequestMethod.GET)
+    public String tree(Model model){
+        model.addAttribute("tree", "");
+        return "tree";
+    }
+
+    @RequestMapping(value = "/profilePage", method = RequestMethod.GET)
+    public ModelAndView profile(){
+        return new ModelAndView("profilePage", "profile", profileServiceStub);
+    }
+
+    @RequestMapping(value = "/findPeople", method = RequestMethod.GET)
+    public ModelAndView findPeople() {
+        return new ModelAndView("findPeople","friends", profileServiceStub);
+    }
+
+    @RequestMapping(value = "/searchResult", method = RequestMethod.GET)
+    public ModelAndView searchResult(HttpServletRequest request) {
+        List<ProfileServiceStub> results = findPeopleService.findPeople(request.getParameter("firstName"),
+                request.getParameter("lastName"), request.getParameter("region"),
+                request.getParameter("minAge"), request.getParameter("maxAge"));
+        return new ModelAndView("searchResult","results", results);
+    }
 }
 
 
