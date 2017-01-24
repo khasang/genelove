@@ -1,4 +1,12 @@
-<jsp:include page="include/header.jsp"/>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<html>
+<head>
+    <title>Genelove Administration: Home</title>
+</head>
+<body>
+    <jsp:include page="include/header.jsp"/>
     <div class="container">
         <br><br><br><br>
         <jsp:include page="include/greeting.jsp"/>
