@@ -1,13 +1,8 @@
-<%--
-  Pagination for any lists in jsp pages
---%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-</head>
+<%--<jsp:include page="/WEB-INF/views/head.jsp"/>--%>
 <body>
-<c:set var="pageListHolder" value="${usersList}" scope="session" />
+<%--<jsp:include page="/WEB-INF/views/admin/include/header.jsp"/>--%>
+<c:set var="pageListHolder" value="${myList}" scope="session" />
 
 <div align="center">
     <ul class="pagination">

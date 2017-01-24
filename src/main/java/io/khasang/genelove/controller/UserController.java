@@ -168,6 +168,7 @@ public class UserController {
     public String userProfiles (Model model) {
         User user = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
         List<Profile> list = profileService.getUserProfiles(user);
+        model.addAttribute("currentUser", user);
         model.addAttribute("profiles", list);
         return "profiles";
     }

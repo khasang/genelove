@@ -3,12 +3,15 @@ package io.khasang.genelove.controller;
 import io.khasang.genelove.entity.EMail;
 import io.khasang.genelove.entity.Role;
 import io.khasang.genelove.entity.User;
+import io.khasang.genelove.model.Utils;
 import io.khasang.genelove.service.AdminService;
 import io.khasang.genelove.service.MailSender;
+import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.core.env.Environment;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,8 +34,10 @@ public class AdminController {
     AdminService adminService;
     @Autowired
     MailSender emailService;
+    @Autowired
+    UserService userService;
 
-    PagedListHolder myList = new PagedListHolder();
+    PagedListHolder usersList = new PagedListHolder();
 
     private void init (AdminService adminService, Model model) {
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
@@ -61,6 +66,8 @@ public class AdminController {
     public String adminScreen(Model model) {
         adminService.createAllRoles();
 
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
 
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
@@ -75,28 +82,18 @@ public class AdminController {
     public String usersList(@RequestParam(value = "page", required = false) String page,
                             @RequestParam(value = "filter", required = false) String filter,
                             Model model) {
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
 
         if (filter == null) {
-            myList.setSource(adminService.getUsers());
+            usersList.setSource(adminService.getUsers());
         }
         else {
-            myList.setSource(adminService.filterUsers(filter));
-        }
-
-        myList.setPageSize(4);
-
-        if (page != null) {
-            if ("previous".equals(page)) {
-                myList.previousPage();
-            } else if ("next".equals(page)) {
-                myList.nextPage();
-            } else{
-                myList.setPage(Integer.parseInt(page));
-            }
+            usersList.setSource(adminService.filterUsers(filter));
         }
 
         model.addAttribute("user", new User());
-        model.addAttribute("usersList", myList);
+        model.addAttribute("usersList", Utils.paginateList(usersList, page, 4, model));
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
 
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
@@ -109,6 +106,8 @@ public class AdminController {
 
     @RequestMapping(value = "new", method = RequestMethod.GET)
     public String userNew(Model model) {
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("user", new User());
         model.addAttribute("accountStatusList", User.getAccountStatusList());
         model.addAttribute("roleList", adminService.getRoles());
@@ -119,6 +118,9 @@ public class AdminController {
     public String userById(@PathVariable("id") long id,
                            @RequestParam(value = "changePassword", required = false) boolean changePassword,
                            Model model){
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
+
         User user = adminService.getUserById(id);
         if (changePassword) {
             user.setPassword(null);
@@ -131,6 +133,8 @@ public class AdminController {
 
     @RequestMapping(value = "sendMailToUserByMail", method = RequestMethod.POST)
     public String sendMailToUserByMail(HttpServletRequest request, Model model) {
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
         adminService.createAllRoles();
         init(adminService, model);
         model.addAttribute("mailto", request.getParameter("email"));
@@ -144,6 +148,8 @@ public class AdminController {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
         adminService.createAllRoles();
         String footer = "\n\n" + "This mail was sended to you from Administrator of " +
                 "Genelove Meeting Service. You don't need to answer on this letter.";
@@ -170,6 +176,8 @@ public class AdminController {
     public String userByLogin(@PathVariable("login") String login,
                               @RequestParam(value = "changePassword", required = false)
                               boolean changePassword, Model model) {
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
         User user = adminService.getUserByLogin(login);
         if (changePassword) {
             user.setPassword(null);

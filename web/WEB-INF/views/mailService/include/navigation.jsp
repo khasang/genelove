@@ -1,11 +1,3 @@
-<div class="Messenger">
-    <fieldset class="fieldsetMessenger">
-        <legend id="numberOfMessages">0</legend>
-        <a href="/messenger">You have not new message yet</a>
-    </fieldset>
-</div>
-<div id="head"><a id="headLink" href="/">
-    <span id="gene">GENE</span><span id="love">LOVE</span><br>Meeting Service</a></div>
 <ul class="mailServiceMenu">
     <li><a href="/sendMail">Mail Sender</a></li>
     <li><a href="/DBLoader">DB Loader</a></li>

@@ -1,14 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Genelove Administration: Add User</title>
-</head>
-<body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="include/header.jsp"/>
 <div class="container">
-    <br><br>
+    <br><br><br><br>
+    <jsp:include page="include/greeting.jsp"/>
     <h3>Add User</h3>
     <c:url var="addUser" value="/admin/add"/>
     <form:form action="${addUser}" method="post" modelAttribute="user">

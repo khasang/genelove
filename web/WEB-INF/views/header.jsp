@@ -1,7 +1,3 @@
-
-<%-- <link href="resources/css/header.css" rel="stylesheet" type="text/css" media="all" /> --%>
-<link href="css/header.css" rel="stylesheet" type="text/css" media="all" />
-
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -25,3 +21,4 @@
         </div>
     </div>
 </nav>
+</head>
