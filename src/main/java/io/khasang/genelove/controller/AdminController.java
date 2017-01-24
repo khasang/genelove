@@ -66,8 +66,10 @@ public class AdminController {
         adminService.createAllRoles();
         //adminService.updateAllUsers(); Rewrite to update receiveNotifications to false for all
         // Set messages status to NEW for existing messages
-
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
+
 
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
         model.addAttribute("blockedUsersCount", adminService.getAssocRolesCount(roleBlocked));
@@ -81,7 +83,8 @@ public class AdminController {
     public String usersList(@RequestParam(value = "page", required = false) String page,
                             @RequestParam(value = "filter", required = false) String filter,
                             Model model) {
-        User user = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
 
         if (filter == null) {
             myList.setSource(adminService.getUsers());
@@ -102,7 +105,6 @@ public class AdminController {
             }
         }
 
-        model.addAttribute("currentUser", user);
         model.addAttribute("user", new User());
         model.addAttribute("usersList", myList);
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
@@ -117,6 +119,8 @@ public class AdminController {
 
     @RequestMapping(value = "new", method = RequestMethod.GET)
     public String userNew(Model model) {
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("user", new User());
         model.addAttribute("accountStatusList", User.getAccountStatusList());
         model.addAttribute("roleList", adminService.getRoles());
@@ -127,6 +131,9 @@ public class AdminController {
     public String userById(@PathVariable("id") int id,
                            @RequestParam(value = "changePassword", required = false) boolean changePassword,
                            Model model){
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
+
         User user = adminService.getUserById(id);
         if (changePassword) {
             user.setPassword(null);
@@ -139,6 +146,8 @@ public class AdminController {
 
     @RequestMapping(value = "sendMailToUserByMail", method = RequestMethod.POST)
     public String sendMailToUserByMail(HttpServletRequest request, Model model) {
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
         adminService.createAllRoles();
         init(adminService, model);
         model.addAttribute("mailto", request.getParameter("email"));
@@ -152,6 +161,8 @@ public class AdminController {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
         adminService.createAllRoles();
         String footer = "\n\n" + "This mail was sended to you from Administrator of " +
                 "Genelove Meeting Service. You don't need to answer on this letter.";
@@ -178,6 +189,8 @@ public class AdminController {
     public String userByLogin(@PathVariable("login") String login,
                               @RequestParam(value = "changePassword", required = false)
                               boolean changePassword, Model model) {
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
         User user = adminService.getUserByLogin(login);
         if (changePassword) {
             user.setPassword(null);
@@ -191,6 +204,7 @@ public class AdminController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
     public Object addUser(@ModelAttribute(value = "user") User user, HttpServletResponse response) {
+
         try {
             if (user != null) {
                 user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));

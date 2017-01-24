@@ -2,7 +2,7 @@
 <jsp:include page="head.jsp"/>
 
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="admin/include/header.jsp"/>
 <c:set var="pageListHolder" value="${usersList}" scope="session" />
 
 <div align="center">
