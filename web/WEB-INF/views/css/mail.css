@@ -348,8 +348,12 @@ legend {
 .fieldsetMessenger {
   border: 1px solid gray;
   border-radius: 15px;
-  background-image: linear-gradient(to bottom, white, yellow);
+  background-image: linear-gradient(to bottom, white, lightgreen);
   border: 1px solid darkred;
+}
+
+.fieldsetMessenger #newMessage {
+  background-image: linear-gradient(to bottom, white, yellow);
 }
 
 .Messenger {

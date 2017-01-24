@@ -30,6 +30,7 @@ public class MessageDAOImpl implements MessageDAO {
     }
 
     public void addMessage(Message message) {
+
         this.sessionFactory.getCurrentSession().save(message);
     }
 

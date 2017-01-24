@@ -2,6 +2,9 @@ package io.khasang.genelove.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 @Entity(name = "messages")
 public class Message {
@@ -39,6 +42,17 @@ public class Message {
     private String text;
 
     public Message() {
+        this.messageStatus = MessageStatus.NEW;
+    }
+
+    public Message(User sender, User receiver, String text) {
+
+        this.setSender(sender);
+        this.setReceiver(receiver);
+        this.setCreatedDate(new Timestamp());
+        this.setCreatedDate(null);
+        this.setSentDate(null);
+        this.setText(text);
         this.messageStatus = MessageStatus.NEW;
     }
 
