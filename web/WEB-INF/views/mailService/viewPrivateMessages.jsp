@@ -61,8 +61,8 @@
                 </tr>
             </c:forEach>
             <!-- <%= count=0 %> -->
-            <br>
          </table>
+        <input class="submitMail" type="submit" value="No action" />
     </fieldset>
 
 </div>
