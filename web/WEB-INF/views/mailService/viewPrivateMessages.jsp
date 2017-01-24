@@ -29,37 +29,43 @@
 <div class="sendMailToSelectUsers">
     <fieldset class="fieldset">
         <legend>View all users</legend>
-        <h1>Please, select all users that you wanna, and then push button "Select"</h1>
+        <h1>Output of all PMs</h1>
         <form class="mailForm" method="post" action="sendMailToGroupOfUsers">
             <table class="tableData">
                 <tr>
                     <th>Select</th>
                     <th>N</th>
                     <th>ID</th>
-                    <th>Login</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>E-Mail</th>
-                    <th>Send E-Mail</th>
-                    <th>Send Private Message</th>
+                    <th>Sender ID</th>
+                    <th>Sender Name, Lastname</th>
+                    <th>Receiver ID</th>
+                    <th>Receiver Name, Lastname</th>
+                    <th>Time of create</th>
+                    <th>Time of sent</th>
+                    <th>Time of receive</th>
+                    <th>Status of PM's</th>
+                    <th>Private Message</th>
                 </tr>
                 <%! private int count = 0; %>
-                <c:forEach items="${usersList}" var="user">
+                <c:forEach items="${allPrivateMessages}" var="privateMessage">
                     <tr>
                         <td><input type="checkbox" name="choice" value="${user.id}"/></td>
                         <td><%= ++count %></td>
-                        <td>${user.id}</td>
-                        <td>${user.login}</td>
-                        <td>${user.firstName}</td>
-                        <td>${user.lastName}</td>
-                        <td>${user.email}</td>
-                        <td><a href="sendMailById/${user.id}">Send E-Mail</a></td>
-                        <td><a href="sendMessageById/${user.id}">Send Private Message</a></td>
+                        <td>${privateMessage.id}</td>
+                        <td>${privateMessage.sender.id}</td>
+                        <td>${privateMessage.sender.firstName} ${privateMessage.sender.lastName}</td>
+                        <td>${privateMessage.receiver.id}</td>
+                        <td>${privateMessage.receiver.firstName} ${privateMessage.receiver.lastName}</td>
+                        <td>${privateMessage.createdDate}</td>
+                        <td>${privateMessage.sentDate}</td>
+                        <td>${privateMessage.receivedDate}</td>
+                        <td>${privateMessage.messageStatus}</td>
+                        <td>${privateMessage.text}</td>
                     </tr>
                 </c:forEach>
                 <!-- <%= count=0 %> -->
             </table>
-            <input class="submitMail" type="submit" value="Send Mail" />
+            <input class="submitMail" type="submit" value="Send PM" />
         </form>
     </fieldset>
 </div>

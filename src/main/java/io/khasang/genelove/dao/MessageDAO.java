@@ -29,4 +29,8 @@ public interface MessageDAO {
 
     List<Message> getMessagesFromTo(User sender, User recipient);
 
+    List<Message> getAllMessagesForUserById(long owner_id);
+
+
+
 }

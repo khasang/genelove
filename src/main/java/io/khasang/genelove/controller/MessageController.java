@@ -19,10 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
 
 @Controller
-public class MessengerController {
+public class MessageController {
     @Autowired
     MyMessage myMessage;
     @Autowired
@@ -78,10 +77,11 @@ public class MessengerController {
         model.addAttribute("currentUser", getCurrentUserName());
         int receiver_id = Integer.parseInt(request.getParameter("recipient"));
         String text = request.getParameter("privateMessage");
-
+        String option = request.getParameter("option");
+        System.out.println("Option: " + option);
         Message privateMessage = new Message(
+                userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName()),
                 userService.getUserById(receiver_id),
-                userService.getUserById(2),
                 text
         );
 
@@ -116,6 +116,29 @@ public class MessengerController {
             model.addAttribute("errorMessage", exception);
             return "mailService/sendMailError";
         }
+    }
+
+    @RequestMapping(value = "/viewAllPMs", method = RequestMethod.GET)
+    public String viewAllPMs(Model model) {
+        String message = "Output of All Private Messages from DB";
+        model.addAttribute("currentUser", getCurrentUserName());
+        model.addAttribute("message", message);
+        model.addAttribute("allPrivateMessages", messageService.getMessageAll());
+        return "mailService/viewPrivateMessages";
+    }
+
+    @RequestMapping(value = "/viewAllMyPMs", method = RequestMethod.GET)
+    public String viewAllMyPMs(Model model) {
+        String message = "Output of all your Private Messages from DB";
+        model.addAttribute("currentUser", getCurrentUserName());
+        model.addAttribute("message", message);
+        model.addAttribute("allPrivateMessages", messageService
+                .getAllMessagesForUserById(userService
+                        .getUserByLogin(SecurityContextHolder
+                        .getContext().getAuthentication()
+                        .getName())
+                        .getId()));
+        return "mailService/viewPrivateMessages";
     }
     /************************** End of the Private Message Service *************************/
 }

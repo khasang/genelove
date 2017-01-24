@@ -78,4 +78,8 @@ public class MessageService {
         return messageDAO.getMessageAll();
     }
 
+    public List<Message> getAllMessagesForUserById (long owner_id) {
+        return messageDAO.getAllMessagesForUserById(owner_id);
+    }
+
 }

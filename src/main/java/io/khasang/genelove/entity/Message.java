@@ -47,7 +47,8 @@ public class Message {
     public Message(User sender, User receiver, String text) {
         this.setSender(sender);
         this.setReceiver(receiver);
-        this.setCreatedDate(new java.sql.Timestamp((long)(new java.util.Date().getTime()/1000)*1000));
+        //this.setCreatedDate(new java.sql.Timestamp((long)(new java.util.Date().getTime()/1000)*1000));
+        this.setCreatedDate( new Timestamp(new Date().getTime()));
         this.setReceivedDate(null);
         this.setSentDate(null);
         this.setText(text);

@@ -119,4 +119,15 @@ public class MessageDAOImpl implements MessageDAO {
         query.setParameter("receiver_id", receiver.getId());
         return query.getResultList();
     }
+
+
+    @Override
+    public List<Message> getAllMessagesForUserById(long owner_id) {
+        TypedQuery<Message> query = sessionFactory.getCurrentSession().
+                createNativeQuery("SELECT * FROM messages WHERE " +
+                        "sender_id = :owner_id or receiver_id = :owner_id ",
+                        Message.class);
+        query.setParameter("owner_id", owner_id);
+        return query.getResultList();
+    }
 }
