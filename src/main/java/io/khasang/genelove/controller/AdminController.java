@@ -3,6 +3,7 @@ package io.khasang.genelove.controller;
 import io.khasang.genelove.entity.EMail;
 import io.khasang.genelove.entity.Role;
 import io.khasang.genelove.entity.User;
+import io.khasang.genelove.model.Utils;
 import io.khasang.genelove.service.AdminService;
 import io.khasang.genelove.service.MailSender;
 import io.khasang.genelove.service.UserService;
@@ -36,7 +37,7 @@ public class AdminController {
     @Autowired
     UserService userService;
 
-    PagedListHolder myList = new PagedListHolder();
+    PagedListHolder usersList = new PagedListHolder();
 
     private void init (AdminService adminService, Model model) {
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
@@ -87,26 +88,14 @@ public class AdminController {
         model.addAttribute("currentUser", currentUser);
 
         if (filter == null) {
-            myList.setSource(adminService.getUsers());
+            usersList.setSource(adminService.getUsers());
         }
         else {
-            myList.setSource(adminService.filterUsers(filter));
-        }
-
-        myList.setPageSize(4);
-
-        if (page != null) {
-            if ("previous".equals(page)) {
-                myList.previousPage();
-            } else if ("next".equals(page)) {
-                myList.nextPage();
-            } else{
-                myList.setPage(Integer.parseInt(page));
-            }
+            usersList.setSource(adminService.filterUsers(filter));
         }
 
         model.addAttribute("user", new User());
-        model.addAttribute("usersList", myList);
+        model.addAttribute("usersList", Utils.paginateList(usersList, page, 4, model));
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
 
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
