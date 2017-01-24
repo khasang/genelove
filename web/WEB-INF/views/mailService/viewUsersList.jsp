@@ -7,7 +7,7 @@
     <title>Mail Sender</title>
 </head>
 <body>
-<jsp:include page="navigation.jsp"/>
+<jsp:include page="include/navigation.jsp"/>
 <div class="systemMessage">
     <p>Your request has been successfully completed<br>
         <span class="systemResponce">${message}</span></p>
@@ -16,7 +16,7 @@
 <div class="sendMailToSelectUsers">
     <fieldset class="fieldset">
         <legend>View all users</legend>
-        <h1> Please, select all users that you wanna, and ther push button "Select"</h1>
+        <h1> Please, select all users that you wanna, and then push button "Select"</h1>
         <form class="mailForm" method="post" action="sendMailToGroupOfUsers">
             <table class="tableData">
                 <tr>
@@ -25,7 +25,6 @@
                     <th>Login</th>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Gender</th>
                     <th>E-Mail</th>
                     <th>Send E-Mail</th>
                     <th>Send Private Message</th>
@@ -37,7 +36,6 @@
                         <td>${user.login}</td>
                         <td>${user.firstName}</td>
                         <td>${user.lastName}</td>
-                        <td>${user.gender}</td>
                         <td>${user.email}</td>
                         <td><a href="sendMailById/${user.id}">Send E-Mail</a></td>
                         <td><a href="sendMail?user=${user.id}">Send Private message</a></td>
@@ -48,4 +46,4 @@
         </form>
     </fieldset>
 </div>
-<jsp:include page="footer.jsp"/>
+<jsp:include page="include/footer.jsp"/>

@@ -4,6 +4,7 @@
 
 html {
   overflow-y: scroll;
+  text-align: center;
 }
 
 body {
@@ -304,6 +305,7 @@ td {
 }
 
 .mailServiceMenu {
+  float: left;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -379,6 +381,7 @@ legend {
 }
 
 #head {
+  float: left;
   margin: 10px;
   font-size: 20px;
   color: white;
@@ -401,4 +404,3 @@ legend {
   text-align: center;
   color: white;
 }
-
