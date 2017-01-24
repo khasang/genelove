@@ -49,8 +49,8 @@ public class Message {
 
         this.setSender(sender);
         this.setReceiver(receiver);
-        this.setCreatedDate(new Timestamp());
-        this.setCreatedDate(null);
+        this.setCreatedDate(new java.sql.Timestamp((long)(new java.util.Date().getTime()/1000)*1000));
+        this.setReceivedDate(null);
         this.setSentDate(null);
         this.setText(text);
         this.messageStatus = MessageStatus.NEW;
