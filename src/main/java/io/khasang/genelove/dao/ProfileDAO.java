@@ -11,7 +11,7 @@ public interface ProfileDAO {
 
     List<Profile> getUserProfiles (User user);
 
-    Profile getProfileById (int id);
+    Profile getProfileById (long id);
 
     void updateProfile(Profile profile);
 

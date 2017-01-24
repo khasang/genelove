@@ -8,7 +8,7 @@ public class Relationship {
 
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "person_1_id", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "relationships_persons_1_fk"))
@@ -43,11 +43,11 @@ public class Relationship {
     @JoinColumn(name = "tree_id", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "relationships_trees_fk"))
     private Tree tree;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -30,7 +30,7 @@ public class ProfileService {
         return profileDAO.getUserProfiles(user);
     }
 
-    public Profile getProfileById (int id) {
+    public Profile getProfileById (long id) {
         return profileDAO.getProfileById(id);
     }
 

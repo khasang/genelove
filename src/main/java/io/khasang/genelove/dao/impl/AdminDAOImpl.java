@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,9 +71,9 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
-    public int getRoleId(String roleName) {
+    public long getRoleId(String roleName) {
         CriteriaBuilder criteriaBuilder = sessionFactory.getCurrentSession().getCriteriaBuilder();
-        CriteriaQuery<Integer> criteriaQuery = criteriaBuilder.createQuery(Integer.class);
+        CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
         Root<Role> root = criteriaQuery.from(Role.class);
         criteriaQuery.select(root.get("id"));
         criteriaQuery.where(criteriaBuilder.equal(root.get("roleName"),roleName));
@@ -152,12 +151,12 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
-    public User getUserById(int id) {
+    public User getUserById(long id) {
         CriteriaBuilder cb = sessionFactory.getCurrentSession().getCriteriaBuilder();
 
         CriteriaQuery<User> cq = cb.createQuery(User.class);
         Root<User> root = cq.from(User.class);
-        ParameterExpression<Integer> p = cb.parameter(Integer.class);
+        ParameterExpression<Long> p = cb.parameter(Long.class);
         cq.select(root).where(cb.equal(root.get("id"), p));
 
         TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(cq);
@@ -180,13 +179,13 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
-    public Role getRoleById(int id) {
+    public Role getRoleById(long id) {
         Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
 
         CriteriaQuery<Role> cq = cb.createQuery(Role.class);
         Root<Role> root = cq.from(Role.class);
-        ParameterExpression<Integer> p = cb.parameter(Integer.class);
+        ParameterExpression<Long> p = cb.parameter(Long.class);
         cq.select(root).where(cb.equal(root.get("id"), p));
 
         TypedQuery<Role> query = session.createQuery(cq);

@@ -60,8 +60,6 @@ public class AdminController {
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public String adminScreen(Model model) {
         adminService.createAllRoles();
-        //adminService.updateAllUsers(); Rewrite to update receiveNotifications to false for all
-        // Set messages status to NEW for existing messages
 
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
 
@@ -118,7 +116,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "user/id/{id}", method = RequestMethod.GET)
-    public String userById(@PathVariable("id") int id,
+    public String userById(@PathVariable("id") long id,
                            @RequestParam(value = "changePassword", required = false) boolean changePassword,
                            Model model){
         User user = adminService.getUserById(id);
@@ -258,8 +256,6 @@ public class AdminController {
             return "Error in promoteUser method: " + e.getMessage();
         }
     }
-
-
 
     @RequestMapping(value = "block", method = RequestMethod.POST)
     @ResponseBody
