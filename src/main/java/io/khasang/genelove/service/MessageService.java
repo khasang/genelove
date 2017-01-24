@@ -61,8 +61,8 @@ public class MessageService {
         return messages;
     }*/
 
-    public List<Message> getMessagesWith (int id) {
-        int otherId = userDAO.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
+    public List<Message> getMessagesWith (long id) {
+        long otherId = userDAO.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
         return messageDAO.getMessagesWith (id, otherId);
     }
 

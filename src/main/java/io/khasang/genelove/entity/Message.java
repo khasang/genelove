@@ -2,8 +2,6 @@ package io.khasang.genelove.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 @Entity(name = "messages")
@@ -15,7 +13,7 @@ public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "sender_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "messages_users_sender_fk"))
@@ -43,10 +41,10 @@ public class Message {
 
     public Message() {
         this.messageStatus = MessageStatus.NEW;
+        this.createdDate = new Timestamp(new Date().getTime());
     }
 
     public Message(User sender, User receiver, String text) {
-
         this.setSender(sender);
         this.setReceiver(receiver);
         this.setCreatedDate(new java.sql.Timestamp((long)(new java.util.Date().getTime()/1000)*1000));
@@ -56,11 +54,11 @@ public class Message {
         this.messageStatus = MessageStatus.NEW;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

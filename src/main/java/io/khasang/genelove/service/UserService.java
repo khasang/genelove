@@ -32,7 +32,7 @@ public class UserService {
         return userDAO.getUserByLogin(login);
     }
 
-    public User getUserById(int id){
+    public User getUserById(long id){
         return userDAO.getUserById(id);
     }
 
@@ -48,7 +48,7 @@ public class UserService {
         return userDAO.getRoleByName(name);
     }
 
-    public Role getRoleById(int id){
+    public Role getRoleById(long id){
         return userDAO.getRoleById(id);
     }
 

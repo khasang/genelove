@@ -67,7 +67,7 @@ public class UserController {
 
     /** Get message from another user" */
     @RequestMapping(value = "/messagesWith/{otherId}", method = RequestMethod.GET)
-    public String messagesWithOther (@PathVariable("otherId") int otherId, Model model) {
+    public String messagesWithOther (@PathVariable("otherId") long otherId, Model model) {
         List<Message> list = messageService.getMessagesWith(otherId);
         model.addAttribute("messages", list);
         return "messages";
@@ -191,7 +191,7 @@ public class UserController {
 
     /** View person info" */
     @RequestMapping(value = "/viewPersInfo/{id}", method = RequestMethod.GET)
-    public String persInfoView(@PathVariable("id") int id, Model model){
+    public String persInfoView(@PathVariable("id") long id, Model model){
         model.addAttribute("profile", profileService.getProfileById(id));
         return "profile";
     }
@@ -199,7 +199,7 @@ public class UserController {
     /** Update person info about user" */
 
     @RequestMapping(value = "/editProfile/{id}", method = RequestMethod.GET)
-    public String editProfile(@PathVariable("id") int id, Model model){
+    public String editProfile(@PathVariable("id") long id, Model model){
         model.addAttribute("profile", profileService.getProfileById(id));
         return "profileEdit";
     }

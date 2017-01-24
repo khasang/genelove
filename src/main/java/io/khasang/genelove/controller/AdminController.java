@@ -65,12 +65,10 @@ public class AdminController {
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public String adminScreen(Model model) {
         adminService.createAllRoles();
-        //adminService.updateAllUsers(); Rewrite to update receiveNotifications to false for all
-        // Set messages status to NEW for existing messages
+
         User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
-
 
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
         model.addAttribute("blockedUsersCount", adminService.getAssocRolesCount(roleBlocked));
@@ -117,7 +115,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "user/id/{id}", method = RequestMethod.GET)
-    public String userById(@PathVariable("id") int id,
+    public String userById(@PathVariable("id") long id,
                            @RequestParam(value = "changePassword", required = false) boolean changePassword,
                            Model model){
         User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -193,7 +191,6 @@ public class AdminController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
     public Object addUser(@ModelAttribute(value = "user") User user, HttpServletResponse response) {
-
         try {
             if (user != null) {
                 user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
@@ -267,8 +264,6 @@ public class AdminController {
             return "Error in promoteUser method: " + e.getMessage();
         }
     }
-
-
 
     @RequestMapping(value = "block", method = RequestMethod.POST)
     @ResponseBody

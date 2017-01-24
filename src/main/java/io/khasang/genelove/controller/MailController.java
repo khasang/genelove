@@ -163,7 +163,7 @@ public class MailController {
     }
 
     @RequestMapping(value = "/sendMailById/{id}", method = RequestMethod.GET)
-    public String sendMailByIdGET(@PathVariable("id") int id, Model model) {
+    public String sendMailByIdGET(@PathVariable("id") long id, Model model) {
         String message = "Do you wanna send the message to user (ID = <strong>" +
                 id+ "</strong>) in really? ";
         model.addAttribute("currentUser", getCurrentUserName());
