@@ -85,7 +85,7 @@ public class MessengerController {
                 text
         );
 
-        System.out.println("*********** Message Constructor ***********");
+/*       System.out.println("*********** Message Constructor ***********");
         System.out.println("Private Message Sender: " + userService.getUserById(receiver_id));
         System.out.println("Private Message Receiver: " + userService.getUserById(receiver_id));
         System.out.println("Private Message Creation Date: " + privateMessage.getCreatedDate());
@@ -104,7 +104,7 @@ public class MessengerController {
         System.out.println("Private Message Received Date: " + privateMessage.getReceivedDate());
         System.out.println("Private Message Status: " + privateMessage.getMessageStatus());
         System.out.println("Private Message Text:" + privateMessage.getText());
-        System.out.println("*******************************************");
+        System.out.println("*******************************************");*/
 
         try {
             messageService.addMessage(privateMessage);
