@@ -16,20 +16,16 @@
 <div class="sendMailById">
     <fieldset class="fieldset">
         <legend>E-Mail Service</legend>
-    <h1>Send simple e-mail to User by Id</h1>
+    <h1>Send Private Message to User by Id</h1>
     <form class="mailForm" method="post" action="send">
         <input type="hidden" name="recipient" value="${id}"/>
         <table border="0" align="center">
             <tr>
-                <td><label>Subject:</label></td>
-                <td><input type="text" name="subject"/></td>
-            </tr>
-            <tr>
-                <td><label>Message:</label></td>
-                <td><textarea rows="4" name="message"></textarea></td>
+                <td><label>Private Message:</label></td>
+                <td><textarea rows="4" name="privateMessage"></textarea></td>
             </tr>
         </table>
-        <input class="submitMail" type="submit" value="Send Mail" />
+        <input class="submitMail" type="submit" value="Send your PM" />
     </form>
     </fieldset>
 </div>

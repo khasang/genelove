@@ -13,9 +13,9 @@ public interface MessageDAO {
 
     void editMessage(Message message);
 
-    Message getMessageById(int id);
+    Message getMessageById(long id);
 
-    List<Message> getMessagesWith(int id, int otherId);
+    List<Message> getMessagesWith(long id, long otherId);
 
     List<Message> getMessageByKeyWord(String keyWord);
 

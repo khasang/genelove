@@ -56,7 +56,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User getUserById (int id) {
+    public User getUserById (long id) {
         TypedQuery<User> query = sessionFactory.getCurrentSession().createNativeQuery("" +
                 "SELECT * FROM users WHERE id = ?", User.class);
         query.setParameter(1, id);
@@ -83,7 +83,7 @@ public class UserDAOImpl implements UserDAO {
 
 
     @Override
-    public Role getRoleById (int id) {
+    public Role getRoleById (long id) {
         TypedQuery<Role> query = sessionFactory.getCurrentSession().createNativeQuery("" +
                 "SELECT * FROM roles WHERE id = ?", Role.class);
         query.setParameter(1, id);
@@ -133,5 +133,10 @@ public class UserDAOImpl implements UserDAO {
                                       "SET receive_notifications = true " +
                                       "WHERE receive_notifications IS NULL");
         query.executeUpdate();
+
+        /*Message message = new Message();
+        message.setSender(getUserByLogin("admin"));
+        message.setReceiver(getUserByLogin("admin"));
+        sessionFactory.getCurrentSession().save(message);*/
     }
 }

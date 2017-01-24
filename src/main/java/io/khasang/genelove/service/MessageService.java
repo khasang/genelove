@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import io.khasang.genelove.dao.UserDAO;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -22,7 +25,22 @@ public class MessageService {
 
     public void addMessage(Message message) {
         messageDAO.addMessage(message);
-    }
+        System.out.println("************* Message Service *************");
+        System.out.println("Private Message ID:" + message.getId());
+        System.out.println("Private Message Sender:" + message.getSender());
+        System.out.println("Private Message Receiver:" + message.getReceiver());
+        System.out.println("Private Message Creation Date:" + message.getCreatedDate());
+        System.out.println("Private Message Sent Date:" + message.getSentDate());
+        System.out.println("Private Message Received Date:" + message.getReceivedDate());
+        System.out.println("Private Message Status:" + message.getMessageStatus());
+        System.out.println("Private Message Text:" + message.getText());
+        System.out.println("*******************************************");
+        System.out.println(Calendar.getInstance().getTime());
+        //SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+
+        System.out.println("*******************************************");
+   }
 
     public void deleteMessage(Message message) {
         messageDAO.deleteMessage(message);
@@ -43,8 +61,8 @@ public class MessageService {
         return messages;
     }*/
 
-    public List<Message> getMessagesWith (int id) {
-        int otherId = userDAO.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
+    public List<Message> getMessagesWith (long id) {
+        long otherId = userDAO.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
         return messageDAO.getMessagesWith (id, otherId);
     }
 

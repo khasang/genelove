@@ -36,7 +36,7 @@ public class ProfileDAOImpl implements ProfileDAO {
     }
 
     @Override
-    public Profile getProfileById (int id) {
+    public Profile getProfileById (long id) {
         TypedQuery<Profile> query = sessionFactory.getCurrentSession().createNativeQuery("" +
                 "SELECT * FROM profiles WHERE id = ?", Profile.class);
         query.setParameter(1, id);

@@ -6,10 +6,10 @@
     <title>Genelove Administration: Home</title>
 </head>
 <body>
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="include/header.jsp"/>
     <div class="container">
-        <br><br>
-        <h3>Administration Screen</h3>
+        <br><br><br><br>
+        <jsp:include page="include/greeting.jsp"/>
         <div class="row">
             <div class="col-sm-4">
                 <div class="card">

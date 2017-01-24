@@ -12,15 +12,16 @@ import io.khasang.genelove.service.QuestionService;
 import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 @Controller
+@RequestMapping(value = "/")
 public class MailController {
     @Autowired
     MyMessage myMessage;
@@ -41,18 +42,29 @@ public class MailController {
     @Autowired
     DBLoader dbLoader;
 
+    private String getCurrentUserName () {
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        String name = currentUser.getFirstName();
+        String lastName = currentUser.getLastName();
+        if (name != null && lastName != null)
+            return name + " " + lastName;
+        else return "Anonymous User";
+    }
+
     /*********************************** Mail Sender Service *******************************
     * In this section represents code of Mail Sender Service.
     * Begin of this section here.
     ***************************************************************************************/
     @RequestMapping(value = "/sendMail", method = RequestMethod.GET)
-    public String mailSender() {
+    public String mailSender(Model model) {
+        model.addAttribute("currentUser", getCurrentUserName());
         return "mailService/sendMail";
     }
 
     @RequestMapping(value = "/insertUsersIntoDB", method = RequestMethod.GET)
     public String addUsersIntoDB(Model model) {
         String response = dbLoader.addUsersIntoDB();
+        model.addAttribute("currentUser", getCurrentUserName());
         model.addAttribute("message", response);
         if (response.equals("Ok"))
             return "mailService/sendMailResult";
@@ -65,6 +77,7 @@ public class MailController {
     @RequestMapping(value = "/viewAllUsers", method = RequestMethod.GET)
     public String viewAllUsers(Model model) {
         String message = "View all users from our database \"User\"";
+        model.addAttribute("currentUser", getCurrentUserName());
         model.addAttribute("message", message);
         model.addAttribute("usersList", userService.getUserAll());
         return "mailService/viewUsersList";
@@ -73,6 +86,7 @@ public class MailController {
     @RequestMapping(value = "/viewAllEMails", method = RequestMethod.GET)
     public String viewAllUEMails(Model model) {
         String message = "View all E-Mails";
+        model.addAttribute("currentUser", getCurrentUserName());
         model.addAttribute("message", message);
         model.addAttribute("eMailsList", userService.getUserAll());
         return "mailService/viewEMailsList";
@@ -81,6 +95,7 @@ public class MailController {
     @RequestMapping(value = "/noAction", method = RequestMethod.POST)
     public String noAction(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         String message = "This is blank for the future usage";
+        model.addAttribute("currentUser", getCurrentUserName());
         model.addAttribute("message", message);
         return "mailService/sendMailResult";
     }
@@ -88,6 +103,7 @@ public class MailController {
     @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
     public String doSendEmail(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         request.setCharacterEncoding("UTF8");
+        model.addAttribute("currentUser", getCurrentUserName());
 
         if (request.getParameter("recipient").equals("")) {
             String message = "Recipient's address is null";
@@ -116,6 +132,7 @@ public class MailController {
     @RequestMapping(value = "/sendMailToAllUsers", method = RequestMethod.GET)
     public String sendMailToAllUsersGET(Model model) {
         String message = "Do you wanna send the e-Mail to all users in really?";
+        model.addAttribute("currentUser", getCurrentUserName());
         model.addAttribute("message", message);
         return "mailService/sendMailToAllUsers";
     }
@@ -124,6 +141,7 @@ public class MailController {
     public String sendMailToAllUsersPOST(HttpServletRequest request, Model model)
             throws UnsupportedEncodingException {
         request.setCharacterEncoding("UTF8");
+        model.addAttribute("currentUser", getCurrentUserName());
         ArrayList<User> listOfRecipients = (ArrayList<User>) userService.getUserAll();
         EMail eMail = new EMail(
                 environment.getProperty("mail.username"),
@@ -145,9 +163,10 @@ public class MailController {
     }
 
     @RequestMapping(value = "/sendMailById/{id}", method = RequestMethod.GET)
-    public String sendMailByIdGET(@PathVariable("id") int id, Model model) {
+    public String sendMailByIdGET(@PathVariable("id") long id, Model model) {
         String message = "Do you wanna send the message to user (ID = <strong>" +
                 id+ "</strong>) in really? ";
+        model.addAttribute("currentUser", getCurrentUserName());
         model.addAttribute("message", message);
         model.addAttribute("id", id);
         return "mailService/sendMailById";
@@ -156,6 +175,7 @@ public class MailController {
     @RequestMapping(value = "/sendMailById/send", method = RequestMethod.POST)
     public String sendMailByIdPOST(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         request.setCharacterEncoding("UTF8");
+        model.addAttribute("currentUser", getCurrentUserName());
         int recipient = Integer.valueOf(request.getParameter("recipient"));
         EMail eMail = new EMail(
                 userService.getUserById(recipient).getEmail(),
@@ -179,6 +199,7 @@ public class MailController {
 
     @RequestMapping(value = "/sendMailToUser", method = RequestMethod.POST)
     public String doSendEmailToUser(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
+        model.addAttribute("currentUser", getCurrentUserName());
         User user = new User();
         user.setEmail("python239@mail.ru");
         user.setFirstName("Alexander");
@@ -198,25 +219,22 @@ public class MailController {
 
     @RequestMapping(value = "/sendMailToSomeUsers", method = RequestMethod.POST)
     public String doSendEmailToSomeUsers(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
-        ModelAndView modelAndView = new ModelAndView();
+        model.addAttribute("currentUser", getCurrentUserName());
 
         User user1 = new User();
         user1.setEmail("python239@mail.ru");
         user1.setFirstName("Alexander");
         user1.setLastName("Pyankov");
-       //user1.setGender("male");
 
         User user2 = new User();
         user2.setEmail("python239@mail.ru");
         user2.setFirstName("Robert");
         user2.setLastName("Stivenson");
-        //user2.setGender("male");
 
         User user3 = new User();
         user3.setEmail("python239@mail.ru");
         user3.setFirstName("Alexander");
         user3.setLastName("Miln");
-        //user3.setGender("male");
 
         ArrayList<User> list = new ArrayList<>();
         list.add(user1);
@@ -234,5 +252,14 @@ public class MailController {
             return "mailService/sendMailError";
         }
     }
+
+    @RequestMapping(value = "/sendMailToGroupOfUsers", method = RequestMethod.POST)
+    public String sendMailToGroupOfUsers(Model model) {
+        model.addAttribute("currentUser", getCurrentUserName());
+        String message = "Send Mail to selected users";
+        model.addAttribute("message", message);
+        return "mailService/sendMailToSelectedUsers";
+    }
+
     /*************************** End of the Mail Sender Service ****************************/
 }

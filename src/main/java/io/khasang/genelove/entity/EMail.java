@@ -18,7 +18,7 @@ import java.util.Date;
 public class EMail {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private long id;
 
     @Column(length = 9999)
     private String recipient;
@@ -38,11 +38,11 @@ public class EMail {
     public EMail() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -6,13 +6,14 @@
     <title>Genelove Administration: Users List</title>
 </head>
 <body>
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="include/header.jsp"/>
     <div class="container">
-        <br><br>
+        <br><br><br><br>
+        <jsp:include page="include/greeting.jsp"/>
         <h3>User List</h3>
 
         <table class="table-bordered container">
-        <thead>
+            <thead>
             <tr>
                 <th>#</th>
                 <th>Login</th>
