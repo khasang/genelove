@@ -78,14 +78,21 @@ public class MessageController {
         int receiver_id = Integer.parseInt(request.getParameter("recipient"));
         String text = request.getParameter("privateMessage");
         String option = request.getParameter("option");
-        System.out.println("Option: " + option);
+
         Message privateMessage = new Message(
                 userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName()),
                 userService.getUserById(receiver_id),
                 text
         );
 
-/*       System.out.println("*********** Message Constructor ***********");
+        if (option != null) privateMessage.setMessageStatus(Message.MessageStatus.NEW);
+        else privateMessage.setMessageStatus(Message.MessageStatus.SENT);
+
+/*      System.out.println("********** Messenger Controller ***********");
+        System.out.println("Option: " + option);
+        System.out.println("********** Messenger Controller ***********");
+
+        System.out.println("*********** Message Constructor ***********");
         System.out.println("Private Message Sender: " + userService.getUserById(receiver_id));
         System.out.println("Private Message Receiver: " + userService.getUserById(receiver_id));
         System.out.println("Private Message Creation Date: " + privateMessage.getCreatedDate());
