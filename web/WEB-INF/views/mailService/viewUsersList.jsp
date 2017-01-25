@@ -29,12 +29,11 @@
 <div class="sendMailToSelectUsers">
     <fieldset class="fieldset">
         <legend>View all users</legend>
-        <h1>Please, select all users that you wanna, and then push button "Select"</h1>
+        <h1> Please, select all users that you wanna, and then push button "Select"</h1>
         <form class="mailForm" method="post" action="sendMailToGroupOfUsers">
             <table class="tableData">
                 <tr>
                     <th>Select</th>
-                    <th>N</th>
                     <th>ID</th>
                     <th>Login</th>
                     <th>First Name</th>
@@ -43,11 +42,9 @@
                     <th>Send E-Mail</th>
                     <th>Send Private Message</th>
                 </tr>
-                <%! private int count = 0; %>
                 <c:forEach items="${usersList}" var="user">
                     <tr>
                         <td><input type="checkbox" name="choice" value="${user.id}"/></td>
-                        <td><%= ++count %></td>
                         <td>${user.id}</td>
                         <td>${user.login}</td>
                         <td>${user.firstName}</td>
@@ -57,7 +54,6 @@
                         <td><a href="sendMessageById/${user.id}">Send Private Message</a></td>
                     </tr>
                 </c:forEach>
-                <!-- <%= count=0 %> -->
             </table>
             <input class="submitMail" type="submit" value="Send Mail" />
         </form>

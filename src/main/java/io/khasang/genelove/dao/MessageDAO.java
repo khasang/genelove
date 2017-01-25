@@ -31,6 +31,6 @@ public interface MessageDAO {
 
     List<Message> getAllMessagesForUserById(long owner_id);
 
-    long checkNewMessage(long owner_id);
+
 
 }
