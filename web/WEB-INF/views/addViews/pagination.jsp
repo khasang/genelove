@@ -1,3 +1,8 @@
+<%--
+  Add pagination bar to the place in "jsp" page.
+  Author: DenisGuzikov
+  Version: 1.0
+--%>
 <html>
 <%--<jsp:include page="/WEB-INF/views/head.jsp"/>--%>
 <body>
@@ -7,7 +12,6 @@
 <div align="center">
     <ul class="pagination">
         <li>
-            <%--<a href="?page=previous">&lt;</a>--%>
             <span style="float:left;">
                     <c:choose>
                         <c:when test="${pageListHolder.firstPage}"> < </c:when>
@@ -28,7 +32,6 @@
                     </span>
         </li>
         <li>
-            <%--<a href="?page=next">&gt;</a>--%>
             <span>
                     <c:choose>
                         <c:when test="${pageListHolder.lastPage}"> > </c:when>

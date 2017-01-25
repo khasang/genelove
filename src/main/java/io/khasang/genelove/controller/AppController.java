@@ -45,7 +45,7 @@ public class AppController {
     @Autowired
     UserService userService;
 
-    static int pageNum = 0;
+    PagedListHolder questionList = new PagedListHolder();
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public String menuPage() {
@@ -110,29 +110,14 @@ public class AppController {
     }
 
     /**
-     * Example request http://localhost:8089/db/allQuestion?page=next
+     * Example request http://localhost:8080/db/allQuestion?page=next
+     * (see also "model/Utils.paginateList" and testViews/questions.jsp)
      */
     @RequestMapping(value = "/db/allQuestion", method = RequestMethod.GET)
     public String allQuestion(Model model, @RequestParam(value = "page", required = false) String page) {
-        PagedListHolder questionList = new PagedListHolder(questionService.getQuestionList());
-        questionList.setPageSize(4);
+        questionList.setSource(questionService.getQuestionList());
 
-        if (page != null) {
-            if ("previous".equals(page)) {
-                questionList.previousPage();
-                pageNum--;
-                questionList.setPage(pageNum);
-            } else if ("next".equals(page)) {
-                questionList.nextPage();
-                pageNum++;
-                questionList.setPage(pageNum);
-            } else {
-                questionList.setPage(Integer.parseInt(page));
-                pageNum = Integer.parseInt(page);
-            }
-        }
-
-        model.addAttribute("allQuestion", questionList);
+        model.addAttribute("allQuestion", Utils.paginateList(questionList, page, 4, model));
         return "testViews/questions";
     }
 
