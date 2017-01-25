@@ -48,15 +48,32 @@ public class MessageController {
         else return "Anonymous User";
     }
 
+    private long checkNewMessage(long owner_id) {
+        return messageService.checkNewMessage(owner_id);
+    }
+
     /********************************* Private Message Service ******************************
     * In this section represents code of Mail Sender Service.
     * Begin of this section here.
     ***************************************************************************************/
     @RequestMapping(value = "/messenger", method = RequestMethod.GET)
     public String messenger(Model model) {
+        String message;
         model.addAttribute("currentUser", getCurrentUserName());
-        String message = "Your Message Box is empty.<br>" +
-                "You haven't get any messages yet.";
+        long owner_id = userService
+                .getUserByLogin(SecurityContextHolder
+                        .getContext().getAuthentication()
+                        .getName())
+                .getId();
+        long numberNewMessages = checkNewMessage(owner_id);
+        if (numberNewMessages == 0) {
+            message = "Your Message Box is empty.<br>" +
+                    "You haven't get any messages yet.";
+        } else {
+            message = "Your Message Box is empty.<br>" +
+                    "You have got " + numberNewMessages + " new messages.";
+        }
+        model.addAttribute("numberNewMessages", numberNewMessages);
         model.addAttribute("message", message);
         return "mailService/messenger";
     }
