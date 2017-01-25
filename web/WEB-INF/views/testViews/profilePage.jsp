@@ -6,8 +6,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Profile</title>
-    <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="css/images.css"/>
+    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="../css/images.css"/>
 
 </head>
 
@@ -16,7 +16,7 @@
 <%@ include file="header_r.jsp" %><br><br>
 <div>
     <a href="changeFoto.jsp">
-        <img src="resources/images/smile.jpg" alt="Фото" class="profilePageFoto">
+        <img src="../resources/images/smile.jpg" alt="Фото" class="profilePageFoto">
         <%-- <img src="resources/smile.jpg" alt="Фото" class="profilePageFoto"> --%>
     </a><br>
 
@@ -35,7 +35,7 @@
         </strong>
     </div>
     <a href="${pageContext.request.contextPath}/tree">
-        <img src="resources/images/drevo.jpg" alt="генеалогическое древо" class="profilePageFoto" >
+        <img src="../resources/images/drevo.jpg" alt="генеалогическое древо" class="profilePageFoto" >
         <%-- <img src="resources/drevo.jpg" alt="генеалогическое древо" class="profilePageFoto" > --%>
     </a>
 

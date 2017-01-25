@@ -30,23 +30,6 @@ public class UserController {
     @Autowired
     ProfileService profileService;
 
-    @RequestMapping("/qwerty")
-    public String test(Model model){
-        model.addAttribute("hello", "");
-        return "hello";
-    }
-
-    /** View home page */
-    @RequestMapping(value = {"","/"}, method = RequestMethod.GET)
-    public String homePage(){
-        return "menuPage";
-    }
-
-    /** View menu page */
-    @RequestMapping(value = {"/menuPage"}, method = RequestMethod.GET)
-    public String menuPage(){
-        return "menuPage";
-    }
 
     /** Logout user from system" */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -141,7 +124,7 @@ public class UserController {
     public String myFavorites(Model model) {
         model.addAttribute("favourite", new Favourite());
         model.addAttribute("favouriteList", userService.getFavouritesForUser(userService.getCurrentUser()));
-        return "MyFavourites";
+        return "testViews/MyFavourites";
     }
 
     /** Add relative to user relative tree" */
@@ -165,13 +148,13 @@ public class UserController {
     /** View user relative tree" */
     @RequestMapping(value = "/myTree", method = RequestMethod.GET)
     public String relativeNodeAll(){
-        return "myTree";
+        return "profile";
     }
 
     /** Add person info about user" */
     @RequestMapping(value = "/profileNew", method = RequestMethod.GET)
     public String profileNew(){
-        return "profileNew";
+        return "testViews/profileNew";
     }
 
 
@@ -196,14 +179,14 @@ public class UserController {
         List<Profile> list = profileService.getUserProfiles(user);
         model.addAttribute("currentUser", user);
         model.addAttribute("profiles", list);
-        return "profiles";
+        return "testViews/profiles";
     }
 
     /**Find profile**/
 
     @RequestMapping(value = "/find", method = RequestMethod.GET)
     public String findProfiles (){
-        return "profileFind";
+        return "testViews/profileFind";
     }
 
     @RequestMapping(value = "/findProfile", method = RequestMethod.GET)
@@ -212,14 +195,14 @@ public class UserController {
                                          Model model) {
         List<Profile> list = profileService.getProfiles(ageFrom, ageTo, gender, marital);
         model.addAttribute("profiles", list);
-        return "profiles";
+        return "testViews/profiles";
     }
 
     /** View person info" */
     @RequestMapping(value = "/viewPersInfo/{id}", method = RequestMethod.GET)
     public String persInfoView(@PathVariable("id") long id, Model model){
         model.addAttribute("profile", profileService.getProfileById(id));
-        return "profile";
+        return "testViews/profile";
     }
 
     /** Update person info about user" */
@@ -227,7 +210,7 @@ public class UserController {
     @RequestMapping(value = "/editProfile/{id}", method = RequestMethod.GET)
     public String editProfile(@PathVariable("id") long id, Model model){
         model.addAttribute("profile", profileService.getProfileById(id));
-        return "profileEdit";
+        return "testViews/profileEdit";
     }
 
     @RequestMapping(value = "/updateProfile/{id}", method = RequestMethod.POST)

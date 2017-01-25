@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="css/images.css"/>
     </head>
     <body class="background">
-        <jsp:include page="header_r.jsp" />
+        <jsp:include page="testViews/header_r.jsp" />
         <h1 class="alignCenter">Search results</h1>
         <div class="opacityBackground rowFlexContainer">
             <div class="toCenter flexElement quaterWidth fixedPosition">
@@ -58,6 +58,6 @@
                 </c:forEach>
             </div>
         </div>
-        <jsp:include page="footer_d.jsp" />
+        <jsp:include page="testViews/footer_d.jsp" />
     </body>
 </html>

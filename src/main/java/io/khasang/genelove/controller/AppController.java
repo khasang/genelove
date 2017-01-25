@@ -3,7 +3,6 @@ package io.khasang.genelove.controller;
 import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.entity_training.Question;
 import io.khasang.genelove.entity.User;
-import io.khasang.genelove.model.DBLoader;
 import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.MyMessage;
 import io.khasang.genelove.model.SQLExamples;
@@ -20,17 +19,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletResponse;
 
 import io.khasang.genelove.model.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -99,7 +92,7 @@ public class AppController {
     @RequestMapping(value = {"hello/{name}"}, method = RequestMethod.GET)
     public ModelAndView hello(@PathVariable("name") String name) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("encode");
+        modelAndView.setViewName("testViews/encode");
         modelAndView.addObject("crypt", new BCryptPasswordEncoder().encode(name));
         return modelAndView;
     }
@@ -140,7 +133,7 @@ public class AppController {
         }
 
         model.addAttribute("allQuestion", questionList);
-        return "questions";
+        return "testViews/questions";
     }
 
     @RequestMapping(value = "/db/message/{id}", method = RequestMethod.GET)
@@ -200,7 +193,7 @@ public class AppController {
     @RequestMapping(value = "/questions", method = RequestMethod.GET)
     public String questions(Model model){
         model.addAttribute("questions", "");
-        return "questions";
+        return "testViews/questions";
     }
 
     @RequestMapping(value = "/modifyProfile", method = RequestMethod.GET)
@@ -217,7 +210,7 @@ public class AppController {
 
     @RequestMapping(value = "/profilePage", method = RequestMethod.GET)
     public ModelAndView profile(){
-        return new ModelAndView("profilePage", "profile", profileServiceStub);
+        return new ModelAndView("testViews/profilePage", "profile", profileServiceStub);
     }
 
     @RequestMapping(value = "/findPeople", method = RequestMethod.GET)
