@@ -56,7 +56,7 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public List<User> getUsers() {
-        Session session= sessionFactory.getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
 
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);

@@ -13,6 +13,15 @@ public class Favourite {
     @Column(length = 1500)
     private String notes;
 
+    public Favourite() {
+
+    }
+
+    public Favourite(User user, User favourite) {
+        this.favouriteKey = new FavouriteKey(user, favourite);
+        this.notes = favourite.getFirstName() + " " + favourite.getLastName() + " is my new friend!";
+    }
+
     public FavouriteKey getFavouriteKey() {
         return favouriteKey;
     }
