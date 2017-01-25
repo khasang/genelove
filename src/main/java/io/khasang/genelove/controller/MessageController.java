@@ -19,10 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
 
 @Controller
-public class MessengerController {
+public class MessageController {
     @Autowired
     MyMessage myMessage;
     @Autowired
@@ -49,15 +48,32 @@ public class MessengerController {
         else return "Anonymous User";
     }
 
+    private long checkNewMessage(long owner_id) {
+        return messageService.checkNewMessage(owner_id);
+    }
+
     /********************************* Private Message Service ******************************
     * In this section represents code of Mail Sender Service.
     * Begin of this section here.
     ***************************************************************************************/
     @RequestMapping(value = "/messenger", method = RequestMethod.GET)
     public String messenger(Model model) {
+        String message;
         model.addAttribute("currentUser", getCurrentUserName());
-        String message = "Your Message Box is empty.<br>" +
-                "You haven't get any messages yet.";
+        long owner_id = userService
+                .getUserByLogin(SecurityContextHolder
+                        .getContext().getAuthentication()
+                        .getName())
+                .getId();
+        long numberNewMessages = checkNewMessage(owner_id);
+        if (numberNewMessages == 0) {
+            message = "Your Message Box is empty.<br>" +
+                    "You haven't get any messages yet.";
+        } else {
+            message = "Your Message Box is empty.<br>" +
+                    "You have got " + numberNewMessages + " new messages.";
+        }
+        model.addAttribute("numberNewMessages", numberNewMessages);
         model.addAttribute("message", message);
         return "mailService/messenger";
     }
@@ -78,12 +94,20 @@ public class MessengerController {
         model.addAttribute("currentUser", getCurrentUserName());
         int receiver_id = Integer.parseInt(request.getParameter("recipient"));
         String text = request.getParameter("privateMessage");
+        String option = request.getParameter("option");
 
         Message privateMessage = new Message(
+                userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName()),
                 userService.getUserById(receiver_id),
-                userService.getUserById(2),
                 text
         );
+
+        if (option != null) privateMessage.setMessageStatus(Message.MessageStatus.NEW);
+        else privateMessage.setMessageStatus(Message.MessageStatus.SENT);
+
+/*      System.out.println("********** Messenger Controller ***********");
+        System.out.println("Option: " + option);
+        System.out.println("********** Messenger Controller ***********");
 
         System.out.println("*********** Message Constructor ***********");
         System.out.println("Private Message Sender: " + userService.getUserById(receiver_id));
@@ -104,7 +128,7 @@ public class MessengerController {
         System.out.println("Private Message Received Date: " + privateMessage.getReceivedDate());
         System.out.println("Private Message Status: " + privateMessage.getMessageStatus());
         System.out.println("Private Message Text:" + privateMessage.getText());
-        System.out.println("*******************************************");
+        System.out.println("*******************************************");*/
 
         try {
             messageService.addMessage(privateMessage);
@@ -116,6 +140,29 @@ public class MessengerController {
             model.addAttribute("errorMessage", exception);
             return "mailService/sendMailError";
         }
+    }
+
+    @RequestMapping(value = "/viewAllPMs", method = RequestMethod.GET)
+    public String viewAllPMs(Model model) {
+        String message = "Output of All Private Messages from DB";
+        model.addAttribute("currentUser", getCurrentUserName());
+        model.addAttribute("message", message);
+        model.addAttribute("allPrivateMessages", messageService.getMessageAll());
+        return "mailService/viewPrivateMessages";
+    }
+
+    @RequestMapping(value = "/viewAllMyPMs", method = RequestMethod.GET)
+    public String viewAllMyPMs(Model model) {
+        String message = "Output of all your Private Messages from DB";
+        model.addAttribute("currentUser", getCurrentUserName());
+        model.addAttribute("message", message);
+        model.addAttribute("allPrivateMessages", messageService
+                .getAllMessagesForUserById(userService
+                        .getUserByLogin(SecurityContextHolder
+                        .getContext().getAuthentication()
+                        .getName())
+                        .getId()));
+        return "mailService/viewPrivateMessages";
     }
     /************************** End of the Private Message Service *************************/
 }

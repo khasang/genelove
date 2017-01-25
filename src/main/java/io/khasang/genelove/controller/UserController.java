@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/account")
+@RequestMapping(value = "/")
 public class UserController {
 
     @Autowired
