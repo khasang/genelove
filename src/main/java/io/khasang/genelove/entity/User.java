@@ -11,7 +11,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private long id;
 
     @Column(length = 255, unique = true)
     private String login;
@@ -51,11 +51,11 @@ public class User {
         return accountStatusList;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

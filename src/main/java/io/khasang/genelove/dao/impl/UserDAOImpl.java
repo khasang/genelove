@@ -56,7 +56,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User getUserById (int id) {
+    public User getUserById (long id) {
         TypedQuery<User> query = sessionFactory.getCurrentSession().createNativeQuery("" +
                 "SELECT * FROM users WHERE id = ?", User.class);
         query.setParameter(1, id);
@@ -83,7 +83,7 @@ public class UserDAOImpl implements UserDAO {
 
 
     @Override
-    public Role getRoleById (int id) {
+    public Role getRoleById (long id) {
         TypedQuery<Role> query = sessionFactory.getCurrentSession().createNativeQuery("" +
                 "SELECT * FROM roles WHERE id = ?", Role.class);
         query.setParameter(1, id);
@@ -99,32 +99,34 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void addFavourite(User user, User favourite) {
-        FavouriteKey key = new FavouriteKey();
-        key.setUser(user);
-        key.setFavourite(favourite);
+    public List<Favourite> getFavouritesForUser(User user) {
+        Session session = sessionFactory.getCurrentSession();
 
-        Favourite fav = new Favourite();
-        fav.setFavouriteKey(key);
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Favourite> criteriaQuery = criteriaBuilder.createQuery(Favourite.class);
+
+        Root<Favourite> root = criteriaQuery.from(Favourite.class);
+
+        criteriaQuery.select(root);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("favouriteKey").get("user"), user));
+
+        TypedQuery<Favourite> typedQuery = session.createQuery(criteriaQuery);
+        return typedQuery.getResultList();
+    }
+
+    @Override
+    public void addToFavourites(User currentUser, User favouriteUser) {
+        Favourite favourite = new Favourite(currentUser, favouriteUser);
         sessionFactory.getCurrentSession().save(favourite);
     }
 
     @Override
-    public void deleteFavourite(User user, User favourite) {
-
+    public void removeFromFavourites(User currentUser, User favouriteUser) {
+        Session session = sessionFactory.getCurrentSession();
+        Favourite favourite = new Favourite(currentUser, favouriteUser);
+        session.delete(favourite);
+        session.flush();
     }
-
-    /*@Override
-    public void addFavourite(User user, Favourite favourite) {
-        FavouriteKey key = new FavouriteKey();
-        key.setUserId(user.getId());
-        favourite.setFavouriteKey(key);
-        sessionFactory.getCurrentSession().save(favourite);
-    }
-
-    public void deleteFavourite(User user, Favourite favourite){
-
-    }*/
 
     @Override
     public void update() {
@@ -133,5 +135,10 @@ public class UserDAOImpl implements UserDAO {
                                       "SET receive_notifications = true " +
                                       "WHERE receive_notifications IS NULL");
         query.executeUpdate();
+
+        /*Message message = new Message();
+        message.setSender(getUserByLogin("admin"));
+        message.setReceiver(getUserByLogin("admin"));
+        sessionFactory.getCurrentSession().save(message);*/
     }
 }

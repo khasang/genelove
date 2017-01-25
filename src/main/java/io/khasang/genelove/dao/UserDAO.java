@@ -14,7 +14,7 @@ public interface UserDAO {
 
     User getUserByLogin(String login);
 
-    User getUserById(int id);
+    User getUserById(long id);
 
     List<User> getUserAll();
 
@@ -22,11 +22,13 @@ public interface UserDAO {
 
     Role getRoleByName(String name);
 
-    Role getRoleById(int id);
+    Role getRoleById(long id);
 
-    void addFavourite(User user, User favourite);
+    List<Favourite> getFavouritesForUser(User user);
 
-    void deleteFavourite(User user, User favourite);
+    void addToFavourites(User currentUser, User favouriteUser);
+
+    void removeFromFavourites(User currentUser, User favouriteUser);
 
     void update(); // to be removed
 }

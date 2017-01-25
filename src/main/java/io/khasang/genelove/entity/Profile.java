@@ -15,7 +15,7 @@ public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private long id;
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "profiles_users_fk"))
@@ -52,11 +52,11 @@ public class Profile {
         this.maritalStatus = MaritalStatus.OTHER;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

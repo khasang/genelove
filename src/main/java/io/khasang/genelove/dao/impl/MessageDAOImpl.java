@@ -5,15 +5,10 @@ import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.ParameterExpression;
-import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +25,7 @@ public class MessageDAOImpl implements MessageDAO {
     }
 
     public void addMessage(Message message) {
+
         this.sessionFactory.getCurrentSession().save(message);
     }
 
@@ -51,7 +47,7 @@ public class MessageDAOImpl implements MessageDAO {
     }
 
     @Override
-    public List<Message> getMessagesWith (int UserId, int OtherUserId) {
+    public List<Message> getMessagesWith (long UserId, long OtherUserId) {
         TypedQuery<Message> query = sessionFactory.getCurrentSession().
                 createNativeQuery("SELECT * FROM messages WHERE sender_id in ( :otherUserId, :userId) " +
                         "and receiver_id in (:userId, :otherUserId) order by created_date ", Message.class);
@@ -61,7 +57,7 @@ public class MessageDAOImpl implements MessageDAO {
     }
 
     @Override
-    public Message getMessageById (int id) {
+    public Message getMessageById (long id) {
         TypedQuery<Message> query = sessionFactory.getCurrentSession().createNativeQuery("" +
                 "SELECT * FROM messages WHERE id = ?", Message.class);
         query.setParameter(1, id);

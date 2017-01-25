@@ -30,12 +30,13 @@ public class ProfileService {
         return profileDAO.getUserProfiles(user);
     }
 
-    public Profile getProfileById (int id) {
+    public Profile getProfileById (long id) {
         return profileDAO.getProfileById(id);
     }
 
     public void updateProfile(Profile profile) {
-        profileDAO.updateProfile(profile);
+        User user = userDAO.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        profileDAO.updateProfile(profile, user);
     }
 
     public void hideProfile(Profile profile) {

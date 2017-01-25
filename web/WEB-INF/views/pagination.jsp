@@ -1,9 +1,8 @@
-
-<jsp:include page="head.jsp"/>
-
+<html>
+<%--<jsp:include page="/WEB-INF/views/head.jsp"/>--%>
 <body>
-<jsp:include page="admin/include/header.jsp"/>
-<c:set var="pageListHolder" value="${usersList}" scope="session" />
+<%--<jsp:include page="/WEB-INF/views/admin/include/header.jsp"/>--%>
+<c:set var="pageListHolder" value="${myList}" scope="session" />
 
 <div align="center">
     <ul class="pagination">

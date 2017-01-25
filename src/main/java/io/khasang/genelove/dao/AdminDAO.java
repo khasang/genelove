@@ -9,7 +9,7 @@ public interface AdminDAO {
 
     long getAllUsersCount();
 
-    int getRoleId(String role);
+    long getRoleId(String role);
 
     boolean checkUserRole(User user, Role role);
 
@@ -25,7 +25,7 @@ public interface AdminDAO {
 
     void removeRole(User user, Role role);
 
-    User getUserById(int id);
+    User getUserById(long id);
 
     User getUserByLogin(String login);
 
@@ -33,7 +33,7 @@ public interface AdminDAO {
 
     List<User> filterUsers(String filter);
 
-    Role getRoleById(int id);
+    Role getRoleById(long id);
 
     Role getRoleByName(Role.RoleName name);
 

@@ -11,7 +11,7 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private long id;
 
     @Column(name = "role_name", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -21,11 +21,11 @@ public class Role {
 
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -50,7 +50,7 @@ public class Role {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (roleName != null ? roleName.hashCode() : 0);
         return result;
     }

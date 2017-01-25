@@ -26,7 +26,7 @@
 
     <div class="col-sm-10 text-left">
         <div class="container">
-            <table>
+            <table class="table-bordered container">
                 <tr>
                     <td>Nickname</td>
                     <td>Age</td>
@@ -45,12 +45,15 @@
                         <td>${profile.hobbies}</td>
                         <td>${profile.introduction}</td>
                         <td>${profile.match}</td>
+                        <td>
+                            <div>
+                            <a href="${pageContext.request.contextPath}/account/editProfile/${profile.id}">
+                                <button class="btn btn-success btn-xs">Edit Profile</button>
+                            </a>
+                            </div>
+                        </td>
                     </tr>
-                    <div>
-                        <a href="${pageContext.request.contextPath}/account/editProfile/${profile.id}">
-                            <button class="btn btn-success btn-xs">Edit Profile</button>
-                        </a>
-                    </div>
+
                 </c:forEach>
             </table>
             <div style="margin:5px;"><a href="${pageContext.request.contextPath}/account/profileNew">

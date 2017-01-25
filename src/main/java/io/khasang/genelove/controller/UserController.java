@@ -36,8 +36,14 @@ public class UserController {
         return "hello";
     }
 
+    /** View home page */
+    @RequestMapping(value = {"","/"}, method = RequestMethod.GET)
+    public String homePage(){
+        return "menuPage";
+    }
+
     /** View menu page */
-    @RequestMapping(value = "/menuPage", method = RequestMethod.GET)
+    @RequestMapping(value = {"/menuPage"}, method = RequestMethod.GET)
     public String menuPage(){
         return "menuPage";
     }
@@ -67,7 +73,7 @@ public class UserController {
 
     /** Get message from another user" */
     @RequestMapping(value = "/messagesWith/{otherId}", method = RequestMethod.GET)
-    public String messagesWithOther (@PathVariable("otherId") int otherId, Model model) {
+    public String messagesWithOther (@PathVariable("otherId") long otherId, Model model) {
         List<Message> list = messageService.getMessagesWith(otherId);
         model.addAttribute("messages", list);
         return "messages";
@@ -101,21 +107,41 @@ public class UserController {
     }
 
     /** Add favorite user to favorite list" */
-    @RequestMapping(value = "/addFavorite", method = RequestMethod.POST)
-    public String favoriteAdd(){
-        return "favoriteAddPage";
+    @RequestMapping(value = "/addFavourite", method = RequestMethod.POST)
+    @ResponseBody
+    public Object addFavorite(@ModelAttribute("favourite") Favourite favourite,
+                              Model model,
+                              HttpServletResponse response) {
+        try {
+            userService.addToFavourites(userService.getCurrentUser(), favourite.getFavouriteKey().getFavourite());
+            return "Favourite was added successfully";
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error adding favourite: " + e.getMessage();
+        }
     }
 
     /** Delete favorite user from favorite list" */
-    @RequestMapping(value = "/deleteFavorite", method = RequestMethod.DELETE)
-    public String favoriteDelete(){
-        return "favoriteDeletePage";
+    @RequestMapping(value = "/removeFavourite", method = RequestMethod.POST)
+    @ResponseBody
+    public Object removeFavorite(@ModelAttribute("favourite") Favourite favourite,
+                                 Model model,
+                                 HttpServletResponse response) {
+        try {
+            userService.removeFromFavourites(userService.getCurrentUser(), favourite.getFavouriteKey().getFavourite());
+            return "Favourite was removed successfully";
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error removing favourite: " + e.getMessage();
+        }
     }
 
     /** View favorite user list" */
-    @RequestMapping(value = "/allFavorite", method = RequestMethod.GET)
-    public String favoriteAll(){
-        return "favoriteAllPage";
+    @RequestMapping(value = "/myFavourites", method = RequestMethod.GET)
+    public String myFavorites(Model model) {
+        model.addAttribute("favourite", new Favourite());
+        model.addAttribute("favouriteList", userService.getFavouritesForUser(userService.getCurrentUser()));
+        return "MyFavourites";
     }
 
     /** Add relative to user relative tree" */
@@ -191,7 +217,7 @@ public class UserController {
 
     /** View person info" */
     @RequestMapping(value = "/viewPersInfo/{id}", method = RequestMethod.GET)
-    public String persInfoView(@PathVariable("id") int id, Model model){
+    public String persInfoView(@PathVariable("id") long id, Model model){
         model.addAttribute("profile", profileService.getProfileById(id));
         return "profile";
     }
@@ -199,15 +225,21 @@ public class UserController {
     /** Update person info about user" */
 
     @RequestMapping(value = "/editProfile/{id}", method = RequestMethod.GET)
-    public String editProfile(@PathVariable("id") int id, Model model){
+    public String editProfile(@PathVariable("id") long id, Model model){
         model.addAttribute("profile", profileService.getProfileById(id));
         return "profileEdit";
     }
 
-    @RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
-    public String updateProfile(@ModelAttribute("profile") Profile profile){
-        profileService.updateProfile(profile);
-        return "profiles";
+    @RequestMapping(value = "/updateProfile/{id}", method = RequestMethod.POST)
+    public String updateProfile(@PathVariable("id") long id,
+                                @ModelAttribute("profile") Profile profile){
+        //To view details from database
+        Profile dbProfile = profileService.getProfileById(id);
+        //To check if details were changed by user
+        if (!dbProfile.equals(profile)) {
+            profileService.updateProfile(profile);
+        }
+        return "redirect:/account/profiles";
     }
 
     /** Delete person info about user" */
