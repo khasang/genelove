@@ -16,7 +16,7 @@ public class CreateUserController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView createUsersInDB(){
-        ModelAndView modelAndView=new ModelAndView("index");
+        ModelAndView modelAndView=new ModelAndView("testViews/index");
         modelAndView.addObject("sqlResultInsertUsers",sqlTable.insertUsers());
         return modelAndView;
     }

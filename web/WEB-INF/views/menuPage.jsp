@@ -11,90 +11,35 @@
     <%-- <link href="resources/css/menuPage.css" rel="stylesheet" type="text/css" media="all" /> --%>
     <link href="css/menuPage.css" rel="stylesheet" type="text/css" media="all" />
 </head>
-<body style="background: url(resources/images/loveFone.jpg) no-repeat fixed center;">
+<body style="background: url(images/loveFone.jpg) no-repeat fixed center;">
 
 <jsp:include page="header.jsp"/>
 
-    <div class="row content" id="menuBox">
-        <div class="col-sm-10 text-left">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Name Surname : Age</div>
-                            <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                            <div class="panel-footer">City :  <a href="#">More info</a></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Name Surname : Age</div>
-                            <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                            <div class="panel-footer">City :  <a href="#">More info</a></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Name Surname : Age</div>
-                            <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                            <div class="panel-footer">City :  <a href="#">More info</a></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Name Surname : Age</div>
-                            <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                            <div class="panel-footer">City :  <a href="#">More info</a></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Name Surname : Age</div>
-                            <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                            <div class="panel-footer">City :  <a href="#">More info</a></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Name Surname : Age</div>
-                            <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                            <div class="panel-footer">City :  <a href="#">More info</a></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Name Surname : Age</div>
-                            <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                            <div class="panel-footer">City :  <a href="#">More info</a></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Name Surname : Age</div>
-                            <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                            <div class="panel-footer">City :  <a href="#">More info</a></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Name Surname : Age</div>
-                            <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                            <div class="panel-footer">City :  <a href="#">More info</a></div>
-                        </div>
-                    </div>
-                    <div style="margin:5px;"><a href="${pageContext.request.contextPath}/account/find">
-                        <button class="btn btn-success btn-sm">
-                            <i class="glyphicon glyphicon-pencil"></i>
-                            Find new person
-                        </button>
-                    </a>
-                    </div>
 
-                </div>
-            </div>
+
+<div class="row content">
+    <div class="col-sm-1 sidenav">
         </div>
 
+        <div class="col-sm-10 text-left">
+<c:forEach items="${list}" var="list">
+    <div class="content" id="boxContent">
+            <a href=#>
+                <div class="panel panel-primary" id="userBox">
+                    <div class="panel-body" >
+                        <img id="picture" alt="Profile picture" src="images/Zidane.jpg" width="200" height="200" />
+                        Zinedine : 37 years
+                    </div>
+                </div>
+            </a>
+</div>
+</c:forEach>
+        </div>
+    <div class="col-sm-1 sidenav">
     </div>
+
+
+</div>
 <jsp:include page="footer.jsp"/>
 </body>
 </html>

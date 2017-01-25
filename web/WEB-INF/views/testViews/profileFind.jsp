@@ -11,11 +11,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <%-- <link href="resources/css/menuPage.css" rel="stylesheet" type="text/css" media="all" /> --%>
-    <link href="css/menuPage.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../css/menuPage.css" rel="stylesheet" type="text/css" media="all"/>
 </head>
-<body style="background: url(resources/images/loveFone.jpg) no-repeat fixed center;">
+<body style="background: url(../resources/images/loveFone.jpg) no-repeat fixed center;">
 
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 
 <div class="panel panel-default">
     <div class="panel-body">
@@ -45,6 +45,6 @@
         </form:form>
 
     </div>
-    <jsp:include page="footer.jsp"/>
+    <jsp:include page="../footer.jsp"/>
 </body>
 </html>

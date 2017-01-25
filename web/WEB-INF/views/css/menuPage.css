@@ -1,8 +1,3 @@
-
-.row.content {height: 100%;
-padding: 20px;
-}
-
 .sidenav {
     padding-top: 20px;
     height: 100%;
@@ -15,6 +10,21 @@ padding: 20px;
     }
     .row.content {height:auto;}
 }
-div#menuBox{
-    padding-top: 30px;
+.row.content {min-height: 60%}
+
+div#userBox{
+    width: 240px;
+    height:250px;
+    background-color: lightcyan;
+    border:  1px solid transparent;
+    box-shadow: 5px 5px 20px grey;
+}
+div#boxContent {
+    float: left;
+    margin-left: 40px;
+    margin-top: 40px;
+}
+div.btn-group{
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "/myTree")
+@RequestMapping(value = "/myProfile")
 public class MyTreeController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView meTreeAcount(){
-        ModelAndView modelAndView=new ModelAndView("myTree");
+        ModelAndView modelAndView=new ModelAndView("profile");
         return modelAndView;
     }
 }

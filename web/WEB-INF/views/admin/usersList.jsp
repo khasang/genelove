@@ -72,7 +72,7 @@
             </tbody>
         </table>
 
-        <%@ include file="/WEB-INF/views/pagination.jsp" %>
+        <%@ include file="/WEB-INF/views/testViews/pagination.jsp" %>
 
         <br>
 

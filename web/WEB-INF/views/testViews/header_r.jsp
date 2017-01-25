@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%-- <link rel="stylesheet" href="css/header.css"/> --%>
-<link rel="stylesheet" href="css/header_r.css"/>
+<link rel="stylesheet" href="../css/header_r.css"/>
 
 <nav class="headerStyle">
     <a><p class="logo">Genelove</p></a>

@@ -1,4 +1,4 @@
-<jsp:include page="head.jsp"/>
+<jsp:include page="testViews/head.jsp"/>
 <body>
 
 <%--СТРАНИЦА НЕ ИСПОЛЬЗУЕТСЯ--%>
