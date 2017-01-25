@@ -101,21 +101,41 @@ public class UserController {
     }
 
     /** Add favorite user to favorite list" */
-    @RequestMapping(value = "/addFavorite", method = RequestMethod.POST)
-    public String favoriteAdd(){
-        return "favoriteAddPage";
+    @RequestMapping(value = "/addFavourite", method = RequestMethod.POST)
+    @ResponseBody
+    public Object addFavorite(@ModelAttribute("favourite") Favourite favourite,
+                              Model model,
+                              HttpServletResponse response) {
+        try {
+            userService.addToFavourites(userService.getCurrentUser(), favourite.getFavouriteKey().getFavourite());
+            return "Favourite was added successfully";
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error adding favourite: " + e.getMessage();
+        }
     }
 
     /** Delete favorite user from favorite list" */
-    @RequestMapping(value = "/deleteFavorite", method = RequestMethod.DELETE)
-    public String favoriteDelete(){
-        return "favoriteDeletePage";
+    @RequestMapping(value = "/removeFavourite", method = RequestMethod.POST)
+    @ResponseBody
+    public Object removeFavorite(@ModelAttribute("favourite") Favourite favourite,
+                                 Model model,
+                                 HttpServletResponse response) {
+        try {
+            userService.removeFromFavourites(userService.getCurrentUser(), favourite.getFavouriteKey().getFavourite());
+            return "Favourite was removed successfully";
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error removing favourite: " + e.getMessage();
+        }
     }
 
     /** View favorite user list" */
-    @RequestMapping(value = "/allFavorite", method = RequestMethod.GET)
-    public String favoriteAll(){
-        return "favoriteAllPage";
+    @RequestMapping(value = "/myFavourites", method = RequestMethod.GET)
+    public String myFavorites(Model model) {
+        model.addAttribute("favourite", new Favourite());
+        model.addAttribute("favouriteList", userService.getFavouritesForUser(userService.getCurrentUser()));
+        return "MyFavourites";
     }
 
     /** Add relative to user relative tree" */
