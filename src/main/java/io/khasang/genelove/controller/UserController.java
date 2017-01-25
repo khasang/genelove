@@ -36,8 +36,14 @@ public class UserController {
         return "hello";
     }
 
+    /** View home page */
+    @RequestMapping(value = {"","/"}, method = RequestMethod.GET)
+    public String homePage(){
+        return "menuPage";
+    }
+
     /** View menu page */
-    @RequestMapping(value = "/menuPage", method = RequestMethod.GET)
+    @RequestMapping(value = {"/menuPage"}, method = RequestMethod.GET)
     public String menuPage(){
         return "menuPage";
     }
@@ -224,10 +230,16 @@ public class UserController {
         return "profileEdit";
     }
 
-    @RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
-    public String updateProfile(@ModelAttribute("profile") Profile profile){
-        profileService.updateProfile(profile);
-        return "profiles";
+    @RequestMapping(value = "/updateProfile/{id}", method = RequestMethod.POST)
+    public String updateProfile(@PathVariable("id") long id,
+                                @ModelAttribute("profile") Profile profile){
+        //To view details from database
+        Profile dbProfile = profileService.getProfileById(id);
+        //To check if details were changed by user
+        if (!dbProfile.equals(profile)) {
+            profileService.updateProfile(profile);
+        }
+        return "redirect:/account/profiles";
     }
 
     /** Delete person info about user" */

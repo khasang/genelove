@@ -31,18 +31,20 @@
 
                 <p><label for="gender">Your gender:</label>
                 <select name="gender" id="gender" class="form-control">
-                <option value="FEMALE">Female</option>
-                <option value="MALE">Male</option>
-                <option value="OTHER">Doesn't matter</option>
+                    <option hidden disabled selected>Choose gender</option>
+                    <option value="FEMALE">FEMALE</option>
+                    <option value="MALE">MALE</option>
+                    <option value="OTHER">OTHER</option>
                 </select></p>
 
-                <p><label for="maritalStatus">Role:</label>
+                <p><label for="maritalStatus">Your marital status:</label>
                 <select name="maritalStatus" id="maritalStatus" class="form-control">
-                    <option value="SINGLE">Single</option>
-                    <option value="MARRIED">Married</option>
-                    <option value="SEPARATED">Separated</option>
-                    <option value="DIVORCED">Divorced</option>
-                    <option value="WIDOWED">Widowed</option>
+                    <option hidden disabled selected>Choose your status</option>
+                    <option value="SINGLE">SINGLE</option>
+                    <option value="MARRIED">MARRIED</option>
+                    <option value="SEPARATED">SEPARATED</option>
+                    <option value="DIVORCED">DIVORCED</option>
+                    <option value="WIDOWED">WIDOWED</option>
                 </select></p>
 
 

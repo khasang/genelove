@@ -44,7 +44,8 @@ public class ProfileDAOImpl implements ProfileDAO {
     }
 
     @Override
-    public void updateProfile(Profile profile) {
+    public void updateProfile(Profile profile, User user) {
+        profile.setUser(user);
         this.sessionFactory.getCurrentSession().update(profile);
     }
 
