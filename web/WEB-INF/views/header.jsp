@@ -14,14 +14,16 @@
                 <li><a href="menuPage"><span class="glyphicon glyphicon-tree-deciduous"></span>My Tree</a></li>
                 <li><a href="myProfile"><span class="glyphicon glyphicon-user"></span>My profiles</a></li>
                <li><a href="#"><span class="glyphicon glyphicon-envelope"></span>Messages <span class="badge">10</span></a></li>
-                <li><a href="${pageContext.request.contextPath}/account/find">
+                <li><a data-toggle="modal"  data-target="#myModalFindLove" href="#">
                     <span class="glyphicon glyphicon-heart"></span>Find Love
                 </a></li>
-            </ul>
+
+               </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
             </ul>
         </div>
     </div>
 </nav>
+<jsp:include page="findUserModal.jsp"></jsp:include>
 </head>
