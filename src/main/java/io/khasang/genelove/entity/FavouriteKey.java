@@ -14,6 +14,15 @@ public class FavouriteKey implements Serializable {
     @JoinColumn(name = "favourite_id", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "favourites_favourite_fk"))
     private User favourite;
 
+    public FavouriteKey() {
+
+    }
+
+    public FavouriteKey(User user, User favourite) {
+        this.user = user;
+        this.favourite = favourite;
+    }
+
     public User getUser() {
         return user;
     }
