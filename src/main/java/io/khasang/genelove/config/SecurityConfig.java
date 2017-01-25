@@ -22,11 +22,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("j_password").loginProcessingUrl("/j_spring_security_check")
                 .and()
                 .authorizeRequests()
-               .antMatchers("/").permitAll()
-               /* .antMatchers("/sql*//**").access("hasAnyRole('ADMIN','SUPERADMIN')")
+                .antMatchers("/").permitAll()
 				.antMatchers("/admin*//**").access("hasAnyRole('ADMIN')")
-                .antMatchers("/db*//**").access("hasAnyRole('DB','ADMIN')")
-                .antMatchers("/account*//**").access("hasAnyRole('DB','ADMIN','USER')")*/
+                .antMatchers("/account*//**").access("hasAnyRole('DB','ADMIN','USER')")
+                //.antMatchers("/sql*//**").access("hasAnyRole('ADMIN','SUPERADMIN')")
+                //.antMatchers("/db*//**").access("hasAnyRole('DB','ADMIN')")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
     }
 

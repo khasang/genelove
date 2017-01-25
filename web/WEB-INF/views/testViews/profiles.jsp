@@ -17,7 +17,7 @@
 
 <div class="row content" id="menuBox">
     <div class="col-sm-10 text-left">
-        <div class="container">
+        <div class="container" style="color: azure">
             <p>Hello, Dear <strong>${currentUser.firstName} ${currentUser.lastName}</strong>
                 Welcome to your personal cabinet!</p>
         </div>
@@ -26,7 +26,7 @@
 
     <div class="col-sm-10 text-left">
         <div class="container">
-            <table class="table-bordered container">
+            <table class="table-bordered container" style="background-color: azure">
                 <tr>
                     <td>Nickname</td>
                     <td>Age</td>
