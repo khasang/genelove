@@ -139,7 +139,7 @@ public class MessageDAOImpl implements MessageDAO {
                     "AND message_status='NEW);", Message.class);
                     */
         Query query =sessionFactory.getCurrentSession().createNativeQuery(
-                "SELECT COUNT(*) FROM messages WHERE sender_id = '" + owner_id + "'");
+                "SELECT COUNT(*) FROM messages WHERE sender_id = " + owner_id );
 
         //query.setParameter("owner_id", owner_id);
         long l = Long.getLong(query.getSingleResult().toString());
