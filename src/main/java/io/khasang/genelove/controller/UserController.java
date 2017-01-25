@@ -190,7 +190,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/findProfile", method = RequestMethod.GET)
-    public String findProfilesWithParam (@RequestParam("ageFrom") int ageFrom, @RequestParam("ageTo") int ageTo,
+    public String findProfilesWithParam (@RequestParam("from") int ageFrom, @RequestParam("to") int ageTo,
                                 @RequestParam ("gender") String gender, @RequestParam ("marital") String marital,
                                          Model model) {
         List<Profile> list = profileService.getProfiles(ageFrom, ageTo, gender, marital);

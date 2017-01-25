@@ -29,28 +29,30 @@
     </table>
     <c:set var="pageListHolder" value="${allQuestion}" scope="session" />
     <div>
-    <span style="float:left;">
-    <c:choose>
-        <c:when test="${pageListHolder.firstPage}">Prev</c:when>
-        <c:otherwise><a href="?page=previous">Prev</a></c:otherwise>
-    </c:choose>
-    </span>
-        <span>
-    <c:forEach begin="0" end="${pageListHolder.pageCount-1}" varStatus="loop">
-        &nbsp;&nbsp;
+        <%--<a href="?page=previous">&lt;</a>--%>
+        <%--<a href="?page=next">&gt;</a>--%>
+        <span style="float:left;">
         <c:choose>
-            <c:when test="${loop.index == pageListHolder.page}">${loop.index+1}</c:when>
-            <c:otherwise><a href="?page=${loop.index}">${loop.index+1}</a></c:otherwise>
+            <c:when test="${pageListHolder.firstPage}">Prev</c:when>
+            <c:otherwise><a href="?page=previous">Prev</a></c:otherwise>
         </c:choose>
-        &nbsp;&nbsp;
-    </c:forEach>
-    </span>
+        </span>
         <span>
-    <c:choose>
-        <c:when test="${pageListHolder.lastPage}">Next</c:when>
-        <c:otherwise><a href="?page=next">Next</a></c:otherwise>
-    </c:choose>
-    </span>
+        <c:forEach begin="0" end="${pageListHolder.pageCount-1}" varStatus="loop">
+            &nbsp;&nbsp;
+            <c:choose>
+                <c:when test="${loop.index == pageListHolder.page}">${loop.index+1}</c:when>
+                <c:otherwise><a href="?page=${loop.index}">${loop.index+1}</a></c:otherwise>
+            </c:choose>
+            &nbsp;&nbsp;
+        </c:forEach>
+        </span>
+        <span>
+        <c:choose>
+            <c:when test="${pageListHolder.lastPage}">Next</c:when>
+            <c:otherwise><a href="?page=next">Next</a></c:otherwise>
+        </c:choose>
+        </span>
     </div>
     </body>
     </html>

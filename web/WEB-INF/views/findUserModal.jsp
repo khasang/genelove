@@ -19,7 +19,7 @@
 <form:form action="/account/findProfile" method="get" commandName="findProfile"
            cssClass="form-inline form-group-sm">
                     <p>
-                        AGE :  <input id="from" type="number" min="16" max="90" /> - <input id="to" type="number" min="16" max="90" />
+                        AGE :  <input id="from" type="number" min="16" max="90" name="from"/> - <input id="to" type="number" min="16" max="90" name="to"/>
                     </p>
                     <p><label for="gender">Gender:</label>
                         <select name="gender" id="gender" class="form-control">
