@@ -6,6 +6,7 @@ import io.khasang.genelove.entity.User;
 import io.khasang.genelove.model.Utils;
 import io.khasang.genelove.service.AdminService;
 import io.khasang.genelove.service.MailSender;
+import io.khasang.genelove.service.UserInspectionService;
 import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
@@ -15,6 +16,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +39,8 @@ public class AdminController {
     MailSender emailService;
     @Autowired
     UserService userService;
+    @Autowired
+    UserInspectionService userInspectionService;
 
     PagedListHolder usersList = new PagedListHolder();
 
@@ -139,6 +144,23 @@ public class AdminController {
         init(adminService, model);
         model.addAttribute("mailto", request.getParameter("email"));
         return "admin/sendMailToUserByMail";
+    }
+
+    @RequestMapping(value = "inspectUser", method = RequestMethod.POST)
+    @ResponseBody
+    public Object inspectUser(@ModelAttribute("user") User user, HttpServletResponse response) {
+        try {
+
+//            User dbUser = adminService.getUserById(user.getId());
+
+            User dbUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+            userInspectionService.sendInspection(dbUser);
+
+            return "JMS Message for inspection user was send";
+
+        } catch (Exception e) {
+            return "Error in inspectionUser method: " + e.getMessage();
+        }
     }
 
     @RequestMapping(value = "sendMail", method = RequestMethod.POST)
