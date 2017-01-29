@@ -11,13 +11,10 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/menuPage"><span class="glyphicon glyphicon-home"></span>Home</a></li>
-                <li><a href="/menuPage"><span class="glyphicon glyphicon-tree-deciduous"></span>My Tree</a></li>
-                <li><a href="/myProfile"><span class="glyphicon glyphicon-user"></span>My profile</a></li>
-                <li><a href="/account/profiles"><span class="glyphicon glyphicon-user"></span>My profiles</a></li>
-               <li><a href="#"><span class="glyphicon glyphicon-envelope"></span>Messages <span class="badge">10</span></a></li>
-                <li><a data-toggle="modal"  data-target="#myModalFindLove" href="#">
-                    <span class="glyphicon glyphicon-heart"></span>Find Love
-                </a></li>
+                <li><a href="/myTree"><span class="glyphicon glyphicon-tree-deciduous"></span>My Tree</a></li>
+                <li><a href="/account/profiles"><span class="glyphicon glyphicon-user"></span>My profile</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-envelope"></span>Messages <span class="badge">10</span></a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-heart"></span>Find My Love</a></li>
 
                </ul>
             <ul class="nav navbar-nav navbar-right">

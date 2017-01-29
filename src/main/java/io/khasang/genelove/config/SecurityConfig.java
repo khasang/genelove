@@ -23,10 +23,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-				.antMatchers("/admin*//**").access("hasAnyRole('ADMIN')")
-                .antMatchers("/account*//**").access("hasAnyRole('DB','ADMIN','USER')")
-                //.antMatchers("/sql*//**").access("hasAnyRole('ADMIN','SUPERADMIN')")
-                //.antMatchers("/db*//**").access("hasAnyRole('DB','ADMIN')")
+			.antMatchers("/admin*//**//**").access("hasAnyRole('ADMIN')")
+                .antMatchers("/account*//**//**").access("hasAnyRole('DB','ADMIN','USER')")
+                .antMatchers("/sql*//**//**").access("hasAnyRole('ADMIN','SUPERADMIN')")
+                .antMatchers("/db*//**//**").access("hasAnyRole('DB','ADMIN')")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
     }
 

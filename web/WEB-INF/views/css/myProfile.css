@@ -64,9 +64,40 @@
     transform: translate(-50%,-50%);
 
 }
-div#contentTree{
-    min-height: 70%;
-    background-color: whitesmoke;
-    margin: 3%;
+
+.col-md-8{
+    min-height: 202px;
 }
 
+hr{
+    width: 300px;
+}
+
+#icon-png{
+    width: 50px;
+    height: 50px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+}
+
+.start-page {
+    margin-top: 25%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+}
+
+#radius {
+    background-color: #2196f3;
+    border-radius: 5px;
+}
+
+h2{
+    margin-top: 0;
+}
+#description {
+    border: 1px outset black;
+    margin:20px;
+    padding:10px;
+    background-color: olivedrab;
+}
