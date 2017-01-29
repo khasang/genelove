@@ -10,12 +10,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <%-- <link href="resources/css/menuPage.css" rel="stylesheet" type="text/css" media="all" /> --%>
     <link href="../css/menuPage.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="../css/style.css"/>
 </head>
 <body style="background: url(../resources/images/loveFone.jpg) no-repeat fixed center;">
 
 <jsp:include page="../header.jsp"/>
 
-<div class="row content" id="menuBox">
+<div class="row content wrapper" id="menuBox">
     <div class="col-sm-10 text-left">
         <div class="container" style="color: azure">
             <p>Hello, Dear <strong>${currentUser.firstName} ${currentUser.lastName}</strong>
