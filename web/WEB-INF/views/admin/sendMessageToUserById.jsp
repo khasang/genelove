@@ -6,9 +6,19 @@
             <div class="col-sm-4">
                 <div class="card">
                     <div class="card-block thumbnail">
-                        <h3 class="card-title">Send ${service} to User</h3>
-                        <p class="card-text">Response of ${service} Service:</p>
-                        <p class="card-text">${response}</p>
+                        <h3 class="card-title">Send Private Message to User</h3>
+                        <p class="card-text">Here You can send your Private Message to selected user at User's ID:</p>
+                        <p class="card-text"><strong>${recipient}</strong></p>
+                        <p class="card-text">Please, input your message into textarea of form that is below:</p>
+                        <hr>
+                        <form method="post" action="/admin/sendMessage" class="input-group">
+                            <input type="hidden" name="receiver" value="${receiver}"/>
+                            <label>Message:</label>
+                            <textarea class="form-control" rows="4" name="message"></textarea>
+                            <input type="checkbox" name="option" value="draft"/>&nbsp;
+                            <label>Draft (do NOT send immediately)</label>
+                            <button class="btn btn-primary" type="submit">Send Private Message</button>
+                        </form>
                     </div>
                 </div>
             </div>

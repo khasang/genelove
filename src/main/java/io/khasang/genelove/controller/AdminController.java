@@ -1,11 +1,13 @@
 package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.EMail;
+import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.Role;
 import io.khasang.genelove.entity.User;
 import io.khasang.genelove.model.Utils;
 import io.khasang.genelove.service.AdminService;
 import io.khasang.genelove.service.MailSender;
+import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
@@ -36,10 +38,16 @@ public class AdminController {
     MailSender emailService;
     @Autowired
     UserService userService;
+    @Autowired
+    MessageService messageService;
 
     PagedListHolder usersList = new PagedListHolder();
 
-    private void init (AdminService adminService, Model model) {
+    private User currentUser;
+
+    private void init (User currentUser, AdminService adminService, Model model) {
+        currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
         Role roleAdmin = adminService.getRoleByName(Role.RoleName.ROLE_ADMIN);
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
@@ -131,12 +139,79 @@ public class AdminController {
         return "admin/updateUser";
     }
 
+
+    @RequestMapping(value = "sendMessageToUserById", method = RequestMethod.POST)
+    public String sendMessageToUserByMail(HttpServletRequest request, Model model) {
+        adminService.createAllRoles();
+        currentUser = new User();
+        init(currentUser, adminService, model);
+        model.addAttribute("receiver", request.getParameter("receiver"));
+        return "admin/sendMessageToUserById";
+    }
+
+    @RequestMapping(value = "sendMessage", method = RequestMethod.POST)
+    public String sendMessage(HttpServletRequest request, Model model)
+            throws UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF8");
+        String message = request.getParameter("message");
+        String option = request.getParameter("option");
+        int receiver_id = Integer.parseInt(request.getParameter("receiver"));
+
+        Message privateMessage = new Message(
+                userService.getUserByLogin(SecurityContextHolder
+                        .getContext().getAuthentication().getName()),
+                userService.getUserById(receiver_id),
+                message
+        );
+
+        if (option != null) privateMessage.setMessageStatus(Message.MessageStatus.NEW);
+        else privateMessage.setMessageStatus(Message.MessageStatus.SENT);
+
+/*      System.out.println("********** Messenger Controller ***********");
+        System.out.println("Option: " + option);
+        System.out.println("********** Messenger Controller ***********");
+
+        System.out.println("*********** Message Constructor ***********");
+        System.out.println("Private Message Sender: " + userService.getUserById(receiver_id));
+        System.out.println("Private Message Receiver: " + userService.getUserById(receiver_id));
+        System.out.println("Private Message Creation Date: " + privateMessage.getCreatedDate());
+        System.out.println("Private Message Sent Date: " + privateMessage.getSentDate());
+        System.out.println("Private Message Received Date: " + privateMessage.getReceivedDate());
+        System.out.println("Private Message Status: " + privateMessage.getMessageStatus());
+        System.out.println("Private Message Text: " + privateMessage.getText());
+        System.out.println("*******************************************");
+
+        System.out.println("********** Messenger Controller ***********");
+        System.out.println("Private Message ID: " + privateMessage.getId());
+        System.out.println("Private Message Sender: " + privateMessage.getSender());
+        System.out.println("Private Message Receiver: " + privateMessage.getReceiver());
+        System.out.println("Private Message Creation Date: " + privateMessage.getCreatedDate());
+        System.out.println("Private Message Sent Date: " + privateMessage.getSentDate());
+        System.out.println("Private Message Received Date: " + privateMessage.getReceivedDate());
+        System.out.println("Private Message Status: " + privateMessage.getMessageStatus());
+        System.out.println("Private Message Text:" + privateMessage.getText());
+        System.out.println("*******************************************");*/
+
+
+         try {
+            messageService.addMessage(privateMessage);
+            String service = "Private Message";
+             String response = "Your " + service + " was successfully delivered to User " +
+                     "by Id <strong>" + request.getParameter("receiver") +"</strong>";
+                model.addAttribute("response", response);
+             model.addAttribute("service", service);
+             return "admin/sendMailResult";
+            } catch (Exception exception) {
+                model.addAttribute("errorMessage", exception);
+             return "mailService/sendMailError";
+        }
+    }
+
     @RequestMapping(value = "sendMailToUserByMail", method = RequestMethod.POST)
     public String sendMailToUserByMail(HttpServletRequest request, Model model) {
-        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("currentUser", currentUser);
         adminService.createAllRoles();
-        init(adminService, model);
+        currentUser = new User();
+        init(currentUser, adminService, model);
         model.addAttribute("mailto", request.getParameter("email"));
         return "admin/sendMailToUserByMail";
     }
@@ -151,10 +226,10 @@ public class AdminController {
         User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("currentUser", currentUser);
         adminService.createAllRoles();
-        String footer = "\n\n" + "This mail was sended to you from Administrator of " +
+        String footer = "\n\n" + "This mail has been send to you from Administrator of " +
                 "Genelove Meeting Service. You don't need to answer on this letter.";
         EMail eMail = new EMail(
-                request.getParameter("recipient"),
+                request.getParameter("receiver"),
                 environment.getProperty("mail.username"),
                 request.getParameter("subject"),
                 request.getParameter("message") + footer
@@ -162,9 +237,11 @@ public class AdminController {
         emailService.setEmailFields(eMail);
         try {
             emailService.sendEmail(eMail);
-            String message = "Your Mail was successfully delivered to User at address " +
-                    request.getParameter("recipient");
-            model.addAttribute("message", message);
+            String service = "e-Mail";
+            String response = "Your " + service + " was successfully delivered to User " +
+                    "at address <strong>" + request.getParameter("receiver") +"</strong>";
+            model.addAttribute("service", service);
+            model.addAttribute("response", response);
             return "admin/sendMailResult";
         } catch (Exception exception) {
             model.addAttribute("errorMessage", exception);

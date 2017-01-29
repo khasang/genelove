@@ -20,7 +20,7 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>E-Mail Address</th>
-                <th>Send eMail</th>
+                <th>Communication</th>
                 <th>Account Status</th>
                 <th>Roles</th>
                 <th colspan="3">Actions</th>
@@ -33,11 +33,16 @@
                     <td><a href="/admin/user/id/${user.id}">${user.login}</a></td>
                     <td><a href="/admin/user/id/${user.id}">${user.firstName}</a></td>
                     <td><a href="/admin/user/id/${user.id}">${user.lastName}</a></td>
-                    <td><a href="/admin/user/id/${user.id}">${user.email}</a></td>
+                    <td><a href="/admin/user/id/${user.id}">${user.email}</a>
+                    </td>
                     <td>
                         <form method="post" action="sendMailToUserByMail">
                             <input type="hidden" name="email" value="${user.email}"/>
                             <button class="btn btn-info" type="submit">Send Mail</button>
+                        </form>
+                        <form method="post" action="sendMessageToUserById">
+                            <input type="hidden" name="receiver" value="${user.id}"/>
+                            <button class="btn btn-info" type="submit">Send Message</button>
                         </form>
                     </td>
                     <td>${user.accountStatus}</td>
