@@ -14,12 +14,14 @@ import java.util.List;
 public class ProfileServiceStub {
     private String firstName = "myName";
     private String lastName = "mySurname";
-    private String birthDate  = "myDate";
+    private String age  = "age";
     private String region = "myRegion";
     private String school = "mySchool";
     private String university = "myUniversity";
     private String activity = "myActivity";
     private String hobby = "myHobby";
+    private String accountStatus = "active";
+
     private List friendlist = new ArrayList<>();
 
     public ProfileServiceStub() {
@@ -29,11 +31,15 @@ public class ProfileServiceStub {
         }
     }
 
-    public ProfileServiceStub(String firstName, String lastName, String birthDate, String region) {
+    public ProfileServiceStub(String firstName, String lastName, String age, String region) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthDate = birthDate;
+        this.age = age;
         this.region = region;
+    }
+
+    public String getAccountStatus() {
+        return accountStatus;
     }
 
     public List<ProfileServiceStub> getFriendsList(){
@@ -48,8 +54,8 @@ public class ProfileServiceStub {
         return lastName;
     }
 
-    public String getBirthDate() {
-        return birthDate;
+    public String getAge() {
+        return age;
     }
 
     public String getRegion() {

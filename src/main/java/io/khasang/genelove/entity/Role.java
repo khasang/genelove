@@ -1,9 +1,10 @@
 package io.khasang.genelove.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity(name = "roles")
-public class Role {
+public class Role implements Serializable {
 
     public enum RoleName {
         ROLE_ADMIN, ROLE_BLOCKED, ROLE_USER, ROLE_DB

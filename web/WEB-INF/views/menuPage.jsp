@@ -23,13 +23,13 @@
 
         <div class="col-sm-10 text-left">
 <c:forEach items="${list}" var="list">
-    <div class="content" id="boxContent">
-            <a href=#>
+    <div class="content text-center" id="boxContent">
+            <a href="/myProfile">
                 <div class="panel panel-primary" id="userBox">
                     <div class="panel-body" >
                         <img id="picture" alt="Profile picture" src="images/Zidane.jpg" width="200" height="200" />
-                        Zinedine : 37 years
                     </div>
+                    <div class="panel-footer">Zinedine : 37 years</div>
                 </div>
             </a>
 </div>

@@ -16,11 +16,14 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    color: #080808;
 }
-
+.label {
+    color: #080808;
+}
 input[type=submit] {
     width: 50%;
-    color: white;
+    color: #080808;
     background-color: #2196f3;
     padding: 14px 20px;
     margin: 8px 0;
@@ -33,7 +36,7 @@ input[type=submit]:hover {
     background-color: steelblue;
 }
 
-div {
+div.border {
     border-radius: 5px;
     background-color: white;
     padding: 20px;

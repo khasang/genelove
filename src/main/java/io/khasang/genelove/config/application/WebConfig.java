@@ -16,7 +16,7 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @ComponentScan({"io.khasang.genelove.config", "io.khasang.genelove.controller", "io.khasang.genelove.model",
-                 "io.khasang.genelove.dao", "io.khasang.genelove.service"})
+                 "io.khasang.genelove.dao", "io.khasang.genelove.service", "io.khasang.genelove.messaging"})
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public InternalResourceViewResolver viewResolver() {

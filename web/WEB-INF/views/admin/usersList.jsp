@@ -21,6 +21,8 @@
                 <th>Last Name</th>
                 <th>E-Mail Address</th>
                 <th>Communication</th>
+                <th>Send eMail</th>
+                <th>Inspection Status</th>
                 <th>Account Status</th>
                 <th>Roles</th>
                 <th colspan="3">Actions</th>
@@ -43,6 +45,12 @@
                         <form method="post" action="sendMessageToUserById">
                             <input type="hidden" name="receiver" value="${user.id}"/>
                             <button class="btn btn-info" type="submit">Send Message</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="inspectUser">
+                            <input type="hidden" name="inspection" value="${user.inspectionStatus}"/>
+                            <button class="btn btn-info" type="submit">Inspect</button>
                         </form>
                     </td>
                     <td>${user.accountStatus}</td>
