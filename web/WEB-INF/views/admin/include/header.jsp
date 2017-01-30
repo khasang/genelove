@@ -15,7 +15,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/admin">Genelove: Administration Screen</a>
+            <a class="navbar-brand" href="/admin">Genelove: Admin Area</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -23,10 +23,12 @@
                 <li><a onclick="aboutPopup()">About</a></li>
                 <li><a href="/admin/usersList">Users List</a></li>
                 <li><a href="/admin/new">Add User</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-envelope"></span>Messages <span class="badge">10</span></a></li>
 
+                <li><a href="#">Hello, Dear <strong>${currentUser.firstName} ${currentUser.lastName}</strong>.</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-envelope"></span>Messages <span class="badge">10</span></a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
+            <!--
             <div class="col-sm-3 col-md-3 pull-right">
                 <form action="/admin/usersList" class="navbar-form" role="search">
                     <div class="input-group">
@@ -37,6 +39,7 @@
                     </div>
                 </form>
             </div>
+            -->
         </div>
     </div>
 </nav>

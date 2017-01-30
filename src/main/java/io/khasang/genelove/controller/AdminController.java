@@ -141,6 +141,22 @@ public class AdminController {
         return "admin/updateUser";
     }
 
+    @RequestMapping(value = "inspectUser", method = RequestMethod.POST)
+    @ResponseBody
+    public Object inspectUser(@ModelAttribute("user") User user, HttpServletResponse response) {
+        try {
+
+//            User dbUser = adminService.getUserById(user.getId());
+
+            User dbUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+            userInspectionService.sendInspection(dbUser);
+
+            return "JMS Message for inspection user was send";
+
+        } catch (Exception e) {
+            return "Error in inspectionUser method: " + e.getMessage();
+        }
+    }
 
     @RequestMapping(value = "sendMessageToUserById", method = RequestMethod.POST)
     public String sendMessageToUserByMail(HttpServletRequest request, Model model) {
@@ -193,7 +209,6 @@ public class AdminController {
         System.out.println("Private Message Status: " + privateMessage.getMessageStatus());
         System.out.println("Private Message Text:" + privateMessage.getText());
         System.out.println("*******************************************");*/
-
 
          try {
             messageService.addMessage(privateMessage);
