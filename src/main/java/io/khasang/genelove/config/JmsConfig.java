@@ -8,7 +8,7 @@ import org.springframework.jms.core.JmsTemplate;
 import java.util.Arrays;
 
 @Configuration
-public class MessagingConfiguration {
+public class JmsConfig {
     private static final String DEFAULT_BROKER_URL = "tcp://localhost:61616";
 
     private static final String USER_INSPECTION_QUEUE = "inspection-queue";
