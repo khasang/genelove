@@ -30,7 +30,11 @@ public class UserController {
     @Autowired
     ProfileService profileService;
 
-
+    private User currentUser;
+    private void init(User currentUser, Model model ) {
+        currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("currentUser", currentUser);
+    }
     /** Logout user from system" */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpServletRequest request, HttpServletResponse response) {

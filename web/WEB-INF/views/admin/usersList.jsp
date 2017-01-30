@@ -26,7 +26,7 @@
                 <th>Inspection Status</th>
                 <th>Account Status</th>
                 <th>Roles</th>
-                <th>Actions</th>
+                <th colspan="3">Actions</th>
             </tr>
             </thead>
             <tbody>
