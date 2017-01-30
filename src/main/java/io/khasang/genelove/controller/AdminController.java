@@ -188,7 +188,6 @@ public class AdminController {
 /*      System.out.println("********** Messenger Controller ***********");
         System.out.println("Option: " + option);
         System.out.println("********** Messenger Controller ***********");
-
         System.out.println("*********** Message Constructor ***********");
         System.out.println("Private Message Sender: " + userService.getUserById(receiver_id));
         System.out.println("Private Message Receiver: " + userService.getUserById(receiver_id));
@@ -198,7 +197,6 @@ public class AdminController {
         System.out.println("Private Message Status: " + privateMessage.getMessageStatus());
         System.out.println("Private Message Text: " + privateMessage.getText());
         System.out.println("*******************************************");
-
         System.out.println("********** Messenger Controller ***********");
         System.out.println("Private Message ID: " + privateMessage.getId());
         System.out.println("Private Message Sender: " + privateMessage.getSender());
