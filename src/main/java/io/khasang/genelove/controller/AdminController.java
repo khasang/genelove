@@ -5,11 +5,7 @@ import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.Role;
 import io.khasang.genelove.entity.User;
 import io.khasang.genelove.model.Utils;
-import io.khasang.genelove.service.AdminService;
-import io.khasang.genelove.service.MailSender;
-import io.khasang.genelove.service.MessageService;
-import io.khasang.genelove.service.UserInspectionServiceImpl;
-import io.khasang.genelove.service.UserService;
+import io.khasang.genelove.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.core.env.Environment;
@@ -41,7 +37,8 @@ public class AdminController {
     UserService userService;
     @Autowired
     MessageService messageService;
-    UserInspectionServiceImpl userInspectionService;
+    @Autowired
+    UserInspectionService userInspectionService;
 
     PagedListHolder usersList = new PagedListHolder();
 
@@ -145,14 +142,10 @@ public class AdminController {
     @ResponseBody
     public Object inspectUser(@ModelAttribute("user") User user, HttpServletResponse response) {
         try {
-
-//            User dbUser = adminService.getUserById(user.getId());
-
-            User dbUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+            User dbUser = adminService.getUserById(user.getId());
             userInspectionService.sendInspection(dbUser);
 
             return "JMS Message for inspection user was send";
-
         } catch (Exception e) {
             return "Error in inspectionUser method: " + e.getMessage();
         }

@@ -17,7 +17,6 @@ public class JmsConfig {
     public ActiveMQConnectionFactory connectionFactory(){
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
         connectionFactory.setBrokerURL(DEFAULT_BROKER_URL);
-//        connectionFactory.setTrustedPackages(Arrays.asList("com.khasang.genelove","java.util"));
         connectionFactory.setTrustedPackages(Arrays.asList("com.khasang.genelove"));
         return connectionFactory;
     }

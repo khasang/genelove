@@ -49,11 +49,12 @@
                             <button class="btn btn-info" type="submit">Send Message</button>
                         </form>
                     </td>
-                    <td>
-                        <form method="post" action="inspectUser">
-                            <input type="hidden" name="inspection" value="${user.inspectionStatus}"/>
+                    <td align="center">
+                        <c:url var="inspectUser" value="/admin/inspectUser"/>
+                        <form:form action="${inspectUser}" method="post" modelAttribute="user">
+                            <form:input type="hidden" path="id" value="${user.id}"/>
                             <button class="btn btn-info" type="submit">Inspect</button>
-                        </form>
+                        </form:form>
                     </td>
                     <td>${user.accountStatus}</td>
                     <td>
