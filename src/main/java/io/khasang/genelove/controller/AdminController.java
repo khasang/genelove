@@ -8,7 +8,7 @@ import io.khasang.genelove.model.Utils;
 import io.khasang.genelove.service.AdminService;
 import io.khasang.genelove.service.MailSender;
 import io.khasang.genelove.service.MessageService;
-import io.khasang.genelove.service.UserInspectionService;
+import io.khasang.genelove.service.UserInspectionServiceImpl;
 import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
@@ -41,7 +41,7 @@ public class AdminController {
     UserService userService;
     @Autowired
     MessageService messageService;
-    UserInspectionService userInspectionService;
+    UserInspectionServiceImpl userInspectionService;
 
     PagedListHolder usersList = new PagedListHolder();
 
