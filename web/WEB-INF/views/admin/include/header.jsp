@@ -23,8 +23,6 @@
                 <li><a onclick="aboutPopup()">About</a></li>
                 <li><a href="/admin/usersList">Users List</a></li>
                 <li><a href="/admin/new">Add User</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-envelope"></span>Messages <span class="badge">10</span></a></li>
-
                 <li><a href="/logout">Logout</a></li>
             </ul>
             <div class="col-sm-3 col-md-3 pull-right">

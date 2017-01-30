@@ -10,15 +10,21 @@
                         <p class="card-text">Here You can send your mail email to selected user at address:</p>
                         <p class="card-text"><strong>${mailto}</strong></p>
                         <p class="card-text">Please, fill all fields of form that is below:</p>
-                        <hr>
                         <form method="post" action="/admin/sendMail" class="input-group">
-                            <input type="hidden" name="receiver" value="${mailto}"/>
-                            <label>Subject:</label>
-                            <input class="form-control" type="text" name="subject"/>
-                            <label>Message:</label>
-                            <textarea class="form-control" rows="4" name="message"></textarea>
-                            <p></p>
-                            <button class="btn btn-primary" type="submit">Send e-Mail</button>
+                            <input type="hidden" name="recipient" value="${mailto}"/>
+                            <table border="0" align="center">
+                                <tr>
+                                    <td><label>Subject:</label></td>
+                                    <td><input class="form-control" type="text" name="subject"/></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Message:</label></td>
+                                    <td><textarea class="form-control" rows="4" name="message"></textarea></td>
+                                </tr>
+                            </table><br>
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">Send e-Mail</button>
+                            </span>
                         </form>
                     </div>
                 </div>
