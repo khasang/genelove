@@ -55,7 +55,7 @@ public class UserInspectionServiceImpl implements UserInspectionService{
         userWrapper.setFirstName(user.getFirstName());
         userWrapper.setLastName(user.getLastName());
         userWrapper.setEmail(user.getEmail() != null ? user.getEmail() : "");
-        //userWrapper.setInspectionStatus(user.getInspectionStatus() != null ? user.getInspectionStatus().toString() : "");
+        userWrapper.setInspectionStatus(user.getInspectionStatus() != null ? user.getInspectionStatus().toString() : "");
         userWrapper.setAccountStatus(user.getAccountStatus() != null ? user.getAccountStatus().toString() : "");
 
         return userWrapper;

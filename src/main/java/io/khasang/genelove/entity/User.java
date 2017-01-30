@@ -1,16 +1,17 @@
 package io.khasang.genelove.entity;
 
-import jdk.nashorn.internal.ir.Node;
-
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 
 @Entity(name = "users")
-public class User {
-
-
+public class User implements Serializable{
     public enum AccountStatus {
         NEW, ACTIVE, SUSPENDED
+    }
+
+    public enum InspectionStatus {
+        NEW, NEGATIVE, POSITIVE
     }
 
     @Id
@@ -32,6 +33,10 @@ public class User {
     @Column(length = 255)
     private String email;
 
+    @Column
+    @Enumerated(EnumType.STRING)
+    private InspectionStatus inspectionStatus;
+
     @Column(name = "receive_notifications")
     private boolean receiveNotifications = false;
 
@@ -45,6 +50,7 @@ public class User {
 
     public User() {
         this.accountStatus = AccountStatus.NEW;
+        this.inspectionStatus = InspectionStatus.NEW;
     }
 
     public static Map<AccountStatus, String> getAccountStatusList() {
@@ -103,6 +109,14 @@ public class User {
         this.email = email;
     }
 
+    public InspectionStatus getInspectionStatus() {
+        return inspectionStatus;
+    }
+
+    public void setInspectionStatus(InspectionStatus inspection) {
+        this.inspectionStatus = inspection;
+    }
+
     public AccountStatus getAccountStatus() {
         return accountStatus;
     }
@@ -126,5 +140,5 @@ public class User {
     public void setReceiveNotifications(boolean receiveNotifications) {
         this.receiveNotifications = receiveNotifications;
     }
-    
+
 }
