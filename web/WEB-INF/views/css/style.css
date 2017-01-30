@@ -84,17 +84,16 @@ body {
     font-family: 'Titillium Web', sans-serif;
     font-size: 16px;
     font-style: italic;
-    color: #080808;
+    color: #ffffff;
     height: 100%;
 }
-.wrapper {
-  min-height: 100%;
-}
+
 .genericFont {
     font-family: 'Titillium Web', sans-serif;
     font-size: 16px;
     font-style: italic;
-    color: #ffffff;
+    color: #555555;
+    opacity: 1;
 }
 .italic {
     font-style: italic;
@@ -519,10 +518,14 @@ th {
 .rowFlexContainer{
     display: inline-flex;
     flex-flow: row wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
 }
 .flexElement {
-    width: auto;
-    align-items: flex-start;
+    align-self: baseline;
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin: auto;
 }
 .fixedPosition{
     position: fixed;

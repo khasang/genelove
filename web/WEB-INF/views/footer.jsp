@@ -1,18 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="stylesheet" href="../css/footer.css"/>
+<link rel="stylesheet" href="css/footer.css"/>
         <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-lg-offset-1">
-                        <a class="footerStyle" href="${pageContext.request.contextPath}/help.jsp">Help me</a>
-                    </div>
-                    <div class="col-lg-3 col-lg-offset-1">
-                        <a class="footerStyle" href="${pageContext.request.contextPath}/about.jsp">About us</a>
-                    </div>
-                    <div class="col-lg-3 col-lg-offset-1">
-                        <a class="footerStyle" href="${pageContext.request.contextPath}/FAQ.jsp">FAQ</a>
-                    </div>
-                </div>
-            </div>
+            <table width="100%">
+                <tr>
+                    <td><a href="help.jsp">Help me</a></td>
+                    <td><a href="about.jsp">About us</a></td>
+                    <td><a href="FAQ.jsp">FAQ</a></td>
+                </tr>
+            </table>
         </footer>
 

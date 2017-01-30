@@ -1,19 +1,5 @@
 footer {
-   background-color: #080808;
-   position: relative;
-   margin-top: -30px; /* negative value of footer height */
-   height: 30px;
-   clear:both;
-   width: 100%;
-   align-items: center;
-}
-
-a.footerStyle {
-   color: #d1d1d1;
-   transition: 0.5s ease-in-out;
-   font-family: 'Montez', cursive; /*скачать шрифт можно с сайта https://www.google.com/fonts/*/
-}
-
-a.footerStyle:hover {
+   background-color: #555;
    color: white;
+   padding: 15px;
 }

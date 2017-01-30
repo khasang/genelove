@@ -16,8 +16,8 @@
             </div>
             <div class="modal-body">
                 <div class="panel-body">
-<form action="${pageContext.request.contextPath}/account/searchResult" method="get" commandName="findProfile"
-           class="form-inline form-group-sm">
+<form:form action="/account/findProfile" method="get" commandName="findProfile"
+           cssClass="form-inline form-group-sm">
                     <p>
                         AGE :  <input id="from" type="number" min="16" max="90" name="from"/> - <input id="to" type="number" min="16" max="90" name="to"/>
                     </p>
@@ -39,7 +39,7 @@
 
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <input type="submit" class="btn btn-success" value="Find">
-</form>
+</form:form>
 
                 </div>
             </div>

@@ -1,7 +1,6 @@
 package io.khasang.genelove.service;
 
 import io.khasang.genelove.entity.User;
-import io.khasang.genelove.messaging.MessageSender;
 import io.khasang.genelove.model.UserWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,7 @@ public class UserInspectionServiceImpl implements UserInspectionService{
 //    static final Logger LOG = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     @Autowired
-    MessageSender messageSender;
+    JmsSender messageSender;
 
     @Autowired
     UserService userService;

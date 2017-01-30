@@ -1,4 +1,4 @@
-package io.khasang.genelove.messaging;
+package io.khasang.genelove.service;
 
 import io.khasang.genelove.entity.User;
 import io.khasang.genelove.model.UserWrapper;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.jms.*;
 
 @Component
-public class MessageSender {
+public class JmsSender {
     @Autowired
     JmsTemplate jmsTemplate;
 

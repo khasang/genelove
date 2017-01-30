@@ -69,7 +69,7 @@ public class UserService {
     }
 
     public void update() {
-        userDAO.update();
+        userDAO.update(); // to be removed
     }
 
 }

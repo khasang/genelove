@@ -11,7 +11,6 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -190,13 +189,13 @@ public class UserController {
         return "testViews/profileFind";
     }
 
-    @RequestMapping(value = "/searchResult", method = RequestMethod.GET)
-    public ModelAndView findProfilesWithParam (@RequestParam(value = "from", required = false) Integer ageFrom,
-                                         @RequestParam(value = "to", required = false) Integer ageTo,
-                                         @RequestParam (value = "gender", required = false) String gender,
-                                         @RequestParam (value = "marital", required = false) String marital) {
+    @RequestMapping(value = "/findProfile", method = RequestMethod.GET)
+    public String findProfilesWithParam (@RequestParam("from") int ageFrom, @RequestParam("to") int ageTo,
+                                @RequestParam ("gender") String gender, @RequestParam ("marital") String marital,
+                                         Model model) {
         List<Profile> list = profileService.getProfiles(ageFrom, ageTo, gender, marital);
-        return new ModelAndView("searchResult","profiles", list);
+        model.addAttribute("profiles", list);
+        return "testViews/profiles";
     }
 
     /** View person info" */
