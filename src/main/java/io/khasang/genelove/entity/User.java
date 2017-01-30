@@ -1,10 +1,14 @@
 package io.khasang.genelove.entity;
 
+import jdk.nashorn.internal.ir.Node;
+
 import javax.persistence.*;
 import java.util.*;
 
 @Entity(name = "users")
 public class User {
+
+
     public enum AccountStatus {
         NEW, ACTIVE, SUSPENDED
     }
