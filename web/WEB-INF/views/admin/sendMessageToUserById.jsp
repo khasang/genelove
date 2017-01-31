@@ -8,7 +8,7 @@
                 <div class="card-block thumbnail">
                     <h3 class="card-title">Send Private Message to User</h3>
                     <p class="card-text">Here You can send your Private Message to selected user at User's ID:</p>
-                    <p class="card-text"><strong>${recipient}</strong></p>
+                    <p class="card-text"><strong>${receiver}</strong></p>
                     <p class="card-text">Please, input your message into textarea of form that is below:</p>
                     <hr>
                     <form method="post" action="/admin/sendMessage" class="input-group">

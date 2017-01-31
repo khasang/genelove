@@ -1,11 +1,9 @@
 package io.khasang.genelove.model;
 
+import io.khasang.genelove.entity.entity_training.Table;
 import org.springframework.jdbc.core.JdbcTemplate;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,10 +11,12 @@ import java.util.Scanner;
 public class DBLoader {
     private JdbcTemplate jdbcTemplate;
 
-    public DBLoader() { }
     public DBLoader(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+    public DBLoader() { }
+
 
     public String addUsersIntoDB () {
         ArrayList<String> sql = new ArrayList<>();
@@ -341,6 +341,12 @@ public class DBLoader {
     public String clearTable (String table) {
         String request = "DELETE FROM " + table + ";";
         return executeRequest(request);
+    }
+
+    public List<Table> getTablesList () {
+        String request = "SELECT table_name FROM information_schema.tables " +
+                "WHERE table_schema='public' ORDER BY table_name ASC;";
+        return jdbcTemplate.query(request, new TableMapper());
     }
 
     public String insertFromFile (ArrayList<String> request) {

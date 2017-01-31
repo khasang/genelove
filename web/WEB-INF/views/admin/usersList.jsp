@@ -23,10 +23,11 @@
                 <th>Send Message</th>
                 <th>Send eMail</th>
                 <th>Inspection</th>
+                <th>Send Message<hr>Send eMail</th>
                 <th>Inspection Status</th>
                 <th>Account Status</th>
                 <th>Roles</th>
-                <th colspan="3">Actions</th>
+                <th colspan="2">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -42,8 +43,7 @@
                             <input type="hidden" name="email" value="${user.email}"/>
                             <button class="btn btn-info" type="submit">Send Mail</button>
                         </form>
-                    </td>
-                    <td>
+
                         <form method="post" action="sendMessageToUserById">
                             <input type="hidden" name="receiver" value="${user.id}"/>
                             <button class="btn btn-info" type="submit">Send Message</button>
@@ -68,8 +68,7 @@
                             <form:input type="hidden" path="id" value="${user.id}"/>
                             <button class="btn btn-info" type="submit">Block/Unblock</button>
                         </form:form>
-                    </td>
-                    <td align="center">
+
                         <c:url var="promote" value="/admin/promote"/>
                         <form:form action="${promote}" method="post" modelAttribute="user">
                             <form:input type="hidden" path="id" value="${user.id}"/>
