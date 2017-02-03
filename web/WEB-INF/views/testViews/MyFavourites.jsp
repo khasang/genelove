@@ -33,7 +33,7 @@
                 <td>${favourite.favouriteKey.favourite.email}</td>
 
                 <td align="center">
-                    <c:url var="remove" value="/account/removeFavourite"/>
+                    <c:url var="remove" value="/removeFavourite"/>
                     <form:form action="${remove}" method="post" modelAttribute="favourite">
                         <form:input type="hidden" path="favouriteKey.user.id" value="${favourite.favouriteKey.user.id}"/>
                         <form:input type="hidden" path="favouriteKey.favourite.id" value="${favourite.favouriteKey.favourite.id}"/>

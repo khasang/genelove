@@ -16,7 +16,7 @@
             </div>
             <div class="modal-body">
                 <div class="panel-body">
-<form:form action="/account/findProfile" method="get" commandName="findProfile"
+<form:form action="/findProfile" method="get" commandName="findProfile"
            cssClass="form-inline form-group-sm">
                     <p>
                         AGE :  <input id="from" type="number" min="16" max="90" name="from"/> - <input id="to" type="number" min="16" max="90" name="to"/>

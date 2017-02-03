@@ -19,7 +19,7 @@
 
 <div class="panel panel-default">
     <div class="panel-body">
-        <form:form action="/account/findProfile" method="get" commandName="findProfile"
+        <form:form action="/findProfile" method="get" commandName="findProfile"
                    cssClass="form-inline form-group-sm">
             <p><label for="ageFrom">Age from:</label><input type="text" id="ageFrom" class="form-control" name="ageFrom"></p>
             <p><label for="ageTo">to:</label><input type="text" id="ageTo" class="form-control"

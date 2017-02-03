@@ -39,14 +39,14 @@ public class AdminController {
     MessageService messageService;
     @Autowired
     UserInspectionService userInspectionService;
-    //UserInspectionServiceImpl userInspectionService;
 
     PagedListHolder usersList = new PagedListHolder();
 
     private User currentUser;
 
     private void init (User currentUser, AdminService adminService, Model model) {
-        currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        currentUser.setUser(userService.getUserByLogin(SecurityContextHolder.getContext()
+                .getAuthentication().getName()));
         model.addAttribute("currentUser", currentUser);
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
         Role roleAdmin = adminService.getRoleByName(Role.RoleName.ROLE_ADMIN);

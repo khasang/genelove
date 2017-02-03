@@ -53,6 +53,44 @@ public class User implements Serializable{
         this.inspectionStatus = InspectionStatus.NEW;
     }
 
+    public User(String login, String password, String firstName, String lastName,
+                String email, InspectionStatus inspectionStatus, boolean receiveNotifications,
+                AccountStatus accountStatus, List<Role> roles) {
+        this.login = login;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.inspectionStatus = inspectionStatus;
+        this.receiveNotifications = receiveNotifications;
+        this.accountStatus = accountStatus;
+        this.roles = roles;
+    }
+
+    public User(User user) {
+        this.login = user.login;
+        this.password = user.password;
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.email = user.email;
+        this.inspectionStatus = user.inspectionStatus;
+        this.receiveNotifications = user.receiveNotifications;
+        this.accountStatus = user.accountStatus;
+        this.roles = user.roles;
+    }
+
+    public void setUser(User user) {
+        this.login = user.login;
+        this.password = user.password;
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.email = user.email;
+        this.inspectionStatus = user.inspectionStatus;
+        this.receiveNotifications = user.receiveNotifications;
+        this.accountStatus = user.accountStatus;
+        this.roles = user.roles;
+    }
+
     public static Map<AccountStatus, String> getAccountStatusList() {
         Map<AccountStatus, String> accountStatusList = new HashMap<>();
         for (AccountStatus status : AccountStatus.values()) {
