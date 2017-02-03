@@ -1,7 +1,6 @@
-#SOKOL 
+# Genelove
 ![logo](https://github.com/khasang/genelove/blob/development/web/WEB-INF/views/images/love2.jpg)
 
-# Genelove
 
 description
 
