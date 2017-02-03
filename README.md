@@ -1,4 +1,5 @@
-![Alt text](/images/love2.jpg)
+#SOKOL 
+![logo](https://github.com/khasang/genelove/blob/development/web/WEB-INF/views/images/love2.jpg)
 
 # Genelove
 
