@@ -20,9 +20,6 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>E-Mail Address</th>
-                <th>Send Message</th>
-                <th>Send eMail</th>
-                <th>Inspection</th>
                 <th>Send Message<hr>Send eMail</th>
                 <th>Inspection Status</th>
                 <th>Account Status</th>
