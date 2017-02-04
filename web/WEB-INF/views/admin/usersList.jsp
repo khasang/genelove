@@ -22,7 +22,7 @@
                 <th>E-Mail Address</th>
                 <th>Send Message</th>
                 <th>Send eMail</th>
-                <th>Inspection Status</th>
+                <th>Inspection</th>
                 <th>Inspection Status</th>
                 <th>Account Status</th>
                 <th>Roles</th>
