@@ -45,7 +45,8 @@ public class AdminController {
     private User currentUser;
 
     private void init (User currentUser, AdminService adminService, Model model) {
-        currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        currentUser.setUser(userService.getUserByLogin(SecurityContextHolder.getContext()
+                .getAuthentication().getName()));
         model.addAttribute("currentUser", currentUser);
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
         Role roleAdmin = adminService.getRoleByName(Role.RoleName.ROLE_ADMIN);
@@ -73,8 +74,8 @@ public class AdminController {
     public String adminScreen(Model model) {
         adminService.createAllRoles();
 
-        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("currentUser", currentUser);
+        currentUser = new User();
+        init(currentUser, adminService, model);
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
 
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
@@ -89,8 +90,8 @@ public class AdminController {
     public String usersList(@RequestParam(value = "page", required = false) String page,
                             @RequestParam(value = "filter", required = false) String filter,
                             Model model) {
-        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("currentUser", currentUser);
+        currentUser = new User();
+        init(currentUser, adminService, model);
 
         if (filter == null) {
             usersList.setSource(adminService.getUsers());
@@ -113,8 +114,8 @@ public class AdminController {
 
     @RequestMapping(value = "new", method = RequestMethod.GET)
     public String userNew(Model model) {
-        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("currentUser", currentUser);
+        currentUser = new User();
+        init(currentUser, adminService, model);
         model.addAttribute("user", new User());
         model.addAttribute("accountStatusList", User.getAccountStatusList());
         model.addAttribute("roleList", adminService.getRoles());
@@ -125,8 +126,8 @@ public class AdminController {
     public String userById(@PathVariable("id") long id,
                            @RequestParam(value = "changePassword", required = false) boolean changePassword,
                            Model model){
-        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("currentUser", currentUser);
+        currentUser = new User();
+        init(currentUser, adminService, model);
 
         User user = adminService.getUserById(id);
         if (changePassword) {
@@ -163,6 +164,8 @@ public class AdminController {
     @RequestMapping(value = "sendMessage", method = RequestMethod.POST)
     public String sendMessage(HttpServletRequest request, Model model)
             throws UnsupportedEncodingException {
+        currentUser = new User();
+        init(currentUser, adminService, model);
         request.setCharacterEncoding("UTF8");
         String message = request.getParameter("message");
         String option = request.getParameter("option");
@@ -231,8 +234,8 @@ public class AdminController {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("currentUser", currentUser);
+        currentUser = new User();
+        init(currentUser, adminService, model);
         adminService.createAllRoles();
         String footer = "\n\n" + "This mail has been send to you from Administrator of " +
                 "Genelove Meeting Service. You don't need to answer on this letter.";

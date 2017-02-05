@@ -47,7 +47,7 @@
                         <td>${profile.match}</td>
                         <td>
                             <div>
-                            <a href="${pageContext.request.contextPath}/account/editProfile/${profile.id}">
+                            <a href="${pageContext.request.contextPath}/editProfile/${profile.id}">
                                 <button class="btn btn-success btn-xs">Edit Profile</button>
                             </a>
                             </div>
@@ -56,7 +56,7 @@
 
                 </c:forEach>
             </table>
-            <div style="margin:5px;"><a href="${pageContext.request.contextPath}/account/profileNew">
+            <div style="margin:5px;"><a href="${pageContext.request.contextPath}/profileNew">
                 <button class="btn btn-success btn-sm">
                     <i class="glyphicon glyphicon-pencil"></i>
                     Add new profile

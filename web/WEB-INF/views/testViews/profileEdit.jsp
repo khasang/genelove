@@ -20,7 +20,7 @@
 <div class="row content" id="menuBox">
     <div class="col-sm-10 text-left">
         <div class="container">
-            <form:form action="${pageContext.request.contextPath}/account/updateProfile/${profile.id}" method="post" commandName="updateProfile"
+            <form:form action="${pageContext.request.contextPath}/updateProfile/${profile.id}" method="post" commandName="updateProfile"
                        cssClass="form-inline form-group-sm">
 
                 <p><label for="nickname">Nickname:</label><input type="text" id="nickname" class="form-control" name="nickname" value="${profile.nickname}"></p>

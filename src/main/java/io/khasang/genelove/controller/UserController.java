@@ -1,6 +1,7 @@
 package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.*;
+import io.khasang.genelove.service.AdminService;
 import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.service.ProfileService;
 import io.khasang.genelove.service.UserService;
@@ -30,6 +31,13 @@ public class UserController {
     @Autowired
     ProfileService profileService;
 
+    private User currentUser;
+
+    private void init (User currentUser, Model model) {
+        currentUser.setUser(userService.getUserByLogin(SecurityContextHolder.getContext()
+                .getAuthentication().getName()));
+        model.addAttribute("currentUser", currentUser);
+    }
 
     /** Logout user from system" */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -122,6 +130,8 @@ public class UserController {
     /** View favorite user list" */
     @RequestMapping(value = "/myFavourites", method = RequestMethod.GET)
     public String myFavorites(Model model) {
+        currentUser = new User();
+        init(currentUser, model);
         model.addAttribute("favourite", new Favourite());
         model.addAttribute("favouriteList", userService.getFavouritesForUser(userService.getCurrentUser()));
         return "testViews/MyFavourites";
@@ -169,15 +179,15 @@ public class UserController {
             message = "Profile creation error: " + e.getMessage();
         }
         redirectAttributes.addFlashAttribute("message", message);
-        return "redirect:/account/profiles";
+        return "redirect:/profiles";
     }
 
     /**View profiles list**/
     @RequestMapping(value = "/profiles", method = RequestMethod.GET)
     public String userProfiles (Model model) {
-        User user = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        List<Profile> list = profileService.getUserProfiles(user);
-        model.addAttribute("currentUser", user);
+        currentUser = new User();
+        init(currentUser, model);
+        List<Profile> list = profileService.getUserProfiles(currentUser);
         model.addAttribute("profiles", list);
         return "testViews/profiles";
     }
@@ -185,7 +195,9 @@ public class UserController {
     /**Find profile**/
 
     @RequestMapping(value = "/find", method = RequestMethod.GET)
-    public String findProfiles (){
+    public String findProfiles (Model model){
+        currentUser = new User();
+        init(currentUser, model);
         return "testViews/profileFind";
     }
 
@@ -193,6 +205,8 @@ public class UserController {
     public String findProfilesWithParam (@RequestParam("from") int ageFrom, @RequestParam("to") int ageTo,
                                 @RequestParam ("gender") String gender, @RequestParam ("marital") String marital,
                                          Model model) {
+        currentUser = new User();
+        init(currentUser, model);
         List<Profile> list = profileService.getProfiles(ageFrom, ageTo, gender, marital);
         model.addAttribute("profiles", list);
         return "testViews/profiles";
@@ -201,6 +215,8 @@ public class UserController {
     /** View person info" */
     @RequestMapping(value = "/viewPersInfo/{id}", method = RequestMethod.GET)
     public String persInfoView(@PathVariable("id") long id, Model model){
+        currentUser = new User();
+        init(currentUser, model);
         model.addAttribute("profile", profileService.getProfileById(id));
         return "testViews/profile";
     }
@@ -209,20 +225,24 @@ public class UserController {
 
     @RequestMapping(value = "/editProfile/{id}", method = RequestMethod.GET)
     public String editProfile(@PathVariable("id") long id, Model model){
+        currentUser = new User();
+        init(currentUser, model);
         model.addAttribute("profile", profileService.getProfileById(id));
         return "testViews/profileEdit";
     }
 
     @RequestMapping(value = "/updateProfile/{id}", method = RequestMethod.POST)
     public String updateProfile(@PathVariable("id") long id,
-                                @ModelAttribute("profile") Profile profile){
+                                @ModelAttribute("profile") Profile profile, Model model){
+        currentUser = new User();
+        init(currentUser, model);
         //To view details from database
         Profile dbProfile = profileService.getProfileById(id);
         //To check if details were changed by user
         if (!dbProfile.equals(profile)) {
             profileService.updateProfile(profile);
         }
-        return "redirect:/account/profiles";
+        return "redirect:/profiles";
     }
 
     /** Delete person info about user" */
