@@ -30,8 +30,8 @@ public class MenuController {
     public ModelAndView menuPage(Model model){
         currentUser = new User();
         init(currentUser, model);
-        ModelAndView modelAndView=new ModelAndView("menuPage");
-        String[] list={"user1","user2","user3","user4","user5","user6","user7","user8"};
+        ModelAndView modelAndView=new ModelAndView("home");
+        String[] list={"user1","user2","user3","user4","user5","user6","user7","user8",};
 
         modelAndView.addObject("currentUser", currentUser);
         modelAndView.addObject("list",list);

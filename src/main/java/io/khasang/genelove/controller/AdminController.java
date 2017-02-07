@@ -88,7 +88,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "usersList", method = RequestMethod.GET)
-    @ResponseBody
+    //@ResponseBody
     public String usersList(@RequestParam(value = "page", required = false) String page,
                             @RequestParam(value = "filter", required = false) String filter,
                             Model model) {
@@ -115,7 +115,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "new", method = RequestMethod.GET)
-    @ResponseBody
+    //@ResponseBody
     public String userNew(Model model) {
         currentUser = new User();
         init(currentUser, adminService, model);
@@ -126,7 +126,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "user/id/{id}", method = RequestMethod.GET)
-    @ResponseBody
+    //@ResponseBody
     public String userById(@PathVariable("id") long id,
                            @RequestParam(value = "changePassword", required = false) boolean changePassword,
                            Model model){
@@ -157,7 +157,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "sendMessageToUserById", method = RequestMethod.POST)
-    @ResponseBody
+    //@ResponseBody
     public String sendMessageToUserByMail(HttpServletRequest request, Model model) {
         adminService.createAllRoles();
         currentUser = new User();
@@ -167,7 +167,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "sendMessage", method = RequestMethod.POST)
-    @ResponseBody
+    //@ResponseBody
     public String sendMessage(HttpServletRequest request, Model model)
             throws UnsupportedEncodingException {
         currentUser = new User();
@@ -201,7 +201,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "sendMailToUserByMail", method = RequestMethod.POST)
-    @ResponseBody
+    //@ResponseBody
     public String sendMailToUserByMail(HttpServletRequest request, Model model) {
         adminService.createAllRoles();
         currentUser = new User();
@@ -211,7 +211,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "sendMail", method = RequestMethod.POST)
-    @ResponseBody
+    //@ResponseBody
     public String sendMail(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         try {
             request.setCharacterEncoding("UTF8");
