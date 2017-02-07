@@ -71,7 +71,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-    @ResponseBody
+    //@ResponseBody
     public String adminScreen(Model model) {
         adminService.createAllRoles();
 
