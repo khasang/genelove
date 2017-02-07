@@ -1,4 +1,4 @@
-package io.khasang.genelove.controller;
+package io.khasang.genelove.controller.testControllers;
 
 import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.User;

@@ -15,12 +15,15 @@
         <p id="image-msg" style="display: none;">
     </div>
     <hr>
-    <h2>Zinedine Zidane</h2>
+    <h2>${currentUser.firstName} ${currentUser.lastName}</h2>
     <hr>
-    <h3>Birth : 23 June 1972</h3>
-        <h3>Age : 44</h3>
-            <h3>About Me: </h3>
-            <div id="description" class="content">
+    <h4>Birth : 23 June 1972</h4>
+    <h4>Age : 44</h4>
+    <h4>My e-Mail: ${currentUser.email}</h4>
+    <h4>My Account Status: ${currentUser.accountStatus}</h4>
+
+    <h3>About Me: </h3>
+    <div id="description" class="content">
                 <p>I was named the FIFA World Player of the Year three times, in 1998, 2000 and 2003, and won the 1998 Ballon d'Or.
                     He was Ligue 1 Player of the Year in 1996, Serie A Footballer of the Year in 2001 and La Liga Best Foreign Player in 2002<p>
             </div>

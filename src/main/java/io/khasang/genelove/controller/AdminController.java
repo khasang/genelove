@@ -71,6 +71,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
+    @ResponseBody
     public String adminScreen(Model model) {
         adminService.createAllRoles();
 
@@ -87,6 +88,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "usersList", method = RequestMethod.GET)
+    @ResponseBody
     public String usersList(@RequestParam(value = "page", required = false) String page,
                             @RequestParam(value = "filter", required = false) String filter,
                             Model model) {
@@ -113,6 +115,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "new", method = RequestMethod.GET)
+    @ResponseBody
     public String userNew(Model model) {
         currentUser = new User();
         init(currentUser, adminService, model);
@@ -123,6 +126,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "user/id/{id}", method = RequestMethod.GET)
+    @ResponseBody
     public String userById(@PathVariable("id") long id,
                            @RequestParam(value = "changePassword", required = false) boolean changePassword,
                            Model model){
@@ -153,6 +157,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "sendMessageToUserById", method = RequestMethod.POST)
+    @ResponseBody
     public String sendMessageToUserByMail(HttpServletRequest request, Model model) {
         adminService.createAllRoles();
         currentUser = new User();
@@ -162,6 +167,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "sendMessage", method = RequestMethod.POST)
+    @ResponseBody
     public String sendMessage(HttpServletRequest request, Model model)
             throws UnsupportedEncodingException {
         currentUser = new User();
@@ -174,35 +180,11 @@ public class AdminController {
         Message privateMessage = new Message(
                 userService.getUserByLogin(SecurityContextHolder
                         .getContext().getAuthentication().getName()),
-                userService.getUserById(receiver_id),
-                message
+                userService.getUserById(receiver_id), message
         );
 
         if (option != null) privateMessage.setMessageStatus(Message.MessageStatus.NEW);
         else privateMessage.setMessageStatus(Message.MessageStatus.SENT);
-
-/*      System.out.println("********** Messenger Controller ***********");
-        System.out.println("Option: " + option);
-        System.out.println("********** Messenger Controller ***********");
-        System.out.println("*********** Message Constructor ***********");
-        System.out.println("Private Message Sender: " + userService.getUserById(receiver_id));
-        System.out.println("Private Message Receiver: " + userService.getUserById(receiver_id));
-        System.out.println("Private Message Creation Date: " + privateMessage.getCreatedDate());
-        System.out.println("Private Message Sent Date: " + privateMessage.getSentDate());
-        System.out.println("Private Message Received Date: " + privateMessage.getReceivedDate());
-        System.out.println("Private Message Status: " + privateMessage.getMessageStatus());
-        System.out.println("Private Message Text: " + privateMessage.getText());
-        System.out.println("*******************************************");
-        System.out.println("********** Messenger Controller ***********");
-        System.out.println("Private Message ID: " + privateMessage.getId());
-        System.out.println("Private Message Sender: " + privateMessage.getSender());
-        System.out.println("Private Message Receiver: " + privateMessage.getReceiver());
-        System.out.println("Private Message Creation Date: " + privateMessage.getCreatedDate());
-        System.out.println("Private Message Sent Date: " + privateMessage.getSentDate());
-        System.out.println("Private Message Received Date: " + privateMessage.getReceivedDate());
-        System.out.println("Private Message Status: " + privateMessage.getMessageStatus());
-        System.out.println("Private Message Text:" + privateMessage.getText());
-        System.out.println("*******************************************");*/
 
          try {
             messageService.addMessage(privateMessage);
@@ -219,6 +201,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "sendMailToUserByMail", method = RequestMethod.POST)
+    @ResponseBody
     public String sendMailToUserByMail(HttpServletRequest request, Model model) {
         adminService.createAllRoles();
         currentUser = new User();
@@ -228,6 +211,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "sendMail", method = RequestMethod.POST)
+    @ResponseBody
     public String sendMail(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         try {
             request.setCharacterEncoding("UTF8");
@@ -260,6 +244,9 @@ public class AdminController {
         }
     }
 
+
+
+/*    /////////////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "user/login/{login}", method = RequestMethod.GET)
     public String userByLogin(@PathVariable("login") String login,
                               @RequestParam(value = "changePassword", required = false)
@@ -274,8 +261,10 @@ public class AdminController {
         model.addAttribute("accountStatusList", User.getAccountStatusList());
         model.addAttribute("roleList", adminService.getRoles());
         return "admin/updateUser";
-    }
+    }*/
+/////////////////////////////////////////////////////////////////////////////////////////
 
+    // Add new user by Administrator in admin area
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
     public Object addUser(@ModelAttribute(value = "user") User user, HttpServletResponse response) {

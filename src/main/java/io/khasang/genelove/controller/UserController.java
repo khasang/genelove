@@ -49,6 +49,7 @@ public class UserController {
         return "redirect:/login";
     }
 
+
     /** Post message to another user" */
     @RequestMapping(value = "/postMessage", method = RequestMethod.POST)
     @ResponseBody

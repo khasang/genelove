@@ -1,4 +1,4 @@
-package io.khasang.genelove.controller;
+package io.khasang.genelove.controller.testControllers;
 
 import io.khasang.genelove.model.SQLTable;
 import org.springframework.beans.factory.annotation.Autowired;
