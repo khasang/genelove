@@ -1,11 +1,11 @@
 <jsp:include page="testViews/head.jsp"/>
-<body style="background: url(images/loveFone.jpg) no-repeat fixed center;" >
+<body style="background: url(../resources/images/loveFone.jpg) no-repeat fixed center;" >
 <jsp:include page="header.jsp"/>
 <div class="container" id="myProfile">
     <div class="left">
         <div id="Photo">
-            <a href="images/Zidane.jpg">
-                <img id="picture" alt="Profile picture" src="/images/Zidane.jpg" width="200" height="200" />
+            <a href="resources/images/Zidane.jpg">
+                <img id="picture" alt="Profile picture" src="resources/images/Zidane.jpg" width="200" height="200" />
             </a>
         </div>
         <label class="btn btn-raised btn-success glyphicon glyphicon-folder-open">
