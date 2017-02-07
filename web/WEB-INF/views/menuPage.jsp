@@ -13,7 +13,7 @@
 </head>
 <body style="background: url(images/loveFone.jpg) no-repeat fixed center;">
 
-<jsp:include page="header.jsp"/>
+<jsp:include page="include/header.jsp"/>
 
 
 
@@ -40,6 +40,6 @@
 
 
 </div>
-<jsp:include page="footer.jsp"/>
+<jsp:include page="include/footer.jsp"/>
 </body>
 </html>
