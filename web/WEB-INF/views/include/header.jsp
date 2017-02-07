@@ -27,5 +27,5 @@
         </div>
     </div>
 </nav>
-<jsp:include page="findUserModal.jsp"></jsp:include>
+<jsp:include page="../findUserModal.jsp"></jsp:include>
 </head>
