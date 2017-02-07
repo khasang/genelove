@@ -14,6 +14,13 @@
             <li class="myschedule-menu"><a href="mySchedule"><p><span class="glyphicon glyphicon-calendar"></span> My Schedule</p></a></li>
             <li class="mysalary-menu"><a href="#"><p><span class="glyphicon glyphicon-usd"></span> My Salary</p></a></li>
             <li class="message-menu"><a href="#"><p><span class="glyphicon glyphicon-envelope"></span> Messages <span class="badge">10</span></p></a></li>
+
+            <li class="message-menu"><a href="/profiles"><p><span class="glyphicon glyphicon-pencil"></span> Add new profile </p></a></li>
+            <li class="message-menu"><a href="/profiles"><p><span class="glyphicon glyphicon-pencil"></span> Add new profile </p></a></li>
+            <li class="message-menu"><a href="/profiles"><p><span class="glyphicon glyphicon-pencil"></span> Add new profile </p></a></li>
+            <li class="message-menu"><a href="/profiles"><p><span class="glyphicon glyphicon-pencil"></span> Add new profile </p></a></li>
+
+
             <li class="contact-menu"><a href="#contact"><p><span class="glyphicon glyphicon-tasks"></span> Event Editor</p></a></li>
             <li class="contact-menu"><a href="#contact"><p><span class="glyphicon glyphicon-pencil"></span> Coffe Break Editor</p></a></li>
             <li class="contact-menu"><a href="#contact"><p><span class="glyphicon glyphicon-envelope"></span> Salary Editor</p></a></li>
