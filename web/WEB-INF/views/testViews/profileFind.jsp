@@ -15,7 +15,7 @@
 </head>
 <body style="background: url(../resources/images/loveFone.jpg) no-repeat fixed center;">
 
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../include/header.jsp"/>
 
 <div class="panel panel-default">
     <div class="panel-body">
@@ -45,6 +45,6 @@
         </form:form>
 
     </div>
-    <jsp:include page="../footer.jsp"/>
+    <jsp:include page="../include/footer.jsp"/>
 </body>
 </html>
