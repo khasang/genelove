@@ -1,6 +1,6 @@
 <jsp:include page="testViews/head.jsp"/>
 <body style="background: url(../resources/images/loveFone.jpg) no-repeat fixed center;" >
-<jsp:include page="header.jsp"/>
+<jsp:include page="include/header.jsp"/>
 <div class="container" id="myProfile">
     <div class="left">
         <div id="Photo">
