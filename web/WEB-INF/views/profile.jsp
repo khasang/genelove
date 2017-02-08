@@ -33,7 +33,7 @@
             </button>
 </div>
 
-    <jsp:include page="footer.jsp"/>
+    <jsp:include page="include/footer.jsp"/>
 
 </body>
 </html>
