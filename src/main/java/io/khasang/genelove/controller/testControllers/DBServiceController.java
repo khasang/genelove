@@ -3,7 +3,7 @@ package io.khasang.genelove.controller.testControllers;
 import io.khasang.genelove.entity.User;
 import io.khasang.genelove.entity.entity_training.Table;
 import io.khasang.genelove.model.CreateTable;
-import io.khasang.genelove.model.DBLoader;
+import io.khasang.genelove.service.DBLoader;
 import io.khasang.genelove.model.MyMessage;
 import io.khasang.genelove.model.SQLExamples;
 import io.khasang.genelove.service.*;
@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *  This class designed for maintenance tables in database.
@@ -29,7 +31,7 @@ import java.util.List;
  */
 
 @Controller
-public class DBLoaderController {
+public class DBServiceController {
 
     @Autowired
     MyMessage myMessage;
@@ -70,27 +72,58 @@ public class DBLoaderController {
      * /
 
     /**
-     * Main page for DBLoader
+     * Main page for DBService
      * @param model represents model
      * @return link to "mailService/DBMain"
      */
-    @RequestMapping(value = "/DBMain", method = RequestMethod.GET)
+    @RequestMapping(value = "/DBService", method = RequestMethod.GET)
     public String DBMain(Model model) {
+        String tableTitle = "List of tables in database Genelove";
+        String hiddenAction = "viewTablesList";
         model.addAttribute("currentUser", getCurrentUserName());
         List<Table> tables = dbLoader.getTablesList();
         model.addAttribute("tables", tables);
         model.addAttribute("message", message);
-        return "mailService/DBMain";
+        model.addAttribute("tableTitle", tableTitle);
+        model.addAttribute("hiddenAction", hiddenAction);
+        return "mailService/DBService";
     }
 
-    @RequestMapping(value = "/DBMain/view/{table}", method = RequestMethod.GET)
+    @RequestMapping(value = "/DBService/view/{table}", method = RequestMethod.GET)
     public String DBMainView(@PathVariable("table") String table, Model model) {
+        String tableTitle = "View of table '" + table + "'";
+        String hiddenAction = "viewTable";
         model.addAttribute("currentUser", getCurrentUserName());
+        //List<Map<String, Object>> tableHeaders = dbLoader.getTableHeaderList(table);
+        List<Map<String, Object>> tableData = dbLoader.getTableDataList(table);
+        Map<String, Object> map = null;
+        Set<String> keys = null;
+        if (!tableData.isEmpty()) {
+            map = tableData.get(0);
+            keys = map.keySet();
+        }
 
 
+/*        boolean firstIteration = true;
+        for (Map<String, Object> map: tableData) {
+            for (String key: map.keySet()) {
+                if (firstIteration)
+                    System.out.print (key + "\t");
+                else
+                    System.out.print (map.get(key) + "\t");
+            }
+            firstIteration = false;
+            System.out.println();
+        }*/
 
+        //model.addAttribute("tableHeaders", tableHeaders);
         model.addAttribute("message", message);
-        return "mailService/DBMain";
+        model.addAttribute("tableTitle", tableTitle);
+        //model.addAttribute("tableHeaders", tableHeaders);
+        model.addAttribute("keys", keys);
+        model.addAttribute("tableData", tableData);
+        model.addAttribute("hiddenAction", hiddenAction);
+        return "mailService/DBService";
     }
 
     /**

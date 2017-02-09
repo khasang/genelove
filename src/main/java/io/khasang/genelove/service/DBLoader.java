@@ -1,11 +1,13 @@
-package io.khasang.genelove.model;
+package io.khasang.genelove.service;
 
 import io.khasang.genelove.entity.entity_training.Table;
+import io.khasang.genelove.model.TableMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class DBLoader {
@@ -347,6 +349,17 @@ public class DBLoader {
         String request = "SELECT table_name FROM information_schema.tables " +
                 "WHERE table_schema='public' ORDER BY table_name ASC;";
         return jdbcTemplate.query(request, new TableMapper());
+    }
+
+/*    public List<Map<String, Object>> getTableHeaderList (String table) {
+        String request = "SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS " +
+                "WHERE table_name = '" + table + "';";
+        return jdbcTemplate.queryForList(request);
+    }*/
+
+    public List<Map<String, Object>> getTableDataList (String table) {
+        String request = "SELECT * FROM " + table;
+        return jdbcTemplate.queryForList(request);
     }
 
     public String insertFromFile (ArrayList<String> request) {
