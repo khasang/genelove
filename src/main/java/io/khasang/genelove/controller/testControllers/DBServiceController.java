@@ -52,7 +52,7 @@ public class DBServiceController {
     @Autowired
     DBLoader dbLoader;
 
-    private String message = "DB Main is ready";
+    private String message = "DB Service is ready";
 
     private String getCurrentUserName () {
         User currentUser = userService.getUserByLogin(SecurityContextHolder

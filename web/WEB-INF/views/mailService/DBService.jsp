@@ -28,7 +28,7 @@
 <hr>
 <div class="sendMailToSelectUsers">
     <fieldset class="fieldset">
-        <legend>View all users</legend>
+        <legend>DB Service</legend>
         <h1>${tableTitle}</h1>
         <form class="mailForm" method="get" action="">
             <table class="tableData">
