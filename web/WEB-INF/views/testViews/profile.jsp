@@ -1,11 +1,5 @@
-<html>
-<head>
-    <title>Profile</title>
-    <jsp:include page="../include/head.jsp"/>
-</head>
+<jsp:include page="header_r.jsp"/>
 <body>
-<jsp:include page="../include/header.jsp"/>
-
 <table>
     <tr>
         <td>Nickname</td>
@@ -16,18 +10,17 @@
         <td>Introduction</td>
         <td>Match</td>
     </tr>
-    <tr>
-        <td>${profile.nickname}</td>
-        <td>${profile.age}</td>
-        <td>${profile.gender}</td>
-        <td>${profile.maritalStatus}</td>
-        <td>${profile.hobbies}</td>
-        <td>${profile.introduction}</td>
-        <td>${profile.match}</td>
-        <td></td>
-    </tr>
+        <tr>
+            <td>${profile.nickname}</td>
+            <td>${profile.age}</td>
+            <td>${profile.gender}</td>
+            <td>${profile.maritalStatus}</td>
+            <td>${profile.hobbies}</td>
+            <td>${profile.introduction}</td>
+            <td>${profile.match}</td>
+            <td></td>
+        </tr>
 </table>
-<jsp:include page="../include/footer.jsp"/>
 </body>
 </html>
 

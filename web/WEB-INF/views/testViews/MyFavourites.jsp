@@ -4,7 +4,6 @@
 <html>
 <head>
     <title>My Favourites</title>
-    <jsp:include page="../include/head.jsp"/>
 </head>
 
 <body>

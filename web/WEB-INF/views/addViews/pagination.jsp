@@ -4,7 +4,7 @@
   Version: 1.0
 --%>
 <html>
-<%--<jsp:include page="/WEB-INF/views/include/head.jsp"/>--%>
+<%--<jsp:include page="/WEB-INF/views/head.jsp"/>--%>
 <body>
 <%--<jsp:include page="/WEB-INF/views/admin/include/header.jsp"/>--%>
 <c:set var="pageListHolder" value="${myList}" scope="session" />

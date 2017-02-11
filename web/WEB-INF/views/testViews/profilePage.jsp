@@ -6,13 +6,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Profile</title>
-    <%@ include file="./../include/head.jsp" %>
+    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="../css/images.css"/>
 
 </head>
 
-<body>
+<body class="background">
 
-<%@ include file="./../include/header.jsp" %><br><br>
+<%@ include file="header_r.jsp" %><br><br>
 <div>
     <a href="changeFoto.jsp">
         <img src="../resources/images/smile.jpg" alt="Фото" class="profilePageFoto">
@@ -51,7 +52,7 @@
     </div>
 </div>
 
-<%@ include file="./../include/footer.jsp" %>
+<%@ include file="footer_d.jsp" %>
 
 </body>
 </html>
