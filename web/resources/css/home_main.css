@@ -3,7 +3,7 @@
 body, html { overflow-x: hidden; }
 
 body {
-    font-size: 1em;
+    font-size: 1.4em;
     line-height: 1.4;
     font-family: 'Raleway', sans-serif;
     font-style: normal; 
@@ -95,7 +95,6 @@ img.slide {
 .templatemo-content {
     position: static;
     overflow: hidden; 
-    margin-top: 16%;
 }
 
 .templatemo-content section {
@@ -110,6 +109,7 @@ img.slide {
 
 .templatemo-content-wrapper {
     overflow: hidden;
+    margin-top: 28px;
 }
 
 .templatemo-content h2 {
@@ -127,7 +127,7 @@ img.slide {
     position: fixed; 
     width: 220px;
     z-index: 1; 
-    top: 35px;
+    top: 100px;
 }
 
 #menu {
