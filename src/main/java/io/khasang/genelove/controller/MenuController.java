@@ -3,6 +3,7 @@ package io.khasang.genelove.controller;
 import io.khasang.genelove.entity.User;
 import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/menuPage")
+@RequestMapping(value = "/home")
 public class MenuController {
     @Autowired
     UserService userService;
@@ -27,7 +28,7 @@ public class MenuController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView menuPage(Model model){
+    public ModelAndView homePage(Model model){
         currentUser = new User();
         init(currentUser, model);
         ModelAndView modelAndView=new ModelAndView("home");

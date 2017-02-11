@@ -10,12 +10,14 @@ import io.khasang.genelove.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.core.env.Environment;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.servlet.http.HttpServletResponse;
 
 import io.khasang.genelove.model.*;
@@ -33,8 +35,6 @@ public class AppController {
     @Autowired
     SQLExamples sqlExamples;
     @Autowired
-    CreateTable createTable;
-    @Autowired
     QuestionService questionService;
     @Autowired
     MessageService messageService;
@@ -48,19 +48,14 @@ public class AppController {
     PagedListHolder questionList = new PagedListHolder();
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
-    public String menuPage() {
+    public String homePage() {
         userService.update(); // to be removed
-        return "redirect:/menuPage";
+        return "redirect:/home";
     }
 
     /**
      * User registration"
      */
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration() {
-        return "registrationPage";
-    }
-
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("registerUser") User user,
                                RedirectAttributes redirectAttributes) {
@@ -80,13 +75,26 @@ public class AppController {
             message = "Registration error " + e.getMessage();
         }
         redirectAttributes.addFlashAttribute("message", message);
-        return "redirect:/menuPage";
+        return "redirect:/home";
     }
 
-    @RequestMapping(value = "/admin/create", method = RequestMethod.GET)
-    public String createTable(Model model) {
-        model.addAttribute("create", createTable.createTableStatus());
-        return "create";
+
+    @RequestMapping(value = "/support", method = RequestMethod.GET)
+    public String support(Model model) {
+        model.addAttribute("support", "");
+        return "support";
+    }
+
+    @RequestMapping(value = "/about", method = RequestMethod.GET)
+    public String about(Model model) {
+        model.addAttribute("about", "");
+        return "about";
+    }
+
+    @RequestMapping(value = "/tree", method = RequestMethod.GET)
+    public String tree(Model model) {
+        model.addAttribute("tree", "");
+        return "tree";
     }
 
     @RequestMapping(value = {"hello/{name}"}, method = RequestMethod.GET)
@@ -95,6 +103,19 @@ public class AppController {
         modelAndView.setViewName("testViews/encode");
         modelAndView.addObject("crypt", new BCryptPasswordEncoder().encode(name));
         return modelAndView;
+    }
+
+
+    /**
+     * Example request http://localhost:8080/db/allQuestion?page=next
+     * (see also "model/Utils.paginateList" and testViews/questions.jsp)
+     */
+    @RequestMapping(value = "/db/allQuestion", method = RequestMethod.GET)
+    public String allQuestion(Model model, @RequestParam(value = "page", required = false) String page) {
+        questionList.setSource(questionService.getQuestionList());
+
+        model.addAttribute("allQuestion", Utils.paginateList(questionList, page, 4, model));
+        return "testViews/questions";
     }
 
     @RequestMapping(value = "/db/addQuestion", method = RequestMethod.POST, produces = "application/json")
@@ -107,18 +128,6 @@ public class AppController {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return "Error adding question: " + e.getMessage();
         }
-    }
-
-    /**
-     * Example request http://localhost:8080/db/allQuestion?page=next
-     * (see also "model/Utils.paginateList" and testViews/questions.jsp)
-     */
-    @RequestMapping(value = "/db/allQuestion", method = RequestMethod.GET)
-    public String allQuestion(Model model, @RequestParam(value = "page", required = false) String page) {
-        questionList.setSource(questionService.getQuestionList());
-
-        model.addAttribute("allQuestion", Utils.paginateList(questionList, page, 4, model));
-        return "testViews/questions";
     }
 
     @RequestMapping(value = "/db/message/{id}", method = RequestMethod.GET)
@@ -134,82 +143,6 @@ public class AppController {
         return "messages";
     }
 
-    /*
-    Stub controllers for jsp pages
-    */
-    SelectQuery selectQuery;
-    @Autowired
-    JoinQuery joinQuery;
-    @Autowired
-    ProfileServiceStub profileServiceStub;
-    @Autowired
-    FindPeopleService findPeopleService;
-
-    @RequestMapping(value = "/support", method = RequestMethod.GET)
-    public String support(Model model){
-        model.addAttribute("support", "");
-        return "support";
-    }
-
-    @RequestMapping(value = "/about", method = RequestMethod.GET)
-    public String about(Model model){
-        model.addAttribute("about", "");
-        return "about";
-    }
-
-    @RequestMapping(value = "/services", method = RequestMethod.GET)
-    public String services(Model model){
-        model.addAttribute("services", "");
-        return "services";
-    }
-
-    @RequestMapping(value = "/docs", method = RequestMethod.GET)
-    public String docs(Model model){
-        model.addAttribute("docs", "");
-        return "docs";
-    }
-
-    @RequestMapping(value = "/help", method = RequestMethod.GET)
-    public String help(Model model){
-        model.addAttribute("help", "");
-        return "help";
-    }
-
-    @RequestMapping(value = "/questions", method = RequestMethod.GET)
-    public String questions(Model model){
-        model.addAttribute("questions", "");
-        return "testViews/questions";
-    }
-
-    @RequestMapping(value = "/modifyProfile", method = RequestMethod.GET)
-    public String modifyProfile(Model model){
-        model.addAttribute("modifyProfile", "");
-        return "modifyProfile";
-    }
-
-    @RequestMapping(value = "/tree", method = RequestMethod.GET)
-    public String tree(Model model){
-        model.addAttribute("tree", "");
-        return "tree";
-    }
-
-    @RequestMapping(value = "/profilePage", method = RequestMethod.GET)
-    public ModelAndView profile(){
-        return new ModelAndView("testViews/profilePage", "profile", profileServiceStub);
-    }
-
-    @RequestMapping(value = "/findPeople", method = RequestMethod.GET)
-    public ModelAndView findPeople() {
-        return new ModelAndView("findPeople","friends", profileServiceStub);
-    }
-
-    @RequestMapping(value = "/searchResult", method = RequestMethod.GET)
-    public ModelAndView searchResult(HttpServletRequest request) {
-        List<ProfileServiceStub> results = findPeopleService.findPeople(request.getParameter("firstName"),
-                request.getParameter("lastName"), request.getParameter("region"),
-                request.getParameter("minAge"), request.getParameter("maxAge"));
-        return new ModelAndView("searchResult","results", results);
-    }
 }
 
 

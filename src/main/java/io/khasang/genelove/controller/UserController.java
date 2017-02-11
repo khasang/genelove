@@ -12,6 +12,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -213,7 +214,7 @@ public class UserController {
         return "testViews/profiles";
     }
 
-    /** View person info" */
+    /** View person info by id" */
     @RequestMapping(value = "/viewPersInfo/{id}", method = RequestMethod.GET)
     public String persInfoView(@PathVariable("id") long id, Model model){
         currentUser = new User();
@@ -222,8 +223,18 @@ public class UserController {
         return "testViews/profile";
     }
 
-    /** Update person info about user" */
+    /** View user's own profile" */
+    @RequestMapping(value = "/myProfile", method = RequestMethod.GET)
+    public ModelAndView myProfile(Model model){
+        currentUser = new User();
+        init(currentUser, model);
+        ModelAndView modelAndView=new ModelAndView("profile");
+        modelAndView.addObject("currentUser", currentUser);
+        return modelAndView;
+    }
 
+
+    /** Update person info about user" */
     @RequestMapping(value = "/editProfile/{id}", method = RequestMethod.GET)
     public String editProfile(@PathVariable("id") long id, Model model){
         currentUser = new User();

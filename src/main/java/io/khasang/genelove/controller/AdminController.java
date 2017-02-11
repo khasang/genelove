@@ -4,6 +4,7 @@ import io.khasang.genelove.entity.EMail;
 import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.Role;
 import io.khasang.genelove.entity.User;
+import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.Utils;
 import io.khasang.genelove.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,8 @@ public class AdminController {
     MessageService messageService;
     @Autowired
     UserInspectionService userInspectionService;
+    @Autowired
+    CreateTable createTable;
 
     PagedListHolder usersList = new PagedListHolder();
 
@@ -359,5 +362,12 @@ public class AdminController {
         } catch (Exception e) {
             return "Error in blockUser method: " + e.getMessage();
         }
+    }
+
+    //to check
+    @RequestMapping(value = "create", method = RequestMethod.GET)
+    public String createTable(Model model) {
+        model.addAttribute("create", createTable.createTableStatus());
+        return "create";
     }
 }
