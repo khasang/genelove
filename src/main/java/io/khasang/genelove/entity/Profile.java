@@ -1,6 +1,7 @@
 package io.khasang.genelove.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /** Class that is used by Hibernate to create table "profiles" in the Database.
  * Table is used to store personal information(profiles) about registered users.
@@ -30,8 +31,9 @@ public class Profile {
     @Column(name = "nickname", length = 255)
     private String nickname;
 
-    @Column
-    private int age;
+    @Column(name = "date_of_birth")
+    @Temporal(TemporalType.DATE)
+    private Date dateOfBirth;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -82,14 +84,6 @@ public class Profile {
         this.nickname = nickname;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public Gender getGender() {
         return gender;
     }
@@ -138,4 +132,11 @@ public class Profile {
         this.photoURL = photoURL;
     }
 
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 }
