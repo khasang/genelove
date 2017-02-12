@@ -67,7 +67,7 @@
                 </tr>
             </table>
             <br>
-            <a href="/admin/usersList">Back to list</a>
+            <a href="${pageContext.request.contextPath}/admin/usersList">Back to list</a>
             <input class="btn btn-success" type="submit" value="Submit"/>
         </form:form>
     </div>

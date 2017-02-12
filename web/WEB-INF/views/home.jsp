@@ -5,7 +5,7 @@
     <title>Home</title>
     <jsp:include page="include/head.jsp"/>
 </head>
-<body style="background: url(../../resources/images/bground.jpg) no-repeat fixed center;">
+<body style="background: url(resources/images/bground.jpg) no-repeat fixed center;">
 <%--<div id="main-wrapper">--%>
 <jsp:include page="include/header.jsp"/>
 

@@ -185,7 +185,7 @@ public class UserController {
     }
 
     /**View profiles list**/
-    @RequestMapping(value = "/profiles", method = RequestMethod.GET)
+    @RequestMapping(value = "profiles", method = RequestMethod.GET)
     public String userProfiles (Model model) {
         currentUser = new User();
         init(currentUser, model);
@@ -196,14 +196,14 @@ public class UserController {
 
     /**Find profile**/
 
-    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    @RequestMapping(value = "find", method = RequestMethod.GET)
     public String findProfiles (Model model){
         currentUser = new User();
         init(currentUser, model);
         return "testViews/profileFind";
     }
 
-    @RequestMapping(value = "/findProfile", method = RequestMethod.GET)
+    @RequestMapping(value = "findProfile", method = RequestMethod.GET)
     public String findProfilesWithParam (@RequestParam("from") int ageFrom, @RequestParam("to") int ageTo,
                                 @RequestParam ("gender") String gender, @RequestParam ("marital") String marital,
                                          Model model) {
@@ -224,7 +224,7 @@ public class UserController {
     }
 
     /** View user's own profile" */
-    @RequestMapping(value = "/myProfile", method = RequestMethod.GET)
+    @RequestMapping(value = "myProfile", method = RequestMethod.GET)
     public ModelAndView myProfile(Model model){
         currentUser = new User();
         init(currentUser, model);
