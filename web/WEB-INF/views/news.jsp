@@ -46,7 +46,7 @@
                                             </div>
                                             <div class="stream-attachment photo">
                                                 <div class="responsive-photo">
-                                                    <img src="../../resources/images/veronique-zidane.jpg"/>
+                                                    <img src="../../resources/images/user.png"/>
                                                 </div>
                                             </div>
                                         </div><!--/.stream-headline-->

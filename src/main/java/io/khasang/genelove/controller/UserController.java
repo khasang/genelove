@@ -163,6 +163,12 @@ public class UserController {
         return "profile";
     }
 
+    /** View user news" */
+    @RequestMapping(value = "news", method = RequestMethod.GET)
+    public String viewNews(){
+        return "news";
+    }
+
     /** Add person info about user" */
     @RequestMapping(value = "/profileNew", method = RequestMethod.GET)
     public String profileNew(){

@@ -4,7 +4,7 @@
             <ul id="menu">
                 <li class="myProfile"><a href="${pageContext.request.contextPath}/myProfile"><p><span class="glyphicon glyphicon-user"></span> Profile</p>
                 </a></li>
-                <li class="myNews"><a href="#"><p><span class="glyphicon glyphicon-bell"></span> News</p></a></li>
+                <li class="myNews"><a href="${pageContext.request.contextPath}/news"><p><span class="glyphicon glyphicon-bell"></span> News</p></a></li>
                 <li class="message-menu"><a href="#"><p><span class="glyphicon glyphicon-envelope"></span> Messages
                     <span class="badge">10</span></p></a></li>
                 <li class="myContacts"><a href="#"><p><span class="glyphicon glyphicon-book"></span> Contacts</p></a>
