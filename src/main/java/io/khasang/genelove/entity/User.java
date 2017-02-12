@@ -4,6 +4,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
+/** Class that is used by Hibernate to create table "users" in the Database.
+ * Table is used to store list of users and technical information about theirs accounts.
+ *
+ * Класс, используя который, Hibernate создаёт таблицу в Базе данных.
+ * В таблице хранится список пользователей, а также техническая информация об их аккаунте.*/
+
 @Entity(name = "users")
 public class User implements Serializable{
     public enum AccountStatus {
