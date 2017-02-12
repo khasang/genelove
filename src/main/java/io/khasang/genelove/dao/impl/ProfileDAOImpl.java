@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.TypedQuery;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -60,14 +61,16 @@ public class ProfileDAOImpl implements ProfileDAO {
     }
 
     @Override
-    public List<Profile> getProfiles(int ageFrom, int ageTo, String gender, String marital, User user){
+    public List<Profile> getProfiles(Date dateFrom, Date dateTo,
+                                     Profile.Gender gender, Profile.MaritalStatus maritalStatus,
+                                     User user){
         TypedQuery<Profile> query = sessionFactory.getCurrentSession().
-                createNativeQuery("SELECT * FROM profiles WHERE age BETWEEN ? AND ? AND gender = ? " +
+                createNativeQuery("SELECT * FROM profiles WHERE date_of_birth BETWEEN ? AND ? AND gender = ? " +
                         "AND marital_status = ? AND user_id != ?", Profile.class);
-        query.setParameter(1, ageFrom);
-        query.setParameter(2, ageTo);
-        query.setParameter(3, gender);
-        query.setParameter(4, marital);
+        query.setParameter(1, dateFrom);
+        query.setParameter(2, dateTo);
+        query.setParameter(3, gender.toString());
+        query.setParameter(4, maritalStatus.toString());
         query.setParameter(5, user.getId());
         return query.getResultList();
     }

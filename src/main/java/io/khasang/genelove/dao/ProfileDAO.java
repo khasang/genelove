@@ -3,6 +3,7 @@ package io.khasang.genelove.dao;
 import io.khasang.genelove.entity.Profile;
 import io.khasang.genelove.entity.User;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ProfileDAO {
@@ -19,5 +20,5 @@ public interface ProfileDAO {
 
     void shareProfile(Profile profile);
 
-    List<Profile> getProfiles(int ageFrom, int ageTo, String gender, String marital, User user);
+    List<Profile> getProfiles(Date dateFrom, Date dateTo, Profile.Gender gender, Profile.MaritalStatus maritalStatus, User user);
 }

@@ -35,7 +35,7 @@
                         <h3>Email : ${currentUser.email}</h3>
                         <hr>
                         <h4>City : Madrid</h4>
-                        <h4>Date birth : 20.03.1974</h4>
+                        <h4>Date of birth : 20.03.1974</h4>
                         <h4>Phone : 074-567-32-35</h4>
                         <h4>Roles : USER,ADMINISTRATOR</h4>
                         <h4><a href="#">My Friends</a></h4>
