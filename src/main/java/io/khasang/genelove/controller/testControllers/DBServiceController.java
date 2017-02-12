@@ -96,7 +96,7 @@ public class DBServiceController {
         model.addAttribute("currentUser", getCurrentUserName());
         //List<Map<String, Object>> tableHeaders = dbLoader.getTableHeaderList(table);
         List<Map<String, Object>> tableData = dbLoader.getTableDataList(table);
-        Map<String, Object> map = null;
+        Map<String, Object> map;
         Set<String> keys = null;
         if (!tableData.isEmpty()) {
             map = tableData.get(0);
@@ -122,6 +122,7 @@ public class DBServiceController {
         //model.addAttribute("tableHeaders", tableHeaders);
         model.addAttribute("keys", keys);
         model.addAttribute("tableData", tableData);
+        model.addAttribute("table", table);
         model.addAttribute("hiddenAction", hiddenAction);
         return "mailService/DBService";
     }

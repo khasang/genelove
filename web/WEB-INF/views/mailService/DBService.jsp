@@ -37,14 +37,12 @@
                     <tr>
                         <th>N</th>
                         <th>Table</th>
-                        <th>Status</th>
                         <th>Records</th>
                         <th colspan="4">Actions</th>
                     </tr>
                     <c:forEach items="${tables}" var="table">
                         <tr>
                             <td><%= ++counter %></td>
-                            <td>${table.name}</td>
                             <td>${table.name}</td>
                             <td>${table.name}</td>
                             <td><a href="DBService/view/${table.name}">View</a></td>
@@ -67,6 +65,7 @@
                             <c:forEach items="${keys}" var="key">
                                 <th>${key}</th>
                             </c:forEach>
+                            <th colspan="2">Actions</th>
                         </tr>
                         <c:forEach items="${tableData}" var="map">
                             <tr>
@@ -74,8 +73,11 @@
                                 <c:forEach items="${keys}" var="key">
                                     <td>${map.get(key)}</td>
                                 </c:forEach>
+                                <td><a href="DBService/view/${table}">Update</a></td>
+                                <td><a href="DBService/view/${table}">Delete</a></td>
                             </tr>
                         </c:forEach>
+
                         <!-- <%= counter=0 %> -->
                     </c:if>
                 </c:if>
