@@ -9,6 +9,14 @@ public class Authorisation {
     @EmbeddedId
     private AuthorisationKey authorisationKey;
 
+    public Authorisation() {
+
+    }
+
+    public Authorisation(AuthorisationKey key) {
+        this.authorisationKey = key;
+    }
+
     public AuthorisationKey getAuthorisationKey() {
         return authorisationKey;
     }

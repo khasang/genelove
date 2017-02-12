@@ -41,8 +41,8 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void deleteUser(User user) {
         Session session = this.sessionFactory.getCurrentSession();
-        User wasteUser = session.get(User.class, user.getId());
-        session.delete(wasteUser);
+        session.delete(user);
+        session.flush();
     }
 
     @Override
@@ -73,14 +73,12 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void addAuthorisation(User user) {
-        AuthorisationKey key = new AuthorisationKey();
-        key.setUser(user);
-        key.setRole(adminDAO.getRoleByName(Role.RoleName.ROLE_USER));
-        Authorisation authorisation = new Authorisation();
-        authorisation.setAuthorisationKey(key);
-        sessionFactory.getCurrentSession().save(authorisation);
+        Role role = adminDAO.getRoleByName(Role.RoleName.ROLE_USER);
+        if (role != null) {
+            Authorisation authorisation = new Authorisation(new AuthorisationKey(user, role));
+            sessionFactory.getCurrentSession().save(authorisation);
+        }
     }
-
 
     @Override
     public Role getRoleById (long id) {
@@ -135,10 +133,5 @@ public class UserDAOImpl implements UserDAO {
                                       "SET receive_notifications = true " +
                                       "WHERE receive_notifications IS NULL");
         query.executeUpdate();
-
-        /*Message message = new Message();
-        message.setSender(getUserByLogin("admin"));
-        message.setReceiver(getUserByLogin("admin"));
-        sessionFactory.getCurrentSession().save(message);*/
     }
 }

@@ -135,7 +135,7 @@ public class UserController {
     public String myFavorites(Model model) {
         model.addAttribute("favourite", new Favourite());
         model.addAttribute("favouriteList", userService.getFavouritesForUser(userService.getCurrentUser()));
-        return "MyFavourites";
+        return "myFavourites";
     }
 
     /** Add relative to user relative tree" */
