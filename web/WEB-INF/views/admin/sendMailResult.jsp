@@ -6,9 +6,9 @@
             <div class="col-sm-4">
                 <div class="card">
                     <div class="card-block thumbnail">
-                        <h3 class="card-title">Send e-Mail to User</h3>
-                        <p class="card-text">Response of Mail Service:</p>
-                        <p class="card-text"><strong>${message}</strong></p>
+                        <h3 class="card-title">Send ${service} to User</h3>
+                        <p class="card-text">Response of ${service} Service:</p>
+                        <p class="card-text">${response}</p>
                     </div>
                 </div>
             </div>

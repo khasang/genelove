@@ -2,6 +2,12 @@ package io.khasang.genelove.entity;
 
 import javax.persistence.*;
 
+/** Class that is used by Hibernate to create table "roles" in the Database.
+ * Table is used to store list of roles that can be assigned to users.
+ *
+ * Класс, используя который, Hibernate создаёт таблицу в Базе данных.
+ * В таблице хранится список ролей, которые могут быть присвоены пользователям. */
+
 @Entity(name = "roles")
 public class Role {
 

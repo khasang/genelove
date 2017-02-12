@@ -3,6 +3,14 @@ package io.khasang.genelove.entity;
 import javax.persistence.*;
 import java.util.Date;
 
+/** Class that is used by Hibernate to create table "persons" in the Database.
+ * This table is used to store list of relatives of the user. Relatives are not necessary registered users.
+ * The list is used to create Genealogical Tree.
+ *
+ * Класс, используя который, Hibernate создаёт таблицу в Базе данных.
+ * В таблице хранится список родствеников пользователя. Родственники - не обязательно зарегистрированные пользователи.
+ * Список используется для построения Генеалогического Дерева.*/
+
 @Entity(name = "persons")
 public class Person {
 

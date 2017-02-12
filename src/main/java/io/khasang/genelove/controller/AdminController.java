@@ -1,12 +1,12 @@
 package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.EMail;
+import io.khasang.genelove.entity.Message;
 import io.khasang.genelove.entity.Role;
 import io.khasang.genelove.entity.User;
+import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.Utils;
-import io.khasang.genelove.service.AdminService;
-import io.khasang.genelove.service.MailSender;
-import io.khasang.genelove.service.UserService;
+import io.khasang.genelove.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.core.env.Environment;
@@ -36,10 +36,21 @@ public class AdminController {
     MailSender emailService;
     @Autowired
     UserService userService;
+    @Autowired
+    MessageService messageService;
+    @Autowired
+    UserInspectionService userInspectionService;
+    @Autowired
+    CreateTable createTable;
 
     PagedListHolder usersList = new PagedListHolder();
 
-    private void init (AdminService adminService, Model model) {
+    private User currentUser;
+
+    private void init (User currentUser, AdminService adminService, Model model) {
+        currentUser.setUser(userService.getUserByLogin(SecurityContextHolder.getContext()
+                .getAuthentication().getName()));
+        model.addAttribute("currentUser", currentUser);
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
         Role roleAdmin = adminService.getRoleByName(Role.RoleName.ROLE_ADMIN);
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
@@ -63,11 +74,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
+    //@ResponseBody
     public String adminScreen(Model model) {
         adminService.createAllRoles();
 
-        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("currentUser", currentUser);
+        currentUser = new User();
+        init(currentUser, adminService, model);
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
 
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
@@ -79,11 +91,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "usersList", method = RequestMethod.GET)
+    //@ResponseBody
     public String usersList(@RequestParam(value = "page", required = false) String page,
                             @RequestParam(value = "filter", required = false) String filter,
                             Model model) {
-        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("currentUser", currentUser);
+        currentUser = new User();
+        init(currentUser, adminService, model);
 
         if (filter == null) {
             usersList.setSource(adminService.getUsers());
@@ -105,9 +118,10 @@ public class AdminController {
     }
 
     @RequestMapping(value = "new", method = RequestMethod.GET)
+    //@ResponseBody
     public String userNew(Model model) {
-        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("currentUser", currentUser);
+        currentUser = new User();
+        init(currentUser, adminService, model);
         model.addAttribute("user", new User());
         model.addAttribute("accountStatusList", User.getAccountStatusList());
         model.addAttribute("roleList", adminService.getRoles());
@@ -115,11 +129,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "user/id/{id}", method = RequestMethod.GET)
+    //@ResponseBody
     public String userById(@PathVariable("id") long id,
                            @RequestParam(value = "changePassword", required = false) boolean changePassword,
                            Model model){
-        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("currentUser", currentUser);
+        currentUser = new User();
+        init(currentUser, adminService, model);
 
         User user = adminService.getUserById(id);
         if (changePassword) {
@@ -131,30 +146,88 @@ public class AdminController {
         return "admin/updateUser";
     }
 
-    @RequestMapping(value = "sendMailToUserByMail", method = RequestMethod.POST)
-    public String sendMailToUserByMail(HttpServletRequest request, Model model) {
-        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("currentUser", currentUser);
+    @RequestMapping(value = "inspectUser", method = RequestMethod.POST)
+    @ResponseBody
+    public Object inspectUser(@ModelAttribute("user") User user, HttpServletResponse response) {
+        try {
+            User dbUser = adminService.getUserById(user.getId());
+            userInspectionService.sendInspection(dbUser);
+
+            return "JMS Message for inspection user was send";
+        } catch (Exception e) {
+            return "Error in inspectionUser method: " + e.getMessage();
+        }
+    }
+
+    @RequestMapping(value = "sendMessageToUserById", method = RequestMethod.POST)
+    //@ResponseBody
+    public String sendMessageToUserByMail(HttpServletRequest request, Model model) {
         adminService.createAllRoles();
-        init(adminService, model);
+        currentUser = new User();
+        init(currentUser, adminService, model);
+        model.addAttribute("receiver", request.getParameter("receiver"));
+        return "admin/sendMessageToUserById";
+    }
+
+    @RequestMapping(value = "sendMessage", method = RequestMethod.POST)
+    //@ResponseBody
+    public String sendMessage(HttpServletRequest request, Model model)
+            throws UnsupportedEncodingException {
+        currentUser = new User();
+        init(currentUser, adminService, model);
+        request.setCharacterEncoding("UTF8");
+        String message = request.getParameter("message");
+        String option = request.getParameter("option");
+        int receiver_id = Integer.parseInt(request.getParameter("receiver"));
+
+        Message privateMessage = new Message(
+                userService.getUserByLogin(SecurityContextHolder
+                        .getContext().getAuthentication().getName()),
+                userService.getUserById(receiver_id), message
+        );
+
+        if (option != null) privateMessage.setMessageStatus(Message.MessageStatus.NEW);
+        else privateMessage.setMessageStatus(Message.MessageStatus.SENT);
+
+         try {
+            messageService.addMessage(privateMessage);
+            String service = "Private Message";
+             String response = "Your " + service + " was successfully delivered to User " +
+                     "by Id <strong>" + request.getParameter("receiver") +"</strong>";
+                model.addAttribute("response", response);
+             model.addAttribute("service", service);
+             return "admin/sendMailResult";
+            } catch (Exception exception) {
+                model.addAttribute("errorMessage", exception);
+             return "mailService/sendMailError";
+        }
+    }
+
+    @RequestMapping(value = "sendMailToUserByMail", method = RequestMethod.POST)
+    //@ResponseBody
+    public String sendMailToUserByMail(HttpServletRequest request, Model model) {
+        adminService.createAllRoles();
+        currentUser = new User();
+        init(currentUser, adminService, model);
         model.addAttribute("mailto", request.getParameter("email"));
         return "admin/sendMailToUserByMail";
     }
 
     @RequestMapping(value = "sendMail", method = RequestMethod.POST)
+    //@ResponseBody
     public String sendMail(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         try {
             request.setCharacterEncoding("UTF8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("currentUser", currentUser);
+        currentUser = new User();
+        init(currentUser, adminService, model);
         adminService.createAllRoles();
-        String footer = "\n\n" + "This mail was sended to you from Administrator of " +
+        String footer = "\n\n" + "This mail has been send to you from Administrator of " +
                 "Genelove Meeting Service. You don't need to answer on this letter.";
         EMail eMail = new EMail(
-                request.getParameter("recipient"),
+                request.getParameter("receiver"),
                 environment.getProperty("mail.username"),
                 request.getParameter("subject"),
                 request.getParameter("message") + footer
@@ -162,9 +235,11 @@ public class AdminController {
         emailService.setEmailFields(eMail);
         try {
             emailService.sendEmail(eMail);
-            String message = "Your Mail was successfully delivered to User at address " +
-                    request.getParameter("recipient");
-            model.addAttribute("message", message);
+            String service = "e-Mail";
+            String response = "Your " + service + " was successfully delivered to User " +
+                    "at address <strong>" + request.getParameter("receiver") +"</strong>";
+            model.addAttribute("service", service);
+            model.addAttribute("response", response);
             return "admin/sendMailResult";
         } catch (Exception exception) {
             model.addAttribute("errorMessage", exception);
@@ -172,6 +247,9 @@ public class AdminController {
         }
     }
 
+
+
+/*    /////////////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "user/login/{login}", method = RequestMethod.GET)
     public String userByLogin(@PathVariable("login") String login,
                               @RequestParam(value = "changePassword", required = false)
@@ -186,8 +264,10 @@ public class AdminController {
         model.addAttribute("accountStatusList", User.getAccountStatusList());
         model.addAttribute("roleList", adminService.getRoles());
         return "admin/updateUser";
-    }
+    }*/
+/////////////////////////////////////////////////////////////////////////////////////////
 
+    // Add new user by Administrator in admin area
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
     public Object addUser(@ModelAttribute(value = "user") User user, HttpServletResponse response) {
@@ -282,5 +362,12 @@ public class AdminController {
         } catch (Exception e) {
             return "Error in blockUser method: " + e.getMessage();
         }
+    }
+
+    //to check
+    @RequestMapping(value = "create", method = RequestMethod.GET)
+    public String createTable(Model model) {
+        model.addAttribute("create", createTable.createTableStatus());
+        return "create";
     }
 }

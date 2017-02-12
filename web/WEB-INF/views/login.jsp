@@ -13,10 +13,10 @@
     <link href='//fonts.googleapis.com/css?family=Muli:400,300,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Comfortaa:400,300,700' rel='stylesheet' type='text/css'>
     <!-- css files -->
-    <link href="css/login/animate-custom.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="css/login/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="resources/css/login/animate-custom.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="resources/css/login/style.css" rel="stylesheet" type="text/css" media="all" />
 </head>
-<body style="background: url(images/love2.jpg) no-repeat fixed center;">
+<body style="background: url(resources/images/love2.jpg) no-repeat fixed center;">
 <h1 class="w3ls" style="color: black">WELCOME</h1>
 <div id="container_demo" >
     <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->

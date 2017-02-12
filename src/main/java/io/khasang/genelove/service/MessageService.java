@@ -54,6 +54,10 @@ public class MessageService {
         return messageDAO.getMessageById(id);
     }
 
+    public long checkNewMessage(long owner_id) {
+        return messageDAO.checkNewMessage(owner_id);
+    }
+
     /*
     public List<Message> getMessageById(int id) {
         List<Message> messages = new ArrayList<>();
@@ -76,6 +80,10 @@ public class MessageService {
 
     public List<Message> getMessageAll() {
         return messageDAO.getMessageAll();
+    }
+
+    public List<Message> getAllMessagesForUserById (long owner_id) {
+        return messageDAO.getAllMessagesForUserById(owner_id);
     }
 
 }

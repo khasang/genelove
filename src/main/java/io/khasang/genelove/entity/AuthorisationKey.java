@@ -3,6 +3,12 @@ package io.khasang.genelove.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/** Class that is composite primary key of two different fields "user_id" and "role_id".
+ * It is embeddable, so can be used as part of other classes, in our case entity classes to create tables.
+ * https://docs.oracle.com/cd/E16439_01/doc.1013/e13981/cmp30cfg001.htm
+ * Класс, который является сложным первичным ключом из двух разных полей.
+ * Он встраиваемый, то есть может использоваться как часть других классов, в нашем случае - классов сущностей */
+
 @Embeddable
 public class AuthorisationKey implements Serializable {
 

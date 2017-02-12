@@ -20,10 +20,11 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>E-Mail Address</th>
-                <th>Send eMail</th>
+                <th>Send Message<hr>Send eMail</th>
+                <th>Inspection Status</th>
                 <th>Account Status</th>
                 <th>Roles</th>
-                <th colspan="3">Actions</th>
+                <th colspan="2">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -39,6 +40,18 @@
                             <input type="hidden" name="email" value="${user.email}"/>
                             <button class="btn btn-info" type="submit">Send Mail</button>
                         </form>
+
+                        <form method="post" action="sendMessageToUserById">
+                            <input type="hidden" name="receiver" value="${user.id}"/>
+                            <button class="btn btn-info" type="submit">Send Message</button>
+                        </form>
+                    </td>
+                    <td align="center">
+                        <c:url var="inspectUser" value="/admin/inspectUser"/>
+                        <form:form action="${inspectUser}" method="post" modelAttribute="user">
+                            <form:input type="hidden" path="id" value="${user.id}"/>
+                            <button class="btn btn-info" type="submit">Inspect</button>
+                        </form:form>
                     </td>
                     <td>${user.accountStatus}</td>
                     <td>
@@ -52,8 +65,7 @@
                             <form:input type="hidden" path="id" value="${user.id}"/>
                             <button class="btn btn-info" type="submit">Block/Unblock</button>
                         </form:form>
-                    </td>
-                    <td align="center">
+
                         <c:url var="promote" value="/admin/promote"/>
                         <form:form action="${promote}" method="post" modelAttribute="user">
                             <form:input type="hidden" path="id" value="${user.id}"/>
@@ -72,7 +84,7 @@
             </tbody>
         </table>
 
-        <%@ include file="/WEB-INF/views/pagination.jsp" %>
+        <%@ include file="/WEB-INF/views/addViews/pagination.jsp" %>
 
         <br>
 
@@ -96,3 +108,4 @@
     </div>
 </body>
 </html>
+>>>>>>> parent of df306d5... Realization of sending e-Mail and Private Message

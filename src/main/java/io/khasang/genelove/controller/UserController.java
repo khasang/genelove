@@ -1,6 +1,7 @@
 package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.*;
+import io.khasang.genelove.service.AdminService;
 import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.service.ProfileService;
 import io.khasang.genelove.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/account")
+@RequestMapping(value = "/")
 public class UserController {
 
     @Autowired
@@ -30,22 +32,12 @@ public class UserController {
     @Autowired
     ProfileService profileService;
 
-    @RequestMapping("/qwerty")
-    public String test(Model model){
-        model.addAttribute("hello", "");
-        return "hello";
-    }
+    private User currentUser;
 
-    /** View home page */
-    @RequestMapping(value = {"","/"}, method = RequestMethod.GET)
-    public String homePage(){
-        return "menuPage";
-    }
-
-    /** View menu page */
-    @RequestMapping(value = {"/menuPage"}, method = RequestMethod.GET)
-    public String menuPage(){
-        return "menuPage";
+    private void init (User currentUser, Model model) {
+        currentUser.setUser(userService.getUserByLogin(SecurityContextHolder.getContext()
+                .getAuthentication().getName()));
+        model.addAttribute("currentUser", currentUser);
     }
 
     /** Logout user from system" */
@@ -57,6 +49,7 @@ public class UserController {
         }
         return "redirect:/login";
     }
+
 
     /** Post message to another user" */
     @RequestMapping(value = "/postMessage", method = RequestMethod.POST)
@@ -139,9 +132,11 @@ public class UserController {
     /** View favorite user list" */
     @RequestMapping(value = "/myFavourites", method = RequestMethod.GET)
     public String myFavorites(Model model) {
+        currentUser = new User();
+        init(currentUser, model);
         model.addAttribute("favourite", new Favourite());
         model.addAttribute("favouriteList", userService.getFavouritesForUser(userService.getCurrentUser()));
-        return "MyFavourites";
+        return "testViews/MyFavourites";
     }
 
     /** Add relative to user relative tree" */
@@ -165,13 +160,13 @@ public class UserController {
     /** View user relative tree" */
     @RequestMapping(value = "/myTree", method = RequestMethod.GET)
     public String relativeNodeAll(){
-        return "myTree";
+        return "profile";
     }
 
     /** Add person info about user" */
     @RequestMapping(value = "/profileNew", method = RequestMethod.GET)
     public String profileNew(){
-        return "profileNew";
+        return "testViews/profileNew";
     }
 
 
@@ -186,60 +181,80 @@ public class UserController {
             message = "Profile creation error: " + e.getMessage();
         }
         redirectAttributes.addFlashAttribute("message", message);
-        return "redirect:/account/profiles";
+        return "redirect:/profiles";
     }
 
     /**View profiles list**/
     @RequestMapping(value = "/profiles", method = RequestMethod.GET)
     public String userProfiles (Model model) {
-        User user = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        List<Profile> list = profileService.getUserProfiles(user);
-        model.addAttribute("currentUser", user);
+        currentUser = new User();
+        init(currentUser, model);
+        List<Profile> list = profileService.getUserProfiles(currentUser);
         model.addAttribute("profiles", list);
-        return "profiles";
+        return "testViews/profiles";
     }
 
     /**Find profile**/
 
     @RequestMapping(value = "/find", method = RequestMethod.GET)
-    public String findProfiles (){
-        return "profileFind";
+    public String findProfiles (Model model){
+        currentUser = new User();
+        init(currentUser, model);
+        return "testViews/profileFind";
     }
 
     @RequestMapping(value = "/findProfile", method = RequestMethod.GET)
-    public String findProfilesWithParam (@RequestParam("ageFrom") int ageFrom, @RequestParam("ageTo") int ageTo,
+    public String findProfilesWithParam (@RequestParam("from") int ageFrom, @RequestParam("to") int ageTo,
                                 @RequestParam ("gender") String gender, @RequestParam ("marital") String marital,
                                          Model model) {
+        currentUser = new User();
+        init(currentUser, model);
         List<Profile> list = profileService.getProfiles(ageFrom, ageTo, gender, marital);
         model.addAttribute("profiles", list);
-        return "profiles";
+        return "testViews/profiles";
     }
 
-    /** View person info" */
+    /** View person info by id" */
     @RequestMapping(value = "/viewPersInfo/{id}", method = RequestMethod.GET)
     public String persInfoView(@PathVariable("id") long id, Model model){
+        currentUser = new User();
+        init(currentUser, model);
         model.addAttribute("profile", profileService.getProfileById(id));
-        return "profile";
+        return "testViews/profile";
     }
 
-    /** Update person info about user" */
+    /** View user's own profile" */
+    @RequestMapping(value = "/myProfile", method = RequestMethod.GET)
+    public ModelAndView myProfile(Model model){
+        currentUser = new User();
+        init(currentUser, model);
+        ModelAndView modelAndView=new ModelAndView("profile");
+        modelAndView.addObject("currentUser", currentUser);
+        return modelAndView;
+    }
 
+
+    /** Update person info about user" */
     @RequestMapping(value = "/editProfile/{id}", method = RequestMethod.GET)
     public String editProfile(@PathVariable("id") long id, Model model){
+        currentUser = new User();
+        init(currentUser, model);
         model.addAttribute("profile", profileService.getProfileById(id));
-        return "profileEdit";
+        return "testViews/profileEdit";
     }
 
     @RequestMapping(value = "/updateProfile/{id}", method = RequestMethod.POST)
     public String updateProfile(@PathVariable("id") long id,
-                                @ModelAttribute("profile") Profile profile){
+                                @ModelAttribute("profile") Profile profile, Model model){
+        currentUser = new User();
+        init(currentUser, model);
         //To view details from database
         Profile dbProfile = profileService.getProfileById(id);
         //To check if details were changed by user
         if (!dbProfile.equals(profile)) {
             profileService.updateProfile(profile);
         }
-        return "redirect:/account/profiles";
+        return "redirect:/profiles";
     }
 
     /** Delete person info about user" */
