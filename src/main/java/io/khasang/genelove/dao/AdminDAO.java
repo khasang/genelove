@@ -9,7 +9,7 @@ public interface AdminDAO {
 
     long getAllUsersCount();
 
-    long getRoleId(String role);
+    //long getRoleId(String role);
 
     boolean checkUserRole(User user, Role role);
 

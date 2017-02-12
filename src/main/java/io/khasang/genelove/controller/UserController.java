@@ -1,7 +1,6 @@
 package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.*;
-import io.khasang.genelove.service.AdminService;
 import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.service.ProfileService;
 import io.khasang.genelove.service.UserService;
@@ -136,7 +135,7 @@ public class UserController {
         init(currentUser, model);
         model.addAttribute("favourite", new Favourite());
         model.addAttribute("favouriteList", userService.getFavouritesForUser(userService.getCurrentUser()));
-        return "testViews/MyFavourites";
+        return "testViews/myFavourites";
     }
 
     /** Add relative to user relative tree" */
