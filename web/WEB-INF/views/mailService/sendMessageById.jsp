@@ -24,6 +24,10 @@
                 <td><label>Private Message:</label></td>
                 <td><textarea rows="4" name="privateMessage"></textarea></td>
             </tr>
+            <tr>
+                <td><label>Draft (do NOT send immediately)</label></td>
+                <td><input type="checkbox" name="option" value="draft"/></td>
+            </tr>
         </table>
         <input class="submitMail" type="submit" value="Send your PM" />
     </form>

@@ -4,6 +4,12 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 
+/** Class that is used by Hibernate to create table "messages" in the Database.
+ * Table is used to store user-to-user dialog correspondence.
+ *
+ * Класс, используя который, Hibernate создаёт таблицу в Базе данных.
+ * В таблице хранится переписка между двумя пользователями (диалог). */
+
 @Entity(name = "messages")
 public class Message {
 
@@ -47,7 +53,8 @@ public class Message {
     public Message(User sender, User receiver, String text) {
         this.setSender(sender);
         this.setReceiver(receiver);
-        this.setCreatedDate(new java.sql.Timestamp((long)(new java.util.Date().getTime()/1000)*1000));
+        //this.setCreatedDate(new java.sql.Timestamp((long)(new java.util.Date().getTime()/1000)*1000));
+        this.setCreatedDate( new Timestamp(new Date().getTime()));
         this.setReceivedDate(null);
         this.setSentDate(null);
         this.setText(text);

@@ -2,12 +2,18 @@ package io.khasang.genelove.entity;
 
 import javax.persistence.*;
 
+/** Class that is used by Hibernate to create table "profiles" in the Database.
+ * Table is used to store personal information(profiles) about registered users.
+ *
+ * Класс, используя который, Hibernate создаёт таблицу в Базе данных.
+ * В таблице хранится персональная информация(анкеты) о зарегистрированных пользователях. */
+
 @Entity(name = "profiles")
 public class Profile {
 
     public enum Gender {
         FEMALE, MALE, OTHER
-    };
+    }
 
     public enum MaritalStatus {
         SINGLE, MARRIED, SEPARATED, DIVORCED, WIDOWED, OTHER

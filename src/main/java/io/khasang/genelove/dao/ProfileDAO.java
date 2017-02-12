@@ -13,7 +13,7 @@ public interface ProfileDAO {
 
     Profile getProfileById (long id);
 
-    void updateProfile(Profile profile);
+    void updateProfile(Profile profile, User user);
 
     void hideProfile(Profile profile);
 

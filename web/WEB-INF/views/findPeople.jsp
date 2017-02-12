@@ -4,13 +4,14 @@
 <html>
     <head>
         <title>Find new friends</title>
+        <jsp:include page="include/head.jsp"/>
         <link rel="stylesheet" href="css/bottons.css"/>
         <link rel="stylesheet" href="css/style.css"/>
         <link rel="stylesheet" href="css/images.css"/>
 
     </head>
-    <body class="background">
-        <jsp:include page="header_r.jsp" />
+    <body style="background: url(resources/images/bground.jpg) no-repeat fixed center;">
+        <jsp:include page="include/header.jsp" />
         <h1 class="alignCenter">My Friends</h1>
         <div class="opacityBackground rowFlexContainer">
             <div class="toCenter flexElement quaterWidth fixedPosition">
@@ -56,6 +57,6 @@
                 </c:forEach>
             </div>
         </div>
-        <jsp:include page="footer_d.jsp" />
+        <jsp:include page="include/footer.jsp" />
     </body>
 </html>

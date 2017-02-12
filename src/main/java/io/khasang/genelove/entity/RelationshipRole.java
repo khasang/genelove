@@ -2,6 +2,12 @@ package io.khasang.genelove.entity;
 
 import javax.persistence.*;
 
+/** Class that is used by Hibernate to create table "relationship_roles" in the Database.
+ * The table is used to create Genealogical Tree.
+ *
+ * Класс, используя который, Hibernate создаёт таблицу в Базе данных.
+ * Список используется для построения Генеалогического Дерева.*/
+
 @Entity(name = "relationship_roles")
 public class RelationshipRole {
 

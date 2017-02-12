@@ -6,7 +6,6 @@
     transition: 0.5s ease-in-out;
     font-family: 'Montez', cursive;
     height: 20px;
-    margin-top: -20px;
 }
 
 a.headerText {
@@ -29,9 +28,6 @@ p.logo {
     text-align: left;
 }
 
-p.logo::first-letter {
-    color: red;
-}
 
 .navbar {
     margin-bottom: 0;
