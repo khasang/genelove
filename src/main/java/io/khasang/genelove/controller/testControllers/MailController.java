@@ -8,7 +8,7 @@ import io.khasang.genelove.model.MyMessage;
 import io.khasang.genelove.model.SQLExamples;
 import io.khasang.genelove.service.MailSender;
 import io.khasang.genelove.service.MessageService;
-import io.khasang.genelove.service.QuestionService;
+import io.khasang.genelove.service.testServices.QuestionService;
 import io.khasang.genelove.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;

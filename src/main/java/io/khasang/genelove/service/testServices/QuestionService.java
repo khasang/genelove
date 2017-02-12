@@ -1,4 +1,4 @@
-package io.khasang.genelove.service;
+package io.khasang.genelove.service.testServices;
 
 import io.khasang.genelove.dao.QuestionDAO;
 import io.khasang.genelove.entity.entity_training.Question;

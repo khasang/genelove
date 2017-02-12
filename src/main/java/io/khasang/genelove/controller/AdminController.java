@@ -17,11 +17,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.beans.PropertyEditorSupport;
 import java.io.UnsupportedEncodingException;
-
 
 @Controller
 @RequestMapping("/admin")
@@ -45,12 +46,15 @@ public class AdminController {
 
     PagedListHolder usersList = new PagedListHolder();
 
-    private User currentUser;
+    // Set current logged in user to the model
+    private void setCurrentUser(Model model) {
+        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
 
-    private void init (User currentUser, AdminService adminService, Model model) {
-        currentUser.setUser(userService.getUserByLogin(SecurityContextHolder.getContext()
-                .getAuthentication().getName()));
         model.addAttribute("currentUser", currentUser);
+    }
+
+    // Set user statistics to the model
+    private void setUserStatistics(Model model) {
         Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
         Role roleAdmin = adminService.getRoleByName(Role.RoleName.ROLE_ADMIN);
         model.addAttribute("allUsersCount", adminService.getAllUsersCount());
@@ -58,6 +62,7 @@ public class AdminController {
         model.addAttribute("adminUsersCount", adminService.getAssocRolesCount(roleAdmin));
     }
 
+    // Bind role text in the dropdown list to Role object
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Role.class, new PropertyEditorSupport() {
@@ -73,30 +78,32 @@ public class AdminController {
         });
     }
 
+    // Service method: get encrypted password for a user (name = login)
+    @RequestMapping(value = {"encode/{name}"}, method = RequestMethod.GET)
+    public ModelAndView encode(@PathVariable("name") String name) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("testViews/encode");
+        modelAndView.addObject("crypt", new BCryptPasswordEncoder().encode(name));
+        return modelAndView;
+    }
+
+    // Home page
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-    //@ResponseBody
     public String adminScreen(Model model) {
         adminService.createAllRoles();
-
-        currentUser = new User();
-        init(currentUser, adminService, model);
-        model.addAttribute("allUsersCount", adminService.getAllUsersCount());
-
-        Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
-        model.addAttribute("blockedUsersCount", adminService.getAssocRolesCount(roleBlocked));
-
-        Role roleAdmin = adminService.getRoleByName(Role.RoleName.ROLE_ADMIN);
-        model.addAttribute("adminUsersCount", adminService.getAssocRolesCount(roleAdmin));
+        setCurrentUser(model);
+        setUserStatistics(model);
         return "admin/index";
     }
 
+    // List of users
     @RequestMapping(value = "usersList", method = RequestMethod.GET)
-    //@ResponseBody
     public String usersList(@RequestParam(value = "page", required = false) String page,
                             @RequestParam(value = "filter", required = false) String filter,
                             Model model) {
-        currentUser = new User();
-        init(currentUser, adminService, model);
+
+        setCurrentUser(model);
+        setUserStatistics(model);
 
         if (filter == null) {
             usersList.setSource(adminService.getUsers());
@@ -107,35 +114,26 @@ public class AdminController {
 
         model.addAttribute("user", new User());
         model.addAttribute("usersList", Utils.paginateList(usersList, page, 4, model));
-        model.addAttribute("allUsersCount", adminService.getAllUsersCount());
 
-        Role roleBlocked = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
-        model.addAttribute("blockedUsersCount", adminService.getAssocRolesCount(roleBlocked));
-
-        Role roleAdmin = adminService.getRoleByName(Role.RoleName.ROLE_ADMIN);
-        model.addAttribute("adminUsersCount", adminService.getAssocRolesCount(roleAdmin));
         return "admin/usersList";
     }
 
+    // New user form
     @RequestMapping(value = "new", method = RequestMethod.GET)
-    //@ResponseBody
     public String userNew(Model model) {
-        currentUser = new User();
-        init(currentUser, adminService, model);
+        setCurrentUser(model);
         model.addAttribute("user", new User());
         model.addAttribute("accountStatusList", User.getAccountStatusList());
         model.addAttribute("roleList", adminService.getRoles());
         return "admin/addUser";
     }
 
+    // Existing user form
     @RequestMapping(value = "user/id/{id}", method = RequestMethod.GET)
-    //@ResponseBody
-    public String userById(@PathVariable("id") long id,
+      public String userById(@PathVariable("id") long id,
                            @RequestParam(value = "changePassword", required = false) boolean changePassword,
                            Model model){
-        currentUser = new User();
-        init(currentUser, adminService, model);
-
+        setCurrentUser(model);
         User user = adminService.getUserById(id);
         if (changePassword) {
             user.setPassword(null);
@@ -146,6 +144,108 @@ public class AdminController {
         return "admin/updateUser";
     }
 
+    // User maintenance: add new user
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @ResponseBody
+    public Object addUser(@ModelAttribute(value = "user") User user, HttpServletResponse response) {
+        try {
+            if (user != null) {
+                user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+                adminService.addUser(user);
+                return "User " + user.getLogin() + " added successfully";
+            }
+            else {
+                return "User not found";
+            }
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error adding user: " + e.getMessage();
+        }
+    }
+
+    // User maintenance: update user
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateUser(@ModelAttribute(value = "user") User user, HttpServletResponse response) {
+        try {
+            if (user != null) {
+                // Get user details from the database
+                User dbUser = adminService.getUserById(user.getId());
+                // Check if the password was changed. If yes, encode the new password
+                if (!dbUser.getPassword().equals(user.getPassword())) {
+                    user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+                }
+                adminService.updateUser(user);
+                return "User updated successfully";
+            }
+            else {
+                return "User not found";
+            }
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error updating user: " + e.getMessage();
+        }
+    }
+
+    // User maintenance: delete user
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    @ResponseBody
+    public Object deleteUser(@ModelAttribute("user") User user, HttpServletResponse response){
+        try {
+            if (user != null) {
+                adminService.deleteUser(user);
+                return "User deleted successfully";
+            }
+            else {
+                return "User not found";
+            }
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "Error deleting user: " + e.getMessage();
+        }
+    }
+
+    // User maintenance: add/remove admin role to the user
+    @RequestMapping(value = "promote", method = RequestMethod.POST)
+    @ResponseBody
+    public Object promoteUser(@ModelAttribute("user") User user){
+        try {
+            Role role = adminService.getRoleByName(Role.RoleName.ROLE_ADMIN);
+
+            if (adminService.checkUserRole(user, role)) {
+                adminService.removeRole(user, role);
+                return "User was demoted";
+            }
+            else {
+                adminService.addRole(user, role);
+                return "User was successfully promoted to admin";
+            }
+        } catch (Exception e) {
+            return "Error in promoteUser method: " + e.getMessage();
+        }
+    }
+
+    // User maintenance: add/remove blocked role to the user
+    @RequestMapping(value = "block", method = RequestMethod.POST)
+    @ResponseBody
+    public Object blockUser(@ModelAttribute("user") User user) {
+        try {
+            Role role = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
+
+            if (adminService.checkUserRole(user, role)) {
+                adminService.removeRole(user, role);
+                return "User was unblocked";
+            }
+            else {
+                adminService.addRole(user, role);
+                return "User was successfully blocked";
+            }
+        } catch (Exception e) {
+            return "Error in blockUser method: " + e.getMessage();
+        }
+    }
+
+    // User inspection service
     @RequestMapping(value = "inspectUser", method = RequestMethod.POST)
     @ResponseBody
     public Object inspectUser(@ModelAttribute("user") User user, HttpServletResponse response) {
@@ -159,22 +259,20 @@ public class AdminController {
         }
     }
 
+    // Messaging service: all methods below
     @RequestMapping(value = "sendMessageToUserById", method = RequestMethod.POST)
-    //@ResponseBody
     public String sendMessageToUserByMail(HttpServletRequest request, Model model) {
-        adminService.createAllRoles();
-        currentUser = new User();
-        init(currentUser, adminService, model);
+        setCurrentUser(model);
         model.addAttribute("receiver", request.getParameter("receiver"));
         return "admin/sendMessageToUserById";
     }
 
     @RequestMapping(value = "sendMessage", method = RequestMethod.POST)
-    //@ResponseBody
     public String sendMessage(HttpServletRequest request, Model model)
             throws UnsupportedEncodingException {
-        currentUser = new User();
-        init(currentUser, adminService, model);
+
+        setCurrentUser(model);
+
         request.setCharacterEncoding("UTF8");
         String message = request.getParameter("message");
         String option = request.getParameter("option");
@@ -204,26 +302,21 @@ public class AdminController {
     }
 
     @RequestMapping(value = "sendMailToUserByMail", method = RequestMethod.POST)
-    //@ResponseBody
     public String sendMailToUserByMail(HttpServletRequest request, Model model) {
-        adminService.createAllRoles();
-        currentUser = new User();
-        init(currentUser, adminService, model);
+        setCurrentUser(model);
+
         model.addAttribute("mailto", request.getParameter("email"));
         return "admin/sendMailToUserByMail";
     }
 
     @RequestMapping(value = "sendMail", method = RequestMethod.POST)
-    //@ResponseBody
     public String sendMail(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
         try {
             request.setCharacterEncoding("UTF8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        currentUser = new User();
-        init(currentUser, adminService, model);
-        adminService.createAllRoles();
+        setCurrentUser(model);
         String footer = "\n\n" + "This mail has been send to you from Administrator of " +
                 "Genelove Meeting Service. You don't need to answer on this letter.";
         EMail eMail = new EMail(
@@ -247,127 +340,11 @@ public class AdminController {
         }
     }
 
-
-
-/*    /////////////////////////////////////////////////////////////////////////////////////////////
-    @RequestMapping(value = "user/login/{login}", method = RequestMethod.GET)
-    public String userByLogin(@PathVariable("login") String login,
-                              @RequestParam(value = "changePassword", required = false)
-                              boolean changePassword, Model model) {
-        User currentUser = userService.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("currentUser", currentUser);
-        User user = adminService.getUserByLogin(login);
-        if (changePassword) {
-            user.setPassword(null);
-        }
-        model.addAttribute("user", user);
-        model.addAttribute("accountStatusList", User.getAccountStatusList());
-        model.addAttribute("roleList", adminService.getRoles());
-        return "admin/updateUser";
-    }*/
-/////////////////////////////////////////////////////////////////////////////////////////
-
-    // Add new user by Administrator in admin area
-    @RequestMapping(value = "add", method = RequestMethod.POST)
-    @ResponseBody
-    public Object addUser(@ModelAttribute(value = "user") User user, HttpServletResponse response) {
-        try {
-            if (user != null) {
-                user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-                adminService.addUser(user);
-                return "User " + user.getLogin() + " added successfully";
-            }
-            else {
-                return "User not found";
-            }
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return "Error adding user: " + e.getMessage();
-        }
-    }
-
-    @RequestMapping(value = "update", method = RequestMethod.POST)
-    @ResponseBody
-    public Object updateUser(@ModelAttribute(value = "user") User user, HttpServletResponse response) {
-        try {
-            if (user != null) {
-                // Get user details from the database
-                User dbUser = adminService.getUserById(user.getId());
-                // Check if the password was changed. If yes, encode the new password
-                if (!dbUser.getPassword().equals(user.getPassword())) {
-                    user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-                }
-                adminService.updateUser(user);
-                return "User updated successfully";
-            }
-            else {
-                return "User not found";
-            }
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return "Error updating user: " + e.getMessage();
-        }
-    }
-
-    @RequestMapping(value = "delete", method = RequestMethod.POST)
-    @ResponseBody
-    public Object deleteUser(@ModelAttribute("user") User user, HttpServletResponse response){
-        try {
-            if (user != null) {
-                adminService.deleteUser(user);
-                return "User deleted successfully";
-            }
-            else {
-                return "User not found";
-            }
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return "Error deleting user: " + e.getMessage();
-        }
-    }
-
-    @RequestMapping(value = "promote", method = RequestMethod.POST)
-    @ResponseBody
-    public Object promoteUser(@ModelAttribute("user") User user){
-        try {
-            Role role = adminService.getRoleByName(Role.RoleName.ROLE_ADMIN);
-
-            if (adminService.checkUserRole(user, role)) {
-                adminService.removeRole(user, role);
-                return "User was demoted";
-            }
-            else {
-                adminService.addRole(user, role);
-                return "User was successfully promoted to admin";
-            }
-        } catch (Exception e) {
-            return "Error in promoteUser method: " + e.getMessage();
-        }
-    }
-
-    @RequestMapping(value = "block", method = RequestMethod.POST)
-    @ResponseBody
-    public Object blockUser(@ModelAttribute("user") User user) {
-        try {
-            Role role = adminService.getRoleByName(Role.RoleName.ROLE_BLOCKED);
-
-            if (adminService.checkUserRole(user, role)) {
-                adminService.removeRole(user, role);
-                return "User was unblocked";
-            }
-            else {
-                adminService.addRole(user, role);
-                return "User was successfully blocked";
-            }
-        } catch (Exception e) {
-            return "Error in blockUser method: " + e.getMessage();
-        }
-    }
-
     //to check
     @RequestMapping(value = "create", method = RequestMethod.GET)
     public String createTable(Model model) {
         model.addAttribute("create", createTable.createTableStatus());
         return "create";
     }
+
 }
