@@ -34,7 +34,7 @@
                 <c:forEach items="${profiles}" var="profile">
                     <tr>
                         <td>${profile.nickname}</td>
-                        <td>${profile.age}</td>
+                        <td>${profile.dateOfBirth}</td>
                         <td>${profile.gender}</td>
                         <td>${profile.maritalStatus}</td>
                         <td>${profile.hobbies}</td>
