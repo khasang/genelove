@@ -186,6 +186,7 @@ http://localhost:8081/allMessages
     
 У меня эта строка выглядит так (у меня Linux Mint 18):
 // абсолютный путь
+
 private static String path = "/home/alex/khasang/my/genelove/src/main/resources/files/";
     
 - Запустите проект GeneLove в Intellij IDEA
