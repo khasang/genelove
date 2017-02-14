@@ -6,6 +6,7 @@ import javax.persistence.*;
 public class Table {
     @Id
     private String name;
+    private int records;
 
     public Table() {
     }
@@ -16,5 +17,13 @@ public class Table {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getRecords() {
+        return records;
+    }
+
+    public void setRecords(int records) {
+        this.records = records;
     }
 }

@@ -216,6 +216,14 @@ th, td {
   background-color: lightyellow;
 }
 
+.tableData tr:hover {
+  background-color: #ffff99;
+}
+
+.link:hover {
+  background-color: #ffff00;
+}
+
 .submitMail {
   height: 120px;
   width: 120px;
@@ -300,7 +308,7 @@ td {
   color: red;
 }
 
-.systemResponce {
+.systemResponse {
   color: darkgreen;
 }
 
@@ -407,4 +415,16 @@ legend {
 #footer {
   text-align: center;
   color: white;
+}
+
+.empty {
+  color: lightgray;
+}
+
+.number {
+  color: darkgray;
+}
+
+.caution a{
+  color: red;
 }
