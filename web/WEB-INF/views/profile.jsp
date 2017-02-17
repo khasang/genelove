@@ -27,13 +27,6 @@
                                  src="resources/images/Zidane.jpg" width="200" height="200"/>
                         </div>
                         <hr>
-                        <div class="left">
-                            <label class="btn btn-raised btn-success glyphicon glyphicon-folder-open">
-                                Select Photo
-                            </label>
-                            <input id="file-submit" style="display: none;" type="file" value="Load Photo">
-                            <p id="image-msg" style="display: none;">
-                        </div>
                     </div>
                     <div class="col-sm-8 col-md-8" text-center>
                         <h3>Email : ${currentUser.email}</h3>
@@ -52,10 +45,6 @@
                                 Liga Best Foreign Player in 2002
                             <p>
                         </div>
-
-                        <button id="edit" class="btn btn-raised btn-info glyphicon glyphicon-pencil">
-                            edit
-                        </button>
                     </div>
                 </div>
             </section>

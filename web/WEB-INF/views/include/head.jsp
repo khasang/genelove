@@ -12,6 +12,8 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="resources/js/jquery.backstretch.min.js"></script>
+<script src="resources/js/templatemo_script.js"></script>
 
 <!-- Google Web Font Embed -->
 <link href='http://fonts.googleapis.com/css?family=Raleway:400,600,500,300,700' rel='stylesheet' type='text/css'>

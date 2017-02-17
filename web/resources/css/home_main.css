@@ -110,6 +110,7 @@ img.slide {
 .templatemo-content-wrapper {
     overflow: hidden;
     margin-top: 100px;
+    min-height: 70%;
 }
 
 .templatemo-content h2 {
