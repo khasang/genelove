@@ -164,9 +164,12 @@ public class UserController {
 
     /** View user news" */
     @RequestMapping(value = "news", method = RequestMethod.GET)
-    public String viewNews(){
+    public String viewNews(Model model){
+        currentUser = new User();
+        init(currentUser, model);
         return "news";
     }
+
 
     /** Add person info about user" */
     @RequestMapping(value = "/profileNew", method = RequestMethod.GET)

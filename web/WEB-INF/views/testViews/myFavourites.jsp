@@ -28,13 +28,13 @@
         <tbody>
         <c:forEach items="${favouriteList}" var="favourite" varStatus="status">
             <tr>
-                <td><a href="/admin/user/id/${favourite.favouriteKey.favourite.id}">${favourite.favouriteKey.favourite.login}</a></td>
-                <td><a href="/admin/user/id/${favourite.favouriteKey.favourite.id}">${favourite.favouriteKey.favourite.firstName}</a></td>
-                <td><a href="/admin/user/id/${favourite.favouriteKey.favourite.id}">${favourite.favouriteKey.favourite.lastName}</a></td>
+                <td><a href="${pageContext.request.contextPath}/admin/user/id/${favourite.favouriteKey.favourite.id}">${favourite.favouriteKey.favourite.login}</a></td>
+                <td><a href="${pageContext.request.contextPath}/admin/user/id/${favourite.favouriteKey.favourite.id}">${favourite.favouriteKey.favourite.firstName}</a></td>
+                <td><a href="${pageContext.request.contextPath}/admin/user/id/${favourite.favouriteKey.favourite.id}">${favourite.favouriteKey.favourite.lastName}</a></td>
                 <td>${favourite.favouriteKey.favourite.email}</td>
 
                 <td align="center">
-                    <c:url var="remove" value="/removeFavourite"/>
+                    <c:url var="remove" value="${pageContext.request.contextPath}removeFavourite"/>
                     <form:form action="${remove}" method="post" modelAttribute="favourite">
                         <form:input type="hidden" path="favouriteKey.user.id" value="${favourite.favouriteKey.user.id}"/>
                         <form:input type="hidden" path="favouriteKey.favourite.id" value="${favourite.favouriteKey.favourite.id}"/>

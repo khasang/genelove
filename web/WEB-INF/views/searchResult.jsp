@@ -4,16 +4,16 @@
     <head>
         <title>Search results</title>
         <jsp:include page="include/head.jsp"/>
-        <link rel="stylesheet" href="css/bottons.css"/>
-        <link rel="stylesheet" href="css/style.css"/>
-        <link rel="stylesheet" href="css/images.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}css/bottons.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}css/style.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}css/images.css"/>
     </head>
     <body class="background">
         <jsp:include page="include/header.jsp" />
         <h1 class="alignCenter">Search results</h1>
         <div class="opacityBackground rowFlexContainer">
             <div class="toCenter flexElement quaterWidth fixedPosition">
-                <form action="${pageContext.request.contextPath}/searchResult" class="width noOpacity">
+                <form action="${pageContext.request.contextPath}searchResult" class="width noOpacity">
                     <div class="noOpacity">
                         <label for="fname" class="genericFont">First Name  </label>
                         <input type="checkbox" id="checkBox1" class="checkBoxStyle"><label for="checkBox1"></label><br>

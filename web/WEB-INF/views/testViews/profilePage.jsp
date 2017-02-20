@@ -15,13 +15,13 @@
 <%@ include file="./../include/header.jsp" %><br><br>
 <div>
     <a href="changeFoto.jsp">
-        <img src="../resources/images/smile.jpg" alt="Фото" class="profilePageFoto">
+        <img src="${pageContext.request.contextPath}images/smile.jpg" alt="Фото" class="profilePageFoto">
         <%-- <img src="resources/smile.jpg" alt="Фото" class="profilePageFoto"> --%>
     </a><br>
 
     <div class="leftMargin topMargin">
         <h1 class="heading1">Personal information</h1>
-        <a href="${pageContext.request.contextPath}/modifyProfile"
+        <a href="${pageContext.request.contextPath}modifyProfile"
            class="ref leftMargin23em">Edit profile</a><br><br>
         <strong class="leftMargin23em">
             ${profile.firstName} ${profile.lastName}<br><br>
@@ -34,7 +34,7 @@
         </strong>
     </div>
     <a href="${pageContext.request.contextPath}/tree">
-        <img src="../resources/images/drevo.jpg" alt="генеалогическое древо" class="profilePageFoto" >
+        <img src="${pageContext.request.contextPath}images/drevo.jpg" alt="генеалогическое древо" class="profilePageFoto" >
         <%-- <img src="resources/drevo.jpg" alt="генеалогическое древо" class="profilePageFoto" > --%>
     </a>
 

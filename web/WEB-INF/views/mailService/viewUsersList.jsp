@@ -4,14 +4,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="<%=request.getContextPath()%>/resources/css/mail.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}css/mail.css" rel="stylesheet">
     <title>Mail Sender</title>
 </head>
 <!--------------------------------- end header.jsp -------------------------------->
 <div class="Messenger">
     <fieldset class="fieldsetMessenger">
         <legend id="numberOfMessages">0</legend>
-        <a href="/messenger">Dear <strong>${currentUser}</strong>.<br>You have not new message yet</a>
+        <a href="${pageContext.request.contextPath}/messenger">Dear <strong>${currentUser}</strong>.<br>You have not new message yet</a>
     </fieldset>
 </div>
 <!-------------------------------- from title.jsp -------------------------------->
@@ -30,7 +30,7 @@
     <fieldset class="fieldset">
         <legend>View all users</legend>
         <h1>Please, select all users that you wanna, and then push button "Select"</h1>
-        <form class="mailForm" method="post" action="sendMailToGroupOfUsers">
+        <form class="mailForm" method="post" action="${pageContext.request.contextPath}sendMailToGroupOfUsers">
             <table class="tableData">
                 <tr>
                     <th>Select</th>
