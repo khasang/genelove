@@ -16,10 +16,10 @@
                     <div class="card-block thumbnail">
                         <h3 class="card-title">List of Users</h3>
                         <p class="card-text">Goto list of users, where administrators can see all users of Genelove project and can change their roles or delete all their data from DB:</p>
-                        <a href="/admin/usersList" class="btn btn-primary">Users List</a>
+                        <a href="${pageContext.request.contextPath}/admin/usersList" class="btn btn-primary">Users List</a>
                         <p></p>
                         <p class="card-text">Also administrators can filter list of users by user login:</p>
-                        <form action="/admin/usersList" class="input-group">
+                        <form action="${pageContext.request.contextPath}/admin/usersList" class="input-group">
                             <input type="text" class="form-control" placeholder="Search By Login" name="filter" id="filter">
                             <span class="input-group-btn">
                                 <button class="btn btn-primary" type="submit">Search</button>
@@ -49,7 +49,7 @@
                         </div>
                         <p></p>
                         <p class="card-text">If such user is not exist in the database, administrators can add new user with appropriate privileges: </p>
-                        <a href="/admin/new" class="btn btn-primary">Add User</a>
+                        <a href="${pageContext.request.contextPath}/admin/new" class="btn btn-primary">Add User</a>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                     <div class="card-block thumbnail">
                         <h3 class="card-title">Logout</h3>
                         <p class="card-text">Logout from the current session of Genelove project:</p>
-                        <a href="/logout" class="btn btn-primary">Submit</a>
+                        <a href="${pageContext.request.contextPath}/logout" class="btn btn-primary">Submit</a>
                     </div>
                 </div>
             </div>

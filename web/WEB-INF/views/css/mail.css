@@ -204,6 +204,7 @@ textarea {
 th, td {
   padding: 5px;
 }
+
 .tableData th {
   background-color: lightsteelblue;
 }
@@ -300,7 +301,7 @@ td {
   color: red;
 }
 
-.systemResponce {
+.systemResponse {
   color: darkgreen;
 }
 
@@ -356,6 +357,10 @@ legend {
   background-image: linear-gradient(to bottom, white, yellow);
 }
 
+.emptyRecords {
+  color: grey;
+}
+
 .Messenger {
   text-align: center;
   float: right;
@@ -408,3 +413,8 @@ legend {
   text-align: center;
   color: white;
 }
+
+.caution {
+  color: red;
+}
+

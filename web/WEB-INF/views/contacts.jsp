@@ -27,24 +27,18 @@
                                  src="resources/images/Zidane.jpg" width="200" height="200"/>
                         </div>
                         <hr>
+                        <button id="edit" class="btn btn-raised btn-info">
+                            <p><span class="glyphicon glyphicon-send"></span> Send Message</p>
+                        </button>
                     </div>
                     <div class="col-sm-8 col-md-8" text-center>
                         <h3>Email : ${currentUser.email}</h3>
                         <hr>
                         <h4>City : Madrid</h4>
                         <h4>Date birth : 20.03.1974</h4>
-                        <h4>Age : 44</h4>
                         <h4>Phone : 074-567-32-35</h4>
                         <h4>Roles : USER,ADMINISTRATOR</h4>
                         <h4><a href="#">My Friends</a></h4>
-                        <h3>About Me: </h3>
-                        <div id="description" class="content">
-                            <p>I was named the FIFA World Player of the Year three times, in 1998, 2000 and 2003, and
-                                won the 1998 Ballon d'Or.
-                                He was Ligue 1 Player of the Year in 1996, Serie A Footballer of the Year in 2001 and La
-                                Liga Best Foreign Player in 2002
-                            <p>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -58,6 +52,5 @@
 <script src="resources/js/jquery.backstretch.min.js"></script>
 <script src="resources/js/templatemo_script.js"></script>
 <!-- templatemo 398 nature -->
-
 </body>
 </html>

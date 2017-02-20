@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.TypedQuery;
@@ -19,6 +20,7 @@ import java.util.List;
 public class MessageDAOImpl implements MessageDAO {
 
     private SessionFactory sessionFactory;
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
     public MessageDAOImpl(SessionFactory sessionFactory) {
@@ -133,25 +135,29 @@ public class MessageDAOImpl implements MessageDAO {
 
     @Override
     public long checkNewMessage(long owner_id) {
+
+        String request = "SELECT count(*) FROM messages WHERE sender_id = " + owner_id + ";";
+        Long count = jdbcTemplate.queryForObject(request, Long.class);
+        return count;
        /* Query query = sessionFactory.getCurrentSession().
                 createNativeQuery("SELECT count(*) FROM messages WHERE " +
                     "((sender_id = :owner_id OR receiver_id = :owner_id) " +
                     "AND message_status='NEW);", Message.class);
                     */
-        Query query =sessionFactory.getCurrentSession().createNativeQuery(
-                "SELECT COUNT(*) FROM messages WHERE sender_id = " + owner_id );
+       // Query query =sessionFactory.getCurrentSession().createNativeQuery(
+             //   "SELECT COUNT(*) FROM messages WHERE sender_id = " + owner_id );
 
         //query.setParameter("owner_id", owner_id);
-        long l = Long.getLong(query.getSingleResult().toString());
+        //long l = Long.getLong(query.getSingleResult().toString());
 
         //long response = (long)query.uniqueResult();
-        System.out.println("******************"+l+"*****************");
+        //System.out.println("******************"+l+"*****************");
         //System.out.println("******************"+response+"*****************");
-        System.out.println("******************"+owner_id+"*****************");
+       // System.out.println("******************"+owner_id+"*****************");
         //return (int) query.uniqueResult();
         //long i = 42;
         //return i;
-        return l;
+        //return l;
         //return response;
         //return Integer.getInteger(query.uniqueResult().toString());
         /*

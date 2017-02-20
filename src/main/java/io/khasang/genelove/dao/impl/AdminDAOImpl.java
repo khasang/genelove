@@ -71,30 +71,12 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
-    public long getRoleId(String roleName) {
-        CriteriaBuilder criteriaBuilder = sessionFactory.getCurrentSession().getCriteriaBuilder();
-        CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
-        Root<Role> root = criteriaQuery.from(Role.class);
-        criteriaQuery.select(root.get("id"));
-        criteriaQuery.where(criteriaBuilder.equal(root.get("roleName"),roleName));
-        return sessionFactory.getCurrentSession().createQuery(criteriaQuery).getSingleResult();
-    }
-
-    @Override
     public boolean checkUserRole(User user, Role role) {
-        AuthorisationKey key = new AuthorisationKey();
-        key.setUser(user);
-        key.setRole(role);
-
-        Authorisation authorisation = new Authorisation();
-        authorisation.setAuthorisationKey(key);
-
         CriteriaBuilder criteriaBuilder = sessionFactory.getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<AuthorisationKey> criteriaQuery = criteriaBuilder.createQuery(AuthorisationKey.class);
         Root<Authorisation> root = criteriaQuery.from(Authorisation.class);
         criteriaQuery.select(root.get("authorisationKey"));
-        criteriaQuery.where(criteriaBuilder.equal(root.get("authorisationKey"),authorisation.getAuthorisationKey()));
-
+        criteriaQuery.where(criteriaBuilder.equal(root.get("authorisationKey"), new AuthorisationKey(user, role)));
         try {
             sessionFactory.getCurrentSession().createQuery(criteriaQuery).getSingleResult();
             return true;
@@ -128,26 +110,12 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void addRole(User user, Role role) {
-        AuthorisationKey key = new AuthorisationKey();
-        key.setUser(user);
-        key.setRole(role);
-
-        Authorisation authorisation = new Authorisation();
-        authorisation.setAuthorisationKey(key);
-
-        sessionFactory.getCurrentSession().save(authorisation);
+        sessionFactory.getCurrentSession().save(new Authorisation(new AuthorisationKey(user, role)));
     }
 
     @Override
     public void removeRole(User user, Role role) {
-        AuthorisationKey key = new AuthorisationKey();
-        key.setUser(user);
-        key.setRole(role);
-
-        Authorisation authorisation = new Authorisation();
-        authorisation.setAuthorisationKey(key);
-
-        sessionFactory.getCurrentSession().delete(authorisation);
+        sessionFactory.getCurrentSession().delete(new Authorisation(new AuthorisationKey(user, role)));
     }
 
     @Override
@@ -161,7 +129,11 @@ public class AdminDAOImpl implements AdminDAO {
 
         TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(cq);
         query.setParameter(p, id);
-        return query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override
@@ -175,7 +147,11 @@ public class AdminDAOImpl implements AdminDAO {
 
         TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(cq);
         query.setParameter(p, login);
-        return query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override
@@ -190,7 +166,11 @@ public class AdminDAOImpl implements AdminDAO {
 
         TypedQuery<Role> query = session.createQuery(cq);
         query.setParameter(p, id);
-        return query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override

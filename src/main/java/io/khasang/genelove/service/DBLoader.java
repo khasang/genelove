@@ -1,11 +1,16 @@
-package io.khasang.genelove.model;
+package io.khasang.genelove.service;
 
+import io.khasang.genelove.controller.testControllers.DBServiceController;
 import io.khasang.genelove.entity.entity_training.Table;
+import io.khasang.genelove.model.TableMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class DBLoader {
@@ -343,28 +348,138 @@ public class DBLoader {
         return executeRequest(request);
     }
 
+    public String deleteTable (String table) {
+        String request = "DROP TABLE " + table + ";";
+        return executeRequest(request);
+    }
+
+    public String saveTable (String table) {
+        String request = "SELECT * FROM " + table + ";";
+        List<Map<String, Object>> response = jdbcTemplate.queryForList(request);
+        boolean first = true;
+        String data = "";
+        for (Map<String, Object> map: response) {
+            if (first) {
+                for (String key : map.keySet()) {
+                    first = false;
+                    data += key + ";";
+                }
+                data = data.substring(0, data.length()-1) + "\n";
+            }
+            for (String key: map.keySet()) {
+                data += map.get(key) + ";";
+            }
+            data = data.substring(0, data.length()-1) + "\n";
+        }
+
+        //System.out.println("************************");
+        //System.out.println(data);
+        //System.out.println("************************");
+
+        String filename = DBServiceController.getPath() + table + ".csv";
+
+        File file = new File(filename);
+        try(FileWriter writer = new FileWriter(file))
+        {
+            writer.write(data);
+            writer.flush();
+        }
+        catch(IOException exception){
+            System.out.println(exception.getMessage());
+            exception.printStackTrace();
+        }
+        getInfoAboutFile(file);
+        return "Data saved into file '" + table + ".csv'<br>" +
+                "Absolute path is: " + file.getAbsolutePath();
+    }
+
+    public String loadTable (String table) {
+        if (getAmountRecordsInTable(table) != 0) {
+            return "This table '" + table + "' is NOT empty";
+        }
+        String filename = DBServiceController.getPath() + table + ".csv";
+        File file = new File (filename);
+        System.out.println(file.exists() && file.length() != 0);
+        if (!file.exists())
+            return "This file '" + file.getName() + "' is NOT found in " + DBServiceController.getPath();
+        if (file.exists() && file.length() ==0)
+            return "This file '" + file.getName() + "' is EMPTY";
+        else
+            return insertFromFile(loadFromFile(file));
+  /*      String response = "";
+        String filename = DBServiceController.getPath() + table + ".csv";
+        File file = new File (filename);
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNext()){
+                String str = scanner.nextLine();
+                response += str + "\n";
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.out.println("************************");
+        System.out.println(response);
+        System.out.println("************************");*/
+    }
+
+    public String addRecord (String table) {
+
+        return "";
+    }
+
+    public String updateRecord (String table, int id) {
+
+        return "";
+    }
+
+    public String deleteRecord (String table, int id) {
+
+        return "";
+    }
+
+    public String reloadTable (String table) {
+        clearTable(table);
+        return loadTable(table);
+    }
+
+    public int getAmountRecordsInTable (String table) {
+        String request = "SELECT count(*) FROM " + table + ";";
+        Integer count = jdbcTemplate.queryForObject(request, Integer.class);
+        return count;
+    }
+
     public List<Table> getTablesList () {
         String request = "SELECT table_name FROM information_schema.tables " +
                 "WHERE table_schema='public' ORDER BY table_name ASC;";
         return jdbcTemplate.query(request, new TableMapper());
     }
 
+/*    public List<Map<String, Object>> getTableHeaderList (String table) {
+        String request = "SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS " +
+                "WHERE table_name = '" + table + "';";
+        return jdbcTemplate.queryForList(request);
+    }*/
+
+    public List<Map<String, Object>> getTableDataList (String table) {
+        String request = "SELECT * FROM " + table;
+        return jdbcTemplate.queryForList(request);
+    }
+
     public String insertFromFile (ArrayList<String> request) {
         boolean status = true;
         String buf = null;
         for (String str: request) {
-            String responce = executeRequest(str);
-            if (!responce.equals("Ok")) {
+            String response = executeRequest(str);
+            if (!response.equals("Ok")) {
                 status = false;
-                buf += responce + " ";
+                buf += response + " ";
             }
         }
         if (status) return "Ok";
         else return buf;
     }
 
-    public ArrayList<String> loadFromFile (String fileName) {
-        File file = new File (fileName);
+    public ArrayList<String> loadFromFile (File file) {
         ArrayList<String> answer = new ArrayList<>();
         ArrayList<String> list = new ArrayList<>();
         ArrayList<String> fields = new ArrayList<>();
@@ -392,15 +507,16 @@ public class DBLoader {
             }
             parameters.add(params);
             String table = file.getName().substring(0, file.getName().length()-4);
-            String requestSQL = ("INSERT INTO " + table + " (");
-            for (String s: fields) requestSQL += s + ", ";
-            requestSQL = requestSQL.substring(0, requestSQL.length()-2);
-            requestSQL += ") VALUES ('";
-            for (String s: params) requestSQL += s + "', '";
-            requestSQL = requestSQL.substring(0, requestSQL.length()-3);
-            requestSQL += ");";
-            answer.add(requestSQL);
+            String request = ("INSERT INTO " + table + " (");
+            for (String s: fields) request += s + ", ";
+            request = request.substring(0, request.length()-2);
+            request += ") VALUES ('";
+            for (String s: params) request += s + "', '";
+            request = request.substring(0, request.length()-3);
+            request += ");";
+            answer.add(request);
         }
+        System.out.println(">>>: " + answer);
         return answer;
     }
 

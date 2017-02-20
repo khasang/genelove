@@ -2,7 +2,9 @@ package io.khasang.genelove.dao.impl;
 
 import io.khasang.genelove.dao.QuestionDAO;
 import io.khasang.genelove.entity.entity_training.Question;
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -12,11 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
 @Transactional
 public class QuestionDAOImpl implements QuestionDAO {
+    private static final Logger log = Logger.getLogger(QuestionDAOImpl.class);
     private final SessionFactory sessionFactory;
 
     @Autowired
@@ -84,8 +88,13 @@ public class QuestionDAOImpl implements QuestionDAO {
     @Override
     @SuppressWarnings("unchecked")
     public List getQuestionList() {
-        Query query = sessionFactory.getCurrentSession().createNativeQuery("select * from Question;");
-        query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
+        Query query = null;
+        try{
+            query = sessionFactory.getCurrentSession().createNativeQuery("select * from Question;");
+            query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
+        } catch (HibernateException e) {
+            log.error("io.khasang.genelove.dao.impl.QuestionDAOImpl.getQuestionList:SQL Exception");
+        }
         return query.list();
     }
 

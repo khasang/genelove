@@ -1,7 +1,6 @@
 package io.khasang.genelove.controller;
 
 import io.khasang.genelove.entity.*;
-import io.khasang.genelove.service.AdminService;
 import io.khasang.genelove.service.MessageService;
 import io.khasang.genelove.service.ProfileService;
 import io.khasang.genelove.service.UserService;
@@ -136,7 +135,7 @@ public class UserController {
         init(currentUser, model);
         model.addAttribute("favourite", new Favourite());
         model.addAttribute("favouriteList", userService.getFavouritesForUser(userService.getCurrentUser()));
-        return "testViews/MyFavourites";
+        return "testViews/myFavourites";
     }
 
     /** Add relative to user relative tree" */
@@ -163,6 +162,12 @@ public class UserController {
         return "profile";
     }
 
+    /** View user news" */
+    @RequestMapping(value = "news", method = RequestMethod.GET)
+    public String viewNews(){
+        return "news";
+    }
+
     /** Add person info about user" */
     @RequestMapping(value = "/profileNew", method = RequestMethod.GET)
     public String profileNew(){
@@ -185,7 +190,7 @@ public class UserController {
     }
 
     /**View profiles list**/
-    @RequestMapping(value = "/profiles", method = RequestMethod.GET)
+    @RequestMapping(value = "profiles", method = RequestMethod.GET)
     public String userProfiles (Model model) {
         currentUser = new User();
         init(currentUser, model);
@@ -196,14 +201,14 @@ public class UserController {
 
     /**Find profile**/
 
-    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    @RequestMapping(value = "find", method = RequestMethod.GET)
     public String findProfiles (Model model){
         currentUser = new User();
         init(currentUser, model);
         return "testViews/profileFind";
     }
 
-    @RequestMapping(value = "/findProfile", method = RequestMethod.GET)
+    @RequestMapping(value = "findProfile", method = RequestMethod.GET)
     public String findProfilesWithParam (@RequestParam("from") int ageFrom, @RequestParam("to") int ageTo,
                                 @RequestParam ("gender") String gender, @RequestParam ("marital") String marital,
                                          Model model) {
@@ -224,7 +229,7 @@ public class UserController {
     }
 
     /** View user's own profile" */
-    @RequestMapping(value = "/myProfile", method = RequestMethod.GET)
+    @RequestMapping(value = "myProfile", method = RequestMethod.GET)
     public ModelAndView myProfile(Model model){
         currentUser = new User();
         init(currentUser, model);

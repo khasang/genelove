@@ -20,6 +20,15 @@ public class AuthorisationKey implements Serializable {
     @JoinColumn(name = "role_id", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "authorisations_role_fk"))
     private Role role;
 
+    public AuthorisationKey() {
+
+    }
+
+    public AuthorisationKey(User user, Role role) {
+        this.user = user;
+        this.role = role;
+    }
+
     public User getUser() {
         return user;
     }

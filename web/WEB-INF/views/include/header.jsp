@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -8,17 +8,17 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/home">Genelove</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/home">Genelove</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/myProfile">Hello, Dear
+                        <li><a href="${pageContext.request.contextPath}/myProfile">Hello, Dear
                             <strong>${currentUser.firstName} ${currentUser.lastName}</strong></a></li>
-                        <li><a href="/find"><span class="glyphicon glyphicon-heart"></span> Find Love </a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messages <span
+                        <li><a href="${pageContext.request.contextPath}/find"><span class="glyphicon glyphicon-heart"></span> Find Love </a></li>
+                        <li><a href="/myMessages"><span class="glyphicon glyphicon-envelope"></span> Messages <span
                                 class="badge">10</span></a>
                         </li>
-                        <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
                     </ul>
                 </div>
             </div>
