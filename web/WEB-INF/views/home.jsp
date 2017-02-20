@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="media stream">
                                     <a href="#" class="media-avatar medium pull-left">
-                                        <img src="../../resources/images/veronique-zidane-sm.jpg">
+                                        <img src=".././images/veronique-zidane-sm.jpg">
                                     </a>
                                     <div class="media-body">
                                         <div class="stream-headline">
@@ -46,7 +46,7 @@
                                             </div>
                                             <div class="stream-attachment photo">
                                                 <div class="responsive-photo">
-                                                    <img src="../../resources/images/veronique-zidane.jpg"/>
+                                                    <img src="${pageContext.request.contextPath}WEB-INF/images/veronique-zidane.jpg"/>
                                                 </div>
                                             </div>
                                         </div><!--/.stream-headline-->
@@ -56,7 +56,7 @@
 
                                 <div class="media stream">
                                     <a href="#" class="media-avatar medium pull-left">
-                                        <img src="../../resources/images/veronique-zidane-sm.jpg">
+                                        <img src="${pageContext.request.contextPath}WEB-INF/images/veronique-zidane-sm.jpg">
                                     </a>
                                     <div class="media-body">
                                         <div class="stream-headline">
@@ -86,7 +86,7 @@
 
                                 <div class="media stream">
                                     <a href="#" class="media-avatar medium pull-left">
-                                        <img src="../../resources/images/veronique-zidane-sm.jpg">
+                                        <img src="${pageContext.request.contextPath}WEB-INF/images/veronique-zidane-sm.jpg">
                                     </a>
                                     <div class="media-body">
                                         <div class="stream-headline">
@@ -105,7 +105,7 @@
                                         <div class="stream-respond">
                                             <div class="media stream">
                                                 <a href="#" class="media-avatar small pull-left">
-                                                    <img src="../../resources/images/Zidane-sm.jpg">
+                                                    <img src="../../WEB-INF/images/Zidane-sm.jpg">
                                                 </a>
                                                 <div class="media-body">
                                                     <div class="stream-headline">
@@ -122,7 +122,7 @@
                                             </div><!--/.media .stream-->
                                             <div class="media stream">
                                                 <a href="#" class="media-avatar small pull-left">
-                                                    <img src="../../resources/images/Zidane-sm.jpg">
+                                                    <img src="../../WEB-INF/images/Zidane-sm.jpg">
                                                 </a>
                                                 <div class="media-body">
                                                     <div class="stream-headline">
@@ -142,7 +142,7 @@
                                 </div><!--/.media .stream-->
                                 <div class="media stream">
                                     <a href="#" class="media-avatar medium pull-left">
-                                        <img src="../../resources/images/veronique-zidane-sm.jpg">
+                                        <img src="../../WEB-INF/images/veronique-zidane-sm.jpg">
                                     </a>
                                     <div class="media-body">
                                         <div class="stream-headline">

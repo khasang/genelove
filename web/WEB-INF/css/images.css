@@ -1,5 +1,5 @@
 body.background {
-    background: url(../resources/images/loveFone.jpg) no-repeat center center fixed;
+    background: url(../WEB-INF/images/loveFone.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

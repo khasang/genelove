@@ -3,6 +3,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="<%=request.getContextPath()%>/resources/css/mail.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/WEB-INF/css/mail.css" rel="stylesheet">
     <title>Mail Sender</title>
 </head>

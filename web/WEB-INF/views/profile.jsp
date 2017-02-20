@@ -24,7 +24,7 @@
                     <div class="col-sm-4 col-md-4">
                         <div id="Photo">
                             <img id="picture" class="img-thumbnail" alt="Profile picture"
-                                 src="resources/images/Zidane.jpg" width="200" height="200"/>
+                                 src="../../WEB-INF/images/Zidane.jpg" width="200" height="200"/>
                         </div>
                         <hr>
                     </div>
@@ -54,9 +54,9 @@
 
 </div><!-- /#main-wrapper -->
 
-<script src="resources/js/jquery.min.js"></script>
-<script src="resources/js/jquery.backstretch.min.js"></script>
-<script src="resources/js/templatemo_script.js"></script>
+<script src="../../WEB-INF/js/jquery.min.js"></script>
+<script src="../../WEB-INF/js/jquery.backstretch.min.js"></script>
+<script src="../../WEB-INF/js/templatemo_script.js"></script>
 <!-- templatemo 398 nature -->
 
 </body>

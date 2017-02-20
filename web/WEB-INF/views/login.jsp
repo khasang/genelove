@@ -10,13 +10,13 @@
     <meta name="keywords" content="Majestic Login Form Widget Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- font files -->
-    <link href='//fonts.googleapis.com/css?family=Muli:400,300,300italic,400italic' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Comfortaa:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Comfortaa:400,300,700' rel='stylesheet' type='text/css'>
     <!-- css files -->
-    <link href="resources/css/login/animate-custom.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="resources/css/login/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../WEB-INF/css/login/animate-custom.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../../WEB-INF/css/login/style.css" rel="stylesheet" type="text/css" media="all" />
 </head>
-<body style="background: url(resources/images/love2.jpg) no-repeat fixed center;">
+<body style="background: url(../WEB-INF/images/love2.jpg) no-repeat fixed center;">
 <h1 class="w3ls" style="color: black">WELCOME</h1>
 <div id="container_demo" >
     <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->

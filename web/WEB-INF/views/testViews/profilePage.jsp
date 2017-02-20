@@ -15,7 +15,7 @@
 <%@ include file="./../include/header.jsp" %><br><br>
 <div>
     <a href="changeFoto.jsp">
-        <img src="../resources/images/smile.jpg" alt="Фото" class="profilePageFoto">
+        <img src="../WEB-INF/images/smile.jpg" alt="Фото" class="profilePageFoto">
         <%-- <img src="resources/smile.jpg" alt="Фото" class="profilePageFoto"> --%>
     </a><br>
 

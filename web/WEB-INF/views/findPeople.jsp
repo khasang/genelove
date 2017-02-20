@@ -5,9 +5,9 @@
     <head>
         <title>Find new friends</title>
         <jsp:include page="include/head.jsp"/>
-        <link rel="stylesheet" href="css/bottons.css"/>
-        <link rel="stylesheet" href="css/style.css"/>
-        <link rel="stylesheet" href="css/images.css"/>
+        <link rel="stylesheet" href="../../WEB-INF/css/bottons.css"/>
+        <link rel="stylesheet" href="../../WEB-INF/css/style.css"/>
+        <link rel="stylesheet" href="../../WEB-INF/css/images.css"/>
 
     </head>
     <body style="background: url(resources/images/bground.jpg) no-repeat fixed center;">
