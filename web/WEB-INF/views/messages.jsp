@@ -4,9 +4,9 @@
 <head>
     <title>My message</title>
     <jsp:include page="include/head.jsp"/>
-    <link rel="stylesheet" href="resources/css/message/myMessage.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}css/message/myMessage.css">
 </head>
-<body style="background: url(resources/images/bground.jpg) no-repeat fixed center;">
+<body style="background: url(${pageContext.request.contextPath}images/bground.jpg) no-repeat fixed center;">
 <%--<div id="main-wrapper">--%>
 <jsp:include page="include/header.jsp"/>
 
@@ -19,7 +19,7 @@
                 <hr>
 <c:forEach items="${messageList}" var="message" >
                 <div class="container" id="messageContent">
-                    <img src="resources/images/Zidane.jpg" alt="Avatar" style="width:60px">
+                    <img src="${pageContext.request.contextPath}images/Zidane.jpg" alt="Avatar" style="width:60px">
                     <p><strong><span>${message}</span></strong></p><hr>
                     <p>Some message....</p>
                 </div>

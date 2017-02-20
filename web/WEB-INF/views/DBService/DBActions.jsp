@@ -2,7 +2,7 @@
 <div class="Messenger">
     <fieldset class="fieldsetMessenger">
         <legend id="numberOfMessages">0</legend>
-        <a href="/messenger">Dear <strong>${currentUser}</strong>.<br>You have not new message yet</a>
+        <a href="${pageContext.request.contextPath}/messenger">Dear <strong>${currentUser}</strong>.<br>You have not new message yet</a>
     </fieldset>
 </div>
 <jsp:include page="../mailService/include/title.jsp"/>

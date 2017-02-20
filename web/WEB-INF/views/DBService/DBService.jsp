@@ -4,18 +4,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="<%=request.getContextPath()%>/resources/css/mail.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}css/mail.css" rel="stylesheet">
     <title>Mail Sender</title>
 </head>
 <!--------------------------------- end header.jsp -------------------------------->
 <div class="Messenger">
     <fieldset class="fieldsetMessenger">
         <legend id="numberOfMessages">0</legend>
-        <a href="/messenger">Dear <strong>${currentUser}</strong>.<br>You have not new message yet</a>
+        <a href="${pageContext.request.contextPath}/messenger">Dear <strong>${currentUser}</strong>.<br>You have not new message yet</a>
     </fieldset>
 </div>
 <!-------------------------------- from title.jsp -------------------------------->
-<div id="head"><a id="headLink" href="/">
+<div id="head"><a id="headLink" href="${pageContext.request.contextPath}">
     <span id="gene">GENE</span><span id="love">LOVE</span><br>Meeting Service</a>
 </div>
 <!--------------------------------- end title.jsp -------------------------------->
@@ -78,12 +78,12 @@
                                     ${table.records}
                                 </c:if>
                             </td>
-                            <td class="link"><a href="/DBService/view/${table.name}">View</a></td>
-                            <td class="link"><a href="/DBService/save/${table.name}">Save</a></td>
-                            <td class="link"><a href="/DBService/load/${table.name}">Load</a></td>
-                            <td class="link"><a href="/DBService/reload/${table.name}">Clear/Reload</a></td>
-                            <td class="link caution"><a href="/DBService/clear/${table.name}">Clear</a></td>
-                            <td class="link caution"><a href="/DBService/delete/${table.name}">Delete</a></td>
+                            <td class="link"><a href="${pageContext.request.contextPath}/DBService/view/${table.name}">View</a></td>
+                            <td class="link"><a href="${pageContext.request.contextPath}/DBService/save/${table.name}">Save</a></td>
+                            <td class="link"><a href="${pageContext.request.contextPath}/DBService/load/${table.name}">Load</a></td>
+                            <td class="link"><a href="${pageContext.request.contextPath}/DBService/reload/${table.name}">Clear/Reload</a></td>
+                            <td class="link caution"><a href="${pageContext.request.contextPath}/DBService/clear/${table.name}">Clear</a></td>
+                            <td class="link caution"><a href="${pageContext.request.contextPath}/DBService/delete/${table.name}">Delete</a></td>
                         </tr>
                     </c:forEach>
                     <!-- <%= counter = 0 %> -->
@@ -92,7 +92,7 @@
             </form>
         </c:if>
         <c:if test="${hiddenAction eq 'viewTable'}">
-            <form class="mailForm" method="get" action="/DBService/addRecord/${table}">
+            <form class="mailForm" method="get" action="${pageContext.request.contextPath}/DBService/addRecord/${table}">
                 <table class="tableData">
                     <c:if test="${keys eq null}">
                         <div class="systemErrorMessage">
@@ -113,8 +113,8 @@
                                 <c:forEach items="${keys}" var="key">
                                     <td>${map.get(key)}</td>
                                 </c:forEach>
-                                <td class="link"><a href="/DBService/update/${table}/1">Update</a></td>
-                                <td class="link caution"><a href="/DBService/delete/${table}/1">Delete</a></td>
+                                <td class="link"><a href="${pageContext.request.contextPath}/DBService/update/${table}/1">Update</a></td>
+                                <td class="link caution"><a href="${pageContext.request.contextPath}/DBService/delete/${table}/1">Delete</a></td>
                             </tr>
                         </c:forEach>
                         <!-- <%= counter=0 %> -->

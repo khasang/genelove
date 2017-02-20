@@ -5,7 +5,7 @@
     <title>News</title>
     <jsp:include page="include/head.jsp"/>
 </head>
-<body style="background: url(${pageContext.request.contextPath}/images/bground.jpg) no-repeat fixed center;">
+<body style="background: url(${pageContext.request.contextPath}images/bground.jpg) no-repeat fixed center;">
 
 <jsp:include page="include/header.jsp"/>
 
@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="media stream">
                                     <a href="#" class="media-avatar medium pull-left">
-                                        <img src=".././images/veronique-zidane-sm.jpg">
+                                        <img src="${pageContext.request.contextPath}images/veronique-zidane-sm.jpg">
                                     </a>
                                     <div class="media-body">
                                         <div class="stream-headline">
@@ -46,7 +46,7 @@
                                             </div>
                                             <div class="stream-attachment photo">
                                                 <div class="responsive-photo">
-                                                    <img src="${pageContext.request.contextPath}WEB-INF/images/veronique-zidane.jpg"/>
+                                                    <img src="${pageContext.request.contextPath}images/veronique-zidane.jpg"/>
                                                 </div>
                                             </div>
                                         </div><!--/.stream-headline-->
@@ -56,7 +56,7 @@
 
                                 <div class="media stream">
                                     <a href="#" class="media-avatar medium pull-left">
-                                        <img src="${pageContext.request.contextPath}WEB-INF/images/veronique-zidane-sm.jpg">
+                                        <img src="${pageContext.request.contextPath}images/veronique-zidane-sm.jpg">
                                     </a>
                                     <div class="media-body">
                                         <div class="stream-headline">
@@ -86,7 +86,7 @@
 
                                 <div class="media stream">
                                     <a href="#" class="media-avatar medium pull-left">
-                                        <img src="${pageContext.request.contextPath}WEB-INF/images/veronique-zidane-sm.jpg">
+                                        <img src="${pageContext.request.contextPath}images/veronique-zidane-sm.jpg">
                                     </a>
                                     <div class="media-body">
                                         <div class="stream-headline">
@@ -105,7 +105,7 @@
                                         <div class="stream-respond">
                                             <div class="media stream">
                                                 <a href="#" class="media-avatar small pull-left">
-                                                    <img src="../../WEB-INF/images/Zidane-sm.jpg">
+                                                    <img src="${pageContext.request.contextPath}images/Zidane-sm.jpg">
                                                 </a>
                                                 <div class="media-body">
                                                     <div class="stream-headline">
@@ -122,7 +122,7 @@
                                             </div><!--/.media .stream-->
                                             <div class="media stream">
                                                 <a href="#" class="media-avatar small pull-left">
-                                                    <img src="../../WEB-INF/images/Zidane-sm.jpg">
+                                                    <img src="${pageContext.request.contextPath}images/Zidane-sm.jpg">
                                                 </a>
                                                 <div class="media-body">
                                                     <div class="stream-headline">
@@ -142,7 +142,7 @@
                                 </div><!--/.media .stream-->
                                 <div class="media stream">
                                     <a href="#" class="media-avatar medium pull-left">
-                                        <img src="../../WEB-INF/images/veronique-zidane-sm.jpg">
+                                        <img src="${pageContext.request.contextPath}images/veronique-zidane-sm.jpg">
                                     </a>
                                     <div class="media-body">
                                         <div class="stream-headline">

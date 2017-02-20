@@ -2,7 +2,7 @@
 <div class="Messenger">
     <fieldset class="fieldsetMessenger">
         <legend id="numberOfMessages">0</legend>
-        <a href="/messenger">Dear <strong>${currentUser}</strong>.<br>You have not new message yet</a>
+        <a href="${pageContext.request.contextPath}/messenger">Dear <strong>${currentUser}</strong>.<br>You have not new message yet</a>
     </fieldset>
 </div>
 <jsp:include page="include/title.jsp"/>
@@ -17,7 +17,7 @@
     <fieldset class="fieldset">
         <legend>E-Mail Service</legend>
     <h1>Send Private Message to User by Id</h1>
-    <form class="mailForm" method="post" action="send">
+    <form class="mailForm" method="post" action="${pageContext.request.contextPath}send">
         <input type="hidden" name="recipient" value="${id}"/>
         <table border="0" align="center">
             <tr>

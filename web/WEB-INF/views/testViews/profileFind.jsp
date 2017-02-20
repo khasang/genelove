@@ -7,7 +7,7 @@
     <title>Menu page</title>
     <jsp:include page="../include/head.jsp"/>
 </head>
-<body style="background: url(resources/images/bground.jpg) no-repeat fixed center;">
+<body style="background: url(${pageContext.request.contextPath}images/bground.jpg) no-repeat fixed center;">
 
 <jsp:include page="../include/header.jsp"/>
 <div class="container">
@@ -15,7 +15,7 @@
     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3 templatemo-content-wrapper">
         <div class="panel panel-default">
             <div class="panel-body">
-                <form:form action="/findProfile" method="get" commandName="findProfile"
+                <form:form action="${pageContext.request.contextPath}/findProfile" method="get" commandName="findProfile"
                            cssClass="form-inline form-group-sm">
                     <p><label for="ageFrom">Age from:</label><input type="text" id="ageFrom" class="form-control"
                                                                     name="ageFrom"></p>
