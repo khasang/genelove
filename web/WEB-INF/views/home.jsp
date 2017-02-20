@@ -5,7 +5,7 @@
     <title>News</title>
     <jsp:include page="include/head.jsp"/>
 </head>
-<body style="background: url(resources/images/bground.jpg) no-repeat fixed center;">
+<body style="background: url(${pageContext.request.contextPath}/images/bground.jpg) no-repeat fixed center;">
 
 <jsp:include page="include/header.jsp"/>
 
