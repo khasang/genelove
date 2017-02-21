@@ -5,7 +5,7 @@
     <title>Home</title>
     <jsp:include page="include/head.jsp"/>
 </head>
-<body style="background: url(resources/images/bground.jpg) no-repeat fixed center;">
+<body style="background: url(${pageContext.request.contextPath}images/bground.jpg) no-repeat fixed center;">
 <%--<div id="main-wrapper">--%>
 <jsp:include page="include/header.jsp"/>
 
@@ -24,16 +24,9 @@
                     <div class="col-sm-4 col-md-4">
                         <div id="Photo">
                             <img id="picture" class="img-thumbnail" alt="Profile picture"
-                                 src="resources/images/Zidane.jpg" width="200" height="200"/>
+                                 src="${pageContext.request.contextPath}images/Zidane.jpg" width="200" height="200"/>
                         </div>
                         <hr>
-                        <div class="left">
-                            <label class="btn btn-raised btn-success glyphicon glyphicon-folder-open">
-                                Select Photo
-                            </label>
-                            <input id="file-submit" style="display: none;" type="file" value="Load Photo">
-                            <p id="image-msg" style="display: none;">
-                        </div>
                     </div>
                     <div class="col-sm-8 col-md-8" text-center>
                         <h3>Email : ${currentUser.email}</h3>
@@ -52,10 +45,6 @@
                                 Liga Best Foreign Player in 2002
                             <p>
                         </div>
-
-                        <button id="edit" class="btn btn-raised btn-info glyphicon glyphicon-pencil">
-                            edit
-                        </button>
                     </div>
                 </div>
             </section>
@@ -65,9 +54,9 @@
 
 </div><!-- /#main-wrapper -->
 
-<script src="resources/js/jquery.min.js"></script>
-<script src="resources/js/jquery.backstretch.min.js"></script>
-<script src="resources/js/templatemo_script.js"></script>
+<script src="${pageContext.request.contextPath}js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}js/jquery.backstretch.min.js"></script>
+<script src="${pageContext.request.contextPath}js/templatemo_script.js"></script>
 <!-- templatemo 398 nature -->
 
 </body>

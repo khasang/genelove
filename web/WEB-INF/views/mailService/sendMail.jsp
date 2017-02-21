@@ -2,7 +2,7 @@
 <div class="Messenger">
     <fieldset class="fieldsetMessenger">
         <legend id="numberOfMessages">0</legend>
-        <a href="/messenger">Dear <strong>${currentUser}</strong>.<br>You have not new message yet</a>
+        <a href="${pageContext.request.contextPath}/messenger">Dear <strong>${currentUser}</strong>.<br>You have not new message yet</a>
     </fieldset>
 </div>
 <jsp:include page="include/title.jsp"/>
@@ -12,7 +12,7 @@
     <fieldset class="fieldset">
         <legend>E-Mail Service</legend>
     <h1>Send simple e-mail by form (Denis Guzikov)</h1>
-    <form class="mailForm" method="post" action="sendMail">
+    <form class="mailForm" method="post" action="${pageContext.request.contextPath}sendMail">
         <table border="0" align="center">
             <tr>
                 <td><label>To:</label></td>
@@ -35,7 +35,7 @@
     <fieldset class="fieldset">
         <legend>E-Mail Service</legend>
     <h1>Send simple e-mail (Alexander Pyankov)</h1>
-    <form method="post" action="sendMailToUser">
+    <form method="post" action="${pageContext.request.contextPath}sendMailToUser">
         <input class="submitMail" type="submit" value="Send Mail" />
     </form>
     </fieldset>
@@ -44,7 +44,7 @@
     <fieldset class="fieldset">
         <legend>E-Mail Service</legend>
     <h1>Send multiple e-mail (Alexander Pyankov)</h1>
-    <form method="post" action="sendMailToSomeUsers">
+    <form method="post" action="${pageContext.request.contextPath}sendMailToSomeUsers">
         <input class="submitMail" type="submit" value="Send Mail" />
     </form>
     </fieldset>
@@ -53,7 +53,7 @@
     <fieldset class="fieldset">
         <legend>E-Mail Service</legend>
     <h1>Send multiple e-mail for all users</h1>
-    <form method="get" action="sendMailToAllUsers">
+    <form method="get" action="${pageContext.request.contextPath}sendMailToAllUsers">
         <input class="submitMail" type="submit" value="Send Mail" />
     </form>
     </fieldset>
@@ -62,7 +62,7 @@
     <fieldset class="fieldset">
         <legend>E-Mail Service</legend>
     <h1>Empty<br>(For future usage)</h1>
-    <form method="post" action="noAction">
+    <form method="post" action="${pageContext.request.contextPath}noAction">
         <input class="submitMail" type="submit" value="Send Mail" />
     </form>
     </fieldset>

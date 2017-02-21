@@ -270,7 +270,6 @@ public class AdminController {
     @RequestMapping(value = "sendMessage", method = RequestMethod.POST)
     public String sendMessage(HttpServletRequest request, Model model)
             throws UnsupportedEncodingException {
-
         setCurrentUser(model);
 
         request.setCharacterEncoding("UTF8");

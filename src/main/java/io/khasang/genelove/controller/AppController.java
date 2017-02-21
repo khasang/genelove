@@ -35,8 +35,8 @@ public class AppController {
         try {
             userService.getUserByLogin(login);
             return "User with login name " + login + " already exists, please try another name!";
-        } catch (Exception ex) {
-
+        } catch (Exception e) {
+            message = "Registration error " + e.getMessage();
         }
         try {
             userService.addUser(user);

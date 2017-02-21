@@ -2,7 +2,7 @@ package io.khasang.genelove.controller.testControllers;
 
 import io.khasang.genelove.entity.EMail;
 import io.khasang.genelove.entity.User;
-import io.khasang.genelove.model.DBLoader;
+import io.khasang.genelove.service.DBLoader;
 import io.khasang.genelove.model.CreateTable;
 import io.khasang.genelove.model.MyMessage;
 import io.khasang.genelove.model.SQLExamples;

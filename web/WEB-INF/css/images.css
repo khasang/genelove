@@ -1,0 +1,32 @@
+body.background {
+    background: url(../WEB-INF/images/loveFone.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.noBackground {
+    background: none;
+    width: 60%;
+}
+.opacityBackground {
+    opacity: 0.72;
+}
+.noOpacity{
+    background: rgba(244, 240, 245, 1);
+}
+
+IMG.profilePageFoto {
+    float: left;
+    margin-left: 6em;
+    margin-bottom: 10em;
+    position: absolute;
+    width: 20%;
+    height: 30%;
+ }
+
+IMG.smallFoto {
+    width: 20%;
+    height: 40%;
+}
