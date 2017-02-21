@@ -1,9 +1,5 @@
 package io.khasang.genelove.entity.entity_training;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.util.Date;
 
 //@Entity(name = "private_message")

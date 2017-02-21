@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -212,12 +213,14 @@ public class UserController {
     }
 
     @RequestMapping(value = "findProfile", method = RequestMethod.GET)
-    public String findProfilesWithParam (@RequestParam("from") int ageFrom, @RequestParam("to") int ageTo,
-                                @RequestParam ("gender") String gender, @RequestParam ("marital") String marital,
+    public String findProfilesWithParam (@RequestParam("from") Date dateFrom, @RequestParam("to") Date dateTo,
+                                         @RequestParam ("gender") String gender, @RequestParam ("maritalStatus") String maritalStatus,
                                          Model model) {
         currentUser = new User();
         init(currentUser, model);
-        List<Profile> list = profileService.getProfiles(ageFrom, ageTo, gender, marital);
+        List<Profile> list = profileService.getProfiles(dateFrom, dateTo,
+                Profile.Gender.valueOf(gender),
+                Profile.MaritalStatus.valueOf(maritalStatus));
         model.addAttribute("profiles", list);
         return "testViews/profiles";
     }

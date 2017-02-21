@@ -17,18 +17,18 @@
             <div class="panel-body">
                 <form:form action="${pageContext.request.contextPath}/findProfile" method="get" commandName="findProfile"
                            cssClass="form-inline form-group-sm">
-                    <p><label for="ageFrom">Age from:</label><input type="text" id="ageFrom" class="form-control"
-                                                                    name="ageFrom"></p>
-                    <p><label for="ageTo">to:</label><input type="text" id="ageTo" class="form-control"
-                                                            name="ageTo"></p>
+                    <p><label for="dateFrom">Date from:</label><input type="date" id="dateFrom" class="form-control"
+                                                                    name="dateFrom"></p>
+                    <p><label for="dateTo">to:</label><input type="date" id="dateTo" class="form-control"
+                                                            name="dateTo"></p>
                     <p><label for="gender">Gender:</label>
                         <select name="gender" id="gender" class="form-control">
                             <option value="FEMALE">female</option>
                             <option value="MALE">male</option>
                         </select></p>
 
-                    <p><label for="marital">Marital Status:</label>
-                        <select name="marital" id="marital" class="form-control">
+                    <p><label for="maritalStatus">Marital Status:</label>
+                        <select name="maritalStatus" id="maritalStatus" class="form-control">
                             <option value="SINGLE">Single</option>
                             <option value="MARRIED">Married</option>
                             <option value="SEPARATED">Separated</option>

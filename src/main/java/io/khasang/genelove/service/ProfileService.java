@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -47,9 +48,10 @@ public class ProfileService {
         profileDAO.shareProfile(profile);
     }
 
-    public List<Profile> getProfiles(int ageFrom, int ageTo, String gender, String marital){
+    public List<Profile> getProfiles(Date dateFrom, Date dateTo,
+                                     Profile.Gender gender, Profile.MaritalStatus maritalStatus){
         User user = userDAO.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        return profileDAO.getProfiles(ageFrom, ageTo, gender, marital, user);
+        return profileDAO.getProfiles(dateFrom, dateTo, gender, maritalStatus, user);
     }
 
 }

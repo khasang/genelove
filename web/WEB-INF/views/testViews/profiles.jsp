@@ -24,7 +24,7 @@
             <table class="table-bordered container" style="background-color: azure">
                 <tr>
                     <td>Nickname</td>
-                    <td>Age</td>
+                    <td>Date of Birth</td>
                     <td>Gender</td>
                     <td>Marital Status</td>
                     <td>Hobbies</td>

@@ -18,7 +18,7 @@
                        cssClass="form-inline form-group-sm">
 
                 <p><label for="nickname">Nickname:</label><input type="text" id="nickname" class="form-control" name="nickname"></p>
-                <p><label for="age">Age:</label><input type="text" id="age" class="form-control" name="age"></p>
+                <p><label for="dateOfBirth">Date of birth:</label><input type="date" id="dateOfBirth" class="form-control" name="dateOfBirth"></p>
                 <p><label for="hobbies">Your hobbies:</label><input type="text" id="hobbies" class="form-control" name="hobbies"></p>
                 <p><label for="introduction">About yourself:</label><input type="text" id="introduction" class="form-control" name="introduction"></p>
                 <p><label for="match">You want to find:</label><input type="text" id="match" class="form-control" name="match"></p>
