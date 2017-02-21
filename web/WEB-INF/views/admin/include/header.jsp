@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Genelove Administration Service</title>
-    <link href="${pageContext.request.contextPath}css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">

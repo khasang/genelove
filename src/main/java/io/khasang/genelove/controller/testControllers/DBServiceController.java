@@ -40,8 +40,8 @@ public class DBServiceController {
     SQLExamples sqlExamples;
     @Autowired
     CreateTable createTable;
-    @Autowired
-    QuestionService questionService;
+/*    @Autowired
+    QuestionService questionService;*/
     @Autowired
     MessageService messageService;
     @Autowired
