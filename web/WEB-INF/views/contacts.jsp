@@ -5,7 +5,7 @@
     <title>Home</title>
     <jsp:include page="include/head.jsp"/>
 </head>
-<body style="background: url(${pageContext.request.contextPath}images/bground.jpg) no-repeat fixed center;">
+<body style="background: url(${pageContext.request.contextPath}/images/bground.jpg) no-repeat fixed center;">
 <%--<div id="main-wrapper">--%>
 <jsp:include page="include/header.jsp"/>
 
@@ -24,7 +24,7 @@
                     <div class="col-sm-4 col-md-4">
                         <div id="Photo">
                             <img id="picture" class="img-thumbnail" alt="Profile picture"
-                                 src="${pageContext.request.contextPath}images/Zidane.jpg" width="200" height="200"/>
+                                 src="${pageContext.request.contextPath}/images/Zidane.jpg" width="200" height="200"/>
                         </div>
                         <hr>
                         <button id="edit" class="btn btn-raised btn-info">

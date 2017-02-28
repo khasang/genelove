@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}css/images.css"/>
 
     </head>
-    <body style="background: url(${pageContext.request.contextPath}resources/images/bground.jpg) no-repeat fixed center;">
+    <body style="background: url(${pageContext.request.contextPath}/resources/images/bground.jpg) no-repeat fixed center;">
         <jsp:include page="include/header.jsp" />
         <h1 class="alignCenter">My Friends</h1>
         <div class="opacityBackground rowFlexContainer">

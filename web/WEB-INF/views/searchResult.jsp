@@ -4,11 +4,11 @@
     <head>
         <title>Search results</title>
         <jsp:include page="include/head.jsp"/>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}css/bottons.css"/>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}css/style.css"/>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}css/images.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bottons.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/images.css"/>
     </head>
-    <body class="background">
+    <body class="background" style="background: url(${pageContext.request.contextPath}/images/bground.jpg) no-repeat fixed center;">
         <jsp:include page="include/header.jsp" />
         <h1 class="alignCenter">Search results</h1>
         <div class="opacityBackground rowFlexContainer">
